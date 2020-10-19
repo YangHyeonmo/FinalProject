@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Transfer">
+	
+	
+	<select id="getTransListCount" resultType="int"  parameterType="String">
+		select COUNT(*) from ${dbname}
+	</select>
+	
+	<select id="getAccountNum" resultType="String" parameterType="String">
+		select account_num from account where member_id=#{id} 
+	</select>
+	
+	<!-- <select id="getDeposit" resultType="int" parameterType="String">
+		select deposit from account where member_id=#{id}
+	</select> -->
+	
+	<select id="dateTransList" resultType="Transfer" parameterType="hashMap">
+		select * from transfer where TRANSFER_DAY BETWEEN #{select_date} AND
+		#{now_date} and (account_no=#{account_no} or transfer_to_account_no=#{account_no})
+	</select>
+	
+	<select id="getMaxNum" resultType="int" parameterType="String">
+		select max(transfer_no) from ${dbname}
+	</select>
+	
+	<insert id="insert_Transfer" parameterType="Transfer">
+		insert into Transfer(transfer_no,account_no,transfer_to_member_id,transfer_to_account_no,transfer_price,transfer_alias,transfer_day,member_id)
+						values(#{num},#{account_no},#{transfer_to_member_id},#{transfer_to_account_no},#{transfer_price},#{transfer_alias},sysdate,#{member_id})
+	</insert>
+	<insert id="insertTrans_Auto" parameterType="Transfer">
+		insert into Transfer_Auto(transfer_no,account_no,transfer_to_member_id,transfer_to_account_no,transfer_price,transfer_alias,transfer_auto_period,
+					transfer_auto_period_start,transfer_auto_period_end, member_id) 
+					values(#{num},#{account_no},#{transfer_to_member_id},#{transfer_to_account_no},#{transfer_price},#{transfer_alias},
+					#{transfer_auto_period},#{transfer_auto_period_start},null,#{member_id})
+	</insert>
+	<insert id="insertTrans_Res" parameterType="Transfer">
+	insert into Transfer_Res(transfer_no,account_no,transfer_to_member_id,transfer_to_account_no,transfer_price,transfer_alias,transfer_res_day,
+						transfer_res_state, member_id) 
+						values(#{num},#{account_no},#{transfer_to_member_id},#{transfer_to_account_no},#{transfer_price},#{transfer_alias},#{transfer_res_day}
+						,#{transfer_res_state},#{member_id})
+	</insert>
+	<select id="check_account_no" resultType="Account" parameterType="String">
+		select * from account where account_num=#{account_no}
+	</select>
+	
+	<select id="transferDetail" resultType="Transfer" parameterType="hashmap">
+		select * from ${dbname} where transfer_no=${transfer_no}
+	</select>
+	
+	<update id="updateMoney" parameterType="hashmap">
+		update account set deposit=deposit ${operation} ${money} where account_num=#{account_no}
+	</update>
+ <!--   <select id="getArticleCount" parameterType="hashmap" 
+       resultType="int">
+	select nvl(count(*),0)  from board where boardid = #{boardid}
+	 <if test="category!=null and category !='' ">
+	 and  ${category}  like '%${sentence}%'
+	 </if>
+	</select> -->
+	
+	
+   <!--  <select id="getArticles" parameterType="hashmap" 
+       resultType="Board">
+	 
+	   <if test="category==null or category == ''">   
+	select * from  ( select rownum rnum ,a.* 
+    from (select * from board where boardid = #{boardid} 
+    order by ref desc , re_step)
+	a ) where rnum  between #{start} and #{end}
+	</if>
+	
+	 <if test="category!=null and category !='' "> 
+	select * from  ( select rownum rnum ,a.* 
+    from (select * from board where boardid = #{boardid} 
+     and  ${category}  like '%${sentence}%'
+    order by ref desc , re_step)
+	a ) where rnum  between #{start} and #{end}
+	</if>
+	
+	
+	
+	
+   </select>
+   
+   <update id="addReadCount" parameterType="hashmap"  >
+     update board set readcount=readcount+1 
+			where num = #{num} and boardid = #{boardid}
+   </update>
+   
+   <select id="getArticle" parameterType="hashmap"  resultType="Board">
+   select * from board where num = #{num} and boardid = #{boardid}
+   </select>
+	
+	<select id="insertArticle_new"  resultType="int">
+		select boardser.nextval from dual
+	
+	</select>
+	
+	<update id="insertArticle_update" parameterType="hashmap">
+		update board set re_step=re_step+1 
+		where ref= #{ref} and re_step> #{re_step} 
+		and boardid = #{boardid}
+	</update>
+	
+	<insert id="insertArticle_insert" parameterType="Board">
+	insert into board ( num, writer,email,subject,passwd
+ ,reg_date, ref,re_step,re_level,content,ip,filename, boardid)
+  values (#{num},#{writer},#{email},#{subject},#{passwd},sysdate,
+    #{ref},#{re_step},#{re_level},#{content},#{ip}, #{filename},
+     #{boardid})
+	</insert>
+	
+	
+	<select id="update_passwd"   parameterType="hashmap" 
+     resultType="string">
+		select passwd from board where num =#{num}
+    </select>
+	
+	 <update id="update_update"  parameterType="hashmap">
+		update board set 
+		writer=#{writer},
+		email=#{email},
+		subject=#{subject},
+		passwd=#{passwd},
+		content=#{content} 
+		where num=#{num}
+	</update>
+	
+	<select id="delete"   parameterType="hashmap" >
+	 	delete from board where num = #{num}
+    </select>
+	 -->
+	
+	
+	
+	
+	
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//myatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Member">
+
+	
+	
+   <insert id="insertMember" parameterType="Member" >
+   insert into member (member_id, member_password,member_name,member_birthdate,member_gender,member_email,
+    member_phonenumber,member_zipcode,member_address,member_author, member_regdate)
+    values(#{member_id},#{member_password},#{member_name},#{member_birthdate},#{member_gender},
+    #{member_email},#{member_phonenumber},#{member_zipcode},#{member_address}, #{member_author}, sysdate)
+   </insert>
+
+	<select id="findPwd" parameterType="String" resultType="String">
+	select member_password
+	from member
+	where member_id = #{member_id}
+	</select>
+		
+	<select id="getAllInfo" parameterType="String" resultType="Member">
+	select *
+	from member
+	where member_id = #{member_id}
+	</select>
+	
+	<select id="checkId" parameterType="String" resultType="int">
+	select count(*)
+	from member
+	where member_id = #{member_id}
+	</select>
+	
+	<update id="update" parameterType="member" >
+	update member set member_password=#{member_password}, member_email=#{member_email}, member_name=#{member_name}, member_birthdate=#{member_birthdate}, member_gender=#{member_gender},
+	member_zipcode=#{member_zipcode}, member_address=#{member_address}
+	where member_id=#{member_id}
+	</update>
+	
+	<delete id="deleteMember" parameterType="String">
+	delete from member
+	where member_id=#{member_id}
+	</delete>
+</mapper>

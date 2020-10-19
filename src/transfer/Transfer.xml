@@ -10,12 +10,8 @@
 	</select>
 	
 	<select id="getAccountNum" resultType="String" parameterType="String">
-		select account_num from account where member_id=#{id} 
+		select distinct(account_num) from account where member_id=#{id} 
 	</select>
-	
-	<!-- <select id="getDeposit" resultType="int" parameterType="String">
-		select deposit from account where member_id=#{id}
-	</select> -->
 	
 	<select id="dateTransList" resultType="Transfer" parameterType="hashMap">
 		select * from transfer where TRANSFER_DAY BETWEEN #{select_date} AND
@@ -53,88 +49,7 @@
 	<update id="updateMoney" parameterType="hashmap">
 		update account set deposit=deposit ${operation} ${money} where account_num=#{account_no}
 	</update>
- <!--   <select id="getArticleCount" parameterType="hashmap" 
-       resultType="int">
-	select nvl(count(*),0)  from board where boardid = #{boardid}
-	 <if test="category!=null and category !='' ">
-	 and  ${category}  like '%${sentence}%'
-	 </if>
-	</select> -->
-	
-	
-   <!--  <select id="getArticles" parameterType="hashmap" 
-       resultType="Board">
-	 
-	   <if test="category==null or category == ''">   
-	select * from  ( select rownum rnum ,a.* 
-    from (select * from board where boardid = #{boardid} 
-    order by ref desc , re_step)
-	a ) where rnum  between #{start} and #{end}
-	</if>
-	
-	 <if test="category!=null and category !='' "> 
-	select * from  ( select rownum rnum ,a.* 
-    from (select * from board where boardid = #{boardid} 
-     and  ${category}  like '%${sentence}%'
-    order by ref desc , re_step)
-	a ) where rnum  between #{start} and #{end}
-	</if>
-	
-	
-	
-	
-   </select>
-   
-   <update id="addReadCount" parameterType="hashmap"  >
-     update board set readcount=readcount+1 
-			where num = #{num} and boardid = #{boardid}
-   </update>
-   
-   <select id="getArticle" parameterType="hashmap"  resultType="Board">
-   select * from board where num = #{num} and boardid = #{boardid}
-   </select>
-	
-	<select id="insertArticle_new"  resultType="int">
-		select boardser.nextval from dual
-	
-	</select>
-	
-	<update id="insertArticle_update" parameterType="hashmap">
-		update board set re_step=re_step+1 
-		where ref= #{ref} and re_step> #{re_step} 
-		and boardid = #{boardid}
-	</update>
-	
-	<insert id="insertArticle_insert" parameterType="Board">
-	insert into board ( num, writer,email,subject,passwd
- ,reg_date, ref,re_step,re_level,content,ip,filename, boardid)
-  values (#{num},#{writer},#{email},#{subject},#{passwd},sysdate,
-    #{ref},#{re_step},#{re_level},#{content},#{ip}, #{filename},
-     #{boardid})
-	</insert>
-	
-	
-	<select id="update_passwd"   parameterType="hashmap" 
-     resultType="string">
-		select passwd from board where num =#{num}
-    </select>
-	
-	 <update id="update_update"  parameterType="hashmap">
-		update board set 
-		writer=#{writer},
-		email=#{email},
-		subject=#{subject},
-		passwd=#{passwd},
-		content=#{content} 
-		where num=#{num}
-	</update>
-	
-	<select id="delete"   parameterType="hashmap" >
-	 	delete from board where num = #{num}
-    </select>
-	 -->
-	
-	
+
 	
 	
 	

@@ -4,8 +4,6 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="member.MemberDTO" alias="Member" />
-		<typeAlias type="transfer.TransferDTO" alias="Transfer" />
-		<typeAlias type="account.AccountDTO" alias="Account"/>
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -23,6 +21,5 @@
 	
 	<mappers>
 	<mapper resource="member/MemberMapper.xml"/>
-	<mapper resource="transfer/Transfer.xml"/>
 	</mappers>
 </configuration>
