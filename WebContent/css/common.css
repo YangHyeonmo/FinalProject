@@ -1,0 +1,63 @@
+@charset 'utf-8';
+
+html {font-family: 'Noto Sans KR', sans-serif; font-size: 14px;}
+p {line-height: 1.6;}
+a {color: rgb(29, 29, 31); text-decoration: none;}
+.wrapper .mainPageImg{position:absolute; top:52px;}
+.wrapper .container-fluid .navbar-header .navbar-img {position: sticky; height: 50px; margin-left: -300px;}
+.container {/* iPhone 가로 스크롤 방지 */overflow-x: hidden;}
+
+/* 로그인 폼css */
+.inner_login .login_tistory .form a { color: #333; text-decoration: none;}
+.inner_login .login_tistory .form input { -webkit-writing-mode: horizontal-tb !important; text-rendering: auto; color: initial; letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none; display: inline-block; text-align: start; -webkit-appearance: textfield; 
+background-color: white; -webkit-rtl-ordering: logical; cursor: text; margin: 0em; font: 400 13.3333px Arial; padding: 1px 0px; border-width: 2px; border-style: inset; border-color: initial; border-image: initial;}
+.inner_login { position: absolute; left: 50%; top: 50%; margin: -145px 0 0 -160px;}
+.login_tistory{ position: relative; width: 320px; margin: 0 auto;}
+.inner_login .login_tistory .screen_out { position: absolute; width: 0; height: 0; overflow: hidden; line-height: 0; text-indent: -9999px;}
+.inner_login body, button, input, select, td, textarea, th { font-size: 13px; line-height: 1.5; -webkit-font-smoothing: antialiased;}    
+.inner_login fieldset, img { border: 0;}
+.inner_login .login_tistory .box_login { margin: 35px 0 0;border: 1px solid #ddd; border-radius: 3px;b ackground-color: #fff; box-sizing: border-box;}
+.inner_login .login_tistory .inp_text { position: relative; width: 100%; margin: 0; padding: 18px 19px 19px; box-sizing: border-box;}
+.inner_login .login_tistory .inp_text+.inp_text { border-top: 1px solid #ddd;}
+.inner_login .login_tistory .inp_text input { display: block; width: 100%; height: 100%; font-size: 13px; color: #000; border: none; outline: 0; -webkit-appearance: none; background-color: transparent;}
+.inner_login .login_tistory .btn_login { margin: 20px 0 0; width: 100%; height: 48px; border-radius: 3px; font-size: 16px; color: #fff; background-color: #000;}
+.inner_login .login_tistory .login_append { overflow: hidden; padding: 15px 0 0;}
+.inner_login .login_tistory .inp_chk { display: inline-block; position: relative; margin-bottom: -1px;}
+.inner_login .login_tistory .login_append .inp_chk { float: left;}
+.inner_login .login_tistory .inp_chk .inp_radio { position: absolute; z-index: -1; top: 0; left: 0; width: 18px; height: 18px; border: 0;}
+.inner_login .login_tistory .inp_chk .lab_g { display: inline-block; margin-right: 19px; color: #909090; font-size: 13px; line-height: 19px; vertical-align: top;}
+.inner_login .login_tistory .inp_chk .ico_check { display: inline-block; width: 18px; height: 18px; margin: 1px 4px 0 0; background-position: -60px 0; color: #333;}
+.inner_login .login_tistory .inp_chk .txt_lab { vertical-align: top;}
+.inner_login .login_tistory .login_append .txt_find { float: right; color: #777;}
+
+/* 마이페이지 css */
+.mainPageB{margin:0; background-color: #485861; color: #FFE6CF; }
+.mainPageB .header{text-align:center; margin-top:-21px;}
+.mainPageB  .thumb{width:92px; height:92px; box-shadow:0 6px 12px 0 rgba(0,0,0,0.1),0 12px 24px 0 rgba(0,0,0,0.24);border-radius:50%; margin-left:20px;}
+.mainPageB  .thumb-wrapper{position: relative; display:inline-block; margin-bottom:36px;}
+.mainPageB  .badge{width:28px; height:28px; font-size:12px; position:absolute; top:0; right:-8px; background-color: #ff5500; border-radius:50%; display:flex; justify-content:center; align-items:center; }
+.mainPageB  .greeting{margin-bottom: 10px;}
+.mainPageB  .mail{padding:8px 22px 10px 22px; background-color: rgba(0,0,0,0.05); display:inline-block; border-radius:20px; border: 1px solid rgba(0,0,0,0.08); box-sizing: border-box; margin-top:18px; box-shadow:inset 0 0 0 1px rgba(0,0,0,0.08);}
+.mainPageB .text-area h2{font-size: 24px; }
+.mainPageB .list{margin-top:48px;}
+.mainPageB .list .item{display:flex; justify-content:center; align-items:center; border-bottom:1px solid rgba(0,0,0,0.08); font-size: 15px;}
+.mainPageB .list .item .left a{color:#ffe6cf; text-decoration:none;}
+.mainPageB .list .item .left .name{margin-left:48px;}
+.mainPageB .list .item .left{display:flex; align-items:center;}
+.mainPageB .list .item .right img{padding-right:20px; width:60px; margin-right:30px;}
+.mainPageB .list .item .right{opacity:0.5;}
+.mainPageB .list .item img{padding: 20px 22px;}
+
+/* 내정보수정 css */
+.content{background-color: #485861; color: #FFE6CF;}
+.content .header{text-align:center; margin-top:-21px;}
+.content .header .thumb{width:92px; height:92px; box-shadow:0 6px 12px 0 rgba(0,0,0,0.1),0 12px 24px 0 rgba(0,0,0,0.24);border-radius:50%; margin-left:20px;}
+.content .header .thumb-wrapper{position: relative; display:inline-block; margin-bottom:36px;}
+.content .header .badge{width:28px; height:28px; font-size:12px; position:absolute; top:0; right:-8px; background-color: #ff5500; border-radius:50%; display:flex; justify-content:center; align-items:center; }
+.content .header .greeting{margin-bottom: 10px;}
+.content .tbl-reg{display:flex; justify-content: center; padding-top:40px; border:solid 1px;}
+.content .tbl-reg td,th{font-size: 16px; padding:2px; padding-left:40px;}
+.content input[type="text"],input[type="password"], input[type="email"],input[type="date"], input[type="file"], select {background-color:rgba(0,0,0,0.2); width: 35rem; backwidth:100%; height:32px; font-size:1.4rem; line-height:2rem; padding:5px 10px;  transition: 0.5s;}
+.content button{background-color: rgba(0,0,0,0.25)}
+.btn .btn1{}
+}
