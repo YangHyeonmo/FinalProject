@@ -19,11 +19,19 @@ public class ViewPageAction extends Action {
 			 HttpServletResponse response) throws Throwable{
 			 return "/JSP/view/memberMyPage.jsp"; 
 			}
+	
 	public String myInfo(HttpServletRequest request,
 			 HttpServletResponse response) throws Throwable{
+			HttpSession session = request.getSession();
 			MemberMybatisDAO dao = new MemberMybatisDAO();
-			MemberDTO dto = new MemberDTO();
-			
+			MemberDTO member = new MemberDTO();
+			String member_id = (String) session.getAttribute("member_id");
+			member = dao.getMember(member_id);
+			session.setAttribute("member_phonenumber", member.getMember_phonenumber());
+			session.setAttribute("member_birthdate", member.getMember_birthdate());
+			session.setAttribute("member_gender", member.getMember_gender());
+			session.setAttribute("member_zipcode", member.getMember_zipcode());
+			session.setAttribute("member_address", member.getMember_address());
 		
 			 return "/JSP/view/memberInfoPage.jsp"; 
 			}

@@ -66,11 +66,26 @@ public class MemberMybatisDAO extends AbstractMybatis{
 		}
 		
 
-		public int updateMember(MemberDTO dto) throws Exception{
+		public int updateMember(MemberDTO member) throws Exception{
+			int result = 0;
 			try {
-				return sqlSession.update(namespace +".getAllInfo", dto);
+				sqlSession.update(namespace +".update", member); 
+				result = 1;
 			}  finally {
+				sqlSession.commit();
 				sqlSession.close();
 			}
+			return result;
+		}
+		public int deleteMember(String member_id) throws Exception{
+			int result = 0;
+			try {
+				sqlSession.delete(namespace +".deleteMember", member_id); 
+				result = 1;
+			}  finally {
+				sqlSession.commit();
+				sqlSession.close();
+			}
+			return result;
 		}
 }

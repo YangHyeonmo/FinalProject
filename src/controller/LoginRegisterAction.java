@@ -66,38 +66,50 @@ public class LoginRegisterAction extends Action {
 		if(loginResult == 1) {
 			member = (MemberDTO) memberDAO.getMember(member_id);
 			session.setAttribute("member_id", member_id);
+			session.setAttribute("member_password", member_password);
 			session.setAttribute("member_name", member.getMember_name());
 			session.setAttribute("member_email", member.getMember_email());
-			session.setAttribute("member_phonenumber", member.getMember_phonenumber());
-			session.setAttribute("member_birthdate", member.getMember_birthdate());
-			session.setAttribute("member_gender", member.getMember_gender());
-			session.setAttribute("member_zipcode", member.getMember_zipcode());
-			session.setAttribute("member_address", member.getMember_address());
 			session.setAttribute("login", 1);
 			return "/JSP/member/memberLoginPro.jsp";
 		}
 		else return "/JSP/member/memberLoginFailed.jsp"; 
 	}
+	
 	public String memberInfoUpdate(HttpServletRequest request, HttpServletResponse res) throws Exception {
 		headProcess(request, res);
 		HttpSession session = request.getSession();
 		MemberMybatisDAO dao = new MemberMybatisDAO();
-		MemberDTO dto = new MemberDTO();
-		dto.setMember_password(request.getParameter("pwd"));
-		dto.setMember_email(request.getParameter("email"));
-		dto.setMember_name(request.getParameter("name"));
-		dto.setMember_birthdate(request.getParameter("tel"));
-		dto.setMember_gender(request.getParameter("gender"));
-		dto.setMember_zipcode(request.getParameter("zipcode"));
-		dto.setMember_address(request.getParameter("address"));
+		MemberDTO member = new MemberDTO();
+		member.setMember_id((String)session.getAttribute("member_id"));
+		member.setMember_password(SHA256.getSHA256(request.getParameter("pwd")));
+		member.setMember_email(request.getParameter("email"));
+		member.setMember_name(request.getParameter("name"));
+		member.setMember_birthdate(request.getParameter("tel"));
+		member.setMember_gender(request.getParameter("gender"));
+		member.setMember_zipcode(request.getParameter("zipcode"));
+		member.setMember_address(request.getParameter("address"));
 		String password = (String)session.getAttribute("member_password");
-		String oldpwd = request.getParameter("oldpwd");
-		if(password == oldpwd) {
-			dao.updateMember(dto);
-			return 
+		String oldpwd = SHA256.getSHA256(request.getParameter("oldpwd"));
+		if(password.equals(oldpwd)) {
+			dao.updateMember(member);
+			return "/JSP/view/mainPage.jsp";
 		}
+		else return "/JSP/view/memberInfoPage.jsp";
 		
-		return null;
+	}
+	public String memberDelete(HttpServletRequest request, HttpServletResponse res) throws Exception {
+		headProcess(request, res);
+		HttpSession session = request.getSession();
+		MemberMybatisDAO dao = new MemberMybatisDAO();
+		String member_id = (String) session.getAttribute("member_id");
+		String password = (String)session.getAttribute("member_password");
+		String oldpwd = SHA256.getSHA256(request.getParameter("oldpwd"));
+		if(password.equals(oldpwd)) {
+			dao.deleteMember(member_id);
+			session.invalidate();
+			return "/JSP/view/mainPage.jsp";
+		}
+		else return "/JSP/view/memberInfoPage.jsp";
 		
 	}
 	
