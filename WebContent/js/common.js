@@ -14,12 +14,24 @@
 	   frm.submit();
 	}
 
-	$("#member_id").blur(function() {
+	$("#member_id").keyup(function() {
 		let member_id = $('#member_id').val();
-		let pattern1 = /[0-9]/;
-		let pattern2 = /[a-zA-Z]/;
-		$.ajax({
-			url: "idCheck",
+		
+		
+		if ($('#member_id').length >= 8){
+			console.log(member_id);
+		//	$("#reg_submit").attr("disabled", true);
+		}
+	/*	else if(member_id != pattern1 || member_id != pattern2 ){
+				$("#id_check").text("아이디는 소문자/대문자와 숫자 4~12자리만 가능합니다");
+				$("#id_check").css("color","red");
+				$("#reg_submit").attr("disabled", true);
+				}*/
+			
+		
+			
+		/*$.ajax({
+			url: "/SpringProject/member/idCheck",
 			data:{memberId : member_id},
 			type:'get',
 			success : function(data){
@@ -29,25 +41,12 @@
 					$("#id_check").css("color","red");
 					$("#reg_submit").attr("disabled", true);
 				}
-				else{
-					 if(member_id == ""){
-						$("#id_check").text("아이디를 입력해주세요");
-						$("#id_check").css("color","red");
-						$("#reg_submit").attr("disabled", true);
-					}
-					else{
-						//if(member_id != pattern1 || member_id != pattern2 ){
-						$("#id_check").text("아이디는 소문자/대문자와 숫자 4~12자리만 가능합니다");
-						$("#id_check").css("color","red");
-						$("#reg_submit").attr("disabled", true);
-						//}
-					}
-				}
+				
 			}, error : function(){
 				console.log("실패");
 			}
 		
-		});
+		});*/ 
 	});
 
 	// 회원가입 check

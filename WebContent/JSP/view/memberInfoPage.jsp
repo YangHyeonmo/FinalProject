@@ -90,10 +90,10 @@
 			</tr>
 			</tbody>
 		</table>
-		
+		<div class="button">
 		<button type="button" class="btn1"  onclick="memberDelete()">탈퇴하기</button>
 		<button type="button" class="btn1" onclick="memberUpdate()">회원정보 수정</button>
-		
+		</div>
 		<input type="hidden" name="author" value="${member_author}" />
 	</form>
 </div>

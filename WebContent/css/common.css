@@ -59,5 +59,5 @@ background-color: white; -webkit-rtl-ordering: logical; cursor: text; margin: 0e
 .content .tbl-reg td,th{font-size: 16px; padding:2px; padding-left:40px;}
 .content input[type="text"],input[type="password"], input[type="email"],input[type="date"], input[type="file"], select {background-color:rgba(0,0,0,0.2); width: 35rem; backwidth:100%; height:32px; font-size:1.4rem; line-height:2rem; padding:5px 10px;  transition: 0.5s;}
 .content button{background-color: rgba(0,0,0,0.25)}
-.btn .btn1{}
+.content .button .btn1{}
 }

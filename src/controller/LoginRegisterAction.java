@@ -10,7 +10,7 @@ import member.MemberDTO;
 import member.MemberMybatisDAO;
 import util.SHA256;
 
-public class LoginRegisterAction extends Action {
+public class LoginRegisterAction extends com.user.cks.Action {
 	
 	public void headProcess(HttpServletRequest request, HttpServletResponse res) {
 		try {

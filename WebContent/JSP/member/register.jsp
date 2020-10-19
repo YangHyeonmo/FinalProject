@@ -29,7 +29,8 @@
                   <tr>
                         <td><small>v</small>
                         <span>아이디</span></td>
-                        <td><input id="member_id" name="member_id" autofocus placeholder = "아이디를 입력해주세요" title = "아이디 입력창입니다."  style="width:calc(100% - 96px)">
+                        <td><input id="member_id" name="member_id" autofocus placeholder = "아이디를 입력해주세요" 
+                        title = "아이디 입력창입니다."  style="width:calc(100% - 96px)"  >
                         <div class="check-font" id="id_check"></div><br>
                         </td>
                      </tr>
