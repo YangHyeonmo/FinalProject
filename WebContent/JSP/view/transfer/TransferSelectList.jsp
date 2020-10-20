@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="EUC-KR"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -83,6 +83,24 @@
 					</tr>
 			</table>
 </form>
+
+<table>
+<tr>
+	<td>보낸 시간</td>
+	<td>보낸 사람</td>
+	<td>보낸 금액</td>
+</tr>
+<tr>
+
+</tr>
+<c:forEach var= "transList" items="${transList}">
+	<tr>
+		<td>${transList.transfer_day}</td>
+		<td>${transList.transfer_to_member_id}</td>
+		<td>${transList.transfer_price}</td>
+	</tr>
+	</c:forEach>
+</table>
 </body>
 <script>
       function money(price) {                           /* type 메뉴 선택시 type에 해당하는 테이블 출력하는 함수   /  cityName => kind(type) */
@@ -141,22 +159,6 @@ function lastday_select(){ //년과 월에 따라 마지막 일 구하기
 		} 
 	} 
 </script>
-<table>
-<tr>
-	<td>보낸 시간</td>
-	<td>보낸 사람</td>
-	<td>보낸 금액</td>
-</tr>
-<tr>
 
-</tr>
-<c:forEach var= "transList" items="${transList}">
-	<tr>
-		<td>${transList.transfer_day}</td>
-		<td>${transList.transfer_to_member_id}</td>
-		<td>${transList.transfer_price}</td>
-	</tr>
-	</c:forEach>
-</table>
 </body>
 </html>

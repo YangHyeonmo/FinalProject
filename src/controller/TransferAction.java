@@ -38,12 +38,12 @@ public class TransferAction extends Action{
 	
 	public String TransferAuto(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
 		headProcess(request,response);	
-		 return  "/view/transfer/TransferAuto.jsp"; 
+		 return  "/JSP/view/transfer/TransferAuto.jsp"; 
 	} 
 	
 	public String TransferRes(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
 		headProcess(request,response);
-		 return  "/view/transfer/TransferReserve.jsp"; 
+		 return  "/JSP/view/transfer/TransferReserve.jsp"; 
 	}
 	
 	public String TransferSelect(HttpServletRequest request,HttpServletResponse response)  throws Throwable { 
@@ -51,7 +51,7 @@ public class TransferAction extends Action{
 		//int deposit=transferMybatisdao.getDeposit("dasom7107");
 		//request.setAttribute("deposit", deposit);
 		
-		return  "/view/transfer/TransferSelect.jsp"; 
+		return  "/JSP/view/transfer/TransferSelect.jsp"; 
 	} 
 	
 	public String TransferSelectList(HttpServletRequest request,HttpServletResponse response)  throws Throwable { 	//기간 설정 메소드(다솜이 달력메소드 참고 후 수정할게요)
@@ -102,7 +102,7 @@ public class TransferAction extends Action{
 			List<TransferDTO> transList=transferMybatisdao.dateTransList(second_date,first_date,transferdata.getAccount_no());
 			
 			request.setAttribute("transList", transList);		
-			return  "/view/transfer/TransferSelectList.jsp"; 
+			return  "/JSP/view/transfer/TransferSelectList.jsp"; 
 		}else if(select_period<10 && select_period>0) {
 			cal.add(Calendar.DATE, -select_period);
 		}else {
@@ -114,7 +114,7 @@ public class TransferAction extends Action{
 		List<TransferDTO> transList=transferMybatisdao.dateTransList(now_date,select_date,transferdata.getAccount_no());
 		
 		request.setAttribute("transList", transList);		
-		return  "/view/transfer/TransferSelectList.jsp"; 
+		return  "/JSP/view/transfer/TransferSelectList.jsp"; 
 	} 
 	public String TransferAuth(HttpServletRequest request, HttpServletResponse response)  throws Throwable {
 		headProcess(request,response);
@@ -122,7 +122,7 @@ public class TransferAction extends Action{
 		int num=Integer.parseInt(request.getParameter("TransferNum"));
 		try {
 			//transferdata.setTransfer_no(2);
-			//통장이 존재하는지 1번
+			//통장이 존재하는지 1번 
 			boolean check_Account= transferMybatisdao.check_account_no(request.getParameter("ACCOUNT_NO")); //통장이 존재하는지 확인하는 메소드
 			if(check_Account) {
 				transferdata.setAccount_no(request.getParameter("ACCOUNT_NO"));	//통장이 존재할 경우 
@@ -137,7 +137,7 @@ public class TransferAction extends Action{
 			}else {		//통장에 돈이 부족한 경우
 				error=2;
 				request.setAttribute("error", error);
-				return "/view/transfer/TransferWrite.jsp";
+				return "/JSP/view/transfer/TransferWrite.jsp";
 			}
 			//보낼 통장이 존재하는지 3번
 			boolean check_TransferAccount=transferMybatisdao.check_account_no(request.getParameter("TRANSFER_TO_ACCOUNT_NO"));
@@ -146,13 +146,13 @@ public class TransferAction extends Action{
 			}else {
 				error=3;
 				request.setAttribute("error", error);
-				return "/view/transfer/TransferWrite.jsp";
+				return "/JSP/view/transfer/TransferWrite.jsp";
 			}
 			//자신에게 보내지 못하도록 4번
 			if(request.getParameter("ACCOUNT_NO").equals(request.getParameter("TRANSFER_TO_ACCOUNT_NO"))) {
 				error=4;
 				request.setAttribute("error", error);
-				return "/view/transfer/TransferWrite.jsp";
+				return "/JSP/view/transfer/TransferWrite.jsp";
 			}
 			if(num==1) {	//즉시 이체인 경우
 				result=transferMybatisdao.transferInsert(transferdata,num);		//이체 내역 삽입
@@ -160,7 +160,7 @@ public class TransferAction extends Action{
 				transferdata=transferMybatisdao.transferDetail(transcount, num);	//사용자 정보
 				transferMybatisdao.updateMoney(transferdata.getAccount_no(),transferdata.getTransfer_price(),1);		//1: Minus Money 2.Plus Money
 				transferMybatisdao.updateMoney(transferdata.getTransfer_to_account_no(),transferdata.getTransfer_price(),2);
-				return "/view/transfer/TransferAuth.jsp";
+				return "/JSP/view/transfer/TransferAuth.jsp";
 			}else if(num==2 || num==3) {	//자동이체 , 예약이체 (달력 수정 이후 주석 달게요)
 				String year=request.getParameter("transfer_year");
 				String month=request.getParameter("transfer_month");
@@ -201,7 +201,7 @@ public class TransferAction extends Action{
 								System.out.println("이체가격"+ transferdata.getTransfer_price());
 								transferMybatisdao.updateMoney(transferdata.getAccount_no(),transferdata.getTransfer_price(),1);		//1: Minus Money 2.Plus Money
 								transferMybatisdao.updateMoney(transferdata.getTransfer_to_account_no(),transferdata.getTransfer_price(),2);		
-								return "/view/transfer/TransferAuth.jsp";
+								return "/JSP/view/transfer/TransferAuth.jsp";
 							}
 						}					
 						else {
@@ -209,18 +209,18 @@ public class TransferAction extends Action{
 							System.out.println("에러입니다");
 							request.setAttribute("error", error);
 							if(num==2) {
-								return "/view/transfer/TransferAuto.jsp";
+								return "/JSP/view/transfer/TransferAuto.jsp";
 							}else if(num==3) {
-								return "/view/transfer/TransferReserve.jsp";
+								return "/JSP/view/transfer/TransferReserve.jsp";
 							}
 						}
 				}catch(java.text.ParseException e) {
 					error=6;
 					request.setAttribute("error", error);
 					if(num==2) {
-						return "/view/transfer/TransferAuto.jsp";
+						return "/JSP/view/transfer/TransferAuto.jsp";
 					}else if(num==3) {
-						return "/view/transfer/TransferReserve.jsp";
+						return "/JSP/view/transfer/TransferReserve.jsp";
 					}
 				}catch(Exception e) {
 					e.printStackTrace();
@@ -229,6 +229,6 @@ public class TransferAction extends Action{
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-		return "/view/transfer/TransferAuth.jsp";			
+		return "/JSP/view/transfer/TransferAuth.jsp";			
 	} 
 }

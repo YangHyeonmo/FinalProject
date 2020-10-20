@@ -231,7 +231,7 @@
 					<tr>
 						<td colspan = "2">
 							<select id="select_year" name="transfer_year" onchange="javascript:lastday();">
-							</select>
+							</select> 
 						</td>
 						<td colspan = "2">
 							<select id="select_month" name="transfer_month" onchange="javascript:lastday();">

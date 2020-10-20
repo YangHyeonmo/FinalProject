@@ -1,41 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible">
+<title>MyPage</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <c:if test="${account_num==null}">
 	<script>
-		alert("ÅëÀåÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù");
+		alert("í†µìž¥ì´ ì¡´ìž¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤");
 	</script>
 </c:if>	
 <c:if test="${error==2 }">
 	<script>
-		alert("±Ý¾×ÀÌ ºÎÁ·ÇÏ¿© ÀÌÃ¼°¡ ºÒ°¡´É ÇÕ´Ï´Ù");
+		alert("ê¸ˆì•¡ì´ ë¶€ì¡±í•˜ì—¬ ì´ì²´ê°€ ë¶ˆê°€ëŠ¥ í•©ë‹ˆë‹¤");
 	</script>
 </c:if>
 <c:if test="${error==3 }">
 	<script>
-		alert("ÀÌÃ¼ÇÏ°íÀÚ ÇÏ´Â ÅëÀåÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù");
+		alert("ì´ì²´í•˜ê³ ìž í•˜ëŠ” í†µìž¥ì´ ì¡´ìž¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤");
 	</script>
 </c:if>
 <c:if test="${error==4 }">
 	<script>
-		alert("Ãâ±Ý °èÁÂ¿Í ÀÌÃ¼ÇÏ°íÀÚ ÇÏ´Â °èÁÂ°¡ ÀÏÄ¡ÇÏ¸é ¾ÈµË´Ï´Ù");
+		alert("ì¶œê¸ˆ ê³„ì¢Œì™€ ì´ì²´í•˜ê³ ìž í•˜ëŠ” ê³„ì¢Œê°€ ì¼ì¹˜í•˜ë©´ ì•ˆë©ë‹ˆë‹¤");
 	</script>
 </c:if>
 <c:if test="${error==5 }">
 	<script>
-		alert("ÇöÀç ³¯Â¥º¸´Ù ´õ ´Ê°Ô ÀÔ·Â");
+		alert("í˜„ìž¬ ë‚ ì§œë³´ë‹¤ ë” ëŠ¦ê²Œ ìž…ë ¥");
 	</script>
 </c:if>
 <c:if test="${error==6 }">
 	<script>
-		alert("³¯Â¥ Çü½ÄÀ» Á¤È®ÇÏ°Ô ÀÔ·ÂÇØÁÖ¼¼¿ä");
+		alert("ë‚ ì§œ í˜•ì‹ì„ ì •í™•í•˜ê²Œ ìž…ë ¥í•´ì£¼ì„¸ìš”");
 	</script>
 </c:if>
 </head>
@@ -44,14 +48,14 @@
 	<table class = "table table-bordered table-hover" style = "text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<th colspan = "5"><h4>±â°£ ¼³Á¤</h4></th>
+						<th colspan = "5"><h4 align="center">ê¸°ê°„ ì„¤ì •</h4></th>
 					</tr>
 				</thead>
 					<tr>
-						<td colspan = "5">Ãâ±Ý °èÁÂ ¹øÈ£</td>
+						<td colspan = "5">ì¶œê¸ˆ ê³„ì¢Œ ë²ˆí˜¸</td>
 					</tr>
 					<tr>
-						<td>	
+						<td colspan = "5">	
 							<select name="ACCOUNT_NO">
 								<c:forEach var= "ACCOUNT_NO" items="${account_num }" varStatus="status">
 									<option value=${ACCOUNT_NO }>${ACCOUNT_NO}</option>
@@ -60,79 +64,79 @@
 						</td>						
 					</tr>
 					<%-- <tr>
-						<td colspan = "5">ÀÜ¾×</td>
+						<td colspan = "5">ìž”ì•¡</td>
 					</tr>
 					<tr>
 						<td>${deposit }
 					</tr> --%>
 					<tr align=center>
-						<td colspan="5">ÀÌÃ¼±Ý¾×</td>					
+						<td colspan="5">ì´ì²´ê¸ˆì•¡</td>					
 					</tr>
 					<tr>
-						<td><input type="button" value="ÀÏÁÖÀÏ" onclick="money(7)"></td>
-						<td><input type="button" value="1°³¿ù" onclick="money(30)"></td>
-						<td><input type="button" value="3°³¿ù" onclick="money(90)"></td>
-						<td><input type="button" value="6°³¿ù" onclick="money(180)"></td>
-						<td><input type="button" value="1³â"  onclick="money(365)"></td>
+						<td><input type="button" value="ì¼ì£¼ì¼" onclick="money(7)"></td>
+						<td><input type="button" value="1ê°œì›”" onclick="money(30)"></td>
+						<td><input type="button" value="3ê°œì›”" onclick="money(90)"></td>
+						<td><input type="button" value="6ê°œì›”" onclick="money(180)"></td>
+						<td><input type="button" value="1ë…„"  onclick="money(365)"></td>
 					</tr>
 					<tr>
 						<td colspan="5"><input type="hidden" value=0 name= "select_period" id="select_period"></td>
 					</tr>
 					
 					<tr align=center>
-						<td colspan="5">Á÷Á¢ ÀÔ·Â(½ÃÀÛ ³¯Â¥)</td>					
+						<td colspan="5">ì§ì ‘ ìž…ë ¥(ì‹œìž‘ ë‚ ì§œ)</td>					
 					</tr>
 					<tr>
-						<td>
+						<td colspan = "2">
 							<select id="select_year" name="transfer_year" onchange="javascript:lastday();">
 							</select>
 						</td>
-						<td>
+						<td colspan = "2">
 							<select id="select_month" name="transfer_month" onchange="javascript:lastday();">
 							</select>
 						</td>
-						<td>
+						<td colspan = "1">
 							<select id="select_day" name="transfer_day">
 							</select>
 						</td>
 					</tr>
 				
 					<tr align=center>
-						<td colspan="5">Á÷Á¢ ÀÔ·Â(Á¾·á ³¯Â¥)</td>					
+						<td colspan="5">ì§ì ‘ ìž…ë ¥(ì¢…ë£Œ ë‚ ì§œ)</td>					
 					</tr>
 					<tr>
-						<td>
+						<td colspan = "2">
 							<select id="select_year2" name="transfer_year2" onchange="javascript:lastday_select();">
 							</select>
 						</td>
-						<td>
+						<td colspan = "2">
 							<select id="select_month2" name="transfer_month2" onchange="javascript:lastday_select();">
 							</select>
 						</td>
-						<td>
+						<td colspan = "1">
 							<select id="select_day2" name="transfer_day2">
 							</select>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="5"><input type="submit" value="È®ÀÎ"></td>
+						<td colspan="5"><input type="submit" value="í™•ì¸"></td>
 					</tr>
 			</table>
 </form>
 </body>
 <script>
-      function money(price) {                           /* type ¸Þ´º ¼±ÅÃ½Ã type¿¡ ÇØ´çÇÏ´Â Å×ÀÌºí Ãâ·ÂÇÏ´Â ÇÔ¼ö   /  cityName => kind(type) */
+      function money(price) {                           /* type ë©”ë‰´ ì„ íƒì‹œ typeì— í•´ë‹¹í•˜ëŠ” í…Œì´ë¸” ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜   /  cityName => kind(type) */
           var element= parseInt(document.getElementById("select_period").value);
     	  document.getElementById("select_period").value=element+price;
       }
 </script>
 
 <script> 
-var start_year="2020";// ½ÃÀÛÇÒ ³âµµ 
+var start_year="2020";// ì‹œìž‘í•  ë…„ë„ 
 var today = new Date(); 
 var today_year= today.getFullYear(); 
 var index=0; 
-for(var y=start_year; y<=today_year; y++){ //start_year ~ ÇöÀç ³âµµ 
+for(var y=start_year; y<=today_year; y++){ //start_year ~ í˜„ìž¬ ë…„ë„ 
 	document.getElementById('select_year').options[index] = new Option(y, y); 
 	document.getElementById('select_year2').options[index] = new Option(y, y); 
 	index++; 
@@ -145,7 +149,7 @@ for(var m=1; m<=12; m++){
 	} 
 	
 lastday(); 
-function lastday(){ //³â°ú ¿ù¿¡ µû¶ó ¸¶Áö¸· ÀÏ ±¸ÇÏ±â 
+function lastday(){ //ë…„ê³¼ ì›”ì— ë”°ë¼ ë§ˆì§€ë§‰ ì¼ êµ¬í•˜ê¸° 
 	var Year=document.getElementById('select_year').value; 
 	var Month=document.getElementById('select_month').value; 
 	var day=new Date(new Date(Year,Month,1)-86400000).getDate(); 
@@ -162,7 +166,7 @@ function lastday(){ //³â°ú ¿ù¿¡ µû¶ó ¸¶Áö¸· ÀÏ ±¸ÇÏ±â
 	} 
 	
 lastday_select();
-function lastday_select(){ //³â°ú ¿ù¿¡ µû¶ó ¸¶Áö¸· ÀÏ ±¸ÇÏ±â 
+function lastday_select(){ //ë…„ê³¼ ì›”ì— ë”°ë¼ ë§ˆì§€ë§‰ ì¼ êµ¬í•˜ê¸° 
 	var Year=document.getElementById('select_year2').value; 
 	var Month=document.getElementById('select_month2').value; 
 	var day=new Date(new Date(Year,Month,1)-86400000).getDate(); 
