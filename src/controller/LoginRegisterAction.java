@@ -61,6 +61,8 @@ public class LoginRegisterAction extends com.user.cks.Action {
 		MemberDTO member = new MemberDTO();
 		String member_id = request.getParameter("member_id");
 		String member_password = SHA256.getSHA256(request.getParameter("member_password"));
+		System.out.println("=======================================");
+		System.out.println(member_password);
 		int loginResult = memberDAO.loginMember(member_id, member_password);
 		
 		if(loginResult == 1) {

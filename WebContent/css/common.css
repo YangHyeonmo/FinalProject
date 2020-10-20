@@ -5,10 +5,10 @@ p {line-height: 1.6;}
 a {color: rgb(29, 29, 31); text-decoration: none;}
 .wrapper .mainPageImg{position:absolute; top:52px;}
 .wrapper .container-fluid .navbar-header .navbar-img {position: sticky; height: 50px; margin-left: -300px;}
-.container {/* iPhone 가로 스크롤 방지 */overflow-x: hidden;}
+
 
 /* 로그인 폼css */
-.inner_login .login_tistory .form a { color: #333; text-decoration: none;}
+/* .inner_login .login_tistory .form a { color: #333; text-decoration: none;}
 .inner_login .login_tistory .form input { -webkit-writing-mode: horizontal-tb !important; text-rendering: auto; color: initial; letter-spacing: normal; word-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none; display: inline-block; text-align: start; -webkit-appearance: textfield; 
 background-color: white; -webkit-rtl-ordering: logical; cursor: text; margin: 0em; font: 400 13.3333px Arial; padding: 1px 0px; border-width: 2px; border-style: inset; border-color: initial; border-image: initial;}
 .inner_login { position: absolute; left: 50%; top: 50%; margin: -145px 0 0 -160px;}
@@ -28,7 +28,64 @@ background-color: white; -webkit-rtl-ordering: logical; cursor: text; margin: 0e
 .inner_login .login_tistory .inp_chk .lab_g { display: inline-block; margin-right: 19px; color: #909090; font-size: 13px; line-height: 19px; vertical-align: top;}
 .inner_login .login_tistory .inp_chk .ico_check { display: inline-block; width: 18px; height: 18px; margin: 1px 4px 0 0; background-position: -60px 0; color: #333;}
 .inner_login .login_tistory .inp_chk .txt_lab { vertical-align: top;}
-.inner_login .login_tistory .login_append .txt_find { float: right; color: #777;}
+.inner_login .login_tistory .login_append .txt_find { float: right; color: #777;} */
+
+
+
+body .container {position: relative; overflow: hidden; width: 700px; height: 500px; margin: 80px auto 0; background-color: #ffffff; -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px; -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px; box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;}
+body .container .half {float: left; width: 50%; height: 100%; padding: 20px 40px 0;}
+body .container .half.bg { background-image: url("http://www.blueb.co.kr/SRC2/_image/v01.jpg"); background-size: 400px; background-repeat: no-repeat;}
+body .container h1 { font-size: 18px; font-weight: 700; margin-bottom: 23px; text-align: center; text-indent: 6px; letter-spacing: 7px; text-transform: uppercase; color: #263238;}
+body .container .tabs { width: 100%; margin-bottom: 29px; border-bottom: 1px solid #d9d9d9;}
+body .container .tabs .tab { display: inline-block; margin-bottom: -1px; padding: 20px 15px 10px; cursor: pointer; letter-spacing: 0; border-bottom: 1px solid #d9d9d9; -moz-user-select: -moz-none; -ms-user-select: none; -webkit-user-select: none; user-select: none; transition: all 0.1s ease-in-out;}
+body .container .tabs .tab a { font-size: 11px; text-decoration: none; text-transform: uppercase; color: #d9d9d9; transition: all 0.1s ease-in-out;}
+body .container .tabs .tab.active a, body .container .tabs .tab:hover a {color: #263238;}
+body .container .tabs .tab.active { border-bottom: 1px solid #263238;}
+body .container .contentLogin form { position: relative; height: 287px;}
+body .container .contentLogin label:first-of-type, body .container .contentLogin input:first-of-type, body .container .contentLogin .more:first-of-type { -moz-animation: slideIn 0.4s cubic-bezier(0.37, 0.82, 0.2, 1); -webkit-animation: slideIn 0.4s cubic-bezier(0.37, 0.82, 0.2, 1); animation: slideIn 0.4s cubic-bezier(0.37, 0.82, 0.2, 1);}
+body .container .contentLogin label:nth-of-type(2), body .container .contentLogin input:nth-of-type(2), body .container .contentLogin .more:nth-of-type(2) { -moz-animation: slideIn 0.5s cubic-bezier(0.37, 0.82, 0.2, 1); -webkit-animation: slideIn 0.5s cubic-bezier(0.37, 0.82, 0.2, 1); animation: slideIn 0.5s cubic-bezier(0.37, 0.82, 0.2, 1);}
+body .container .contentLogin label:nth-of-type(3), body .container .contentLogin input:nth-of-type(3), body .container .contentLogin .more:nth-of-type(3) { -moz-animation: slideIn 0.6s cubic-bezier(0.37, 0.82, 0.2, 1); -webkit-animation: slideIn 0.6s cubic-bezier(0.37, 0.82, 0.2, 1); animation: slideIn 0.6s cubic-bezier(0.37, 0.82, 0.2, 1);}
+body .container .contentLogin label:nth-of-type(4), body .container .contentLogin input:nth-of-type(4), body .container .contentLogin .more:nth-of-type(4) { -moz-animation: slideIn 0.7s cubic-bezier(0.37, 0.82, 0.2, 1); -webkit-animation: slideIn 0.7s cubic-bezier(0.37, 0.82, 0.2, 1); animation: slideIn 0.7s cubic-bezier(0.37, 0.82, 0.2, 1);}
+body .container .contentLogin label:nth-of-type(5), body .container .contentLogin input:nth-of-type(5), body .container .contentLogin .more:nth-of-type(5) { -moz-animation: slideIn 0.8s cubic-bezier(0.37, 0.82, 0.2, 1); -webkit-animation: slideIn 0.8s cubic-bezier(0.37, 0.82, 0.2, 1); animation: slideIn 0.8s cubic-bezier(0.37, 0.82, 0.2, 1);}
+body .container .contentLogin label:nth-of-type(6), body .container .contentLogin input:nth-of-type(6), body .container .contentLogin .more:nth-of-type(6) { -moz-animation: slideIn 0.9s cubic-bezier(0.37, 0.82, 0.2, 1); -webkit-animation: slideIn 0.9s cubic-bezier(0.37, 0.82, 0.2, 1); animation: slideIn 0.9s cubic-bezier(0.37, 0.82, 0.2, 1);}
+body .container .contentLogin label:nth-of-type(7), body .container .contentLogin input:nth-of-type(7), body .container .contentLogin .more:nth-of-type(7) { -moz-animation: slideIn 1.0s cubic-bezier(0.37, 0.82, 0.2, 1); -webkit-animation: slideIn 1.0s cubic-bezier(0.37, 0.82, 0.2, 1); animation: slideIn 1.0s cubic-bezier(0.37, 0.82, 0.2, 1);}
+body .container .contentLogin label:nth-of-type(8), body .container .contentLogin input:nth-of-type(8), body .container .contentLogin .more:nth-of-type(8) { -moz-animation: slideIn 1.1s cubic-bezier(0.37, 0.82, 0.2, 1); -webkit-animation: slideIn 1.1s cubic-bezier(0.37, 0.82, 0.2, 1); animation: slideIn 1.1s cubic-bezier(0.37, 0.82, 0.2, 1);}
+body .container .contentLogin label:nth-of-type(9), body .container .contentLogin input:nth-of-type(9), body .container .contentLogin .more:nth-of-type(9) { -moz-animation: slideIn 1.2s cubic-bezier(0.37, 0.82, 0.2, 1); -webkit-animation: slideIn 1.2s cubic-bezier(0.37, 0.82, 0.2, 1); animation: slideIn 1.2s cubic-bezier(0.37, 0.82, 0.2, 1);}
+body .container .contentLogin label:nth-of-type(10), body .container .contentLogin input:nth-of-type(10), body .container .contentLogin .more:nth-of-type(10) { -moz-animation: slideIn 1.3s cubic-bezier(0.37, 0.82, 0.2, 1); -webkit-animation: slideIn 1.3s cubic-bezier(0.37, 0.82, 0.2, 1); animation: slideIn 1.3s cubic-bezier(0.37, 0.82, 0.2, 1);}
+body .container .contentLogin label { font-size: 12px; color: #263238; -moz-user-select: -moz-none; -ms-user-select: none; -webkit-user-select: none; user-select: none;}
+body .container .contentLogin label:not([for='remember']) {display: none; }
+body .container .contentLogin input.inpt { font-size: 14px; display: block; width: 100%; height: 0px; margin-bottom: 5px; padding: 12px 0px; color: #999999; border: 1px solid #d9d9d9; background: transparent; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px;}
+body .container .contentLogin input.inpt::-webkit-input-placeholder { font-size: 14px; color: #999999; font-family: 'Lato', sans-serif;}
+body .container .contentLogin input.inpt:-moz-placeholder { font-size: 14px; color: #999999; font-family: 'Lato', sans-serif;}
+body .container .contentLogin input.inpt::-moz-placeholder { font-size: 14px; color: #999999; font-family: 'Lato', sans-serif; }
+body .container .contentLogin input.inpt:-ms-input-placeholder { font-size: 14px; color: #999999; font-family: 'Lato', sans-serif;}
+body .container .contentLogin input.inpt:focus { border-color: #999999;}
+body .container .contentLogin input.submit { font-size: 12px; line-height: 42px; display: block; width: 100%; height: 42px; cursor: pointer; vertical-align: middle; letter-spacing: 2px; text-transform: uppercase;color: #263238; border: 1px solid #263238; background: transparent; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px;}
+body .container .contentLogin input.submit:hover { background-color: #263238; color: #ffffff; -moz-transition: all 0.2s; -o-transition: all 0.2s; -webkit-transition: all 0.2s; transition: all 0.2s;}
+body .container .contentLogin input:focus { outline: none;}
+body .container .contentLogin input.birthdate { font-size: 13px; display: block; color: #999999; width: 12rem; float:left; height: 0px; margin-bottom: 5px; padding: 12px 12px; color: #999999; border: 1px solid #d9d9d9; background: transparent; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px;}
+body .container .contentLogin input.zipcode { font-size: 13px; display: block; color: #999999; width: 11rem; float:left; height: 0px; margin-bottom: 5px; padding: 12px 12px; color: #999999; border: 1px solid #d9d9d9; background: transparent; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px;}
+body .container .contentLogin .findZip {width:6rem; font-size:12px; color: #999999; height:26px; float:right; }
+body .container .contentLogin .regform .gender{width:5rem; height:26px; font-size:13px; color: #999999; background-color: white; border: 1px solid rgba(o,o,o,o.3); float:right;}
+body .container .contentLogin .checkbox { margin-top: 4px; overflow: hidden; clip: rect(0 0 0 0); width: 0; height: 0; margin: 17px -1px; padding: 0; border: 0;}
+body .container .contentLogin .checkbox + label { vertical-align: middle; display: inline-block; width: 50%;}
+body .container .contentLogin .checkbox + label:before {content: "\A"; color: #999999;font-family: Verdana; font-weight: bold;font-size: 8px;line-height: 10px;text-align: center;display: inline-block;vertical-align: middle;position: relative;-moz-border-radius: 2px;-webkit-border-radius: 2px;border-radius: 2px;background: transparent;border: 1px solid #d9d9d9;width: 11px;height: 11px;margin: -2px 8px 0 0;}
+body .container .contentLogin .checkbox:checked + label:before {content: "✓";}
+body .container .contentLogin .submit-wrap { position: absolute; bottom: -5rem; width: 100%;}
+body .container .contentLogin .submit-wrap a { font-size: 12px;display: block; margin-top: 20px;text-align: center; text-decoration: none; color: #999999;}
+body .container .contentLogin .submit-wrap a:hover { text-decoration: underline;}
+body .container .contentLogin .signup-cont { display: none;}
+
+@keyframes slideIn {0% { filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0); opacity: 0; margin-left: -320px;}
+100% { filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false); opacity: 1; margin-left: 0px;}}
+@-webkit-keyframes slideIn { 0% { filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0); opacity: 0; margin-left: -320px;}
+100% {filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false); opacity: 1; margin-left: 0px;}}
+.credits { display: block; position: absolute; right: 0; bottom: 0; color: #999999; font-size: 14px; margin: 0 10px 10px 0;}
+.credits a { filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80); opacity: 0.8; color: inherit; font-weight: 700; text-decoration: none;}
+
+
+
+
 
 /* 마이페이지 css */
 .mainPageB{margin:0; background-color: #485861; color: #FFE6CF; }

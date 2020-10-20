@@ -15,45 +15,82 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/common.css">
 </head>
-<body> 
-<div class="inner_login">
-    <div class="login_tistory">
+<body>
 
-        <form  name="formm" method="post" id="authForm" action="<%=request.getContextPath()%>/member/loginUser" >
-            <fieldset>
-            <legend class="screen_out">로그인 정보 입력폼</legend>
-            <div class="box_login">
-                <div class="inp_text">
-                <label for="loginId" class="screen_out">아이디</label>
-                <input type="text" id="loginId" name="member_id" placeholder="ID" >
-                </div>
-                <div class="inp_text">
-                <label for="loginPw" class="screen_out">비밀번호</label>
-                <input type="password" id="loginPw" name="member_password" placeholder="Password" >
-                </div>
-            </div> 
-     			<button type="button" class="btn_login" onclick="loginCheck();">로그인</button>
-            <div class="login_append">
-                <div class="inp_chk"> <!-- 체크시 checked 추가 -->
-                <input type="checkbox" id="keepLogin" class="inp_radio"  name="keepLogin">
-                <label for="keepLogin" class="lab_g">
-        <span class="img_top ico_check"></span>
-        <span class="txt_lab">로그인 상태 유지</span>
-        </label>
-                </div>
-                <span class="txt_find">
-                <a href="URL" class="link_find" onclick="window.open('<%=request.getContextPath()%>/JSP/introBack/userFindId.jsp', '_blank', 'top=120px,left=500px,width=500px,height=500px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;">아이디</a>               
-                    / 
-                <a href="URL" class="link_find" onclick="window.open('<%=request.getContextPath()%>/JSP/introBack/userFindPwd.jsp', '_blank', 'top=120px,left=500px,width=500px,height=500px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;">비밀번호 찾기</a>
-                </span>
+<section class="container">
+		    <article class="half">
+			        <h1>NARUBANK</h1>
+			        <div class="tabs">
+				            <span class="tab signin active"><a href="#signin">로그인</a></span>
+				            <span class="tab signup"><a href="#signup">회원가입</a></span>
+			        </div>
+			        <div class="contentLogin">
+				            <div class="signin-cont cont">
+					                <form name="formm" action="<%=request.getContextPath()%>/member/loginUser" method="post" >
+						                    <input type="text" name="member_id" id="loginId" class="inpt" required="required" placeholder="아이디">
+						                    <input type="password" name="member_password" id="loginPwd" class="inpt" required="required" placeholder="비밀번호">
+						                    <input type="checkbox" id="remember" class="checkbox" checked>
+						                    <label for="remember">Remember me</label>
+						                    <div class="submit-wrap">
+							                        <input type="submit" value="Sign in" class="submit" onclick="loginCheck();">
+							                        <a href="#" class="more">Forgot your password?</a>
+						                    </div>
+        					        </form>
+    				        </div>
+    		<div class="signup-cont cont">
+                <form class="regform" name="reg_form" method="post" action="<%=request.getContextPath()%>/member/insertRegister" onsubmit="return inputCheck()">
+						<input id="member_id" name="member_id" class="inpt" autofocus placeholder = "아이디를 입력해주세요" title = "아이디 입력창입니다." >
+						<input name="member_password" type="password" class="inpt"  placeholder = "비밀번호를 입력해주세요" title = "비밀번호 입력창입니다." >
+						<input name="member_password_co" type="password" class="inpt" placeholder = "비밀번호를 확인해주세요" title = "비밀번호 확인 입력창입니다." >
+						<input type="text" name="member_name" id="name" class="inpt"  placeholder="이름을 입력해주세요">
+                    	<input type="email" name="member_email" id="email" class="inpt" placeholder="@포함 이메일을 입력하세요">
+                    	<input type="text" name="member_phonenumber" class="inpt" placeholder="-빼고 입력해주세요">
+						<input type="text" name="member_birthdate"  placeholder="ex)19950209" class="birthdate" title = "생년월일">
+                		<select name="member_gender" class="gender">
+                       	 <option value="성별" selected>성별
+                           <option value="남">남</option>
+                           <option value="여">여</option>
+                        </select>			
+                        <input type ="text" name="member_zipcode" id="sample4_postcode" class="zipcode" placeholder="우편번호를 검색하세요" >	
+                        <input type="button" value="우편번호 찾기" class="findZip" onclick="sample4_execDaumPostcode()">
+                        <input name="member_address" type="text" id="sample4_roadAddress" class="inpt" placeholder="나머지 주소를 입력하세요">    
+						                    <div class="submit-wrap">
+							                        <input type="submit" value="Sign up" class="submit">
+							                        <a href="#" class="more">Terms and conditions</a>
+						                    </div>
+        					        </form>
             </div>
-            
-            </fieldset>
-        </form>
-        
-    </div>
-</div>
+			        </div>
+		    </article>
+		    <div class="half bg"></div>
+	</section>
+
+
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/common.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+<script type="text/javascript">
+$('.tabs .tab').click(function(){
+    if ($(this).hasClass('signin')) {
+        $('.tabs .tab').removeClass('active');
+        $(this).addClass('active');
+        $('.cont').hide();
+        $('.signin-cont').show();
+    } 
+    if ($(this).hasClass('signup')) {
+        $('.tabs .tab').removeClass('active');
+        $(this).addClass('active');
+        $('.cont').hide();
+        $('.signup-cont').show();
+    }
+});
+$('.container .bg').mousemove(function(e){
+    var amountMovedX = (e.pageX * -1 / 30);
+    var amountMovedY = (e.pageY * -1 / 9);
+    $(this).css('background-position', amountMovedX + 'px ' + amountMovedY + 'px');
+});
+</script>
+</body>
 
 </body>
 </html>

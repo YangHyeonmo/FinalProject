@@ -49,8 +49,7 @@
    
     <ul class="nav navbar-nav navbar-right">
    	<c:if test="${sessionScope.login ne 1}">
-      <li><a href="URL" onclick="window.open('<%=request.getContextPath()%>/member/login', '_blank', 'top=300px,left=700px,width=500px,height=300px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      <li><a href="URL" onclick="window.open('<%=request.getContextPath()%>/member/register', '_blank', 'top=120px,left=700px,width=500px,height=700px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="URL" onclick="window.open('<%=request.getContextPath()%>/member/login', '_blank', 'top=250px,left=550px,width=756px,height=609px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;"><span class="glyphicon glyphicon-user"></span> Login / Sign Up</a></li>
     </c:if>
     <c:if test="${sessionScope.login eq 1}">
       <li><a href="<%=request.getContextPath()%>/view/memberMyPage"><span class="glyphicon glyphicon-user"></span> 마이페이지</a></li>
