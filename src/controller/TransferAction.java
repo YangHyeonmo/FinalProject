@@ -18,14 +18,14 @@ public class TransferAction extends Action{
 
 	public TransferMybatisDAO transferMybatisdao = new TransferMybatisDAO();
 	public TransferDTO transferdata = new TransferDTO();
-	public int num = 0;
+	public String id;		//사용자 아이디
+	public int num = 0;		// 1. 즉시 이체 2. 자동 이체 3. 예약 이체
 	public boolean result = false;
 
 	public void headProcess(HttpServletRequest request, HttpServletResponse res) {
-		HttpSession session = request.getSession();
-		String id= (String)session.getAttribute("member_id");
-		System.out.println(id);
-		List<String> account_num= transferMybatisdao.getAccountNum(id);
+		HttpSession session = request.getSession();							
+		id= (String)session.getAttribute("member_id");		//세션에 담겨있는 아이디를 id 변수에 저장
+		List<String> account_num= transferMybatisdao.getAccountNum(id);	//사용자의 모든 통장을 담는 List 선언하고 View 로 뿌려줌
 		request.setAttribute("account_num", account_num);
 		
 		
@@ -54,22 +54,16 @@ public class TransferAction extends Action{
 		return  "/view/transfer/TransferSelect.jsp"; 
 	} 
 	
-	public String TransferSelectList(HttpServletRequest request,HttpServletResponse response)  throws Throwable { 
+	public String TransferSelectList(HttpServletRequest request,HttpServletResponse response)  throws Throwable { 	//기간 설정 메소드(다솜이 달력메소드 참고 후 수정할게요)
 		headProcess(request,response);
 		//int deposit=transferMybatisdao.getDeposit("dasom7107");
 		//request.setAttribute("deposit", deposit);
-		TransferMybatisDAO transferMybatisdao=new TransferMybatisDAO();
-		TransferDTO transferdata=new TransferDTO();		
-		int error=0;
+		int error=0;		//에러체크를 위한 변수
 		try {
-		boolean check_Account= transferMybatisdao.check_account_no(request.getParameter("ACCOUNT_NO"));
-		if(check_Account) {
-			transferdata.setAccount_no(request.getParameter("ACCOUNT_NO"));
-		}else {
-			error=1;
-			request.setAttribute("error", error);
-			return "/view/transfer/TransferSelect.jsp";
-		}
+			boolean check_Account= transferMybatisdao.check_account_no(request.getParameter("ACCOUNT_NO"));	//통장이 존재하는지 확인하는 메소드
+			if(check_Account) {
+				transferdata.setAccount_no(request.getParameter("ACCOUNT_NO"));		//통장이 존재할 경우 setAccount_no
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -124,36 +118,30 @@ public class TransferAction extends Action{
 	} 
 	public String TransferAuth(HttpServletRequest request, HttpServletResponse response)  throws Throwable {
 		headProcess(request,response);
-		TransferMybatisDAO transferMybatisdao=new TransferMybatisDAO();
-		TransferDTO transferdata=new TransferDTO();		
 		int error=0;
 		int num=Integer.parseInt(request.getParameter("TransferNum"));
 		try {
 			//transferdata.setTransfer_no(2);
 			//통장이 존재하는지 1번
-			boolean check_Account= transferMybatisdao.check_account_no(request.getParameter("ACCOUNT_NO"));
+			boolean check_Account= transferMybatisdao.check_account_no(request.getParameter("ACCOUNT_NO")); //통장이 존재하는지 확인하는 메소드
 			if(check_Account) {
-				transferdata.setAccount_no(request.getParameter("ACCOUNT_NO"));
-			}else {
-				error=1;
-				request.setAttribute("error", error);
-				return "/view/transfer/TransferWrite.jsp";
+				transferdata.setAccount_no(request.getParameter("ACCOUNT_NO"));	//통장이 존재할 경우 
 			}
-			transferdata.setMember_id("hyeonmo");
+			transferdata.setMember_id(id);
 			transferdata.setTransfer_alias(request.getParameter("TRANSFER_ALIAS"));
 			transferdata.setTransfer_to_member_id("hyeonmo2");	
 			//통장에 돈이 부족한지 2번
 			boolean check_Account_money=transferMybatisdao.check_account_money(request.getParameter("ACCOUNT_NO"),Integer.parseInt(request.getParameter("TRANSFER_PRICE")));
-			if(check_Account_money) {
+			if(check_Account_money) {	//통장에 돈이 충분한 경우
 				transferdata.setTransfer_price(Integer.parseInt(request.getParameter("TRANSFER_PRICE")));
-			}else {
+			}else {		//통장에 돈이 부족한 경우
 				error=2;
 				request.setAttribute("error", error);
 				return "/view/transfer/TransferWrite.jsp";
 			}
 			//보낼 통장이 존재하는지 3번
 			boolean check_TransferAccount=transferMybatisdao.check_account_no(request.getParameter("TRANSFER_TO_ACCOUNT_NO"));
-			if(check_TransferAccount) {
+			if(check_TransferAccount) {	//보낼 통장이 존재하는 경우
 				transferdata.setTransfer_to_account_no(request.getParameter("TRANSFER_TO_ACCOUNT_NO"));
 			}else {
 				error=3;
@@ -166,14 +154,14 @@ public class TransferAction extends Action{
 				request.setAttribute("error", error);
 				return "/view/transfer/TransferWrite.jsp";
 			}
-			if(num==1) {
-				result=transferMybatisdao.transferInsert(transferdata,num);	
-				int transcount=transferMybatisdao.getTransListCount(num);
-				transferdata=transferMybatisdao.transferDetail(transcount, num);		
+			if(num==1) {	//즉시 이체인 경우
+				result=transferMybatisdao.transferInsert(transferdata,num);		//이체 내역 삽입
+				int transcount=transferMybatisdao.getTransListCount(num);	// 마지막 행 = 사용자 정보
+				transferdata=transferMybatisdao.transferDetail(transcount, num);	//사용자 정보
 				transferMybatisdao.updateMoney(transferdata.getAccount_no(),transferdata.getTransfer_price(),1);		//1: Minus Money 2.Plus Money
 				transferMybatisdao.updateMoney(transferdata.getTransfer_to_account_no(),transferdata.getTransfer_price(),2);
 				return "/view/transfer/TransferAuth.jsp";
-			}else if(num==2 || num==3) {
+			}else if(num==2 || num==3) {	//자동이체 , 예약이체 (달력 수정 이후 주석 달게요)
 				String year=request.getParameter("transfer_year");
 				String month=request.getParameter("transfer_month");
 				if(month.length()<2) {

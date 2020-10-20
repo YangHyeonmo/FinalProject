@@ -94,19 +94,19 @@
 	</form>
 </div>
 <div id="transferAuto" class="bank" style="display:none">
-<form action="./TransferAuth" method="post" name="transferform">
+<form action="<%=request.getContextPath()%>/transfer/TransferAuth" method="post" name="transferform">
 	<table class = "table table-bordered table-hover" style = "text-align: center; border: 1px solid #dddddd">
 	<input type="hidden" name="TransferNum" value="2"/>
 				<thead>
 					<tr>
-						<th colspan = "5"><h4>자동이체</h4></th>
+						<th colspan = "5"><h4 align="center">자동이체</h4></th>
 					</tr>
 				</thead>
 					<tr>
 						<td colspan = "5">출금 계좌 번호</td>
 					</tr>
 					<tr>
-						<td>	
+						<td colspan="5">	
 							<select name="ACCOUNT_NO">
 								<c:forEach var= "ACCOUNT_NO" items="${account_num }" varStatus="status">
 									<option value=${ACCOUNT_NO }>${ACCOUNT_NO}</option>
@@ -132,7 +132,7 @@
 						<td colspan = "5">받는 분 계좌 번호</td>
 					</tr>
 					<tr>
-						<td><input type="text" name="TRANSFER_TO_ACCOUNT_NO"></td>
+						<td colspan="5"><input type="text" name="TRANSFER_TO_ACCOUNT_NO"></td>
 					</tr>
 					<tr>
 						<td colspan = "5">받는 분 표시</td>
@@ -144,7 +144,7 @@
 						<td colspan="5">자동 이체 주기</td>
 					</tr>
 					<tr>
-						<td>
+						<td colspan="5">
 							<select name="TRANSFER_AUTO_PERIOD">
 								<option value=7>1주일</option>
 								<option value=14>2주일</option>
@@ -159,15 +159,15 @@
 						<td colspan="5">자동 이체 시작 기간</td>
 					</tr>
 					<tr>
-						<td>
+						<td colspan="2">
 							<select id="select_year" name="transfer_year" onchange="javascript:lastday();">
 							</select>
 						</td>
-						<td>
+						<td colspan="2">
 							<select id="select_month" name="transfer_month" onchange="javascript:lastday();">
 							</select>
 						</td>
-						<td>
+						<td colspan="1">
 							<select id="select_day" name="transfer_day">
 							</select>
 						</td>
@@ -179,19 +179,19 @@
 </form>
 </div>
 <div id="transferRes" class="bank" style="display:none">
-<form action="./TransferAuth" method="post" name="transferform">
+<form action="<%=request.getContextPath()%>/transfer/TransferAuth" method="post" name="transferform">
 	<table class = "table table-bordered table-hover" style = "text-align: center; border: 1px solid #dddddd">
 	<input type="hidden" name="TransferNum" value="3"/>
 				<thead>
 					<tr>
-						<th colspan = "5"><h4>예약 이체</h4></th>
+						<th colspan = "5"><h4 align="center">예약 이체</h4></th>
 					</tr>
 				</thead>
 					<tr>
 						<td colspan = "5">출금 계좌 번호</td>
 					</tr>
 					<tr>
-						<td>	
+						<td colspan = "5">	
 							<select name="ACCOUNT_NO">
 								<c:forEach var= "ACCOUNT_NO" items="${account_num }" varStatus="status">
 									<option value=${ACCOUNT_NO }>${ACCOUNT_NO}</option>
@@ -217,7 +217,7 @@
 						<td colspan = "5">받는 분 계좌 번호</td>
 					</tr>
 					<tr>
-						<td><input type="text" name="TRANSFER_TO_ACCOUNT_NO"></td>
+						<td colspan = "5"><input type="text" name="TRANSFER_TO_ACCOUNT_NO"></td>
 					</tr>
 					<tr>
 						<td colspan = "5">받는 분 표시</td>
@@ -229,15 +229,15 @@
 						<td colspan="5">예약 이체 날짜</td>
 					</tr>
 					<tr>
-						<td>
+						<td colspan = "2">
 							<select id="select_year" name="transfer_year" onchange="javascript:lastday();">
 							</select>
 						</td>
-						<td>
+						<td colspan = "2">
 							<select id="select_month" name="transfer_month" onchange="javascript:lastday();">
 							</select>
 						</td>
-						<td>
+						<td colspan = "1">
 							<select id="select_day" name="transfer_day">
 							</select>
 						</td>
