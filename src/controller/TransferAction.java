@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import controller.Action;
 import transfer.TransferDTO;
@@ -22,8 +22,9 @@ public class TransferAction extends Action{
 	public boolean result = false;
 
 	public void headProcess(HttpServletRequest request, HttpServletResponse res) {
-
-		String id="dasom7107";
+		HttpSession session = request.getSession();
+		String id= (String)session.getAttribute("member_id");
+		System.out.println(id);
 		List<String> account_num= transferMybatisdao.getAccountNum(id);
 		request.setAttribute("account_num", account_num);
 		
@@ -32,7 +33,7 @@ public class TransferAction extends Action{
 	
 	public String TransferWrite(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
 		headProcess(request,response);		
-		return  "/view/transfer/TransferWrite.jsp"; 
+		return  "/JSP/view/transfer/TransferWrite.jsp"; 
 	} 
 	
 	public String TransferAuto(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 

@@ -32,9 +32,10 @@
       </li>
        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">이체 <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Page 1-1</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
+          <li><a href="<%=request.getContextPath()%>/transfer/TransferWrite">즉시 이체</a></li>
+          <li><a href="<%=request.getContextPath()%>/transfer/TransferAuto">">자동 이체</a></li>
+          <li><a href="<%=request.getContextPath()%>/transfer/TransferReserve">">예약 이체</a></li>
+          <li><a href="<%=request.getContextPath()%>/transfer/TransferSelect">">이체 내역 조회</a></li>
         </ul>
       </li>
        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">환전 / 환율 <span class="caret"></span></a>

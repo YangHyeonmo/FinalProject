@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpSession;
 
 import member.MemberDTO;
 import member.MemberMybatisDAO;
+import transfer.TransferDTO;
+import transfer.TransferMybatisDAO;
 import util.SHA256;
 
 public class LoginRegisterAction extends com.user.cks.Action {
@@ -121,4 +124,6 @@ public class LoginRegisterAction extends com.user.cks.Action {
 		String member_id = request.getParameter("memberId").trim();
 		return memberDAO.memberIdCheck(member_id);
 	}
+	
+
 }
