@@ -32,8 +32,9 @@
       </li>
        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">이체 <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="<%=request.getContextPath()%>/transfer/TransferWrite">즉시 이체</a></li>
-         <li><a href="<%=request.getContextPath()%>/transfer/TransferSelect">이체 내역 조회</a></li>
+          <li><a href="#">Page 1-1</a></li>
+          <li><a href="#">Page 1-2</a></li>
+          <li><a href="#">Page 1-3</a></li>
         </ul>
       </li>
        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">환전 / 환율 <span class="caret"></span></a>
@@ -48,7 +49,7 @@
    
     <ul class="nav navbar-nav navbar-right">
    	<c:if test="${sessionScope.login ne 1}">
-      <li><a href="URL" onclick="window.open('<%=request.getContextPath()%>/member/login', '_blank', 'top=250px,left=550px,width=756px,height=609px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;"><span class="glyphicon glyphicon-user"></span> Login / Sign Up</a></li>
+      <li><a href="URL" onclick="window.open('<%=request.getContextPath()%>/member/loginRegister', '_blank', 'top=250px,left=550px,width=756px,height=609px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;"><span class="glyphicon glyphicon-user"></span> Login / Sign Up</a></li>
     </c:if>
     <c:if test="${sessionScope.login eq 1}">
       <li><a href="<%=request.getContextPath()%>/view/memberMyPage"><span class="glyphicon glyphicon-user"></span> 마이페이지</a></li>

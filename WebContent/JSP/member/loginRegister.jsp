@@ -27,13 +27,13 @@
 			        <div class="contentLogin">
 				            <div class="signin-cont cont">
 					                <form name="formm" action="<%=request.getContextPath()%>/member/loginUser" method="post" >
-						                    <input type="text" name="member_id" id="loginId" class="inpt" required="required" placeholder="아이디">
-						                    <input type="password" name="member_password" id="loginPwd" class="inpt" required="required" placeholder="비밀번호">
+						                    <input type="text" name="member_id" id="loginId" class="inptLogin" required="required" placeholder="아이디">
+						                    <input type="password" name="member_password" id="loginPwd" class="inptLogin" required="required" placeholder="비밀번호">
 						                    <input type="checkbox" id="remember" class="checkbox" checked>
 						                    <label for="remember">Remember me</label>
 						                    <div class="submit-wrap">
 							                        <input type="submit" value="Sign in" class="submit" onclick="loginCheck();">
-							                        <a href="#" class="more">Forgot your password?</a>
+							                        <a href="" class="more">Forgot your password?</a>
 						                    </div>
         					        </form>
     				        </div>
