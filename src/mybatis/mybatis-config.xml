@@ -1,28 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration PUBLIC "-//myatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
 	<typeAliases>
 		<typeAlias type="member.MemberDTO" alias="Member" />
 		<typeAlias type="transfer.TransferDTO" alias="Transfer" />
-		<typeAlias type="account.AccountDTO" alias="Account"/>
+		<typeAlias type="account.AccountDTO" alias="Account" />
+		<typeAlias type="OPENBANKING.OpenBankingDTO" alias="OPENBANKING" />
+		<typeAlias type="INSTANT.InstantDTO" alias="INSTANT" />
+		<typeAlias type="RESERVATION.ReservationDTO" alias="RESERVATION" />
 	</typeAliases>
+
 	<environments default="development">
 		<environment id="development">
-			<transactionManager type="JDBC"/>
+			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
-				<property name="driver"
-					value="oracle.jdbc.driver.OracleDriver" />
-				<property name="url"
-					value="jdbc:oracle:thin:@localhost:1521:xe" />
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
 				<property name="username" value="SpringProject" />
 				<property name="password" value="1111" />
 			</dataSource>
 		</environment>
 	</environments>
-	
+
 	<mappers>
-	<mapper resource="member/MemberMapper.xml"/>
-	<mapper resource="transfer/Transfer.xml"/>
+		<mapper resource="member/MemberMapper.xml" />
+		<mapper resource="transfer/Transfer.xml" />
+		<mapper resource="OPENBANKING/OpenBankingMapper.xml" />
+		<mapper resource="INSTANT/InstantMapper.xml" />
+		<mapper resource="RESERVATION/ReservationMapper.xml" />
 	</mappers>
 </configuration>

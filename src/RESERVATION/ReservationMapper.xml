@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ReservationMapper">
+	<cache />
+
+	<!-- 예약 모으기 등록 -->
+	<insert id="ReservationReg" parameterType="RESERVATION">
+		INSERT INTO RESERVATION (
+		 	MEMBER_ID,
+			MY_ACCOUNT_NUM,
+			START_DATE,
+			COLLECTING_DAY )
+		VALUES ( #{MEMBER_ID}, #{MY_ACCOUNT_NUM},
+				 #{START_DATE}, #{COLLECTING_DAY} )
+	</insert>
+
+	<!-- 예약 모으기 삭제 -->
+	<delete id="ReservationDelete" parameterType="RESERVATION">
+		DELETE FROM 
+			RESERVATION
+		WHERE 
+			MEMBER_ID = #{MEMBER_ID}
+		<!--OPEN_ACCOUNT_NO = #{ OPEN_ACCOUNT_NO }-->
+		<!--MEMBER_ID = #{ MEMBER_ID } AND OPEN_ACCOUNT_NO = #{ OPEN_ACCOUNT_NO }-->
+	</delete>
+
+	<!-- 예약 모으기 변경 -->
+	<update id="ReservationModify" parameterType="RESERVATION">
+		UPDATE 
+			RESERVATION
+		SET
+			MY_ACCOUNT_NUM = #{MY_ACCOUNT_NUM},
+			START_DATE = #{START_DATE},
+			COLLECTING_DAY = #{COLLECTING_DAY} )
+		WHERE 
+			MEMBER_ID = #{MEMBER_ID}
+		<!--OPEN_ACCOUNT_NO = #{ OPEN_ACCOUNT_NO }-->
+		<!--MEMBER_ID = #{ MEMBER_ID } AND OPEN_ACCOUNT_NO = #{ OPEN_ACCOUNT_NO }-->
+	</update>
+
+	<!-- 예약 모으기 조회 -->
+	<select id="SelectReservation" resultType="RESERVATION">
+		SELECT
+			MEMBER_ID,
+			MY_ACCOUNT_NUM,
+			COLLECTING_MONEY,
+			to_char(START_DATE, 'yyyy-mm-dd') as START_DATE,
+			COLLECTING_DAY,
+			to_char(LAST_RUN_DATE, 'yyyy-mm-dd') as LAST_RUN_DATE,
+			RESERVATION,
+			to_char(CLOSE_DATE, 'yyyy-mm-dd') as CLOSE_DATE
+		FROM 
+			RESERVATION
+		WHERE 
+			MEMBER_ID = #{MEMBER_ID}
+	</select>
+
+
+	<!-- =============================================================================== -->
+	<!-- 자동이체 실행로직 -->
+	<!-- =============================================================================== -->
+
+	<!--1. 예약 정보 조회 -->
+	<select id="selectByDate" resultType="RESERVATION">
+		SELECT 
+			MEMBER_ID,
+			MY_ACCOUNT_NUM
+		FROM 
+			RESERVATION
+		WHERE 
+			COLLECTING_DAY = '11'
+		<!-- setDate 자동이체 설정일 -->
+	</select>
+
+	<!--3-1. 예약 모으기(출금계좌) -->
+	<update id="ReservationWithdraw" parameterType="RESERVATION">
+		UPDATE 
+			OPENBANKING 
+		SET 
+			OPEN_BALANCE = OPEN_BALANCE - OPEN_BALANCE
+		WHERE 
+			MEMBER_ID = #{MEMBER_ID}
+		<!--임시 조건-->
+	</update>
+
+	<!--3-2. 예약 모으기(입금계좌) -->
+	<update id="ReservationDeposit" parameterType="RESERVATION">
+		UPDATE 
+			ACCOUNT 
+		SET
+			BALANCE = BALANCE + (SELECT SUM(OPEN_BALANCE) FROM OPENBANKING WHERE MEMBER_ID = #{MEMBER_ID})
+		WHERE 
+			MEMBER_ID = #{MEMBER_ID}
+		<!--임시 조건-->
+	</update>
+	
+	<!-- 4. 예약 모으기 마지막 날짜 -->
+	<update id="LastRunDate" parameterType="RESERVATION">
+		UPDATE 
+			RESERVATION
+		SET
+			LAST_RUN_DATE = sysdate
+		WHERE 
+			MEMBER_ID = #{MEMBER_ID}
+	</update>
+	
+	<!-- 거래내역 로그(잔액모기 내역) -->
+	<insert id="ReservationWithdrawLog" parameterType="RESERVATION">
+		INSERT INTO RESERVATION (
+		 	MEMBER_ID,
+			MY_ACCOUNT_NUM,
+			COLLECTING_MONEY,
+			COLLECTING_DAY,
+			SUMMARY,
+			MEMO )
+		VALUES ( #{MEMBER_ID}, #{MY_ACCOUNT_NUM}, (SELECT SUM(OPEN_BALANCE) FROM OPENBANKING WHERE MEMBER_ID = #{MEMBER_ID}),
+				 #{COLLECTING_DAY}, '예약모으기', #{MEMO} )		
+	</insert>
+
+</mapper>
