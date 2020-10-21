@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -42,20 +43,37 @@
 		</li>
 		<li class="item">
 			<div class="left">
-				<div class="name"><a href="">Business</a></div>
+				<div class="name"><a onclick="myFunction('Business')" >계좌</a></div>
 			</div>
 			<div class="right">
 				<img src="<%=request.getContextPath()%>/images/arrow.png">
 			</div>
 		</li>
+		<div id="Business" class="w3-hide w3-container w3-center w3-pale-white">
+  				<p>계좌 소메뉴</p>
+		</div>
 		<li class="item">
 			<div class="left">
-				<div class="name"><a href="">Transfer</a></div>
+				<div class="name"><a onclick="myFunction('Transfer')" >Transfer</a></div>
 			</div>
+			
 			<div class="right">
 				<img src="<%=request.getContextPath()%>/images/arrow.png">
 			</div>
 		</li>
+		<div id="Transfer" class="w3-hide w3-container w3-center w3-pale-white">
+  				<p>Transfer 소메뉴 추가 예정</p>
+		</div>
 	</ul>
 </div>
+<script>
+function myFunction(id) {
+  var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
 </html>
