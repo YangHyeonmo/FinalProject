@@ -24,6 +24,5 @@ public class OpenBankingAction extends Action {
 			 return "/JSP/openbanking/openbanking.jsp"; 
 			}
 	
-	//수정중
-
+	//수정중1
 }
