@@ -23,5 +23,7 @@ public class OpenBankingAction extends Action {
 			 HttpServletResponse response) throws Throwable{
 			 return "/JSP/openbanking/openbanking.jsp"; 
 			}
+	
+	//수정중
 
 }
