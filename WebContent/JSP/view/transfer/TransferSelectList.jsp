@@ -20,7 +20,7 @@
 						<td colspan = "5">출금 계좌 번호</td>
 					</tr>
 					<tr>
-						<td>	
+						<td colspan = "5">	
 							<select name="ACCOUNT_NO">
 								<c:forEach var= "ACCOUNT_NO" items="${account_num }" varStatus="status">
 									<option value=${ACCOUNT_NO }>${ACCOUNT_NO}</option>
@@ -46,15 +46,15 @@
 						<td colspan="5">직접 입력(시작 날짜)</td>					
 					</tr>
 					<tr>
-						<td>
+						<td colspan = "2">
 							<select id="select_year" name="transfer_year" onchange="javascript:lastday();">
 							</select>
 						</td>
-						<td>
+						<td colspan = "2">
 							<select id="select_month" name="transfer_month" onchange="javascript:lastday();">
 							</select>
 						</td>
-						<td>
+						<td colspan = "1">
 							<select id="select_day" name="transfer_day">
 							</select>
 						</td>
@@ -63,15 +63,15 @@
 						<td colspan="5">직접 입력(종료 날짜)</td>					
 					</tr>
 					<tr>
-						<td>
+						<td colspan = "2">
 							<select id="select_year2" name="transfer_year2" onchange="javascript:lastday_select();">
 							</select>
 						</td>
-						<td>
+						<td colspan = "2">
 							<select id="select_month2" name="transfer_month2" onchange="javascript:lastday_select();">
 							</select>
 						</td>
-						<td>
+						<td colspan = "1">
 							<select id="select_day2" name="transfer_day2">
 							</select>
 						</td>
