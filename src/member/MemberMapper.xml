@@ -25,7 +25,7 @@
 	</select>
 	
 	<select id="checkId" parameterType="String" resultType="int">
-	select count(*)
+	select nvl(count(*),0) 
 	from member
 	where member_id = #{member_id}
 	</select>
@@ -40,4 +40,19 @@
 	delete from member
 	where member_id=#{member_id}
 	</delete>
+	
+	<select id="findMemberId" parameterType="hashmap" resultType="String">
+	select member_id
+	from member
+	where member_name=#{member_name} and member_email=#{member_email}
+	</select>
+<!-- 일단 보류 할거 하고 다시 하는걸로 -->	
+	<select id="findMemberPwd" parameterType="hashmap" resultType="String">
+	select member_password
+	from member
+	where member_id=#{member_id} and member_email=#{member_email} and member_phonenumber=#{member_phonenumber}
+	</select>
+	
+	
+	
 </mapper>

@@ -33,13 +33,14 @@
 						                    <label for="remember">Remember me</label>
 						                    <div class="submit-wrap">
 							                        <input type="submit" value="Sign in" class="submit" onclick="loginCheck();">
-							                        <a href="URL" onclick="window.open('<%=request.getContextPath()%>/member/findMember', '_blank', 'top=250px,left=550px,width=756px,height=609px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;"> class="more">Forgot your password?</a>
+							                        <a href="URL" onclick="window.open('<%=request.getContextPath()%>/member/findMemberForm', '_blank', 'top=350px,left=750px,width=350px,height=390px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;">Forgot your password?</a>
 						                    </div>
         					        </form>
     				        </div>
     		<div class="signup-cont cont">
                 <form class="regform" name="reg_form" method="post" action="<%=request.getContextPath()%>/member/insertRegister" onsubmit="return inputCheck()">
-						<input id="member_id" name="member_id" class="inpt" autofocus placeholder = "아이디를 입력해주세요" title = "아이디 입력창입니다." >
+						<input id="member_id" name="member_id" class="inptID" autofocus placeholder = "아이디 입력" title = "아이디 입력창입니다."  onkeyup="joinUseridCheck(this.value)" >
+						<span id="viewstat"><font color="red">8~12자리 입력</font></span>
 						<input name="member_password" type="password" class="inpt"  placeholder = "비밀번호를 입력해주세요" title = "비밀번호 입력창입니다." >
 						<input name="member_password_co" type="password" class="inpt" placeholder = "비밀번호를 확인해주세요" title = "비밀번호 확인 입력창입니다." >
 						<input type="text" name="member_name" id="name" class="inpt"  placeholder="이름을 입력해주세요">

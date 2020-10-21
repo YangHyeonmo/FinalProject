@@ -14,43 +14,52 @@
 	   frm.submit();
 	}
 
-	$("#member_id").keyup(function() {
-		let member_id = $('#member_id').val();
-		
-		
-		if ($('#member_id').length >= 8){
-			console.log(member_id);
-		//	$("#reg_submit").attr("disabled", true);
+	function sendRequest(url, params, callback, method) {
+//		alert("ajax 실행);
+		httpRequest = new XMLHttpRequest();
+		let httpMethod = method ? method : 'GET';
+		if (httpMethod != 'GET' && httpMethod != 'POST') {
+			httpMethod = 'GET';
 		}
-	/*	else if(member_id != pattern1 || member_id != pattern2 ){
-				$("#id_check").text("아이디는 소문자/대문자와 숫자 4~12자리만 가능합니다");
-				$("#id_check").css("color","red");
-				$("#reg_submit").attr("disabled", true);
-				}*/
+		let httpParams = (params == null || params == '') ? null : params;
+		let httpUrl = url;
+		if (httpMethod == 'GET' && httpParams != null) {
+			httpUrl = httpUrl + "?" + httpParams;
+		}
+		httpRequest.open(httpMethod, httpUrl, true);
+		httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		httpRequest.onreadystatechange = callback;
+		httpRequest.send(httpMethod == 'POST' ? httpParams : null);
+	}
+	
+	function joinUseridCheck(member_id) {
+		console.log("joinUseridCheck:" + member_id);
+		let url = "idCheck?member_id=" + member_id;
+		//문자와 숫자 합쳐서 8자리이상 
+		if (member_id.length >= 8 && member_id.length <= 12) {
+			sendRequest(url, "", joinUseridCallBack, "GET");
 			
-		
-			
-		/*$.ajax({
-			url: "/SpringProject/member/idCheck",
-			data:{memberId : member_id},
-			type:'get',
-			success : function(data){
-				console.log("1 = 중복 o / 0 = 중복 x : " + data);
-				if(data == 1){
-					$("#id_check").text("사용중인 아이디입니다");
-					$("#id_check").css("color","red");
-					$("#reg_submit").attr("disabled", true);
+		} else {
+			document.getElementById("viewstat").innerHTML = "<font color='red'>최소 8자리 최대 12자리입니다</font>";
+		}
+	}
+	
+	function joinUseridCallBack() {
+		console.log(httpRequest.readyState + ":" + httpRequest.status);
+		if (httpRequest.readyState == 4) {
+			if (httpRequest.status == 200) {
+				console.log("back:" + httpRequest.responseText);
+				if (httpRequest.responseText == "yes") {
+					document.getElementById("viewstat").innerHTML = "<font color='blue'>사용가능한 아이디입니다</font>";
+				} else {
+					document.getElementById("viewstat").innerHTML = "<font color='red'>사용불가한 아이디입니다</font>";
 				}
-				
-			}, error : function(){
-				console.log("실패");
 			}
-		
-		});*/ 
-	});
+		}
 
+	}
 	// 회원가입 check
-/*	function inputCheck() {
+	function inputCheck() {
 		let pattern1 = /[0-9]/;
 		let pattern2 = /[a-zA-Z]/;
 		let pattern3 = /[~!@#$%^&*()_+|<>?:{}]/;
@@ -60,15 +69,8 @@
 	      document.reg_form.member_id.focus();
 	      return false;
 	   }
-	   if (document.reg_form.idCheckOk.value != "yes") {
-	      alert("아이디 중복확인 하세요");
-	      document.reg_form.member_id.focus();
-	      return false;
-	   }
-	   if (document.reg_form.member_password.value == "" || document.reg_form.member_password.value != pattern1
-			   || document.reg_form.member_password.value != pattern2 || document.reg_form.member_password.value != pattern3 
-			   || document.reg_form.member_password.length < 8){
-		      alert("비밀번호는 8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다.");
+	   if (document.reg_form.member_password.value == "" ){
+		      alert("비밀번호 입력해주세요");
 		      document.reg_form.member_password.focus();
 		      return false;
 	   }
@@ -114,7 +116,7 @@
 	      return false;
 	   }
 	   return true;
-	}*/
+	}
 	function win_close() {
 	   self.close();
 	}

@@ -49,20 +49,19 @@ public class MemberMybatisDAO extends AbstractMybatis{
 			}
 		}
 		
-		public int memberIdCheck(String member_id) {
-			int result=0;
+		public String memberIdCheck(String member_id) {
+			String result="Yes";
 			try {
-				result = sqlSession.selectOne(namespace +".checkId", member_id);
-				if(result == 1) {
-					return result;
+				int chk= sqlSession.selectOne(namespace +".checkId", member_id);
+				
+				if (chk == 1) {
+					result = "No";
 				}
-			}catch (Exception  e) {
-		         e.printStackTrace();
-		      }finally {
-		    	sqlSession.commit();
+				
+				return result;
+			}finally {
 				sqlSession.close();
 			}
-			return result;
 		}
 		
 
@@ -88,4 +87,30 @@ public class MemberMybatisDAO extends AbstractMybatis{
 			}
 			return result;
 		}
+		public String fineMemberId(String member_name, String member_email) throws Exception{
+			try {
+				map.clear();
+				map.put("member_name", member_name);
+				map.put("member_email", member_email);
+				return sqlSession.selectOne(namespace +".findMemberId", map); 
+				
+			}  finally {
+				sqlSession.close();
+			}
+			
+		}
+		public String findMemberPwd(String member_id, String member_email, String member_phonenumber) throws Exception{
+			try {
+				map.clear();
+				map.put("member_id", member_id);
+				map.put("member_email", member_email);
+				map.put("member_phonenumber", member_phonenumber);
+				return sqlSession.selectOne(namespace +".findMemberPwd", map); 
+				
+			}  finally {
+				sqlSession.close();
+			}
+			
+		}
+		
 }

@@ -26,9 +26,9 @@ public class MemberAction extends Action {
 			 return "/JSP/member/loginRegister.jsp"; 
 			}
 	
-	public String findMember(HttpServletRequest request,
+	public String findMemberForm(HttpServletRequest request,
 			 HttpServletResponse response) throws Throwable{
-			 return "/JSP/member/findMember.jsp"; 
+			 return "/JSP/member/findMemberForm.jsp"; 
 			}
 	
 
@@ -117,10 +117,37 @@ public class MemberAction extends Action {
 		
 	}
 	
-	public int idCheck(HttpServletRequest request, HttpServletResponse res) throws Exception {
+	public String findId(HttpServletRequest request, HttpServletResponse res) throws Exception {
+		headProcess(request, res);
+		MemberMybatisDAO dao = new MemberMybatisDAO();
+		String member_name = request.getParameter("member_name");
+		String member_email = request.getParameter("member_email");
+		String member_id = dao.fineMemberId(member_name, member_email);
+		return "/JSP/member/findIdPro.jsp?member_id=" + member_id;
+	}
+	
+	public String findPwd(HttpServletRequest request, HttpServletResponse res) throws Exception {
+		headProcess(request, res);
+		MemberMybatisDAO dao = new MemberMybatisDAO();
+		String member_id = request.getParameter("member_id");
+		String member_email = request.getParameter("memer_email");
+		String member_phonenumber = request.getParameter("member_phonenumber"); 
+		String member_password= dao.findMemberPwd(member_id, member_email, member_phonenumber);
+		return "/JSP/member/findPwdPro.jsp?member_password=" + member_password;
+	}
+	
+	
+	
+	public String idCheck(HttpServletRequest request, HttpServletResponse res) throws Exception {
 		headProcess(request, res);
 		MemberMybatisDAO memberDAO = new MemberMybatisDAO();
-		String member_id = request.getParameter("memberId").trim();
-		return memberDAO.memberIdCheck(member_id);
+		String member_id = request.getParameter("member_id");
+		String checkId = memberDAO.memberIdCheck(member_id);
+		System.out.println(checkId);
+		System.out.println(member_id);
+		if(checkId.equals("Yes")) {
+			return "/JSP/member/idCheck.jsp";
+		}
+		return checkId;
 	}
 }
