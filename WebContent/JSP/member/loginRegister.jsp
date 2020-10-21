@@ -33,7 +33,7 @@
 						                    <label for="remember">Remember me</label>
 						                    <div class="submit-wrap">
 							                        <input type="submit" value="Sign in" class="submit" onclick="loginCheck();">
-							                        <a href="" class="more">Forgot your password?</a>
+							                        <a href="URL" onclick="window.open('<%=request.getContextPath()%>/member/findMember', '_blank', 'top=250px,left=550px,width=756px,height=609px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;"> class="more">Forgot your password?</a>
 						                    </div>
         					        </form>
     				        </div>

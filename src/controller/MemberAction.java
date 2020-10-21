@@ -10,7 +10,7 @@ import member.MemberDTO;
 import member.MemberMybatisDAO;
 import util.SHA256;
 
-public class LoginRegisterAction extends Action {
+public class MemberAction extends Action {
 	
 	public void headProcess(HttpServletRequest request, HttpServletResponse res) {
 		try {
@@ -24,6 +24,11 @@ public class LoginRegisterAction extends Action {
 	public String loginRegister(HttpServletRequest request,
 			 HttpServletResponse response) throws Throwable{
 			 return "/JSP/member/loginRegister.jsp"; 
+			}
+	
+	public String findMember(HttpServletRequest request,
+			 HttpServletResponse response) throws Throwable{
+			 return "/JSP/member/findMember.jsp"; 
 			}
 	
 

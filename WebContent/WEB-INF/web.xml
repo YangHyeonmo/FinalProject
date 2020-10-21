@@ -26,13 +26,13 @@
 	
 	  
     <servlet>   
-   		<servlet-name>register</servlet-name>
-  		<servlet-class>controller.LoginRegisterAction</servlet-class>
+   		<servlet-name>Member</servlet-name>
+  		<servlet-class>controller.MemberAction</servlet-class>
    		<load-on-startup>1</load-on-startup>
 	</servlet> 
 	 
 	<servlet-mapping>
-   		<servlet-name>register</servlet-name>
+   		<servlet-name>Member</servlet-name>
    		<url-pattern>/member/*</url-pattern>
 	</servlet-mapping> 
 	
