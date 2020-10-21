@@ -39,7 +39,7 @@
 						,#{transfer_res_state},#{member_id})
 	</insert>
 	<select id="check_account_no" resultType="Account" parameterType="String">
-		select * from account where account_num=#{account_no}
+		select * from account where account_num=#{account_no} 
 	</select>
 	
 	<select id="transferDetail" resultType="Transfer" parameterType="hashmap">

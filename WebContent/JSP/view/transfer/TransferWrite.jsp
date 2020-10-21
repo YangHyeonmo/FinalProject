@@ -32,7 +32,7 @@
 		alert("출금 계좌와 이체하고자 하는 계좌가 일치하면 안됩니다");
 	</script>
 </c:if>
-<div class="w3-bar w3-black">
+<div class="w3-bar w3-white">
   <button class="w3-bar-item w3-button" onclick="openTransfer('transfer')">이체</button>
   <button class="w3-bar-item w3-button" onclick="openTransfer('transferAuto')">자동 이체</button>
   <button class="w3-bar-item w3-button" onclick="openTransfer('transferRes')">예약 이체</button>
