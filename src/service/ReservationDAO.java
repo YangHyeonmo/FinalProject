@@ -1,20 +1,17 @@
 package service;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.stereotype.Service;
 
 import controller.AbstractMybatis;
 import model.ReservationDTO;
 
+@Service
 public class ReservationDAO extends AbstractMybatis {
 	private final String namespace = "ReservationMapper";
 	HashMap<String, Object> map = new HashMap<String, Object>();

@@ -22,7 +22,7 @@ import model.TransferDTO;
 import service.TransferMybatisDAO;
 
 @Controller
-@RequestMapping("/transfer")
+@RequestMapping("/transfer/")
 public class TransferController{
 
 	@Autowired

@@ -10,10 +10,12 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.stereotype.Service;
 
 import controller.AbstractMybatis;
 import model.InstantDTO;
 
+@Service
 public class InstantDAO extends AbstractMybatis {
 	private final String namespace = "InstantMapper";
 	HashMap<String, Object> map = new HashMap<String, Object>();

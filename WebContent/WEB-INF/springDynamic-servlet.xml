@@ -19,7 +19,7 @@
 	<mvc:view-controller path="/index" view-name="index" />
     <bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/JSP/view/" />
+		<property name="prefix" value="/JSP/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 </beans>

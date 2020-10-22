@@ -1,20 +1,18 @@
 package service;
 
-import java.io.IOException;
-import java.io.InputStream;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.stereotype.Service;
 
 import controller.AbstractMybatis;
 import model.OpenBankingDTO;
 
+@Service
 public class OpenBankingDAO extends AbstractMybatis {
 	
 	private final String namespace = "OpenBankingMapper";
@@ -68,21 +66,5 @@ public class OpenBankingDAO extends AbstractMybatis {
 
 	}
 
-	public static void main(String[] args) {
-		OpenBankingDAO dao = new OpenBankingDAO();
-		OpenBankingDTO op = new OpenBankingDTO();
-
-		op.setOPEN_ACCOUNT_NO("000-000-000000");
-		op.setMEMBER_ID("vldrn7636");
-		op.setOPEN_BANK("땡땡은행");
-		op.setOPEN_ACCOUNT_PW("1111");
-		op.setOPEN_BALANCE(1000000);
-		op.setOPEN_CARD_NAME("땡떙카드");
-		op.setREGDATE(new Date());
-		System.out.println(dao.SelectOpenBanking(op));
-		//System.out.println(dao.InsertOpenBanking(op));
-		//System.out.println(dao.DeleteOpenBanking(op));
-
-	}
 
 }

@@ -19,10 +19,11 @@ import service.MemberMybatisDAO;
 import util.SHA256;
 
 @Controller
-@RequestMapping("/member")
+@RequestMapping("/member/")
 public class MemberController {
 		
 	public	HttpSession session = null;
+	
 	@Autowired
 	MemberMybatisDAO memberDAO;
 	

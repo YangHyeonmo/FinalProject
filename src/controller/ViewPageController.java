@@ -20,7 +20,7 @@ import service.TransferMybatisDAO;
 
 
 @Controller
-@RequestMapping("/view")
+@RequestMapping("/view/")
 public class ViewPageController  {
 
 	@Autowired
@@ -40,9 +40,9 @@ public class ViewPageController  {
 	public String mainPage() throws Throwable{
 			 return "view/mainPage"; 
 			}
-	@RequestMapping("memberMyPage")
+	@RequestMapping("/memberMyPage")
 	public String memberMyPage() throws Throwable{
-			 return "/JSP/view/memberMyPage.jsp"; 
+			 return "view/memberMyPage"; 
 			}
 	@RequestMapping("myInfo")
 	public String myInfo(Model m ) throws Throwable{
@@ -55,7 +55,7 @@ public class ViewPageController  {
 	@RequestMapping("logout")
 	public ModelAndView logout(ModelAndView mv) throws Throwable{
 			session.invalidate();
-			mv.setViewName("view/mainPage");
+			mv.setViewName("/view/mainPage");
 			return mv;
 	}
 	

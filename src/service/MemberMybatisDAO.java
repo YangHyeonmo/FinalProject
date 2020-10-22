@@ -13,7 +13,7 @@ public class MemberMybatisDAO extends AbstractMybatis{
 		String namespace = "Member";
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
-
+		
 		public int insertMember(MemberDTO member) throws Exception {
 			try {
 				int result = sqlSession.insert(namespace +".insertMember", member);

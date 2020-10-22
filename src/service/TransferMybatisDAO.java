@@ -5,13 +5,14 @@ package service;
 import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Service;
 
 import model.AccountDTO;
 import model.TransferDTO;
 
 
 
-
+@Service
 public class TransferMybatisDAO extends AbstractMybatis {
 
 	String namespace = "Transfer";
