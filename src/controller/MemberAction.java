@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import member.MemberDTO;
 import member.MemberMybatisDAO;
 import util.SHA256;
@@ -145,9 +147,8 @@ public class MemberAction extends Action {
 		String checkId = memberDAO.memberIdCheck(member_id);
 		System.out.println(checkId);
 		System.out.println(member_id);
-		if(checkId.equals("Yes")) {
-			return "/JSP/member/idCheck.jsp";
-		}
-		return checkId;
+		request.setAttribute("chk", checkId);
+		return "/JSP/member/idCheck.jsp";
+		
 	}
 }

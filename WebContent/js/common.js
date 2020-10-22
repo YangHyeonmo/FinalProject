@@ -49,7 +49,7 @@
 		if (httpRequest.readyState == 4) {
 			if (httpRequest.status == 200) {
 				console.log("back:" + httpRequest.responseText);
-				if (httpRequest.responseText == "yes") {
+				if (httpRequest.responseText == "Yes") {
 					document.getElementById("viewstat").innerHTML = "<font color='blue'>사용가능한 아이디입니다</font>";
 				} else {
 					document.getElementById("viewstat").innerHTML = "<font color='red'>사용불가한 아이디입니다</font>";
