@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import member.MemberDTO;
-import member.MemberMybatisDAO;
+import service.MemberMybatisDAO;
+import service.TransferMybatisDAO;
 import transfer.TransferDTO;
-import transfer.TransferMybatisDAO;
 
 
-public class ViewPageAction extends Action {
+public class ViewPageController extends Action {
 
 	public String mainPage(HttpServletRequest request,
 			 HttpServletResponse response) throws Throwable{

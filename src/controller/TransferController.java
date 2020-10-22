@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.Action;
+import service.TransferMybatisDAO;
 import transfer.TransferDTO;
-import transfer.TransferMybatisDAO;
 
-public class TransferAction extends Action{
+public class TransferController extends Action{
 
 	public TransferMybatisDAO transferMybatisdao = new TransferMybatisDAO();
 	public TransferDTO transferdata = new TransferDTO();

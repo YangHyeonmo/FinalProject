@@ -1,4 +1,4 @@
-package transfer;
+package model;
 
 import java.util.Date;
 

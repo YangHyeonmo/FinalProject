@@ -6,14 +6,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import member.MemberDTO;
-import member.MemberMybatisDAO;
+import service.BoardMybatisDAO;
+import service.MemberMybatisDAO;
 import util.SHA256;
 
-public class MemberAction extends Action {
+@Controller
+@RequestMapping("/member")
+public class MemberController {
 	
+	public ModelAndView mv = new ModelAndView();
+	
+	@Autowired
+	MemberMybatisDAO memberDAO;
+	
+	@ModelAttribute
 	public void headProcess(HttpServletRequest request, HttpServletResponse res) {
 		try {
 			request.setCharacterEncoding("UTF-8");
@@ -23,19 +37,21 @@ public class MemberAction extends Action {
 		}
 		HttpSession session = request.getSession();
 	}
-	public String loginRegister(HttpServletRequest request,
-			 HttpServletResponse response) throws Throwable{
-			 return "/JSP/member/loginRegister.jsp"; 
-			}
 	
+	@RequestMapping("loginRegister")
+	public String loginRegister() throws Throwable{
+			 return "member/loginRegister"; 
+	}
+	
+	@RequestMapping("findMemberForm")
 	public String findMemberForm(HttpServletRequest request,
 			 HttpServletResponse response) throws Throwable{
-			 return "/JSP/member/findMemberForm.jsp"; 
+			 return "member/findMemberForm"; 
 			}
 	
 
 	
-
+	@RequestMapping("insertRegister")
 	public String insertRegister(HttpServletRequest request, HttpServletResponse res) throws Exception {
 		headProcess(request, res);
 		MemberDTO member = new MemberDTO();
@@ -58,6 +74,7 @@ public class MemberAction extends Action {
 		else return "/JSP/member/memberRegisterFailed.jsp"; 
 	}
 	
+	@RequestMapping("loginUser")
 	public String loginUser(HttpServletRequest request, HttpServletResponse res) throws Exception {
 		headProcess(request, res);
 		HttpSession session = request.getSession();
@@ -80,7 +97,7 @@ public class MemberAction extends Action {
 		}
 		else return "/JSP/member/memberLoginFailed.jsp"; 
 	}
-	
+	@RequestMapping("memberInfoUpdate")
 	public String memberInfoUpdate(HttpServletRequest request, HttpServletResponse res) throws Exception {
 		headProcess(request, res);
 		HttpSession session = request.getSession();
@@ -103,6 +120,8 @@ public class MemberAction extends Action {
 		else return "/JSP/view/memberInfoPage.jsp";
 		
 	}
+	
+	@RequestMapping("insertRegister")
 	public String memberDelete(HttpServletRequest request, HttpServletResponse res) throws Exception {
 		headProcess(request, res);
 		HttpSession session = request.getSession();
@@ -119,6 +138,7 @@ public class MemberAction extends Action {
 		
 	}
 	
+	@RequestMapping("findId")
 	public String findId(HttpServletRequest request, HttpServletResponse res) throws Exception {
 		headProcess(request, res);
 		MemberMybatisDAO dao = new MemberMybatisDAO();
@@ -128,6 +148,7 @@ public class MemberAction extends Action {
 		return "/JSP/member/findIdPro.jsp?member_id=" + member_id;
 	}
 	
+	@RequestMapping("findPwd")
 	public String findPwd(HttpServletRequest request, HttpServletResponse res) throws Exception {
 		headProcess(request, res);
 		MemberMybatisDAO dao = new MemberMybatisDAO();
@@ -139,7 +160,7 @@ public class MemberAction extends Action {
 	}
 	
 	
-	
+	@RequestMapping("idCheck")
 	public String idCheck(HttpServletRequest request, HttpServletResponse res) throws Exception {
 		headProcess(request, res);
 		MemberMybatisDAO memberDAO = new MemberMybatisDAO();

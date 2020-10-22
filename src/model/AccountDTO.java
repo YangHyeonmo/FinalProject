@@ -1,4 +1,4 @@
-package account;
+package model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

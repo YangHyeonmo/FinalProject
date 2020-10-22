@@ -1,9 +1,11 @@
-package member;
+package service;
 
 
 import java.util.*;
 
 import org.apache.ibatis.session.SqlSession;
+
+import member.AbstractMybatis;
 
 public class MemberMybatisDAO extends AbstractMybatis{
 		String namespace = "Member";
