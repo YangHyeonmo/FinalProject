@@ -12,8 +12,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import INSTANT.InstantDTO;
 import controller.AbstractMybatis;
+import model.ReservationDTO;
 
 public class ReservationDAO extends AbstractMybatis {
 	private final String namespace = "ReservationMapper";

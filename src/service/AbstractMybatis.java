@@ -1,4 +1,4 @@
-package member;
+package service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,13 +7,13 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 
-public abstract class AbstractMybatis {
-	private static SqlSessionFactory sqlSessionFactory;
+public  class AbstractMybatis {
+	private  SqlSessionFactory sqlSessionFactory;
 	
-	static {
+	 {
 		setSqlSessionFactory();
 	}
-	private static void setSqlSessionFactory() {
+	private  void setSqlSessionFactory() {
 		String resource = "mybatis/mybatis-config.xml";
 		InputStream inputStream;
 		try {

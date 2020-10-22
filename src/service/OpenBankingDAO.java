@@ -13,6 +13,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import controller.AbstractMybatis;
+import model.OpenBankingDTO;
 
 public class OpenBankingDAO extends AbstractMybatis {
 	

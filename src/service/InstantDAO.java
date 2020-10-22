@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import controller.AbstractMybatis;
+import model.InstantDTO;
 
 public class InstantDAO extends AbstractMybatis {
 	private final String namespace = "InstantMapper";

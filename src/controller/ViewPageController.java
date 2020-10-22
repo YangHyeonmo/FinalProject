@@ -7,45 +7,57 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import member.MemberDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import model.MemberDTO;
 import service.MemberMybatisDAO;
 import service.TransferMybatisDAO;
-import transfer.TransferDTO;
 
 
-public class ViewPageController extends Action {
+@Controller
+@RequestMapping("/view")
+public class ViewPageController  {
 
-	public String mainPage(HttpServletRequest request,
-			 HttpServletResponse response) throws Throwable{
-			 return "/JSP/view/mainPage.jsp"; 
+	@Autowired
+	MemberMybatisDAO dao;
+	
+	public HttpSession session=null;
+	@ModelAttribute
+	public void headProcess(HttpServletRequest request, HttpServletResponse res) {
+	
+		session = request.getSession();
+		
+	}
+	
+	public MemberDTO member=new MemberDTO();
+	
+	@RequestMapping("mainPage")
+	public String mainPage() throws Throwable{
+			 return "view/mainPage"; 
 			}
-	public String memberMyPage(HttpServletRequest request,
-			 HttpServletResponse response) throws Throwable{
+	@RequestMapping("memberMyPage")
+	public String memberMyPage() throws Throwable{
 			 return "/JSP/view/memberMyPage.jsp"; 
 			}
+	@RequestMapping("myInfo")
+	public String myInfo(Model m ) throws Throwable{
+			String member_id=(String)session.getAttribute("member_id");
+			member = dao.getMember(member_id);			
+			m.addAttribute("member", member);
+			 return "view/memberInfoPage"; 
+			}
 	
-	public String myInfo(HttpServletRequest request,
-			 HttpServletResponse response) throws Throwable{
-			HttpSession session = request.getSession();
-			MemberMybatisDAO dao = new MemberMybatisDAO();
-			MemberDTO member = new MemberDTO();
-			String member_id = (String) session.getAttribute("member_id");
-			member = dao.getMember(member_id);
-			session.setAttribute("member_phonenumber", member.getMember_phonenumber());
-			session.setAttribute("member_birthdate", member.getMember_birthdate());
-			session.setAttribute("member_gender", member.getMember_gender());
-			session.setAttribute("member_zipcode", member.getMember_zipcode());
-			session.setAttribute("member_address", member.getMember_address());
-		
-			 return "/JSP/view/memberInfoPage.jsp"; 
-			}
-	public void logout(HttpServletRequest request,
-			 HttpServletResponse response) throws Throwable{
-			HttpSession session = request.getSession();
+	@RequestMapping("logout")
+	public ModelAndView logout(ModelAndView mv) throws Throwable{
 			session.invalidate();
-			response.sendRedirect("./mainPage");
-			
-			}
+			mv.setViewName("view/mainPage");
+			return mv;
+	}
 	
 	
 }

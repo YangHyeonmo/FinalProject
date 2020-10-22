@@ -6,7 +6,6 @@ import java.util.*;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
-import member.AbstractMybatis;
 import model.MemberDTO;
 
 @Service

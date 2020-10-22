@@ -3,12 +3,12 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias type="member.MemberDTO" alias="Member" />
-		<typeAlias type="transfer.TransferDTO" alias="Transfer" />
-		<typeAlias type="account.AccountDTO" alias="Account" />
-		<typeAlias type="OPENBANKING.OpenBankingDTO" alias="OPENBANKING" />
-		<typeAlias type="INSTANT.InstantDTO" alias="INSTANT" />
-		<typeAlias type="RESERVATION.ReservationDTO" alias="RESERVATION" />
+		<typeAlias type="model.MemberDTO" alias="Member" />
+		<typeAlias type="model.TransferDTO" alias="Transfer" />
+		<typeAlias type="model.AccountDTO" alias="Account" />
+		<typeAlias type="model.OpenBankingDTO" alias="OPENBANKING" />
+		<typeAlias type="model.InstantDTO" alias="INSTANT" />
+		<typeAlias type="model.ReservationDTO" alias="RESERVATION" />
 	</typeAliases>
 
 	<environments default="development">
@@ -24,10 +24,10 @@
 	</environments>
 
 	<mappers>
-		<mapper resource="member/MemberMapper.xml" />
-		<mapper resource="transfer/Transfer.xml" />
-		<mapper resource="OPENBANKING/OpenBankingMapper.xml" />
-		<mapper resource="INSTANT/InstantMapper.xml" />
-		<mapper resource="RESERVATION/ReservationMapper.xml" />
+		<mapper resource="mybatis/MemberMapper.xml" />
+		<mapper resource="mybatis/Transfer.xml" />
+		<mapper resource="mybatis/OpenBankingMapper.xml" />
+		<mapper resource="mybatis/InstantMapper.xml" />
+		<mapper resource="mybatis/ReservationMapper.xml" />
 	</mappers>
 </configuration>
