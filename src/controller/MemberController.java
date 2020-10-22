@@ -8,22 +8,21 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import member.MemberDTO;
-import service.BoardMybatisDAO;
+import model.MemberDTO;
 import service.MemberMybatisDAO;
 import util.SHA256;
 
 @Controller
 @RequestMapping("/member")
 public class MemberController {
-	
-	public ModelAndView mv = new ModelAndView();
-	
+		
+	public	HttpSession session = null;
 	@Autowired
 	MemberMybatisDAO memberDAO;
 	
@@ -31,11 +30,12 @@ public class MemberController {
 	public void headProcess(HttpServletRequest request, HttpServletResponse res) {
 		try {
 			request.setCharacterEncoding("UTF-8");
+			session = request.getSession();
 			
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		HttpSession session = request.getSession();
+		
 	}
 	
 	@RequestMapping("loginRegister")
@@ -44,132 +44,98 @@ public class MemberController {
 	}
 	
 	@RequestMapping("findMemberForm")
-	public String findMemberForm(HttpServletRequest request,
-			 HttpServletResponse response) throws Throwable{
+	public String findMemberForm() throws Throwable{
 			 return "member/findMemberForm"; 
 			}
 	
 
 	
 	@RequestMapping("insertRegister")
-	public String insertRegister(HttpServletRequest request, HttpServletResponse res) throws Exception {
-		headProcess(request, res);
-		MemberDTO member = new MemberDTO();
-		member.setMember_id(request.getParameter("member_id"));
-		member.setMember_password(SHA256.getSHA256(request.getParameter("member_password")));
-		member.setMember_name(request.getParameter("member_name"));
-		member.setMember_birthdate(request.getParameter("member_birthdate"));
-		member.setMember_gender(request.getParameter("member_gender"));
-		member.setMember_email(request.getParameter("member_email"));
-		member.setMember_phonenumber(request.getParameter("member_phonenumber"));
-		member.setMember_zipcode(request.getParameter("member_zipcode"));
-		member.setMember_address(request.getParameter("member_address"));
-		member.setMember_author(0);
+	public String insertRegister(MemberDTO member) throws Exception {
 		
-		MemberMybatisDAO memberDAO = new MemberMybatisDAO();
+		member.setMember_password(SHA256.getSHA256(member.getMember_password()));
+		member.setMember_author(0);
+	
 		int result = memberDAO.insertMember(member);
 		if(result == 1) {
-			return "/JSP/member/memberRegisterPro.jsp";
+			return "member/memberRegisterPro";
 		}
-		else return "/JSP/member/memberRegisterFailed.jsp"; 
+		else return "member/memberRegisterFailed"; 
 	}
 	
 	@RequestMapping("loginUser")
-	public String loginUser(HttpServletRequest request, HttpServletResponse res) throws Exception {
-		headProcess(request, res);
-		HttpSession session = request.getSession();
-		MemberMybatisDAO memberDAO = new MemberMybatisDAO();
+	public String loginUser(String member_id, String member_password, Model m) throws Exception {
 		MemberDTO member = new MemberDTO();
-		String member_id = request.getParameter("member_id");
-		String member_password = SHA256.getSHA256(request.getParameter("member_password"));
-		System.out.println("=======================================");
-		System.out.println(member_password);
-		int loginResult = memberDAO.loginMember(member_id, member_password);
+		String member_pwdSecurity = SHA256.getSHA256(member_password);
+
+		int loginResult = memberDAO.loginMember(member_id, member_pwdSecurity);
 		
 		if(loginResult == 1) {
 			member = (MemberDTO) memberDAO.getMember(member_id);
 			session.setAttribute("member_id", member_id);
 			session.setAttribute("member_password", member_password);
-			session.setAttribute("member_name", member.getMember_name());
-			session.setAttribute("member_email", member.getMember_email());
-			session.setAttribute("login", 1);
-			return "/JSP/member/memberLoginPro.jsp";
+			m.addAttribute("member", member);
+			m.addAttribute("login", 1);
+			return "member/memberLoginPro";
 		}
-		else return "/JSP/member/memberLoginFailed.jsp"; 
+		else return "member/memberLoginFailed"; 
 	}
+	
 	@RequestMapping("memberInfoUpdate")
-	public String memberInfoUpdate(HttpServletRequest request, HttpServletResponse res) throws Exception {
-		headProcess(request, res);
-		HttpSession session = request.getSession();
-		MemberMybatisDAO dao = new MemberMybatisDAO();
-		MemberDTO member = new MemberDTO();
+	public String memberInfoUpdate(MemberDTO member, String oldpwd) throws Exception {
+	
 		member.setMember_id((String)session.getAttribute("member_id"));
-		member.setMember_password(SHA256.getSHA256(request.getParameter("pwd")));
-		member.setMember_email(request.getParameter("email"));
-		member.setMember_name(request.getParameter("name"));
-		member.setMember_birthdate(request.getParameter("tel"));
-		member.setMember_gender(request.getParameter("gender"));
-		member.setMember_zipcode(request.getParameter("zipcode"));
-		member.setMember_address(request.getParameter("address"));
+		member.setMember_password(SHA256.getSHA256(member.getMember_password()));
+
 		String password = (String)session.getAttribute("member_password");
-		String oldpwd = SHA256.getSHA256(request.getParameter("oldpwd"));
-		if(password.equals(oldpwd)) {
-			dao.updateMember(member);
-			return "/JSP/view/mainPage.jsp";
+		String oldPwdChk = SHA256.getSHA256(oldpwd);
+		
+		if(password.equals(oldPwdChk)) {
+			memberDAO.updateMember(member);
+			return "view/mainPage";
 		}
-		else return "/JSP/view/memberInfoPage.jsp";
+		else return "view/memberInfoPage";
 		
 	}
 	
-	@RequestMapping("insertRegister")
-	public String memberDelete(HttpServletRequest request, HttpServletResponse res) throws Exception {
-		headProcess(request, res);
-		HttpSession session = request.getSession();
-		MemberMybatisDAO dao = new MemberMybatisDAO();
+	@RequestMapping("memberDelete")
+	public String memberDelete(String oldpwd) throws Exception {
+		
 		String member_id = (String) session.getAttribute("member_id");
 		String password = (String)session.getAttribute("member_password");
-		String oldpwd = SHA256.getSHA256(request.getParameter("oldpwd"));
-		if(password.equals(oldpwd)) {
-			dao.deleteMember(member_id);
+		String oldPwdChk = SHA256.getSHA256(oldpwd);
+		if(password.equals(oldPwdChk)) {
+			memberDAO.deleteMember(member_id);
 			session.invalidate();
-			return "/JSP/view/mainPage.jsp";
+			return "view/mainPage";
 		}
-		else return "/JSP/view/memberInfoPage.jsp";
+		else return "view/memberInfoPage";
 		
 	}
 	
 	@RequestMapping("findId")
-	public String findId(HttpServletRequest request, HttpServletResponse res) throws Exception {
-		headProcess(request, res);
-		MemberMybatisDAO dao = new MemberMybatisDAO();
-		String member_name = request.getParameter("member_name");
-		String member_email = request.getParameter("member_email");
-		String member_id = dao.fineMemberId(member_name, member_email);
-		return "/JSP/member/findIdPro.jsp?member_id=" + member_id;
+	public String findId(String member_name, String member_email, Model m) throws Exception {
+		
+		String member_id = memberDAO.fineMemberId(member_name, member_email);
+		m.addAttribute("member_id",member_id);
+		return "member/findIdPro";
 	}
 	
 	@RequestMapping("findPwd")
-	public String findPwd(HttpServletRequest request, HttpServletResponse res) throws Exception {
-		headProcess(request, res);
-		MemberMybatisDAO dao = new MemberMybatisDAO();
-		String member_id = request.getParameter("member_id");
-		String member_email = request.getParameter("memer_email");
-		String member_phonenumber = request.getParameter("member_phonenumber"); 
-		String member_password= dao.findMemberPwd(member_id, member_email, member_phonenumber);
-		return "/JSP/member/findPwdPro.jsp?member_password=" + member_password;
+	public String findPwd(String member_id, String member_email, String member_phonenumber, Model m) throws Exception {
+
+		String member_password= memberDAO.findMemberPwd(member_id, member_email, member_phonenumber);
+		m.addAttribute("member_password",member_password);
+		
+		return "member/findPwdPro";
 	}
 	
 	
 	@RequestMapping("idCheck")
-	public String idCheck(HttpServletRequest request, HttpServletResponse res) throws Exception {
-		headProcess(request, res);
-		MemberMybatisDAO memberDAO = new MemberMybatisDAO();
-		String member_id = request.getParameter("member_id");
+	public String idCheck(String member_id, Model m) throws Exception {
 		String checkId = memberDAO.memberIdCheck(member_id);
-		System.out.println(checkId);
-		System.out.println(member_id);
-		request.setAttribute("chk", checkId);
-		return "/JSP/member/idCheck.jsp";
+		m.addAttribute("checkId", checkId);
+		return "member/idCheck.";
 		
 	}
 }

@@ -27,8 +27,8 @@
 			<tr>
 				<th>아이디</th>
 				<td>
-					<input type="hidden" name="id" value="${member_id}" />
-					${member_id}
+					<input type="hidden" name="id" value="${member.member_id}" />
+					${member.member_id}
 				</td>
 			</tr>
 			<tr>
@@ -52,42 +52,42 @@
 			<tr>
 				<th>이름</th>
 				<td>
-					<input type="text" name="name" value="${member_name}" />
+					<input type="text" name="name" value="${member.member_name}" />
 				</td>
 			</tr>
 			<tr>
 				<th>Email</th>
-				<td><input type="email" name="email" value="${member_email}" /></td>
+				<td><input type="email" name="email" value="${member.member_email}" /></td>
 			</tr>
 			<tr>
 				<th>핸드폰 번호</th>
 				<td>
-	                <input type="text" name="tel" placeholder="-빼고 입력해주세요" value="${member_phonenumber}">
+	                <input type="text" name="tel" placeholder="-빼고 입력해주세요" value="${member.member_phonenumber}">
 				</td>
 			</tr>
 			<tr>
 				<th>생년월일</th>
 				<td>
-					<input type="text" name="birthdate" size="6" value="${member_birthdate}" placeholder="ex)950101"/>
+					<input type="text" name="birthdate" size="6" value="${member.member_birthdate}" placeholder="ex)950101"/>
 				</td>
 			</tr>
 			<tr>
 				<th>성별</th>
 				<td>
-					<input type="radio" name="gender" id="male" value="남" ${member_gender.equals("남") ? "checked" : "" } /> <label for="male">남</label> &nbsp;
-					<input type="radio" name="gender" id="female" value="여" ${member_gender.equals("여") ? "checked" : "" } /> <label for="female">여</label>
+					<input type="radio" name="gender" id="male" value="남" ${member.member_gender.equals("남") ? "checked" : "" } /> <label for="male">남</label> &nbsp;
+					<input type="radio" name="gender" id="female" value="여" ${member.member_gender.equals("여") ? "checked" : "" } /> <label for="female">여</label>
 				</td>
 			</tr>
 			<tr>
 				<th>우편번호</th>
 				<td>
-					<input type="text" name="zipcode" style="width:100px;" id="sample4_postcode" value="${member_zipcode}" />
+					<input type="text" name="zipcode" style="width:100px;" id="sample4_postcode" value="${member.member_zipcode}" />
 					<button type="button" onClick="sample4_execDaumPostcode()">우편번호찾기</button>
 				</td>
 			</tr>
 			<tr>
 				<th>주소</th>
-				<td><input type="text" name="address" id="sample4_roadAddress" value="${member_address}"/></td>
+				<td><input type="text" name="address" id="sample4_roadAddress" value="${member.member_address}"/></td>
 			</tr>
 			</tbody>
 		</table>
@@ -95,7 +95,7 @@
 		<button type="button" class="btn1"  onclick="memberDelete()">탈퇴하기</button>
 		<button type="button" class="btn1" onclick="memberUpdate()">회원정보 수정</button>
 		</div>
-		<input type="hidden" name="author" value="${member_author}" />
+		<input type="hidden" name="author" value="${member.member_author}" />
 	</form>
 </div>
 

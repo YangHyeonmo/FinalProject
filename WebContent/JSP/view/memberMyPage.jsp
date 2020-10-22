@@ -17,10 +17,10 @@
 			<div class="badge">6</div>
 		</div>
 		<div class="text-area">
-			<h2 class="greeting">${member_name}님,어서오십시오</h2>
+			<h2 class="greeting">${member.member_name}님,어서오십시오</h2>
 			<div class="desc">무엇을 도와드릴까요</div>
 		</div>
-		<div class="mail">${member_email}</div>
+		<div class="mail">${member.member_email}</div>
 
 	</div>
 

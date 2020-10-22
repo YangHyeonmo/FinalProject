@@ -4,9 +4,12 @@ package service;
 import java.util.*;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Service;
 
 import member.AbstractMybatis;
+import model.MemberDTO;
 
+@Service
 public class MemberMybatisDAO extends AbstractMybatis{
 		String namespace = "Member";
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -26,11 +29,11 @@ public class MemberMybatisDAO extends AbstractMybatis{
 			return 1;
 		}
 		
-		public int loginMember(String member_id, String member_password) throws Exception{
+		public int loginMember(String member_id, String member_pwdSecurity) throws Exception{
 			int x = 0;
 			try {
 				String pass = sqlSession.selectOne(namespace +".findPwd", member_id);
-				if(pass.equals(member_password)) {
+				if(pass.equals(member_pwdSecurity)) {
 					x = 1;
 				}
 				else {
