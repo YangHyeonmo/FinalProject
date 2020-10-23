@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Finance">
+
+	<select id="FinanceAllList" resultType="Finance">
+	select * from finance
+	</select>
+
+   <select id="FinanceDepositList" resultType="Finance"> <!-- 예금 상품 검색 -->
+   select fin_no, fin_pro, fin_name, fin_date, fin_rate, fin_amount, fin_content  from finance 
+   where fin_no like '1%'
+   </select>
+   
+   <select id="FinanceSavingsList" resultType="Finance"> <!-- 적금 상품 검색 -->
+   select fin_no, fin_pro, fin_name, fin_date, fin_rate, fin_amount, fin_content  from finance 
+   where fin_no like '2%'
+   </select>
+   
+   <select id="FinanceFundList" resultType="Finance"> <!-- 펀드 상품 검색 -->
+   select fin_no, fin_pro, fin_name, fin_return, fin_type, fin_content  from finance 
+   where fin_no like '3%'
+   </select>
+   
+   <select id="FinanceLoanList" resultType="Finance"> <!-- 대출 상품 검색 -->
+   select fin_no, fin_pro, fin_name, fin_date, fin_rate, fin_repay , fin_amount, fin_content  from finance 
+   where fin_no like '4%'
+   </select>
+   
+  <insert id="insertFinance" parameterType="Finance"> <!-- 상품 추가 -->
+   insert into finance (fin_no, fin_pro,fin_name,fin_date,fin_rate,fin_return,
+   fin_type,fin_repay,fin_amount,fin_content) 
+					 values(#{fin_no},#{fin_pro},#{fin_name},#{fin_date},#{fin_rate},#{fin_return},
+					 #{fin_type},#{fin_repay},#{fin_amount},#{fin_content})
+   </insert>
+   
+</mapper>

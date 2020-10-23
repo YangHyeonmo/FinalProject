@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Products">
+
+	<select id="searchProduct" parameterType="int" resultType="Products"> <!-- 자기가 가입한 상품보기 -->
+	select p.member_id as member_id, f.fin_name as fin_name from products p, finance f where  p.fin_no=f.fin_no and p.fin_no=#{fin_no}
+	</select>
+
+
+	<insert id="insertProducts"  parameterType="int" > <!-- 가입 할시 db에 추가 -->
+   insert into products(ref_no,fin_no) values(Pro_seq.NEXTVAL,#{fin_no})
+   </insert>
+	<select id="bestProducts" resultType="Products"> <!-- 탑 3 정해서 화면에 띄우기 -->
+	<!-- select p.fin_no as fin_no, f.fin_name as fin_name, count(*) from products p, finance f where fin_no group by p.fin_no having rank(count(*)) < 4; -->
+	</select>
+
+</mapper>
