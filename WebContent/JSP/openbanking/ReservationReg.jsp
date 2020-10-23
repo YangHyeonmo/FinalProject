@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <div class="w3-container">
-	<br/><b>계좌등록</b><br/>
+	<br/><b>예약등록</b><br/>
 	<form method="post" name="writeform" 
 		action="<%=request.getContextPath()%>/openbanking/InsertOpenBankingProc"
 	>

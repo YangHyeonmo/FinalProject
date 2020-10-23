@@ -29,8 +29,6 @@
 		<mapper resource="mybatis/MemberMapper.xml" />
 		<mapper resource="mybatis/Transfer.xml" />
 		<mapper resource="mybatis/OpenBankingMapper.xml" />
-		<mapper resource="mybatis/InstantMapper.xml" />
-		<mapper resource="mybatis/ReservationMapper.xml" />
 		<mapper resource="mybatis/Finance.xml"/> 
 		<mapper resource="mybatis/Products.xml"/> 
 	</mappers>

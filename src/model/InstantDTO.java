@@ -7,6 +7,7 @@ public class InstantDTO implements Serializable {
 	private String MEMBER_ID; // 아이디
 	private String OPEN_ACCOUNT_NO; // 오픈뱅킹 계좌번호
 	private String MY_ACCOUNT_NUM; // 내 계좌번호
+	private String OPEN_ACCOUNT_PW;
 	private String OPEN_CARD_NAME; // 오픈뱅킹 카드명
 	private int COLLECTING_MONEY; // 모으기 금액
 	private Date COLLECTING_DAY; // 모으기 날짜
@@ -38,6 +39,14 @@ public class InstantDTO implements Serializable {
 
 	public void setMY_ACCOUNT_NUM(String mY_ACCOUNT_NUM) {
 		MY_ACCOUNT_NUM = mY_ACCOUNT_NUM;
+	}
+
+	public String getOPEN_ACCOUNT_PW() {
+		return OPEN_ACCOUNT_PW;
+	}
+
+	public void setOPEN_ACCOUNT_PW(String oPEN_ACCOUNT_PW) {
+		OPEN_ACCOUNT_PW = oPEN_ACCOUNT_PW;
 	}
 
 	public String getOPEN_CARD_NAME() {
@@ -84,10 +93,13 @@ public class InstantDTO implements Serializable {
 	public String toString() {
 		return "InstantDTO [MEMBER_ID=" + MEMBER_ID + ", OPEN_ACCOUNT_NO="
 				+ OPEN_ACCOUNT_NO + ", MY_ACCOUNT_NUM=" + MY_ACCOUNT_NUM
-				+ ", OPEN_CARD_NAME=" + OPEN_CARD_NAME + ", COLLECTING_MONEY="
-				+ COLLECTING_MONEY + ", COLLECTING_DAY=" + COLLECTING_DAY
-				+ ", SUMMARY=" + SUMMARY + ", MEMO=" + MEMO + "]";
+				+ ", OPEN_ACCOUNT_PW=" + OPEN_ACCOUNT_PW + ", OPEN_CARD_NAME="
+				+ OPEN_CARD_NAME + ", COLLECTING_MONEY=" + COLLECTING_MONEY
+				+ ", COLLECTING_DAY=" + COLLECTING_DAY + ", SUMMARY=" + SUMMARY
+				+ ", MEMO=" + MEMO + "]";
 	}
+
+
 
 	
 

@@ -8,13 +8,13 @@
 	<insert id="InsertOpenBanking" parameterType="OPENBANKING">
 		INSERT INTO OPENBANKING (
 			OPEN_ACCOUNT_NO,
-			MEMBER_ID, 
-			OPEN_BANK, 
+			OPEN_BANK,
+			MEMBER_ID,  
 			OPEN_ACCOUNT_PW, 
-			OPEN_BALANCE, 
+			OPEN_BALANCE,
 			OPEN_CARD_NAME,
 			REGDATE )
-		VALUES ( #{OPEN_ACCOUNT_NO}, #{MEMBER_ID}, #{OPEN_BANK}, #{OPEN_ACCOUNT_PW}, #{OPEN_BALANCE}, #{OPEN_CARD_NAME}, sysdate )
+		VALUES ( #{OPEN_ACCOUNT_NO}, #{OPEN_BANK}, #{MEMBER_ID}, #{OPEN_ACCOUNT_PW}, #{OPEN_BALANCE}, #{OPEN_CARD_NAME}, sysdate )
 		<!--WHERE-->
 	</insert>
 
@@ -26,12 +26,11 @@
   	</delete>
 
 	<!-- 오픈뱅킹 계좌 조회 -->
-	<!--OPEN_ACCOUNT_PW=null 문제-->
-	<select id="SelectOpenBanking" parameterType="OPENBANKING" resultType="OPENBANKING">
+	<select id="SelectOpenBanking" parameterType="String" resultType="OPENBANKING">
 		SELECT
 			OPEN_ACCOUNT_NO,
-			MEMBER_ID,
 			OPEN_BANK,
+			MEMBER_ID,
 			OPEN_BALANCE,
 			OPEN_CARD_NAME,
 			REGDATE
@@ -40,17 +39,71 @@
 		WHERE 
 			MEMBER_ID = #{MEMBER_ID}
 	</select>
-
-	<!-- 계좌비밀번호 확인 -->
-	<!--임시-->
-	<select id="CheckPwOpenBanking" parameterType="OPENBANKING" resultType="int">
-		SELECT 
-			COUNT(*) 
+	<select id="SelectList" parameterType="String" resultType="OPENBANKING">
+		SELECT
+			*
 		FROM 
 			OPENBANKING
-		WHERE 
-			OPEN_ACCOUNT_NO = #{OPEN_ACCOUNT_NO} AND OPEN_ACCOUNT_PW = #{OPEN_ACCOUNT_PW}
+		where member_id=#{member_id}
 	</select>
-
-
+	
+	<!--	
+	<select id="SelectId" parameterType="OPENBANKING" resultType="OPENBANKING">
+		SELECT
+			MEMBER_ID
+		FROM 
+			OPENBANKING
+	</select>
+	<select id="SelectPw" parameterType="OPENBANKING" resultType="OPENBANKING">
+		SELECT
+			OPEN_ACCOUNT_PW
+		FROM 
+			OPENBANKING
+	</select>
+	<select id="SelectBalance" parameterType="OPENBANKING" resultType="OPENBANKING">
+		SELECT
+			OPEN_BALANCE
+		FROM 
+			OPENBANKING
+	</select>
+	-->
+	
+	<!-- 잔액모으기(출금계좌) -->
+	<update id="WithdrawOpenBanking" parameterType="HashMap">
+		UPDATE 
+			OPENBANKING 
+		SET 
+			OPEN_BALANCE = OPEN_BALANCE - #{money}
+		WHERE 
+			 MEMBER_ID = #{MEMBER_ID} AND OPEN_ACCOUNT_PW = #{OPEN_ACCOUNT_PW}
+	</update>
+	<!-- 잔액모으기(입금계좌) -->
+	<update id="DepositOpenBanking" parameterType="HashMap">
+		UPDATE 
+			ACCOUNT 
+		SET
+			BALANCE = BALANCE + #{money}
+		WHERE 
+			account_num = #{account_num}
+	</update>
+	<!-- 거래내역 로그(잔액모으기 내역) -->
+	<insert id="WithdrawLog" parameterType="HashMap">
+		INSERT INTO INSTANT (
+		 	MEMBER_ID,
+			MY_ACCOUNT_NUM,
+			COLLECTING_MONEY,
+			COLLECTING_DAY,
+			SUMMARY,
+			MEMO )
+		VALUES ( #{MEMBER_ID}, #{account_num}, #{money},
+				 sysdate, '즉시모으기', '메모' )		
+	</insert>
+	<select id="checkaccount" parameterType="String" resultType="String">
+		SELECT 
+			account_num 
+		FROM 
+			ACCOUNT 
+		WHERE
+			 MEMBER_ID = #{MEMBER_ID}
+	</select>
 </mapper>
