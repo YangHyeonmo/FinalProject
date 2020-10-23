@@ -11,6 +11,7 @@
 		<typeAlias type="model.ReservationDTO" alias="RESERVATION" />
 		<typeAlias type="model.FinanceDTO" alias="Finance"/>
 		<typeAlias type="model.ProductsDTO" alias="Products"/>
+		<typeAlias type="model.AccountDTO" alias="Account"/>
 	</typeAliases>
 
 	<environments default="development">
@@ -26,6 +27,7 @@
 	</environments>
 
 	<mappers>
+		<mapper resource="mybatis/Account.xml"/>
 		<mapper resource="mybatis/MemberMapper.xml" />
 		<mapper resource="mybatis/Transfer.xml" />
 		<mapper resource="mybatis/OpenBankingMapper.xml" />

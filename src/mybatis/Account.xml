@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Account">
+
+
+	<select id="getACount" parameterType="hashmap" resultType="int">
+		select nvl(count(distinct account_name),0) from account
+		where member_id = #{member_id} and account_type='입출금'
+	</select>
+
+	<select id="getBCount" parameterType="hashmap" resultType="int">
+		select nvl(count(distinct account_name),0) from account
+		where member_id = #{member_id} and account_type='예금'
+	</select>
+
+	<select id="getCCount" parameterType="hashmap" resultType="int">
+		select nvl(count(distinct account_name),0) from account
+		where member_id = #{member_id} and account_type='적금'
+	</select>
+
+
+	<select id="getA" parameterType="hashmap" resultType="Account"> <!-- 입출금 -->
+		select * from account
+		where (account_num, account_date) in (
+		select account_num, max(account_date) max_date from account group by
+		account_num) and account_type='입출금' and member_id = #{member_id}
+
+	</select>
+
+	<select id="getB" parameterType="hashmap" resultType="Account"> <!-- 예금 -->
+		select * from account
+		where (account_num, account_date) in (
+		select account_num, max(account_date) max_date from account group by
+		account_num) and account_type='예금' and member_id = #{member_id}
+
+	</select>
+
+	<select id="getC" parameterType="hashmap" resultType="Account"> <!-- 적금 -->
+		select * from account
+		where (account_num, account_date) in (
+		select account_num, max(account_date) max_date from account group by
+		account_num) and account_type='적금' and member_id = #{member_id}
+
+	</select>
+
+
+	<select id="getArticle" parameterType="hashmap"
+		resultType="Account">
+		select * from account where account_num = #{account_num}
+	</select>
+
+	<select id="getAlias" parameterType="hashmap"
+		resultType="Account">
+		select distinct account_name, account_num, account_alias from account where account_num = #{account_num}
+	</select>
+
+	<update id="updateAlias" parameterType="hashmap">
+		update account set account_alias = #{account_alias} where account_num =
+		#{account_num}
+	</update>
+
+
+
+</mapper>
