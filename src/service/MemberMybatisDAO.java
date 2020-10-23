@@ -64,7 +64,7 @@ public class MemberMybatisDAO extends AbstractMybatis{
 				
 				return result;
 			}finally {
-				sqlSession.close();
+				
 			}
 		}
 		

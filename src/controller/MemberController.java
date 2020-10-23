@@ -136,7 +136,7 @@ public class MemberController {
 	public String idCheck(String member_id, Model m) throws Exception {
 		String checkId = memberDAO.memberIdCheck(member_id);
 		m.addAttribute("checkId", checkId);
-		return "member/idCheck.";
+		return "member/idCheck";
 		
 	}
 }
