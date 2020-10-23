@@ -1,33 +1,33 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="w3-container">
 	<span class="w3-center  w3-large">
-		Á¶È¸³¯Â¥
+		ì¡°íšŒë‚ ì§œ
 		<input type="date" id="UserCheckIn" name="UserCheckIn"
                   min="2020-08-01" max="2020-12-31" name="date"
                   contenteditable="false"> ~
         <input type="date" id="UserCheckIn" name="UserCheckIn"
                   min="2020-08-01" max="2020-12-31" name="date"
                   contenteditable="false">
-        <a href="<%=request.getContextPath() %>/account/Á¶È¸³¯Â¥¼³Á¤">  
-		 Á¶È¸</a>
+        <a href="<%=request.getContextPath() %>/account/ì¡°íšŒë‚ ì§œì„¤ì •">  
+		 ì¡°íšŒ</a>
                   
 
 	</span>
 
 	<table class="w3-table-all" width="700">
 		<tr class="w3-grey">
-			<td align="center" width="100">³¯Â¥</td>
-			<td align="center" width="50">Ãâ±Ý</td>
-			<td align="center" width="250">ÀÔ±Ý</td>
-			<td align="center" width="150">ÀÜ¾×</td>
-			<td align="center" width="150">º¸³½/¹Þ´ÂÀÌ</td>
-			<td align="center" width="150">³»¿ë</td>
-			<td align="center" width="150">°Å·¡Á¡</td>
+			<td align="center" width="100">ë‚ ì§œ</td>
+			<td align="center" width="50">ì¶œê¸ˆ</td>
+			<td align="center" width="250">ìž…ê¸ˆ</td>
+			<td align="center" width="150">ìž”ì•¡</td>
+			<td align="center" width="150">ë³´ë‚¸/ë°›ëŠ”ì´</td>
+			<td align="center" width="150">ë‚´ìš©</td>
+			<td align="center" width="150">ê±°ëž˜ì </td>
 		</tr>
 		<c:set var="account_num" value="${account_num }"/>
-		<c:forEach var="article" items="${article}">  <!-- var=Á¦³×¸¯ÂüÁ¶Çü  items=ÄÃ·º¼Ç -->
+		<c:forEach var="article" items="${article}">  <!-- var=ì œë„¤ë¦­ì°¸ì¡°í˜•  items=ì»¬ë ‰ì…˜ -->
 	
 		<tr height="30">		
 			<td align="center" width="100">${article.account_date }</td>
