@@ -70,13 +70,12 @@ public class MemberController {
 		String member_pwdSecurity = SHA256.getSHA256(member_password);
 
 		int loginResult = memberDAO.loginMember(member_id, member_pwdSecurity);
-		
 		if(loginResult == 1) {
 			member = (MemberDTO) memberDAO.getMember(member_id);
 			session.setAttribute("member_id", member_id);
-			session.setAttribute("member_password", member_password);
-			m.addAttribute("member", member);
-			m.addAttribute("login", 1);
+			session.setAttribute("member_password", member_password);		
+			session.setAttribute("member", member);
+			session.setAttribute("login", 1);
 			return "member/memberLoginPro";
 		}
 		else return "member/memberLoginFailed"; 

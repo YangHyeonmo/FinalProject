@@ -21,7 +21,7 @@
    	<img class="navbar-img" src="<%=request.getContextPath()%>/images/naru3.png"><a class="navbar-brand" href="<%=request.getContextPath()%>/view/mainPage" style="margin-left:95px; font-size:50px; color:white"><strong>Narubank</strong></a>
     </div>
     
-	<c:if test="${sessionScope.login eq 1}">
+	<c:if test="${login eq 1}">
     <ul class="nav navbar-nav">
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">조회 <span class="caret"></span></a>
         <ul class="dropdown-menu">
@@ -48,10 +48,10 @@
     </c:if>
    
     <ul class="nav navbar-nav navbar-right">
-   	<c:if test="${sessionScope.login ne 1}">
+   	<c:if test="${login ne 1}">
       <li><a href="URL" onclick="window.open('<%=request.getContextPath()%>/member/loginRegister', '_blank', 'top=250px,left=550px,width=756px,height=609px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;"><span class="glyphicon glyphicon-user"></span> Login / Sign Up</a></li>
     </c:if>
-    <c:if test="${sessionScope.login eq 1}">
+    <c:if test="${login eq 1}">
       <li><a href="<%=request.getContextPath()%>/view/memberMyPage"><span class="glyphicon glyphicon-user"></span> 마이페이지</a></li>
       <li><a href="<%=request.getContextPath()%>/view/logout"><span class="glyphicon glyphicon-log-in"></span> 로그아웃</a></li>
     </c:if>

@@ -12,23 +12,27 @@ import model.MemberDTO;
 public class MemberMybatisDAO extends AbstractMybatis{
 		String namespace = "Member";
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		SqlSession sqlSession = getSqlSessionFactory().openSession();
+
 		
 		public int insertMember(MemberDTO member) throws Exception {
+			SqlSession sqlSession = getSqlSessionFactory().openSession();
+
 			try {
 				int result = sqlSession.insert(namespace +".insertMember", member);
-				//int result = sqlSession.insert(namespace +".test");
 				System.out.println("insert ok: " + result);
 			}  catch (Exception  e) {
 		         e.printStackTrace();
 		      }finally {
 		    	sqlSession.commit();
-				sqlSession.close();
+		    	sqlSession.close();
+				
 			}
 			return 1;
 		}
 		
 		public int loginMember(String member_id, String member_pwdSecurity) throws Exception{
+			SqlSession sqlSession = getSqlSessionFactory().openSession();
+
 			int x = 0;
 			try {
 				String pass = sqlSession.selectOne(namespace +".findPwd", member_id);
@@ -42,10 +46,14 @@ public class MemberMybatisDAO extends AbstractMybatis{
 			}  catch (Exception  e) {
 		         e.printStackTrace();
 		      }
+			finally {
+				sqlSession.close();
+			}
 			return x;
 		}
 
 		public MemberDTO getMember(String member_id) throws Exception{
+			SqlSession sqlSession = getSqlSessionFactory().openSession();
 			try {
 				return sqlSession.selectOne(namespace +".getAllInfo", member_id);
 			}  finally {
@@ -54,6 +62,7 @@ public class MemberMybatisDAO extends AbstractMybatis{
 		}
 		
 		public String memberIdCheck(String member_id) {
+			SqlSession sqlSession = getSqlSessionFactory().openSession();
 			String result="Yes";
 			try {
 				int chk= sqlSession.selectOne(namespace +".checkId", member_id);
@@ -64,12 +73,13 @@ public class MemberMybatisDAO extends AbstractMybatis{
 				
 				return result;
 			}finally {
-				
+				sqlSession.close();
 			}
 		}
 		
 
 		public int updateMember(MemberDTO member) throws Exception{
+			SqlSession sqlSession = getSqlSessionFactory().openSession();
 			int result = 0;
 			try {
 				sqlSession.update(namespace +".update", member); 
@@ -77,10 +87,12 @@ public class MemberMybatisDAO extends AbstractMybatis{
 			}  finally {
 				sqlSession.commit();
 				sqlSession.close();
+				
 			}
 			return result;
 		}
 		public int deleteMember(String member_id) throws Exception{
+			SqlSession sqlSession = getSqlSessionFactory().openSession();
 			int result = 0;
 			try {
 				sqlSession.delete(namespace +".deleteMember", member_id); 
@@ -88,10 +100,12 @@ public class MemberMybatisDAO extends AbstractMybatis{
 			}  finally {
 				sqlSession.commit();
 				sqlSession.close();
+				
 			}
 			return result;
 		}
 		public String fineMemberId(String member_name, String member_email) throws Exception{
+			SqlSession sqlSession = getSqlSessionFactory().openSession();
 			try {
 				map.clear();
 				map.put("member_name", member_name);
@@ -104,6 +118,7 @@ public class MemberMybatisDAO extends AbstractMybatis{
 			
 		}
 		public String findMemberPwd(String member_id, String member_email, String member_phonenumber) throws Exception{
+			SqlSession sqlSession = getSqlSessionFactory().openSession();
 			try {
 				map.clear();
 				map.put("member_id", member_id);
