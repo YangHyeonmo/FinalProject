@@ -32,6 +32,35 @@
 		alert("출금 계좌와 이체하고자 하는 계좌가 일치하면 안됩니다");
 	</script>
 </c:if>
+<script>
+var balance=new Array();
+<c:forEach items="${balance}" var="item">
+	balance.push("${item}");
+</c:forEach>
+
+
+document.getElementById('balance').value=balance[0];
+</script>
+<script>
+function change(){
+	var account=new Array();
+	<c:forEach items="${account_num}" var="item">
+		account.push("${item}");
+	</c:forEach>
+
+	var balance=new Array();
+	<c:forEach items="${balance}" var="item">
+		balance.push("${item}");
+	</c:forEach>
+	
+	var num=document.getElementById('account_no');	
+	for(var i=0;i<account.length;i++){
+		if(num.value==account[i]){
+			document.getElementById('balance').value=balance[i];
+		}
+	}
+}
+</script>
 <div class="w3-bar w3-white">
   <button class="w3-bar-item w3-button" onclick="openTransfer('transfer')">이체</button>
   <button class="w3-bar-item w3-button" onclick="openTransfer('transferAuto')">자동 이체</button>
@@ -40,7 +69,7 @@
 <div id="transfer" class="bank">
 <form action="<%=request.getContextPath()%>/transfer/TransferAuth" method="post" name="transferform">
 	<table class = "table table-bordered table-hover" style = "text-align: center; border: 1px solid #dddddd">
-	<input type="hidden" name="TransferNum" value="1"/>
+	<input type="hidden" name="num" value="1"/>
 				<thead>
 					<tr>
 						<th colspan = "5"><h4 align="center">이체</h4></th>
@@ -51,12 +80,18 @@
 					</tr>
 					<tr>
 						<td colspan = "5">	
-							<select name="ACCOUNT_NO">
+							<select name="account_no" id="account_no" onchange="change()">
 								<c:forEach var= "ACCOUNT_NO" items="${account_num }" varStatus="status">
 									<option value=${ACCOUNT_NO }>${ACCOUNT_NO}</option>
 								</c:forEach>
 							</select>
 						</td>						
+					</tr>
+					<tr>
+						<td colspan = "5">잔액</td>
+					</tr>
+					<tr>
+						<td colspan="5"><input type="text" name= "balance" value="${balance[0]}" id="balance" style="border:0; outline:0;">원</td>
 					</tr>
 					<tr align=center>
 						<td colspan = "5">이체금액</td>					
@@ -69,21 +104,21 @@
 						<td><input type="button" value="+전액"  onclick="money()" style="border:0; outline:0;"></td>
 					</tr>
 					<tr>
-						<td colspan="5"><input type="text" value=0 name= "TRANSFER_PRICE" id="TRANSFER_PRICE" style="border:0; outline:0;">원</td>
+						<td colspan="5"><input type="text" value=0 name= "transfer_price" id="TRANSFER_PRICE" style="border:0; outline:0;">원</td>
 					</tr>
 					
 					<tr>
 						<td colspan = "5">받는 분 계좌 번호</td>
 					</tr>
 					<tr>
-						<td colspan = "5"><input type="text" name="TRANSFER_TO_ACCOUNT_NO" 
+						<td colspan = "5"><input type="text" name="transfer_to_account_no" 
 						style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
 					</tr>
 					<tr>
 						<td colspan = "5">받는 분 표시</td>
 					</tr>
 					<tr>
-						<td colspan="5"><input type="text" name="TRANSFER_ALIAS" 
+						<td colspan="5"><input type="text" name="transfer_alias" 
 						style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
 					</tr>
 				
@@ -96,7 +131,7 @@
 <div id="transferAuto" class="bank" style="display:none">
 <form action="<%=request.getContextPath()%>/transfer/TransferAuth" method="post" name="transferform">
 	<table class = "table table-bordered table-hover" style = "text-align: center; border: 1px solid #dddddd">
-	<input type="hidden" name="TransferNum" value="2"/>
+	<input type="hidden" name="num" value="2"/>
 				<thead>
 					<tr>
 						<th colspan = "5"><h4 align="center">자동이체</h4></th>
@@ -181,7 +216,7 @@
 <div id="transferRes" class="bank" style="display:none">
 <form action="<%=request.getContextPath()%>/transfer/TransferAuth" method="post" name="transferform">
 	<table class = "table table-bordered table-hover" style = "text-align: center; border: 1px solid #dddddd">
-	<input type="hidden" name="TransferNum" value="3"/>
+	<input type="hidden" name="num" value="3"/>
 				<thead>
 					<tr>
 						<th colspan = "5"><h4 align="center">예약 이체</h4></th>
@@ -210,7 +245,7 @@
 						<td><input type="button" value="+전액"  onclick="money()"></td>
 					</tr>
 					<tr>
-						<td colspan="5"><input type="text" value=0 name= "TRANSFER_PRICE" id="TRANSFER_PRICE" placeholder="숫자만 입력">원</td>
+						<td colspan="5"><input type="text" name= "transfer_price" id="transfer_price" placeholder="숫자만 입력">원</td>
 					</tr>
 					
 					<tr>

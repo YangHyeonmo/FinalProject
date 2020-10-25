@@ -52,7 +52,7 @@ public class MemberMybatisDAO extends AbstractMybatis{
 			return x;
 		}
 
-		public MemberDTO getMember(String member_id) throws Exception{
+		public MemberDTO getMember(String member_id){
 			SqlSession sqlSession = getSqlSessionFactory().openSession();
 			try {
 				return sqlSession.selectOne(namespace +".getAllInfo", member_id);

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import model.FinanceDTO;
 import model.ProductsDTO;
-import mybatis.AbstractMybatis;
 
 @Service
 public class FinanceMybatisDAO extends AbstractMybatis {

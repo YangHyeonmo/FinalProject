@@ -9,8 +9,11 @@
 		select COUNT(*) from ${dbname}
 	</select>
 	
-	<select id="getAccountNum" resultType="String" parameterType="String">
-		select distinct(account_num) from account where member_id=#{id} 
+	<select id="getAccountNum" resultType="Account" parameterType="String">
+			select * from account
+      where (account_num, account_date) in (
+      select account_num, max(account_date) max_date from account group by
+      account_num) and account_type='입출금' and member_id = #{id}
 	</select>
 	
 	<select id="dateTransList" resultType="Transfer" parameterType="hashMap">
@@ -46,8 +49,12 @@
 		select * from ${dbname} where transfer_no=${transfer_no}
 	</select>
 	
+	<select id="sendMember" resultType="String" parameterType="String">
+		select distinct(member_id) from account where account_num=#{account_num}
+	</select>
+		
 	<update id="updateMoney" parameterType="hashmap">
-		update account set deposit=deposit ${operation} ${money} where account_num=#{account_no}
+		update account set balance=balance ${operation} ${money} where account_num=#{account_no}
 	</update>
 
 	

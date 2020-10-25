@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import com.sist.som.Action;
 
 import model.AccountDTO;
 import service.AccountDAO;
@@ -39,13 +38,13 @@ public class AccountController  {
 	@RequestMapping("accountList")
 	public String accountList(Model m) throws Exception {
 
-		String member_id = "dasom7107";	//session.getAtt~~~ ¹Ù²Ù±â
+		String member_id = "dasom7107";	//session.getAtt~~~ ï¿½Ù²Ù±ï¿½
 		int count1 = 0;
 		int count2 = 0;
 		int count3 = 0;
-		List aaList = null; // ÀÔÃâ±Ý
-		List bbList = null; // ¿¹±Ý
-		List ccList = null; // Àû±Ý
+		List aaList = null; // ï¿½ï¿½ï¿½ï¿½ï¿½
+		List bbList = null; // ï¿½ï¿½ï¿½ï¿½
+		List ccList = null; // ï¿½ï¿½ï¿½ï¿½
 		AccountDAO dbPro = new AccountDAO();
 		count1 = dbPro.getACount(member_id);
 		count2 = dbPro.getBCount(member_id);

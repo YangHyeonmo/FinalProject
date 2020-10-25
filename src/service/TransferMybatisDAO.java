@@ -42,10 +42,10 @@ public class TransferMybatisDAO extends AbstractMybatis {
 		return 0;
 	}
 	
-	public List<String> getAccountNum(String id){
+	public List<AccountDTO> getAccountNum(String id){
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
-			String statement = namespace + ".getAccountNum";
+				String statement = namespace + ".getAccountNum";
 			return sqlSession.selectList(statement,id);
 		}finally {
 			sqlSession.close();
@@ -53,38 +53,7 @@ public class TransferMybatisDAO extends AbstractMybatis {
 		
 	}
 	
-	/*public int getDeposit(String id){
-		SqlSession sqlSession = getSqlSessionFactory().openSession();
-		try {
-			String statement = namespace + ".getDeposit";
-			return sqlSession.selectOne(statement,id);
-		}finally {
-			sqlSession.close();
-		}
-		
-	}*/
-	/*public boolean transferAutoInsert(TransferBean transfer) {
-		SqlSession sqlSession = getSqlSessionFactory().openSession();
-		try {
-			String statement=namespace + ".getMaxNum";
-			String dbname="transfer_auto";
-			int number = sqlSession.selectOne(statement,dbname);
-			if(number==0) {
-				number=1;
-			}
-			
-			statement=namespace+".insertTrans_Auto";
-			int result= sqlSession.insert(statement);
-			if(result!=0) {
-				return true;
-			}
-			
-			return false;
-			
-		}finally {
-			sqlSession.close();
-		}
-	}*/
+	
 	
 	public List<TransferDTO> dateTransList(String now_date,String select_date,String account_no){
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
@@ -182,7 +151,7 @@ public class TransferMybatisDAO extends AbstractMybatis {
 		try {
 			String statement=namespace + ".check_account_no";
 			AccountDTO account=sqlSession.selectOne(statement,account_no);
-			if(account.getDeposit()>account_money) {
+			if(account.getBalance()>account_money) {
 				return true;
 			}
 			
@@ -229,7 +198,15 @@ public class TransferMybatisDAO extends AbstractMybatis {
 		return b_result;
 	}
 
-	
+	public String sendMember(String account_num) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			String statement=namespace + ".sendMember";
+			return sqlSession.selectOne(statement,account_num);
+		}finally {
+			sqlSession.close();
+		}
+	}
 
 	
 	
