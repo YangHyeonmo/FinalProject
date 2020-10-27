@@ -32,35 +32,7 @@
 		alert("출금 계좌와 이체하고자 하는 계좌가 일치하면 안됩니다");
 	</script>
 </c:if>
-<script>
-var balance=new Array();
-<c:forEach items="${balance}" var="item">
-	balance.push("${item}");
-</c:forEach>
 
-
-document.getElementById('balance').value=balance[0];
-</script>
-<script>
-function change(){
-	var account=new Array();
-	<c:forEach items="${account_num}" var="item">
-		account.push("${item}");
-	</c:forEach>
-
-	var balance=new Array();
-	<c:forEach items="${balance}" var="item">
-		balance.push("${item}");
-	</c:forEach>
-	
-	var num=document.getElementById('account_no');	
-	for(var i=0;i<account.length;i++){
-		if(num.value==account[i]){
-			document.getElementById('balance').value=balance[i];
-		}
-	}
-}
-</script>
 <div class="w3-bar w3-white">
   <button class="w3-bar-item w3-button" onclick="openTransfer('transfer')">이체</button>
   <button class="w3-bar-item w3-button" onclick="openTransfer('transferAuto')">자동 이체</button>

@@ -12,5 +12,6 @@ window.close();
 alert("나루뱅크에 오신걸 환영합니다 고객님");
 </script>
 <body>
+
 </body>
 </html>

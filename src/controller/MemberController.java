@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,11 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import model.MemberDTO;
 import service.MemberMybatisDAO;
+
 import util.SHA256;
 
 @Controller
@@ -23,19 +25,23 @@ import util.SHA256;
 public class MemberController {
 		
 	public	HttpSession session = null;
+
 	
 	@Autowired
 	MemberMybatisDAO memberDAO;
 	
+
 	@ModelAttribute
 	public void headProcess(HttpServletRequest request, HttpServletResponse res) {
 		try {
 			request.setCharacterEncoding("UTF-8");
 			session = request.getSession();
-			
+	
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
+	
+		
 		
 	}
 	

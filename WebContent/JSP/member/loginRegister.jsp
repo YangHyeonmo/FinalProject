@@ -15,7 +15,7 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/common.css">
 </head>
-<body>
+<body class="loginRegister">
 
 <section class="container">
 		    <article class="half">
