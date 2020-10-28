@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
 <body>
@@ -16,11 +16,11 @@
 			<div>
 				<table class="w3-table-all" align="center">
 					<tr height="30">
-						<td align="center" width="200">ê³„ì¢Œëª…</td>
+						<td align="center" width="200">°èÁÂ¸í</td>
 						<td align="center" width="200">${article.account_name}</td>
 					</tr>
 					<tr height="30">
-						<td align="center" width="200">ê³„ì¢Œë²ˆí˜¸</td>
+						<td align="center" width="200">°èÁÂ¹øÈ£</td>
 						<td align="center" width="200">${article.account_num }</td>
 					</tr>
 				</table>
@@ -28,7 +28,7 @@
 			<div>
 				<table class="w3-table-all" align="center">
 					<tr height="30">
-						<td align="center" width="150">ê³„ì¢Œë³„ëª…</td>
+						<td align="center" width="150">°èÁÂº°¸í</td>
 					</tr>
 					<tr height="30">
 						<td align=center><input type="text" size="8" maxlength="12" name="account_alias"
@@ -38,9 +38,9 @@
 			</div>
 
 			<tr height="30">
-				<td align=center><input type="submit" value="ì €ìž¥"> <input
-					type="button" value="ì·¨ì†Œ"
-					onclick="window.close('<%=request.getContextPath()%>/account/aliasChange?account_num=${article.account_num}', '_blank', 'top=350px,left=350px,width=550px,height=390px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;">
+				<td align=center><input type="submit" value="ÀúÀå"> <input
+					type="button" value="Ãë¼Ò"
+					onclick="window.close();">
 				</td>
 			</tr>
 		</c:forEach>

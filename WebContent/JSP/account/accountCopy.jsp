@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,21 +32,22 @@ body hr{border-top: 1px dotted grey ;}
 			</tr>
 		</table>
 	</div>
-
+	<input type="hidden" name="account_num" value=${account_num }>
+	<c:forEach var="article" items="${article}">
 	<div class="bankInfo">
 		<table class="w3-table-all" >
-			<h3>{$member.name}님</h3>
+			<h3>${member.name}님</h3>
 			<tr>
 				<td>예금종류</td>
-				<td>{$account_type}</td>
+				<td>${article.account_type}</td>
 			</tr>
 			<tr>
 				<td>계좌번호</td>
-				<td>{$account_num}</td>
+				<td>${article.account_num}</td>
 			</tr>
 			<tr>
 				<td>신규일 </td>
-				<td>{$made_date}</td>
+				<td>${article.made_date}</td>
 			</tr>
 
 		</table>
@@ -55,7 +57,8 @@ body hr{border-top: 1px dotted grey ;}
 		<h4>⁕스마트고객상담부(상담/폰뱅킹) 1599-9999, 1588-9999(국내) |
 			82-1-1234-5678(해외)</h4>
 	</div>
-	<h5>⁕통장사본은 본인계좌개설 확인용 이외의 어떠한 용도의 증명서로도 사용하실 수 없습니다.</h5>
+	</c:forEach>
+	<h5>  ⁕통장사본은 본인계좌개설 확인용 이외의 어떠한 용도의 증명서로도 사용하실 수 없습니다.</h5>
 <div class="button">
 	
 		<input type="button" value="인쇄" id="print" onclick="window.print()" />

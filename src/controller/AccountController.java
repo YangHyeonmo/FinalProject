@@ -14,23 +14,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.sist.som.Action;
 
 import model.AccountDTO;
 import service.AccountDAO;
 
 @Controller
 @RequestMapping("/account/")
-public class AccountController  {
+public class AccountController {
 
 	@Autowired
 	AccountDAO dbpro;
+
 	@RequestMapping("accountShow")
-	public String accountShow(String account_num,Model m) throws Exception {
+	public String accountShow(String account_num, Model m) throws Exception {
 
 		List article = dbpro.getArticle(account_num);
 		m.addAttribute("account_num", account_num);
 		m.addAttribute("article", article);
-		
+
 		return "account/accountShow";
 
 	}
@@ -38,13 +40,13 @@ public class AccountController  {
 	@RequestMapping("accountList")
 	public String accountList(Model m) throws Exception {
 
-		String member_id = "dasom7107";	//session.getAtt~~~ ï¿½Ù²Ù±ï¿½
+		String member_id = "dasom7107"; // session.getAtt~~~ ¹Ù²Ù±â
 		int count1 = 0;
 		int count2 = 0;
 		int count3 = 0;
-		List aaList = null; // ï¿½ï¿½ï¿½ï¿½ï¿½
-		List bbList = null; // ï¿½ï¿½ï¿½ï¿½
-		List ccList = null; // ï¿½ï¿½ï¿½ï¿½
+		List aaList = null; // ÀÔÃâ±Ý
+		List bbList = null; // ¿¹±Ý
+		List ccList = null; // Àû±Ý
 		AccountDAO dbPro = new AccountDAO();
 		count1 = dbPro.getACount(member_id);
 		count2 = dbPro.getBCount(member_id);
@@ -64,8 +66,8 @@ public class AccountController  {
 		return "account/accountList";
 	}
 
-	@RequestMapping("aliasChange")
-	public String aliasChange(String account_num,Model m) throws Exception {
+	@RequestMapping("aliasChange") // °èÁÂº°¸í °ü¸® ÆäÀÌÁö
+	public String aliasChange(String account_num, Model m) throws Exception {
 
 		List article = dbpro.getAlias(account_num);
 		m.addAttribute("account_num", account_num);
@@ -74,10 +76,10 @@ public class AccountController  {
 		return "account/aliasChange";
 	}
 
-	@RequestMapping("aliasUpdatePro")
-	public String aliasUpdatePro(String account_alias,String account_num,Model m) throws Exception {
+	@RequestMapping("aliasUpdatePro") // °èÁÂº°¸í º¯°æ
+	public String aliasUpdatePro(String account_alias, String account_num, Model m) throws Exception {
 		// TODO Auto-generated method stub
-		int result=dbpro.updateAlias(account_alias,account_num);
+		int result = dbpro.updateAlias(account_alias, account_num);
 		List article = dbpro.getArticle(account_num);
 		m.addAttribute("account_alias", account_alias);
 		m.addAttribute("account_num", account_num);
@@ -85,5 +87,70 @@ public class AccountController  {
 
 		return "account/accountList";
 	}
+
+	@RequestMapping("accountCopy") // ÅëÀå»çº»
+	public String accountCopy(String account_num, Model m) throws Exception {
+
+		List article = dbpro.getAlias(account_num);
+		m.addAttribute("account_num", account_num);
+		m.addAttribute("article", article);
+
+		return "account/accountCopy";
+	}
+
+	@RequestMapping("accountPwChange") // ºñ¹Ð¹øÈ£ º¯°æ ÆäÀÌÁö
+	public String accountPwChange(String account_num, Model m) throws Exception {
+
+		List article = dbpro.getArticle(account_num);
+		m.addAttribute("account_num", account_num);
+		m.addAttribute("article", article);
+
+		return "account/accountPwChange";
+	}
+
+	@RequestMapping("pwUpdate") // °èÁÂºñ¹ø º¯°æ
+	public String pwUpdate(String account_num, int account_pw, int pw_new, int pw_new_check, Model m) throws Exception {
+		// TODO Auto-generated method stub
+		boolean check;
+
+		check = dbpro.checkPw(account_num, account_pw, pw_new, pw_new_check);
+		System.out.println(pw_new);
+		System.out.println(pw_new_check);
+		m.addAttribute("check", check);
+		if (check == true) {
+			return "account/accountPwChangePro";
+		} else {
+			m.addAttribute("message", "ºñ¹Ð¹øÈ£ ºÒÀÏÄ¡");
+			return "account/accountPwChange";
+
+		}
+	}
+
+	@RequestMapping("accountDelete") // °èÁÂÇØÁö ¸ñ·ÏÃâ·Â
+	public String accountDelete(String account_num, Model m) throws Exception {
+		String member_id = "dasom7107";
+		List<String> article = dbpro.getAccount(account_num);
+		List<String> account = dbpro.moveBalanceAccount(member_id);
+		m.addAttribute("account_num", account_num);
+		m.addAttribute("article", article);
+		m.addAttribute("account", account);
+
+		return "account/accountDelete";
+	}
+
+/*	@RequestMapping("accountDeleteCheckPw")
+	public String accountDeleteCheckPw(String account_num, int account_pw, Model m) throws Exception {
+		boolean check;
+
+		check = dbpro.deleteCheckPw(account_num, account_pw);
+		m.addAttribute("check", check);
+		if (check == true) {
+			return "account/accountDeletePro";
+		} else {
+			m.addAttribute("message", "ºñ¹Ð¹øÈ£ ºÒÀÏÄ¡");
+			return "account/accountDelete";
+
+		}
+	}*/
 
 }
