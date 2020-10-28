@@ -6,12 +6,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>모으기</title>
+<title>예약변경</title>
 </head>
 <body>
 	<script>
-		alert("모으기 완료!");
+		alert("예약 변경완료!");
 	</script>
-	<meta http-equiv="Refresh" content="0; url=SelectOpenBanking" />
+	<meta http-equiv="Refresh" content="0; url=SelectWithdrawLog" />
 </body>
 </html>

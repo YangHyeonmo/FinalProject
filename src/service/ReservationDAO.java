@@ -13,10 +13,10 @@ import model.ReservationDTO;
 
 @Service
 public class ReservationDAO extends AbstractMybatis {
+
 	private final String namespace = "ReservationMapper";
+
 	HashMap<String, Object> map = new HashMap<String, Object>();
-	static Date date = new Date();
-	static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
 	/* 예약 모으기 등록 */
 	public Integer ReservationReg(ReservationDTO reservation) {
@@ -29,33 +29,35 @@ public class ReservationDAO extends AbstractMybatis {
 			} else {
 				sqlSession.rollback();
 			}
-			System.out.println("등록 :" + result);
-			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			sqlSession.close();
 		}
+		return 1;
 	}
 
 	/* 예약 모으기 삭제 */
-	public Integer DeleteOpenBanking(ReservationDTO reservation) {
+	public Integer ReservationDelete(ReservationDTO reservation) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
-			String statement = namespace + ".DeleteOpenBanking";
+			String statement = namespace + ".ReservationDelete";
 			int result = sqlSession.delete(statement, reservation);
 			if (result > 0) {
 				sqlSession.commit();
 			} else {
 				sqlSession.rollback();
 			}
-			System.out.println("삭제 :" + result);
-			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			sqlSession.close();
 		}
+		return 1;
 	}
 
 	/* 예약 모으기 변경 */
-	public Integer ReservationModify(ReservationDTO reservation) {
+	/*public Integer ReservationModify(ReservationDTO reservation) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
 			String statement = namespace + ".ReservationModify";
@@ -65,21 +67,20 @@ public class ReservationDAO extends AbstractMybatis {
 			} else {
 				sqlSession.rollback();
 			}
-			System.out.println("변경 :" + result);
-			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			sqlSession.close();
 		}
-	}
+		return 1;
+	}*/
 
 	/* 예약 모으기 조회 */
-	public List<ReservationDTO> SelectReservation() {
+	public List<ReservationDTO> SelectReservation(String member_id) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
-			List<ReservationDTO> list = sqlSession
-					.selectList(namespace + ".SelectReservation");
-			System.out.println("조회 :" + list.toString());
-			return list;
+			return sqlSession.selectList(namespace + ".SelectReservation",
+					member_id);
 		} finally {
 			sqlSession.close();
 		}

@@ -11,27 +11,28 @@
 		<input type="hidden" name="coltype" value=1>
 		<table class="w3-table-all">
 			<tr>
-				<td width="70" align="center">아이디 확인</td>
-				<td width="330">
-					<input type="text" size="40" maxlength="50" id="MEMBER_ID" name="MEMBER_ID">
+				<td width="150" align="left">해당 계좌 아이디</td>
+				<td width="500">
+					<input type="text" size="50" maxlength="50" id="member_id" name="member_id">
 				</td>
 			</tr>
 			<tr>
-				<td width="70" align="center">비밀번호 확인</td>
-				<td width="330">
-					<input type="password" size="40" maxlength="50" id="OPEN_ACCOUNT_PW"
+				<td width="150" align="left">해당 계좌 비밀번호 </td>
+				<td width="500">
+					<input type="password" size="50" maxlength="50" id="OPEN_ACCOUNT_PW"
 						name="OPEN_ACCOUNT_PW"
 					>
 				</td>
 			</tr>
 			<tr>
-				<td width="70" align="center">금액</td>
-				<td width="330">
-					<input type="text" size="40" maxlength="50" id="money" name="money">
+				<td width="100" align="left">금액</td>
+				<td width="500">
+					<input type="text" size="50" maxlength="50" id="money" name="money">
 				</td>
 			</tr>
 			<tr>
-				<td colspan=2 align="center">
+				<td colspan=2 align="left">
+					<br />
 					<input type="submit" value="모으기">
 				</td>
 			</tr>

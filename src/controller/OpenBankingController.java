@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import model.AccountDTO;
 import model.InstantDTO;
 import model.OpenBankingDTO;
+import model.ReservationDTO;
 import service.OpenBankingDAO;
+import service.ReservationDAO;
 
 @Controller
 @RequestMapping("/openbanking")
@@ -28,17 +30,21 @@ public class OpenBankingController {
 	public OpenBankingDAO opDAO = new OpenBankingDAO();
 	public OpenBankingDTO opDTO = new OpenBankingDTO();
 	public InstantDTO iDTO = new InstantDTO();
+	public ReservationDTO rDTO = new ReservationDTO();
+	public ReservationDAO rDAO = new ReservationDAO();
+
+	public HttpSession session = null;
 
 	@ModelAttribute
 	public void headProcess(HttpServletRequest request,
 			HttpServletResponse res) {
 		try {
 			request.setCharacterEncoding("UTF-8");
+			session = request.getSession();
 
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		HttpSession session = request.getSession();
 	}
 
 	//오픈뱅킹 계좌 등록
@@ -46,6 +52,7 @@ public class OpenBankingController {
 	public String InsertOpenBanking() throws Throwable {
 		return "openbanking/InsertOpenBanking";
 	}
+
 	@RequestMapping("InsertOpenBankingProc")
 	public String InsertOpenBankingProc(OpenBankingDTO opDTO, Model m)
 			throws Throwable {
@@ -55,7 +62,7 @@ public class OpenBankingController {
 		if (result == 1) { //유효성 검사 필요
 			return "openbanking/InsertOpenBankingProc";
 		} else {
-			return "openbanking/InsertOpenBanking";
+			return "openbanking/error";
 		}
 	}
 
@@ -64,16 +71,17 @@ public class OpenBankingController {
 	public String DeleteOpenBanking() throws Throwable {
 		return "openbanking/DeleteOpenBanking";
 	}
+
 	@RequestMapping("DeleteOpenBankingProc")
 	public String DeleteOpenBankingProc(OpenBankingDTO opDTO, Model m)
 			throws Throwable {
 
 		int result = opDAO.DeleteOpenBanking(opDTO);
 
-		if (result == 1) { //유효성 검사 필요
+		if (result == 1) {
 			return "openbanking/DeleteOpenBankingProc";
 		} else {
-			return "openbanking/DeleteOpenBanking";
+			return "openbanking/error";
 		}
 	}
 
@@ -82,9 +90,9 @@ public class OpenBankingController {
 	public String SelectOpenBanking(OpenBankingDTO opDTO, Model m)
 			throws Exception {
 
-		List<OpenBankingDTO> list = opDAO.SelectOpenBanking("vldrn7636"); // 이후 세션으로 수정
-		//List<OpenBankingDTO> list = opDAO.SelectOpenBanking("adkingdom7");
+		String member_id = (String) session.getAttribute("member_id");
 
+		List<OpenBankingDTO> list = opDAO.SelectOpenBanking(member_id);
 		m.addAttribute("list", list);
 
 		return "openbanking/SelectOpenBanking";
@@ -96,26 +104,88 @@ public class OpenBankingController {
 		return "openbanking/CollectOpenBanking";
 	}
 	@RequestMapping("CollectOpenBankingProc")
-	public String CollectOpenBankingProc(int money, String MEMBER_ID,
+	public String CollectOpenBankingProc(int money, String member_id,
 			String OPEN_ACCOUNT_PW, Model m) throws Throwable {
 
-		String fromaccount = opDAO.checkaccount(MEMBER_ID);
+		String fromaccount = opDAO.checkaccount(member_id);
 
-		List<OpenBankingDTO> list = opDAO.selectList(fromaccount, MEMBER_ID);
+		List<OpenBankingDTO> list = opDAO.selectList(fromaccount, member_id);
 		int total = list.size() * money;
 
-		opDAO.WithdrawLog(MEMBER_ID, fromaccount, total);
+		opDAO.WithdrawLog(member_id, fromaccount, total);
 
-		opDAO.WithdrawOpenBanking(money, MEMBER_ID, OPEN_ACCOUNT_PW);
+		opDAO.WithdrawOpenBanking(money, member_id, OPEN_ACCOUNT_PW);
 
-		opDAO.DepositOpenBanking(fromaccount, total);
+		int result = opDAO.DepositOpenBanking(fromaccount, total);
 
-		return "openbanking/CollectOpenBankingProc";
-		/*if (coltype == 1) {
+		if (result == 1) {
 			return "openbanking/CollectOpenBankingProc";
 		} else {
-			return "openbanking/CollectOpenBankingProc";
-		}*/
+			return "openbanking/error";
+		}
 	}
 
+	//거래 내역 조회
+	@RequestMapping("SelectWithdrawLog")
+	public String SelectWithdrawLog(InstantDTO iDTO, Model m) throws Exception {
+
+		String member_id = (String) session.getAttribute("member_id");
+
+		List<InstantDTO> list2 = opDAO.SelectWithdrawLog(member_id);
+		System.out.println(list2);
+
+		m.addAttribute("list2", list2);
+
+		return "openbanking/SelectWithdrawLog";
+	}
+
+	//예약 모으기 등록
+	@RequestMapping("ReservationReg")
+	public String ReservationReg() throws Throwable {
+		return "openbanking/ReservationReg";
+	}
+	@RequestMapping("ReservationRegProc")
+	public String ReservationRegProc(ReservationDTO rDTO, Model m)
+			throws Throwable {
+
+		int result = rDAO.ReservationReg(rDTO);
+
+		System.out.println(result);
+		if (result == 1) { //유효성 검사 필요
+			return "openbanking/ReservationRegProc";
+		} else {
+			return "openbanking/error";
+		}
+	}
+
+	//예약 모으기 조회
+	@RequestMapping("SelectReservation")
+	public String SelectReservation(ReservationDTO rDTO, Model m)
+			throws Exception {
+
+		String member_id = (String) session.getAttribute("member_id");
+
+		List<ReservationDTO> list = rDAO.SelectReservation(member_id);
+		m.addAttribute("list", list);
+
+		return "openbanking/SelectReservation";
+	}
+
+	//예약 모으기 삭제
+	@RequestMapping("ReservationDelete")
+	public String ReservationDelete() throws Throwable {
+		return "openbanking/ReservationDelete";
+	}
+	@RequestMapping("ReservationDeleteProc")
+	public String ReservationDeleteProc(ReservationDTO rDTO, Model m)
+			throws Throwable {
+
+		int result = rDAO.ReservationDelete(rDTO);
+
+		if (result == 1) { //유효성 검사 필요
+			return "openbanking/ReservationDeleteProc";
+		} else {
+			return "openbanking/error";
+		}
+	}
 }

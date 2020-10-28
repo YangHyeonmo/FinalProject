@@ -9,12 +9,12 @@
 		INSERT INTO OPENBANKING (
 			OPEN_ACCOUNT_NO,
 			OPEN_BANK,
-			MEMBER_ID,  
+			member_id,  
 			OPEN_ACCOUNT_PW, 
 			OPEN_BALANCE,
 			OPEN_CARD_NAME,
 			REGDATE )
-		VALUES ( #{OPEN_ACCOUNT_NO}, #{OPEN_BANK}, #{MEMBER_ID}, #{OPEN_ACCOUNT_PW}, #{OPEN_BALANCE}, #{OPEN_CARD_NAME}, sysdate )
+		VALUES ( #{OPEN_ACCOUNT_NO}, #{OPEN_BANK}, #{member_id}, #{OPEN_ACCOUNT_PW}, #{OPEN_BALANCE}, #{OPEN_CARD_NAME}, sysdate )
 		<!--WHERE-->
 	</insert>
 
@@ -22,7 +22,7 @@
 	<delete id="DeleteOpenBanking" parameterType="OPENBANKING">
   		DELETE FROM OPENBANKING
   		WHERE 
-			 MEMBER_ID = #{MEMBER_ID} AND OPEN_ACCOUNT_NO = #{OPEN_ACCOUNT_NO} AND OPEN_ACCOUNT_PW = #{OPEN_ACCOUNT_PW}
+			 member_id = #{member_id} AND OPEN_ACCOUNT_NO = #{OPEN_ACCOUNT_NO} AND OPEN_ACCOUNT_PW = #{OPEN_ACCOUNT_PW}
   	</delete>
 
 	<!-- 오픈뱅킹 계좌 조회 -->
@@ -30,14 +30,16 @@
 		SELECT
 			OPEN_ACCOUNT_NO,
 			OPEN_BANK,
-			MEMBER_ID,
+			member_id,
 			OPEN_BALANCE,
 			OPEN_CARD_NAME,
 			REGDATE
 		FROM 
 			OPENBANKING
 		WHERE 
-			MEMBER_ID = #{MEMBER_ID}
+			member_id = #{member_id}
+		ORDER BY
+			REGDATE
 	</select>
 	<select id="SelectList" parameterType="String" resultType="OPENBANKING">
 		SELECT
@@ -46,11 +48,11 @@
 			OPENBANKING
 		where member_id=#{member_id}
 	</select>
-	
+
 	<!--	
 	<select id="SelectId" parameterType="OPENBANKING" resultType="OPENBANKING">
 		SELECT
-			MEMBER_ID
+			member_id
 		FROM 
 			OPENBANKING
 	</select>
@@ -67,7 +69,7 @@
 			OPENBANKING
 	</select>
 	-->
-	
+
 	<!-- 잔액모으기(출금계좌) -->
 	<update id="WithdrawOpenBanking" parameterType="HashMap">
 		UPDATE 
@@ -75,8 +77,9 @@
 		SET 
 			OPEN_BALANCE = OPEN_BALANCE - #{money}
 		WHERE 
-			 MEMBER_ID = #{MEMBER_ID} AND OPEN_ACCOUNT_PW = #{OPEN_ACCOUNT_PW}
+			 member_id = #{member_id} AND OPEN_ACCOUNT_PW = #{OPEN_ACCOUNT_PW}
 	</update>
+
 	<!-- 잔액모으기(입금계좌) -->
 	<update id="DepositOpenBanking" parameterType="HashMap">
 		UPDATE 
@@ -86,24 +89,53 @@
 		WHERE 
 			account_num = #{account_num}
 	</update>
+
 	<!-- 거래내역 로그(잔액모으기 내역) -->
 	<insert id="WithdrawLog" parameterType="HashMap">
 		INSERT INTO INSTANT (
-		 	MEMBER_ID,
+		 	member_id,
 			MY_ACCOUNT_NUM,
 			COLLECTING_MONEY,
 			COLLECTING_DAY,
 			SUMMARY,
 			MEMO )
-		VALUES ( #{MEMBER_ID}, #{account_num}, #{money},
+		VALUES ( #{member_id}, #{account_num}, #{money},
 				 sysdate, '즉시모으기', '메모' )		
 	</insert>
+
+	<!--거래내역 조회 -->
+	<select id="SelectWithdrawLog" parameterType="String" resultType="INSTANT">
+		SELECT
+			member_id,
+			MY_ACCOUNT_NUM,
+			COLLECTING_MONEY,
+			COLLECTING_DAY,
+			SUMMARY,
+			MEMO 
+		FROM 
+			INSTANT
+		WHERE 
+			member_id = #{member_id}
+		ORDER BY
+			COLLECTING_DAY
+	</select>
+
 	<select id="checkaccount" parameterType="String" resultType="String">
 		SELECT 
 			account_num 
 		FROM 
 			ACCOUNT 
 		WHERE
-			 MEMBER_ID = #{MEMBER_ID}
+			 member_id = #{member_id}
+	</select>
+
+	<!--메인페이지 총 잔액 조회-->
+	<select id="TotalOpenBalance" parameterType="String" resultType="int">
+		SELECT
+			SUM ( OPEN_BALANCE ) AS TOTAL
+		FROM 
+			OPENBANKING
+		WHERE 
+			member_id = #{member_id}
 	</select>
 </mapper>

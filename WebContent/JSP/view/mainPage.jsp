@@ -37,10 +37,11 @@
 	<a class="transfer" href="">이체</a>
 	<a class="card" href="">카드내역</a>
 	</c:if>
-		</div>
+	</div>
+	
 	<div class="coinMoney">
 	<span class="coin">잔돈</span>
-	<span class="coinCollect">897,231원</span>
+	<span class="coinCollect">${total}원</span>
 	</div>
 	
 	<div class="bankProduct">
@@ -54,17 +55,7 @@
 	
 	<span class="moneySave">589,212</span>	
 	</div>
-	
-	<div>
-	
-	
-	</div>
-	
-	
-	<div>
-	<%-- <img  class="phoneImage" src="<%=request.getContextPath()%>/images/catFoot.png"> --%>
-	</div>
-		
+
 	</div>
 	
 	<div class="introduce">

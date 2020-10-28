@@ -12,7 +12,7 @@
 	<div class="w3-container">
 		<br /> <b>계좌조회</b><br />
 		<table class="w3-table-all">
-			<td>&emsp;&emsp;계좌번호</td>
+			<td>계좌번호</td>
 			<td>은행명</td>
 			<td>아이디</td>
 			<td>잔액</td>
@@ -20,24 +20,21 @@
 			<td>등록일</td>
 			<c:forEach var="list" items="${list}">
 				<tr>
-					<td>
-						<input type="checkbox" name="DELETE">
-						&nbsp;&nbsp;&nbsp;${list.OPEN_ACCOUNT_NO}
-					</td>
-					<td>${list.OPEN_BANK}</td>
-					<td>${list.MEMBER_ID}</td>
-					<td>${list.OPEN_BALANCE}</td>
-					<td>${list.OPEN_CARD_NAME}</td>
-					<td>${list.REGDATE}</td>
+					<td>${list.OPEN_ACCOUNT_NO}&emsp;&emsp;</td>
+					<td>${list.OPEN_BANK}&emsp;&emsp;</td>
+					<td>${list.member_id}&emsp;&emsp;</td>
+					<td>${list.OPEN_BALANCE}원&emsp;&emsp;</td>
+					<td>${list.OPEN_CARD_NAME}&emsp;&emsp;</td>
+					<td>${list.REGDATE}&emsp;&emsp;</td>
 				</tr>
 			</c:forEach>
 		</table>
 		<div class="w3-bar w3-white">
+			<br />
 			<button class="w3-bar-item w3-button"
 				onclick="document.location.href='<%=request.getContextPath()%>/openbanking/CollectOpenBanking'"
 			>잔액 모으기</button>
 		</div>
-		</form>
 		<%-- 	<script>
     $(document).ready(function() {
         //confirm() 확인 => true, 취소는 = false
@@ -60,61 +57,64 @@
 </div>
 <div id="insert" class="open" style="display: none">
 	<div class="w3-container">
-		<br /> <b>계좌등록</b><br />
+		<br /> <b>계좌등록</b>
+		</td>
+		<br />
 		<form method="post" name="writeform"
 			action="<%=request.getContextPath()%>/openbanking/InsertOpenBankingProc"
 		>
 			<table class="w3-table-all">
 				<tr>
-					<td width="70" align="center">계좌번호</td>
-					<td width="330">
-						<input type="text" size="40" maxlength="50" id="OPEN_ACCOUNT_NO"
-							name="OPEN_ACCOUNT_NO"
+					<td width="100" align="left">계좌번호</td>
+					<td width="500">
+						<input type="text" size="50" maxlength="50" id="OPEN_ACCOUNT_NO"
+							name="OPEN_ACCOUNT_NO" required="required"
 						>
 					</td>
 				</tr>
 				<tr>
-					<td width="70" align="center">은행명</td>
-					<td width="330">
-						<input type="text" size="40" maxlength="50" id="OPEN_BANK"
+					<td width="100" align="left">은행명</td>
+					<td width="">
+						<input type="text" size="50" maxlength="50" id="OPEN_BANK"
 							name="OPEN_BANK"
 						>
 					</td>
 				</tr>
 				<tr>
-					<td width="70" align="center">아이디(@)</td>
-					<td width="330">
-						<input type="text" size="40" maxlength="50" id="MEMBER_ID"
-							name="MEMBER_ID"
+					<td width="100" align="left">아이디</td>
+					<td width="500">
+						<input type="text" size="50" maxlength="50" id="member_id"
+							name="member_id" required="required"
 						>
 					</td>
 				</tr>
 				<tr>
-					<td width="70" align="center">계좌 비밀번호</td>
-					<td width="330">
-						<input type="password" size="40" maxlength="50" id="OPEN_ACCOUNT_PW"
-							name="OPEN_ACCOUNT_PW"
+					<td width="110" align="left">계좌 비밀번호</td>
+					<td width="500">
+						<input type="password" size="50" maxlength="50" id="OPEN_ACCOUNT_PW"
+							name="OPEN_ACCOUNT_PW" required="required"
 						>
 					</td>
 				</tr>
 				<tr>
-					<td width="70" align="center">잔액</td>
-					<td width="330">
-						<input type="number" value=0 size="40" maxlength="50" id="OPEN_BALANCE"
-							name="OPEN_BALANCE"
+					<td width="100" align="left">잔액</td>
+					<td width="500">
+						<input type="text" value=0 size="50" maxlength="50" id="OPEN_BALANCE"
+							name="OPEN_BALANCE" required="required"
 						>
 					</td>
 				</tr>
 				<tr>
-					<td width="70" align="center">카드명</td>
-					<td width="330">
-						<input type="text" size="40" maxlength="50" id="OPEN_CARD_NAME"
+					<td width="100" align="left">카드명</td>
+					<td width="500">
+						<input type="text" size="50" maxlength="50" id="OPEN_CARD_NAME"
 							name="OPEN_CARD_NAME"
 						>
 					</td>
 				</tr>
 				<tr>
 					<td colspan=2 align="center">
+						<br />
 						<input type="submit" value="등록">
 						<input type="reset" value="다시작성">
 					</td>
@@ -131,31 +131,32 @@
 		>
 			<table class="w3-table-all">
 				<tr>
-					<td width="70" align="center">삭제할 계좌번호</td>
-					<td width="330">
-						<input type="text" size="40" maxlength="50" id="OPEN_ACCOUNT_NO"
-							name="OPEN_ACCOUNT_NO"
+					<td width="150" align="left">삭제할 계좌번호</td>
+					<td width="500">
+						<input type="text" size="50" maxlength="50" id="OPEN_ACCOUNT_NO"
+							name="OPEN_ACCOUNT_NO" required="required"
 						>
 					</td>
 				</tr>
 				<tr>
-					<td width="70" align="center">아이디(@)</td>
-					<td width="330">
-						<input type="text" size="40" maxlength="50" id="MEMBER_ID"
-							name="MEMBER_ID"
+					<td width="100" align="left">아이디 확인</td>
+					<td width="500">
+						<input type="text" size="50" maxlength="50" id="member_id"
+							name="member_id" required="required"
 						>
 					</td>
 				</tr>
 				<tr>
-					<td width="70" align="center">계좌 비밀번호</td>
-					<td width="330">
-						<input type="password" size="40" maxlength="50" id="OPEN_ACCOUNT_PW"
-							name="OPEN_ACCOUNT_PW"
+					<td width="100" align="left">계좌 비밀번호</td>
+					<td width="500">
+						<input type="password" size="50" maxlength="50" id="OPEN_ACCOUNT_PW"
+							name="OPEN_ACCOUNT_PW" required="required"
 						>
 					</td>
 				</tr>
 				<tr>
 					<td colspan=2 align="center">
+						<br />
 						<input type="submit" value="삭제">
 						<input type="reset" value="다시작성">
 					</td>

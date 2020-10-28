@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
 import controller.AbstractMybatis;
+import model.InstantDTO;
 import model.OpenBankingDTO;
 
 @Service
@@ -58,11 +59,11 @@ public class OpenBankingDAO extends AbstractMybatis {
 	}
 
 	/* 오픈뱅킹 계좌 조회 */ /*파라메타수정*/
-	public List<OpenBankingDTO> SelectOpenBanking(String OpenBanking) {
+	public List<OpenBankingDTO> SelectOpenBanking(String member_id) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
 			return sqlSession.selectList(namespace + ".SelectOpenBanking",
-					OpenBanking);
+					member_id);
 		} finally {
 			sqlSession.close();
 		}
@@ -95,14 +96,14 @@ public class OpenBankingDAO extends AbstractMybatis {
 		}*/
 
 	/* 잔액모으기(출금계좌) */
-	public int WithdrawOpenBanking(int money, String MEMBER_ID,
+	public Integer WithdrawOpenBanking(int money, String member_id,
 			String OPEN_ACCOUNT_PW) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
 			String statement = namespace + ".WithdrawOpenBanking";
 			map.clear();
 			map.put("money", money);
-			map.put("MEMBER_ID", MEMBER_ID);
+			map.put("member_id", member_id);
 			map.put("OPEN_ACCOUNT_PW", OPEN_ACCOUNT_PW);
 			int result = sqlSession.update(statement, map);
 			if (result > 0) {
@@ -110,13 +111,16 @@ public class OpenBankingDAO extends AbstractMybatis {
 			} else {
 				sqlSession.rollback();
 			}
-			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			sqlSession.close();
 		}
+		return 1;
 	}
+
 	/* 잔액모으기(입금계좌) */
-	public void DepositOpenBanking(String account_num, int money) {
+	public Integer DepositOpenBanking(String account_num, int money) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
 			String statement = namespace + ".DepositOpenBanking";
@@ -129,13 +133,16 @@ public class OpenBankingDAO extends AbstractMybatis {
 			} else {
 				sqlSession.rollback();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			sqlSession.close();
 		}
+		return 1;
 	}
+
 	public String checkaccount(String id) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
-		System.out.println(id);
 		try {
 			return sqlSession.selectOne(namespace + ".checkaccount", id);
 		} finally {
@@ -154,12 +161,11 @@ public class OpenBankingDAO extends AbstractMybatis {
 	}
 
 	/* 거래내역 등록 */
-	public void WithdrawLog(String MEMBER_ID, String account, int total) {
+	public Integer WithdrawLog(String member_id, String account, int total) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
-		map.put("MEMBER_ID", MEMBER_ID);
+		map.put("member_id", member_id);
 		map.put("account_num", account);
 		map.put("money", total);
-		System.out.println(MEMBER_ID + "" + account + "" + total);
 		int result = 0;
 		try {
 			String statement = namespace + ".WithdrawLog";
@@ -174,6 +180,30 @@ public class OpenBankingDAO extends AbstractMybatis {
 		} finally {
 			sqlSession.close();
 		}
+		return 1;
+	}
+
+	/* 거래내역 */
+	public List<InstantDTO> SelectWithdrawLog(String member_id) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			return sqlSession.selectList(namespace + ".SelectWithdrawLog",
+					member_id);
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	/*메인화면 총액*/
+	public int TotalOpenBalance(String member_id) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			return sqlSession.selectOne(namespace + ".TotalOpenBalance",
+					member_id);
+		} finally {
+			sqlSession.close();
+		}
+
 	}
 
 }

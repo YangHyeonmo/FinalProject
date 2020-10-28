@@ -6,12 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>모으기</title>
+<title>ERROR!!</title>
 </head>
 <body>
 	<script>
-		alert("모으기 완료!");
+		alert("ERROR!!ERROR!!");
+		opener.parent.location.reload();
+		opener.location.reload();
+		history.go(-1);
 	</script>
-	<meta http-equiv="Refresh" content="0; url=SelectOpenBanking" />
 </body>
 </html>
