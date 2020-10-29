@@ -138,19 +138,25 @@ public class AccountController {
 		return "account/accountDelete";
 	}
 
-/*	@RequestMapping("accountDeleteCheckPw")
-	public String accountDeleteCheckPw(String account_num, int account_pw, Model m) throws Exception {
-		boolean check;
+	@RequestMapping("accountDeletePro") // 비번확인,다른계좌로 잔액옮김
+	public String accountDeletePro(String account_num, int account_pw, String OPEN_ACCOUNT_NO, int balance, Model m) throws Exception {
 
+		System.out.println("Account_num= "+balance); 
+		
+		boolean check;
+        int movebalance;
+        
 		check = dbpro.deleteCheckPw(account_num, account_pw);
 		m.addAttribute("check", check);
+		
 		if (check == true) {
-			return "account/accountDeletePro";
-		} else {
-			m.addAttribute("message", "비밀번호 불일치");
-			return "account/accountDelete";
-
+			movebalance = dbpro.moveBalance(OPEN_ACCOUNT_NO, balance);
+			if(movebalance == 1) {
+			m.addAttribute("openAccountNo", OPEN_ACCOUNT_NO);
+			m.addAttribute("balance", balance);
 		}
-	}*/
+		}
+		return "account/accountDeletePro";
+	}
 
 }

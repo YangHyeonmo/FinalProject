@@ -8,11 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form method="POST" name="delForm"
-		action="<%=request.getContextPath()%>/account/accountDeletePro">
+	<form method="POST" name="delForm">
+		<input type="hidden" name="account_num" value=${account_num }>
+
 		<div>
 			<table class="w3-table-all" align="center">
+			
 				<c:forEach var="article" items="${article}">
+					<input type="hidden" name="balance" value=${article.balance }>
 					<tr height="30">
 						<td align="center" width="200">계좌명</td>
 						<td align="center" width="200">${article.account_name}</td>
@@ -23,28 +26,47 @@
 					</tr>
 					<tr height="30">
 						<td align="center" width="200">계좌잔액</td>
-						<td align="center" width="200">${article.balance }</td>
+						<td align="center" width="200">${article.balance }<input
+							type="hidden" name="balance" value=${article.balance }></td>
 					</tr>
 				</c:forEach>
-				<c:forEach var="account" items="${account}">
-					<tr height="30">
-						<td align="center" width="200">잔액옮길계좌</td>
-						<td><select name="openbank">
-								<option value="다른은행계좌">${account.OPEN_ACCOUNT_NO } ${account.OPEN_BANK }</option>
-						</select></td>
-					</tr>
-				</c:forEach>
+
+				<tr height="30">
+					<td align="center" width="200">잔액옮길계좌</td>
+					<td><select name="movebalance">
+							<c:forEach var="account" items="${account}">
+								<option value="다른은행계좌">${account.OPEN_ACCOUNT_NO}
+									${account.OPEN_BANK }</option>
+							<c:set var="openAccountNo" value="${account.OPEN_ACCOUNT_NO}"></c:set>
+							</c:forEach>
+					</select>
+					<input type="hidden" name="OPEN_ACCOUNT_NO" value="${openAccountNo}"></td>
+				</tr>
+
 				<tr height="30">
 					<td align="center" width="200">계좌 비밀번호</td>
 					<td align="center" width="200"><input type="password" size="8"
 						maxlength="12" name="account_pw"></td>
 				</tr>
-				<tr height="30">
-					<td align=center><input type="submit" value="해지"> <input
-						type="button" value="취소" onclick="window.close();"></td>
+				<tr>
+					<td align="center"><input type="button" value="변경"
+						id="btnDelete"> <input type="button" value="취소"
+						onclick="window.close();"></td>
 				</tr>
 			</table>
 		</div>
 	</form>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("#btnDelete").click(function() {
+
+				if (confirm("해지하시겠습니까?")) {
+					document.delForm.action = "accountDeletePro";
+					document.delForm.submit();
+				}
+			});
+		});
+	</script>
 </body>
 </html>

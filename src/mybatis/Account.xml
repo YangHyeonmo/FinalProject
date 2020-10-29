@@ -94,10 +94,16 @@
 		account_num) and account_num = #{account_num}
 	</select>
 
-	<select id="moveBalanceAccount" parameterType="hashmap" resultType="String">
-		select distinct(account_num) from account where account_num
-		not in(#{account_num}) and member_id = #{member_id}
-	</select>
+	<update id="moveBalance" parameterType="hashmap">
+		update openbanking set
+		open_balance =open_balance + #{balance} where OPEN_ACCOUNT_NO
+		= #{OPEN_ACCOUNT_NO}
+	</update>
 
+	<delete id="deleteAccount" parameterType="hashmap">
+		delete from account
+		where
+		account_num = #{account_num}
+	</delete>
 
 </mapper>
