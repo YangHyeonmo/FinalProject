@@ -3,31 +3,34 @@
 html {font-family: 'Noto Sans KR', sans-serif; font-size: 14px;}
 p {line-height: 1.6;}
 a {color: rgb(29, 29, 31); text-decoration: none;}
-
-.container-fluid .navbar-header .navbar-img {position: sticky; height: 50px; margin-left: -345px;}
-
-/* 메인페이지 css */
-.main{background-color: #FFD700; position: relative; overflow:hidden; }
-.main .phoneScreen{background-color: white; width:27rem; height:44rem; border-radius:7%; float:right; margin-right:27rem; margin-top:11rem;}
-.main .phoneScreen .memberId{position:absolute; padding-top:2rem; margin-left:2rem; font-weight:bold; font-size:25px;}
-.main .phoneScreen .insideScreen{background-color: #FFD700; width:25rem; height:12rem; float:right; margin-top: 5rem; margin-right:1rem; border-radius:8%;}
-.main .phoneScreen .insideScreen .my{position:absolute; padding-top:9px; padding-left:45px; font-weight:bold;}
-.main .mainPageImg {position:absolute;margin-left:64rem; margin-top:5rem;}
-.main .introduce span.introduceBank{font-family: 'Noto Sans KR', sans-serif; position:absolute; font-weight:bolder; font-size:4rem; margin-left:30rem; margin-top:19rem;}
-.main .introduce span.introduceBank2{font-family: 'Noto Sans KR', sans-serif; position:absolute; font-weight:bolder; font-size:25px; margin-left:30rem; margin-top:30rem; font-weight:400;}
-.main .phoneScreen .insideScreen .myAccount{position:absolute; margin-top:25px; margin-left:29px; width:9rem; height:26px; font-size:13px; text-align:center; border:white; background-color:rgba(0,0,0,0);}
-.main .phoneScreen .insideScreen .money{position:absolute; text-align:right; margin-top:4rem; margin-left:1rem; font-size:3rem; width:19rem; background-color:#FFD700; height:4rem; font-weight:bold; border:white;}
-.main .phoneScreen .insideScreen h1{font-weight:bold; margin-left:21rem; margin-top:66px;}
-.main .phoneScreen .insideScreen .transfer{position:absolute; margin-top:1rem; margin-left:6rem; font-size:18px;}
-.main .phoneScreen .insideScreen .card{position:absolute; margin-top:1rem; margin-left:15rem; font-size: 18px;}
-.main .phoneScreen .coinMoney{background-color:#FFD700; width:25rem; height:5rem; float:right; margin-top:1rem; margin-right:1rem; border-radius:8%; }
-.main .phoneScreen .coinMoney .coin{position:absolute; margin-top:22px; margin-left:3rem; font-size:27px; font-weight:bold}
-.main .phoneScreen .coinMoney .coinCollect{font-size:2rem; float:right; margin-top:18px; margin-right:21px; font-weight:bold;}
-.main .phoneScreen .bankProduct{background-color:#669999; height:9rem; width:25rem; float:right; margin-right:1rem; margin-top:1rem; border-radius:8%;}
-.main .phoneScreen .bankProduct .productName{position:absolute; font-size:17px; padding-top:10px; padding-left:37px; color:white; font-weight:bold;}
-.main .phoneScreen .bankProduct .productList{position:absolute; margin-top:25px; margin-left:29px; width:8rem; height:26px; font-size:13px; text-align:center; border:white; background-color:rgba(0,0,0,0);}
-.main .phoneScreen .bankProduct .moneySave{font-size:2rem; float:right; margin-top:4rem; margin-right:3rem; font-weight:bold; color:white;}
-.main .phoneScreen .phoneImage{position:absolute;margin-left:62rem; margin-top:5rem;}
+.search-header{color:rgba(0,0,0,1);margin-top:-7rem; position:absolute; margin-left:30rem;}
+.search-header strong{color:black;font-size:5rem;}
+.search-header .navbar-img {position:absolute; height: 10rem; margin-left: -2rem; margin-top:-2rem;}
+.search-header .search{float:right;height:51px;width:50rem;text-align:center;}
+.navbar-inverse .navbar-nav>li>a:hover{color:#000;}
+/* 메인페이지 css  */
+.main{background-color: white; position: relative; overflow:hidden; }
+.main-body{background-color: #FFD700; position: relative; overflow:hidden; margin-top:-8px; height:56rem;}
+.main-body .phoneScreen{background-color: white; width:27rem; height:44rem; border-radius:7%; float:right; margin-right:27rem; margin-top:9rem;}
+.main-body .phoneScreen .memberId{position:absolute; padding-top:2rem; margin-left:2rem; font-weight:bold; font-size:25px;}
+.main-body .phoneScreen .insideScreen{background-color: #FFD700; width:25rem; height:12rem; float:right; margin-top: 5rem; margin-right:1rem; border-radius:8%;}
+.main-body .phoneScreen .insideScreen .my{position:absolute; padding-top:9px; padding-left:45px; font-weight:bold;}
+.main-body .mainPageImg {position:absolute;margin-left:64rem; margin-top:5rem;}
+.main-body .introduce span.introduceBank{font-family: 'Noto Sans KR', sans-serif; position:absolute; font-weight:bolder; font-size:4rem; margin-left:30rem; margin-top:19rem;}
+.main-body .introduce span.introduceBank2{font-family: 'Noto Sans KR', sans-serif; position:absolute; font-weight:bolder; font-size:25px; margin-left:30rem; margin-top:30rem; font-weight:400;}
+.main-body .phoneScreen .insideScreen .myAccount{position:absolute; margin-top:25px; margin-left:29px; width:9rem; height:26px; font-size:13px; text-align:center; border:white; background-color:rgba(0,0,0,0);}
+.main-body .phoneScreen .insideScreen .money{position:absolute; text-align:right; margin-top:4rem; margin-left:1rem; font-size:3rem; width:19rem; background-color:#FFD700; height:4rem; font-weight:bold; border:white;}
+.main-body .phoneScreen .insideScreen h1{font-weight:bold; margin-left:21rem; margin-top:66px;}
+.main-body .phoneScreen .insideScreen .transfer{position:absolute; margin-top:1rem; margin-left:6rem; font-size:18px;}
+.main-body .phoneScreen .insideScreen .card{position:absolute; margin-top:1rem; margin-left:15rem; font-size: 18px;}
+.main-body .phoneScreen .coinMoney{background-color:#FFD700; width:25rem; height:5rem; float:right; margin-top:1rem; margin-right:1rem; border-radius:8%; }
+.main-body .phoneScreen .coinMoney .coin{position:absolute; margin-top:22px; margin-left:3rem; font-size:27px; font-weight:bold}
+.main-body .phoneScreen .coinMoney .coinCollect{font-size:2rem; float:right; margin-top:18px; margin-right:21px; font-weight:bold;}
+.main-body .phoneScreen .bankProduct{background-color:#669999; height:9rem; width:25rem; float:right; margin-right:1rem; margin-top:1rem; border-radius:8%;}
+.main-body .phoneScreen .bankProduct .productName{position:absolute; font-size:17px; padding-top:10px; padding-left:37px; color:white; font-weight:bold;}
+.main-body .phoneScreen .bankProduct .productList{position:absolute; margin-top:25px; margin-left:29px; width:8rem; height:26px; font-size:13px; text-align:center; border:white; background-color:rgba(0,0,0,0);}
+.main-body .phoneScreen .bankProduct .moneySave{font-size:2rem; float:right; margin-top:4rem; margin-right:3rem; font-weight:bold; color:white;}
+.main-body .phoneScreen .phoneImage{position:absolute;margin-left:62rem; margin-top:5rem;}
 
 /* 아이디 비밀번호 찾기 창css */
 .inner_login .login_tistory .form a { color: #333; text-decoration: none;}
