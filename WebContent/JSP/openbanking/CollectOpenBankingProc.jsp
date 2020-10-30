@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>모으기</title>
 </head>
 <body>

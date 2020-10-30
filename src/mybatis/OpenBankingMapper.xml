@@ -33,7 +33,7 @@
 			member_id,
 			OPEN_BALANCE,
 			OPEN_CARD_NAME,
-			REGDATE
+			TO_CHAR(REGDATE,'YYYY-MM-DD')
 		FROM 
 			OPENBANKING
 		WHERE 
@@ -83,7 +83,7 @@
 	<!-- 잔액모으기(입금계좌) -->
 	<update id="DepositOpenBanking" parameterType="HashMap">
 		UPDATE 
-			ACCOUNT 
+			MainAccount 
 		SET
 			BALANCE = BALANCE + #{money}
 		WHERE 

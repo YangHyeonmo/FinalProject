@@ -6,15 +6,16 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import com.sist.som.Action;
 
 import model.AccountDTO;
 import service.AccountDAO;
@@ -53,9 +54,9 @@ public class AccountController {
 		int count1 = 0;
 		int count2 = 0;
 		int count3 = 0;
-		List aaList = null; // ÀÔÃâ±Ý
-		List bbList = null; // ¿¹±Ý
-		List ccList = null; // Àû±Ý
+		List aaList = null; // ï¿½ï¿½ï¿½ï¿½ï¿½
+		List bbList = null; // ï¿½ï¿½ï¿½ï¿½
+		List ccList = null; // ï¿½ï¿½ï¿½ï¿½
 		AccountDAO dbPro = new AccountDAO();
 		count1 = dbPro.getACount(member_id);
 		count2 = dbPro.getBCount(member_id);
@@ -75,7 +76,7 @@ public class AccountController {
 		return "account/accountList";
 	}
 
-	@RequestMapping("aliasChange") // °èÁÂº°¸í °ü¸® ÆäÀÌÁö
+	@RequestMapping("aliasChange") // ï¿½ï¿½ï¿½Âºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public String aliasChange(String account_num, Model m) throws Exception {
 
 		List article = dbpro.getAlias(account_num);
@@ -85,7 +86,7 @@ public class AccountController {
 		return "account/aliasChange";
 	}
 
-	@RequestMapping("aliasUpdatePro") // °èÁÂº°¸í º¯°æ
+	@RequestMapping("aliasUpdatePro") // ï¿½ï¿½ï¿½Âºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public String aliasUpdatePro(String account_alias, String account_num, Model m) throws Exception {
 		// TODO Auto-generated method stub
 		int result = dbpro.updateAlias(account_alias, account_num);
@@ -97,7 +98,7 @@ public class AccountController {
 		return "account/accountList";
 	}
 
-	@RequestMapping("accountCopy") // ÅëÀå»çº»
+	@RequestMapping("accountCopy") // ï¿½ï¿½ï¿½ï¿½çº»
 	public String accountCopy(String account_num, Model m) throws Exception {
 
 		List article = dbpro.getAlias(account_num);
@@ -107,7 +108,7 @@ public class AccountController {
 		return "account/accountCopy";
 	}
 
-	@RequestMapping("accountPwChange") // ºñ¹Ð¹øÈ£ º¯°æ ÆäÀÌÁö
+	@RequestMapping("accountPwChange") // ï¿½ï¿½Ð¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public String accountPwChange(String account_num, Model m) throws Exception {
 
 		List article = dbpro.getArticle(account_num);
@@ -117,7 +118,7 @@ public class AccountController {
 		return "account/accountPwChange";
 	}
 
-	@RequestMapping("pwUpdate") // °èÁÂºñ¹ø º¯°æ
+	@RequestMapping("pwUpdate") // ï¿½ï¿½ï¿½Âºï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public String pwUpdate(String account_num, int account_pw, int pw_new, int pw_new_check, Model m) throws Exception {
 		// TODO Auto-generated method stub
 		boolean check;
@@ -129,13 +130,13 @@ public class AccountController {
 		if (check == true) {
 			return "account/accountPwChangePro";
 		} else {
-			m.addAttribute("message", "ºñ¹Ð¹øÈ£ ºÒÀÏÄ¡");
+			m.addAttribute("message", "ï¿½ï¿½Ð¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½Ä¡");
 			return "account/accountPwChange";
 
 		}
 	}
 
-	@RequestMapping("accountDelete") // °èÁÂÇØÁö ¸ñ·ÏÃâ·Â
+	@RequestMapping("accountDelete") // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public String accountDelete(String account_num, Model m) throws Exception {
 		String member_id = (String) session.getAttribute("member_id");
 		List<String> article = dbpro.getAccount(account_num);
@@ -147,7 +148,7 @@ public class AccountController {
 		return "account/accountDelete";
 	}
 
-	@RequestMapping("accountDeletePro") // ºñ¹øÈ®ÀÎ,´Ù¸¥°èÁÂ·Î ÀÜ¾×¿Å±è
+	@RequestMapping("accountDeletePro") // ï¿½ï¿½ï¿½È®ï¿½ï¿½,ï¿½Ù¸ï¿½ï¿½ï¿½ï¿½Â·ï¿½ ï¿½Ü¾×¿Å±ï¿½
 	public String accountDeletePro(String account_num, int account_pw, String OPEN_ACCOUNT_NO, int balance, Model m)
 			throws Exception {
 

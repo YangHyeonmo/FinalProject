@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>계좌삭제</title>
 </head>
 <body>

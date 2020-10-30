@@ -67,6 +67,8 @@ public class ViewPageController {
 
 			int total = opDAO.TotalOpenBalance(member_id);
 			m.addAttribute("total", total);
+			List<OpenBankingDTO> list = opDAO.SelectOpenBanking(member_id);
+			m.addAttribute("list", list);
 
 			return "view/mainPage";
 		}

@@ -7,11 +7,17 @@
 	<button class="w3-bar-item w3-button" onclick="openTransfer('select')">조회</button>
 	<button class="w3-bar-item w3-button" onclick="openTransfer('insert')">등록</button>
 	<button class="w3-bar-item w3-button" onclick="openTransfer('delete')">삭제</button>
-	<!-- <button class="w3-bar-item w3-button" onclick="openTransfer('modify')">변경</button> -->
+	<button class="w3-bar-item w3-button"
+		onclick="document.location.href='<%=request.getContextPath()%>/view/mainPage'"
+	>MainPage</button>
 </div>
 <div id="select" class="open">
 	<div class="w3-container">
-		<br /> <b>예약조회</b><br />
+		<br />
+		<h1>
+			<b>예약조회</b>
+		</h1>
+		<br />
 		<table class="w3-table-all">
 			<td>아이디</td>
 			<td>입금 될 계좌</td>
@@ -35,13 +41,17 @@
 			<br />
 			<button class="w3-bar-item w3-button"
 				onclick="document.location.href='<%=request.getContextPath()%>/openbanking/CollectOpenBanking'"
-			>예약 모으기</button>
+			>즉시 모으기</button>
 		</div>
 	</div>
 </div>
 <div id="insert" class="open" style="display: none">
 	<div class="w3-container">
-		<br /> <b>예약등록</b><br />
+		<br />
+		<h1>
+			<b>예약등록</b>
+		</h1>
+		<br />
 		<form method="post" name="R"
 			action="<%=request.getContextPath()%>/openbanking/ReservationRegProc"
 		>
@@ -99,7 +109,11 @@
 </div>
 <div id="delete" class="open" style="display: none">
 	<div class="w3-container">
-		<br /> <b>예약삭제</b><br />
+		<br />
+		<h1>
+			<b>예약삭제</b>
+		</h1>
+		<br />
 		<form method="post" name="writeform"
 			action="<%=request.getContextPath()%>/openbanking/ReservationDeleteProc"
 		>
@@ -131,66 +145,6 @@
 		</form>
 	</div>
 </div>
-<%-- 
-<div id="modify" class="open" style="display: none">
-	<div class="w3-container">
-		<br /> <b>예약변경</b><br />
-		<form method="post" name="R"
-			action="<%=request.getContextPath()%>/openbanking/ReservationModifyProc"
-		>
-			<table class="w3-table-all">
-				<tr>
-					<td width="100" align="left">아이디 확인</td>
-					<td width="500">
-						<input type="text" size="50" maxlength="50" id="member_id"
-							name="member_id" required="required"
-						>
-					</td>
-				</tr>
-				<tr>
-					<td width="100" align="left">예약 암호</td>
-					<td width="500">
-						<input type="password" size="50" maxlength="50" id="OPEN_ACCOUNT_PW"
-							name="OPEN_ACCOUNT_PW" required="required"
-						>
-					</td>
-				</tr>
-				<tr>
-					<td width="130" align="left">입금 될 계좌번호</td>
-					<td width="500">
-						<input type="text" size="50" maxlength="50" id="MY_ACCOUNT_NUM"
-							name="MY_ACCOUNT_NUM" required="required"
-						>
-					</td>
-				</tr>
-				<tr>
-					<td width="100" align="left">금액</td>
-					<td width="500">
-						<input type="text" size="50" maxlength="50" id="COLLECTING_MONEY"
-							name="COLLECTING_MONEY" required="required"
-						>
-					</td>
-				</tr>
-				<tr>
-					<td width="100" align="left">설정일</td>
-					<td width="500">
-						<input type="date" size="50" maxlength="50" id="COLLECTING_DAY"
-							name="COLLECTING_DAY" required="required"
-						>
-					</td>
-				</tr>
-				<tr>
-					<td colspan=2 align="center">
-						<br />
-						<input type="submit" value="변경">
-						<input type="reset" value="다시작성">
-					</td>
-				</tr>
-			</table>
-		</form>
-	</div>
-</div>
- --%>
 <script>
 	function openTransfer(bank) {
 		var i;

@@ -2,15 +2,23 @@
 	pageEncoding="UTF-8"
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <div class="w3-bar w3-white">
 	<button class="w3-bar-item w3-button" onclick="openTransfer('select')">조회</button>
 	<button class="w3-bar-item w3-button" onclick="openTransfer('insert')">삽입</button>
 	<button class="w3-bar-item w3-button" onclick="openTransfer('delete')">삭제</button>
+	<button class="w3-bar-item w3-button"
+		onclick="document.location.href='<%=request.getContextPath()%>/view/mainPage'"
+	>MainPage</button>
 </div>
 <div id="select" class="open">
 	<div class="w3-container">
-		<br /> <b>계좌조회</b><br />
+		<br />
+		<h1>
+			<b>계좌조회</b>
+		</h1>
+		<br />
 		<table class="w3-table-all">
 			<td>계좌번호</td>
 			<td>은행명</td>
@@ -25,7 +33,8 @@
 					<td>${list.member_id}&emsp;&emsp;</td>
 					<td>${list.OPEN_BALANCE}원&emsp;&emsp;</td>
 					<td>${list.OPEN_CARD_NAME}&emsp;&emsp;</td>
-					<td>${list.REGDATE}&emsp;&emsp;</td>
+				<%-- 	<td>${list.REGDATE}&emsp;&emsp;</td> --%>
+					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${list.REGDATE}" /></td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -35,30 +44,14 @@
 				onclick="document.location.href='<%=request.getContextPath()%>/openbanking/CollectOpenBanking'"
 			>잔액 모으기</button>
 		</div>
-		<%-- 	<script>
-    $(document).ready(function() {
-        //confirm() 확인 => true, 취소는 = false
-       
-        $("#ALL").click(function() {
-        	location.href=<%=request.getContextPath()%>+"/openbanking/WithdrawOpenBanking";
-        });
- 
-        //삭제버튼 클릭
-        $("#btnDelete").click(function() {
-            if (confirm("삭제하시겠습니까?")) {
-                document.form1.action = "/web03/member/memberDelete";
-                document.form1.submit();
-            }
-        });
- 
-    });
-</script> --%>
 	</div>
 </div>
 <div id="insert" class="open" style="display: none">
 	<div class="w3-container">
-		<br /> <b>계좌등록</b>
-		</td>
+		<br />
+		<h1>
+			<b>계좌등록</b>
+		</h1>
 		<br />
 		<form method="post" name="writeform"
 			action="<%=request.getContextPath()%>/openbanking/InsertOpenBankingProc"
@@ -76,7 +69,7 @@
 					<td width="100" align="left">은행명</td>
 					<td width="">
 						<input type="text" size="50" maxlength="50" id="OPEN_BANK"
-							name="OPEN_BANK"
+							name="OPEN_BANK" required="required"
 						>
 					</td>
 				</tr>
@@ -108,7 +101,7 @@
 					<td width="100" align="left">카드명</td>
 					<td width="500">
 						<input type="text" size="50" maxlength="50" id="OPEN_CARD_NAME"
-							name="OPEN_CARD_NAME"
+							name="OPEN_CARD_NAME" required="required"
 						>
 					</td>
 				</tr>
@@ -125,7 +118,11 @@
 </div>
 <div id="delete" class="open" style="display: none">
 	<div class="w3-container">
-		<br /> <b>계좌삭제</b><br />
+		<br />
+		<h1>
+			<b>계좌삭제</b>
+		</h1>
+		<br />
 		<form method="post" name="writeform"
 			action="<%=request.getContextPath()%>/openbanking/DeleteOpenBankingProc"
 		>
