@@ -70,7 +70,7 @@
 				>(임시)주식 <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a
-							href="<%=request.getContextPath()%>/exceltable/SelectExcelTable"
+							href="<%=request.getContextPath()%>/stock/stockinput"
 						>(임시)주식조회</a></li>
 					</ul></li>
 			</ul>

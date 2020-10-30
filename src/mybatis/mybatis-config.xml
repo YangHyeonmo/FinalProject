@@ -12,8 +12,7 @@
 		<typeAlias type="model.FinanceDTO" alias="Finance" />
 		<typeAlias type="model.ProductsDTO" alias="Products" />
 		<typeAlias type="model.AccountDTO" alias="Account" />
-		<typeAlias type="model.TotalOpenBalanceDTO" alias="TotalOpenBalance" />
-		<typeAlias type="model.ExcelTableDTO" alias="ExcelTable" />
+		<typeAlias type="model.StockDTO" alias="Stock" />
 
 	</typeAliases>
 
@@ -37,6 +36,6 @@
 		<mapper resource="mybatis/Finance.xml" />
 		<mapper resource="mybatis/Products.xml" />
 		<mapper resource="mybatis/ReservationMapper.xml" />
-		<mapper resource="mybatis/ExcelTableMapper.xml" />
+		<mapper resource="mybatis/StockMapper.xml" />
 	</mappers>
 </configuration>

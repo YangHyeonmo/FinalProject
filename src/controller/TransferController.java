@@ -1,5 +1,9 @@
 package controller;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,12 +12,31 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.imageio.ImageIO;
+import javax.mail.Address;
+import javax.mail.Authenticator;
+import javax.mail.BodyPart;
+//import javax.mail.Message;            //¸ŞÀÏ
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import net.nurigo.java_sdk.api.Message;//¹®ÀÚ
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+//import org.rosuda.REngine.Rserve.RConnection;
+//import org.rosuda.REngine.Rserve.RserveException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,298 +47,494 @@ import org.springframework.web.servlet.ModelAndView;
 
 import model.AccountDTO;
 import model.MemberDTO;
+//import model.StockDTO;
 import model.TransferDTO;
-import net.nurigo.java_sdk.api.Message;
+
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import service.MemberMybatisDAO;
+//import service.StockDAO;
 import service.TransferMybatisDAO;
-import util.SendMail;
+import util.Gmail;
+import util.SHA256;
 
 @Controller
 @RequestMapping("/transfer/")
 public class TransferController{
 
-	@Autowired
-	TransferMybatisDAO transferMybatisdao;
-	
-	public String id;		//ì‚¬ìš©ì ì•„ì´ë””
-	public boolean result = false;
-	public	HttpSession session = null;
-	
-	public ModelAndView mv = new ModelAndView();
-	
-	@ModelAttribute
-	public void headProcess(HttpServletRequest request, HttpServletResponse res) {
-		session = request.getSession();							
-		id= (String)session.getAttribute("member_id");		//ì„¸ì…˜ì— ë‹´ê²¨ìˆëŠ” ì•„ì´ë””ë¥¼ id ë³€ìˆ˜ì— ì €ì¥
-		
-		List<AccountDTO> account_num= transferMybatisdao.getAccountNum(id);	//ì‚¬ìš©ìì˜ ëª¨ë“  í†µì¥ì„ ë‹´ëŠ” List ì„ ì–¸í•˜ê³  View ë¡œ ë¿Œë ¤ì¤Œ
-		
-		List<String> num=new ArrayList<String>();
-		List<Integer> balance=new ArrayList<Integer>();
-		
-		//Map<String,Integer> accountMap=new HashMap<String,Integer>();
-		for(int i=0;i<account_num.size();i++) {
-			//accountMap.put(account_num.get(i).getAccount_num(), account_num.get(i).getBalance());
-			num.add(account_num.get(i).getAccount_num());
-			balance.add(account_num.get(i).getBalance());
-		}
-		request.setAttribute("account_num", num);
-		request.setAttribute("balance", balance);
-		//request.setAttribute("accountMap", accountMap);
-	}
-	@RequestMapping("TransferWrite")
-	public String TransferWrite()   { 
-			
-		return  "transfer/TransferWrite"; 
-	} 
-	@RequestMapping("TransferAuto")
-	public String TransferAuto() { 
-		return  "transfer/TransferAuto"; 
-	} 
-	@RequestMapping("TransferRes")
-	public String TransferRes() { 
-		return  "transfer/TransferReserve"; 
-	}
-	@RequestMapping("TransferSelect")
-	public String TransferSelect(){ 
-		return  "transfer/TransferSelect"; 
-	} 
-	@RequestMapping("TransferSelectList")
-	public String TransferSelectList(TransferDTO transfer, int select_period,
-			String first_year,String first_month, String first_day,String second_year,
-			String second_month, String second_day, Model m	)  { 	//ê¸°ê°„ ì„¤ì • ë©”ì†Œë“œ(ë‹¤ì†œì´ ë‹¬ë ¥ë©”ì†Œë“œ ì°¸ê³  í›„ ìˆ˜ì •í• ê²Œìš”)
-		
-	
-		try {
-			boolean check_Account= transferMybatisdao.check_account_no(transfer.getAccount_no());	//í†µì¥ì´ ì¡´ì¬í•˜ëŠ”ì§€ í™•ì¸í•˜ëŠ” ë©”ì†Œë“œ
-			if(check_Account) {
-				transfer.setAccount_no(transfer.getAccount_no());		//í†µì¥ì´ ì¡´ì¬í•  ê²½ìš° setAccount_no
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		Calendar cal=Calendar.getInstance();
-		cal.setTime(new Date());
-		DateFormat df=new SimpleDateFormat("yyyy/MM/dd");
-		String now_date=df.format(cal.getTime());
-		if(select_period==0) {
-			
-			 if(first_month.length()<2) {
-				 first_month="0"+first_month;
-			}
-			if(first_day.length()<2) {
-				first_day="0"+first_day;
-			}
-			 if(second_month.length()<2) {
-				 second_month="0"+second_month;
-			}
-			if(second_day.length()<2) {
-				second_day="0"+second_day;
-			}		
-			String first_date=first_year+first_month+first_day;
-			String second_date=second_year+second_month+second_day;
-			List<TransferDTO> transList=transferMybatisdao.dateTransList(second_date,first_date,transfer.getAccount_no());
-			
-			m.addAttribute("transList", transList);
+   @Autowired
+   TransferMybatisDAO transferMybatisdao;
+   
+   public TransferDTO transferdata = new TransferDTO();
+   public String id;      //»ç¿ëÀÚ ¾ÆÀÌµğ
+   public boolean result = false;
 
-			return  "transfer/TransferSelectList"; 
-		}else if(select_period<10 && select_period>0) {
-			cal.add(Calendar.DATE, -select_period);
-		}else {
-			cal.add(Calendar.MONTH, -(select_period/10));
-		}
+   public MemberDTO member=null;
+   public HttpSession session=null;
+   public ModelAndView mv = new ModelAndView();
+   
+   @ModelAttribute
+   public void headProcess(HttpServletRequest request, HttpServletResponse res) {
+      try {
+         request.setCharacterEncoding("UTF-8");
+      } catch (UnsupportedEncodingException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+      /*
+       session = request.getSession(); 
+       id="hyeonmo";//(String)session.getAttribute("member_id"); //¼¼¼Ç¿¡ ´ã°ÜÀÖ´Â ¾ÆÀÌµğ¸¦ id º¯¼ö¿¡ÀúÀå
+       List<AccountDTO> account_num= transferMybatisdao.getAccountNum(id); //»ç¿ëÀÚÀÇ ¸ğµç ÅëÀåÀ» ´ã´Â List ¼±¾ğÇÏ°í View ·Î »Ñ·ÁÁÜ
+        
+       request.setAttribute("account_num", account_num);
+      */
+      
+   }
+   @RequestMapping("TransferWrite")
+   public String TransferWrite()   { 
+         
+      return  "transfer/TransferWrite"; 
+   } 
+   
+   @RequestMapping("stockinput")
+   public String stockinput()   { 
+         
+      return  "transfer/stockinput"; 
+   } 
+   
+  
+   
+   /*@RequestMapping("messageAuth")
+   public String messageAuth(Model m) throws Exception   { 
+      
+      MemberDTO member=new MemberDTO();
+      MemberMybatisDAO mbPro=new MemberMybatisDAO();
+      
+       member=mbPro.getMember("hangbin");
+      
+       m.addAttribute("member", member);
+      return  "transfer/messageAuth"; 
+   } 
+   */
+   @RequestMapping("realfinish")
+   public String realfinish(Model m,String phone,int auth,int random) throws Exception   { 
+      
+      if(random == auth) {
+         return  "transfer/realfinish";
+      }else {
+         m.addAttribute("error", 1);
+         return "transfer/finish";
+      }
+      
+   } 
+/*   @RequestMapping("emailSendAction")
+   public String emailSendAction() throws Exception   { 
+      //MemberMybatisDAO memberDAO = new MemberMybatisDAO();
+      //String id = "hyeonmo";
+      final String from = "yhj940928@gmail.com";  
+      String to="yhj940928@naver.com";
+      // Assuming you are sending email from localhost  
+      String host = "smtp.googlemail.com";  
+        
+      //587Æ÷Æ®       
+      Properties props = new Properties();  
+      props.put("mail.smtp.host", host); //SMTP Host  
+      props.put("mail.smtp.port", "587"); //TLS Port  
+      props.put("mail.smtp.auth", "true"); //enable authentication  
+      props.put("mail.smtp.starttls.enable", "true"); //enable   
+      props.put("mail.smtp.ssl.trust", host);  
 
-		String select_date=df.format(cal.getTime());
+      Authenticator auth = new Authenticator() {  
+          //override the getPasswordAuthentication method  
+          protected PasswordAuthentication getPasswordAuthentication() {  
+              return new PasswordAuthentication(from, "didgusah135@");  
+          }  
+      };  
+      Session session = Session.getInstance(props, auth);  
+        
+      try {  
+          // Create a default MimeMessage object.  
+          MimeMessage message = new MimeMessage(session);  
+        
+          // Set From: header field of the header.  
+          message.setFrom(new InternetAddress(from));  
+        
+          // Set To: header field of the header.  
+          message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));  
+            
+        
+          // Set Subject: header field  
+          //message.setSubject("µ­ÀåÂî°³´Â °ú¿¬ ¸ÀÀÌ?","utf-8");  
+          message.setSubject("¸ŞÀÏ Å×½ºÆ®","utf-8");  
+        
+          // Create the message part  
+          BodyPart messageBodyPart = new MimeBodyPart();  
+        
+          // Fill the message  
+          messageBodyPart.setText("µ­ÀåÂî°³ ¸ÀÀÌ ±Ã±İÇÔ ¾Ë·ÁÁÖ±æ ¹Ù¶÷!");  
+        
+          // Create a multipar message  
+          Multipart multipart = new MimeMultipart();  
+        
+          // Set text message part  
+          multipart.addBodyPart(messageBodyPart);  
+        
+          // Part two is attachment  
+          messageBodyPart = new MimeBodyPart(); 
+          String filename = "file.txt"; 
+          DataSource source = new FileDataSource(filename); 
+          messageBodyPart.setDataHandler(new DataHandler(source)); 
+          messageBodyPart.setFileName(filename); 
+          multipart.addBodyPart(messageBodyPart);  
+        
+          // Send the complete message parts  
+          message.setContent(multipart);  
+        
+          // Send message  
+          Transport.send(message);  
+          System.out.println(to+" ¸ŞÀÏ Àü¼Û¿Ï·á!");  
+      } catch (MessagingException mex) {  
+          System.out.println(to+" ¸ŞÀÏ Àü¼Û¿¡·¯!");  
+          mex.printStackTrace();  
+      }  */
 
-		List<TransferDTO> transList=transferMybatisdao.dateTransList(now_date,select_date,transfer.getAccount_no());
-		
-		m.addAttribute("transList", transList);	
-		return  "transfer/TransferSelectList"; 
-	} 
-	@RequestMapping("TransferAuth")
-	public String TransferAuth(TransferDTO transfer,String year, String month,String day,Model m) {
-		int error=0;
-		try {
-			//í†µì¥ì´ ì¡´ì¬í•˜ëŠ”ì§€ 1ë²ˆ 
-			System.out.println(transfer.getAccount_no());
-			boolean check_Account= transferMybatisdao.check_account_no(transfer.getAccount_no()); //í†µì¥ì´ ì¡´ì¬í•˜ëŠ”ì§€ í™•ì¸í•˜ëŠ” ë©”ì†Œë“œ
-			if(check_Account) {
-				transfer.setAccount_no(transfer.getAccount_no());	//í†µì¥ì´ ì¡´ì¬í•  ê²½ìš° 
-			}
-			transfer.setMember_id(id);
-			
-			
-			//í†µì¥ì— ëˆì´ ë¶€ì¡±í•œì§€ 2ë²ˆ
-			boolean check_Account_money=transferMybatisdao.check_account_money(transfer.getAccount_no(),transfer.getTransfer_price());
-			if(!check_Account_money) {	//í†µì¥ì— ëˆì´ ì¶©ë¶„í•œ ê²½ìš°
-				error=2;
-				m.addAttribute("error", error);
-				return "transfer/TransferWrite";
-			}
-			//ë³´ë‚¼ í†µì¥ì´ ì¡´ì¬í•˜ëŠ”ì§€ 3ë²ˆ
-			boolean check_TransferAccount=transferMybatisdao.check_account_no(transfer.getTransfer_to_account_no());
-			if(check_TransferAccount) {	//ë³´ë‚¼ í†µì¥ì´ ì¡´ì¬í•˜ëŠ” ê²½ìš°
-				String sendMember=transferMybatisdao.sendMember(transfer.getTransfer_to_account_no());
-				transfer.setTransfer_to_member_id(sendMember);	//ë³´ë‚¼ ì‚¬ëŒ ì•„ì´ë””		
-				m.addAttribute("sendMember",sendMember);
-			}else {
-				error=3;
-				m.addAttribute("error", error);
-				return "transfer/TransferWrite";
-			}
-			//ìì‹ ì—ê²Œ ë³´ë‚´ì§€ ëª»í•˜ë„ë¡ 4ë²ˆ
-			if(transfer.getAccount_no().equals(transfer.getTransfer_to_account_no())) {
-				error=4;
-				m.addAttribute("error", error);
-				return "transfer/TransferWrite";
-			}
-			if(transfer.getNum()==1) {	//ì¦‰ì‹œ ì´ì²´ì¸ ê²½ìš°
-				//result=transferMybatisdao.transferInsert(transferdata,num);		//ì´ì²´ ë‚´ì—­ ì‚½ì…
-				//transferMybatisdao.updateMoney(transferdata.getAccount_no(),transferdata.getTransfer_price(),1);		//1: Minus Money 2.Plus Money
-				//transferMybatisdao.updateMoney(transferdata.getTransfer_to_account_no(),transferdata.getTransfer_price(),2);
-				session.setAttribute("transfer", transfer);
-				m.addAttribute("transferdata", transfer);
-				return "transfer/TransferAuth";
-			}else if(transfer.getNum()==2 || transfer.getNum()==3) {	//ìë™ì´ì²´ , ì˜ˆì•½ì´ì²´ (ë‹¬ë ¥ ìˆ˜ì • ì´í›„ ì£¼ì„ ë‹¬ê²Œìš”)
-				if(month.length()<2) {
-					month="0"+month;
-				}
-				if(day.length()<2) {
-					day="0"+day;
-				}
-				if(transfer.getNum()==2) {
-					transfer.setTransfer_auto_period(transfer.getTransfer_auto_period());				
-					transfer.setTransfer_auto_period_start(year+""+month+""+day);
-				}
-				else if(transfer.getNum()==3){
-					transfer.setTransfer_res_day(year+""+month+""+day);
-				}
-				try {
-					String period_start="";
-					if(transfer.getNum()==2) {
-						transfer.setTransfer_auto_period(transfer.getTransfer_auto_period());
-					 	period_start=transfer.getTransfer_auto_period_start();
-					}else if(transfer.getNum()==3) {
-						period_start=transfer.getTransfer_res_day();
-					}
-						Date today=new Date();
-						System.out.println("ë‚ ì§œ:"+ period_start);
-						Date actday=new SimpleDateFormat("yyyyMMdd").parse(period_start);
-						transfer.setTransfer_auto_period_start(period_start);
-						
-						//ë‚ ì§œ ë¹„êµ ìœ íš¨ì„±
-						if( (actday!=null) && actday.getTime() > today.getTime()) {
-							boolean insert=transferMybatisdao.transferInsert(transfer,transfer.getNum());
-							if(insert) {
-								int transcount=transferMybatisdao.getTransListCount(transfer.getNum());
-								transfer=transferMybatisdao.transferDetail(transcount, transfer.getNum());
-								System.out.println("í†µì¥ë²ˆí˜¸"+ transfer.getAccount_no());
-								System.out.println("ì´ì²´ê°€ê²©"+ transfer.getTransfer_price());
-								transferMybatisdao.updateMoney(transfer.getAccount_no(),transfer.getTransfer_price(),1);		//1: Minus Money 2.Plus Money
-								transferMybatisdao.updateMoney(transfer.getTransfer_to_account_no(),transfer.getTransfer_price(),2);		
-								return "transfer/TransferAuth";
-							}
-						}					
-						else {
-							error=5;
-							System.out.println("ì—ëŸ¬ì…ë‹ˆë‹¤");
-							m.addAttribute("error", error);
-							if(transfer.getNum()==2) {
-								return "transfer/TransferAuto";
-							}else if(transfer.getNum()==3) {
-								return "transfer/TransferReserve";
-							}
-						}
-				}catch(java.text.ParseException e) {
-					error=6;
-					m.addAttribute("error", error);
-					if(transfer.getNum()==2) {
-						return "transfer/TransferAuto";
-					}else if(transfer.getNum()==3) {
-						return "transfer/TransferReserve";
-					}
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
-			}
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-		return "transfer/TransferAuth";			
-	} 
-	
-	@RequestMapping("finish")
-	public String finish(MemberDTO member,Model m,int authType)   { 
-		//í•¸ë“œí° ë²ˆí˜¸ ì…ë ¥
-		int random=(int)(Math.random()*1000000)+1;
-		if(authType==1) {
-		 	String api_key = "NCSGDPVOV9E09TBL";
-		    String api_secret = "HXHETMZZX56FMFPU9OO2H4OHXWJDG2JK";
-		    Message coolsms = new Message(api_key, api_secret);
-		   
-		    // 4 params(to, from, type, text) are mandatory. must be filled
-		    HashMap<String, String> params = new HashMap<String, String>();
-		    params.put("to", member.getMember_phonenumber());	// ìˆ˜ì‹ ì „í™”ë²ˆí˜¸
-		    params.put("from", "01068992734");	// ë°œì‹ ì „í™”ë²ˆí˜¸. í…ŒìŠ¤íŠ¸ì‹œì—ëŠ” ë°œì‹ ,ìˆ˜ì‹  ë‘˜ë‹¤ ë³¸ì¸ ë²ˆí˜¸ë¡œ í•˜ë©´ ë¨
-		    params.put("type", "SMS");
-		    params.put("text", "[ì¸ì¦ ë²ˆí˜¸:"+random+"]");
-		    params.put("app_version", "test app 1.2"); // application name and version
 
-		    try {
-		      JSONObject obj = (JSONObject) coolsms.send(params);
-		      System.out.println(obj.toString());
-		    } catch (CoolsmsException e) {
-		      System.out.println(e.getMessage());
-		      System.out.println(e.getCode());
-		    }		   
-		}else {
-			SendMail send=new SendMail();
-			send.send(member.getMember_email(),random);
-		}
-		m.addAttribute("random", random);
-		return  "transfer/finish";
-	} 
-	@RequestMapping("messageAuth")
-	public String messageAuth(Model m) throws Exception   { 
-		
-		MemberDTO member=new MemberDTO();
-		MemberMybatisDAO mbPro=new MemberMybatisDAO();
-		
-		 member=mbPro.getMember(id);
-		
-		 m.addAttribute("member", member);
-		return  "transfer/messageAuth"; 
-	} 
-	
-	@RequestMapping("emailAuth")
-	public String emailAuth(Model m)   { 
-		
-		MemberDTO member=new MemberDTO();
-		MemberMybatisDAO mbPro=new MemberMybatisDAO();
-		
-		 member=mbPro.getMember("hyeonmo");
-		
-		 m.addAttribute("member", member);
-		return  "transfer/emailAuth"; 
-	} 
-	
-	@RequestMapping("realfinish")
-	public String realfinish(Model m,int auth,int random)    { 
-		
-		if(random == auth) {
-			TransferDTO data=(TransferDTO)session.getAttribute("transfer");
-			result=transferMybatisdao.transferInsert(data,data.getNum());		//ì´ì²´ ë‚´ì—­ ì‚½ì…
-			System.out.println(data.getTransfer_price());
-			transferMybatisdao.updateMoney(data.getAccount_no(),data.getTransfer_price(),1);		//1: Minus Money 2.Plus Money
-			transferMybatisdao.updateMoney(data.getTransfer_to_account_no(),data.getTransfer_price(),2);
-			
-			m.addAttribute("transfer",data);
-			return  "transfer/realfinish";
-		}else {
-			m.addAttribute("error", 1);
-			return "transfer/realfinish";
-		}
-		
-	} 
+      /*String host = "http://localhost:8088/Final_String/";
+      String from = "yhj940928@gmail.com";
+      String to = "yhj940928@naver.com"; //memberDAO.getUserEmail(id);
+      String subject = "BLUEOCEANÀ» À§ÇÑ ÀÌ¸ŞÀÏ ÀÎÁõ ¸ŞÀÏÀÔ´Ï´Ù.";
+      String content = "´ÙÀ½ ¸µÅ©¿¡ Á¢¼ÓÇÏ¿© ÀÌ¸ŞÀÏ ÀÎÁõÀ» ÁøÇàÇÏ¼¼¿ä." + 
+            "<a href='" + host + "transfer/emailCheckAction?code=" + new SHA256().getSHA256(to) + "'>ÀÌ¸ŞÀÏ ÀÎÁõÇÏ±â</a>";
+      
+      //¸ŞÀÏ È¯°æ º¯¼ö ¼³Á¤
+      Properties p  = new Properties();
+      //p.put("mail.smtp.host", host);
+      //¸ŞÀÏ ÇÁ·ÎÅäÄİÀº gmail¸¦ ÀÌ¿ëÇÒ °ÍÀÌ±â ¶§¹®¿¡ smtp·Î »ç¿ë
+      p.setProperty("mail.transport.protocol", "smtp");
+      //°ü¸®ÀÚ ¸ŞÀÏ
+      p.put("mail.smtp.user", from);
+      //¸ŞÀÏ È£½ºÆ® ÁÖ¼Ò¸¦ ¼³Á¤
+      p.put("mail.smtp.host", "smtp.googlemail.com");
+      //Æ÷Æ®¹øÈ£
+      p.put("mail.smtp.port", "587");
+      //Starttls¸¦ ÀÌ¿ëÇÑ ¸ŞÀÏ º¸³»±âÀÇ ÇÙ½É, JavaMail¿¡ TLS¸ğµå¸¦ ½ÃÀÛÇÏ¶ó°í ¸í½ÃÀûÀ¸·Î ¿äÃ»
+      p.put("mail.smtp.starttls.enable", "true");
+      //id, pwd ¼³Á¤ÀÌ ÇÊ¿ä
+      p.put("mail.smtp.auth", "true");
+      //µğ¹ö±× ¸ğµå
+      p.put("mail.smtp.debug","true");
+      p.put("mail.smtp.socketFactory.port", "587");
+      p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+      p.put("mail.smtp.socketFactory.fallback","false");      
+      try{
+         Authenticator auth = new Gmail();
+         // id¿Í password¸¦ ¼³Á¤ÇÏ°í sessionÀ» »ı¼º
+         Session ses = Session.getInstance(p, auth); 
+         ses.setDebug(true);
+         // ¸ŞÀÏ ¸Ş½ÃÁö¸¦ ¸¸µé±â À§ÇÑ Å¬·¡½º¸¦ »ı¼ºÇÕ´Ï´Ù.
+         MimeMessage msg = new MimeMessage(ses);
+         // ¸ŞÀÏ Á¦¸ñÀ» ¼³Á¤ÇÕ´Ï´Ù.
+         msg.setSubject(subject);
+         //¼Û½ÅÀÚ ¼³Á¤
+         Address fromAddr = new InternetAddress(from);
+         msg.setFrom(fromAddr);
+         //¼ö½ÅÀÚ ¼³Á¤
+         Address toAddr = new InternetAddress(to);
+         // ¼ûÀº ÂüÁ¶ ¼ö½ÅÀÚ ¼³Á¤
+         msg.addRecipient(Message.RecipientType.TO, toAddr);
+         // ¸ŞÀÏ ³»¿ëÀ» ¼³Á¤À» À§ÇÑ Å¬·¡½º¸¦ ¼³Á¤ÇÕ´Ï´Ù
+         msg.setContent(content, "text/html;charset=UTF8");
+         //¸ŞÀÏ º¸³»±â
+         Transport.send(msg);
+      }
+      catch(Exception e){
+         e.printStackTrace();      
+      }*/
+      
+   /*   
+      return "transfer/emailSendAction";
+      
+   } 
+   @RequestMapping("emailCheckAction")
+   public String emailCheckAction(String code,Model m) throws Exception   { 
+      MemberMybatisDAO member = new MemberMybatisDAO();
+      String id = null;
+      String msg = null;
+      String location = null;
+      String userEmail = member.getUserEmail(id);
+      
+      boolean isRight = (new SHA256().getSHA256(userEmail).equals(code)) ? true : false;
+      
+      if(isRight == true){
+          msg = "ÀÎÁõ¿¡ ¼º°øÇß½À´Ï´Ù";
+          m.addAttribute("msg",msg);
+          return "transfer/realfinish";
+          
+      }
+      else{
+          msg = "À¯È¿ÇÏÁö ¾Ê´Â ÄÚµåÀÔ´Ï´Ù";
+          m.addAttribute("msg",msg);
+          return "transfer/TransferAuth";
+      }
+   } 
+   @RequestMapping("emailSendConfirm")
+   public String emailSendConfirm() throws Exception   { 
+      
+      return "transfer/emailSendConfirm";
+      
+   } */
+   @RequestMapping("finish")
+   public String finish(MemberDTO member,Model m,int authType)   { 
+      //ÇÚµåÆù ¹øÈ£ ÀÔ·Â
+      int random=(int)(Math.random()*1000000)+1;
+      if(authType==1) {
+          String api_key = "NCSGDPVOV9E09TBL";
+          String api_secret = "HXHETMZZX56FMFPU9OO2H4OHXWJDG2JK";
+          Message coolsms = new Message(api_key, api_secret);
+         
+          // 4 params(to, from, type, text) are mandatory. must be filled
+          HashMap<String, String> params = new HashMap<String, String>();
+          params.put("to", member.getMember_phonenumber());   // ¼ö½ÅÀüÈ­¹øÈ£
+          params.put("from", "01068992734");   // ¹ß½ÅÀüÈ­¹øÈ£. Å×½ºÆ®½Ã¿¡´Â ¹ß½Å,¼ö½Å µÑ´Ù º»ÀÎ ¹øÈ£·Î ÇÏ¸é µÊ
+          params.put("type", "SMS");
+          params.put("text", "[ÀÎÁõ ¹øÈ£:"+random+"]");
+          params.put("app_version", "test app 1.2"); // application name and version
+
+          try {
+            JSONObject obj = (JSONObject) coolsms.send(params);
+            System.out.println(obj.toString());
+          } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+          }         
+      
+         System.out.println(1);
+         m.addAttribute("random", random);
+         m.addAttribute("phone",member.getMember_phonenumber());
+      }else if(authType==2) {
+         /*String host = "http://localhost:8088/backup/";
+         String to = member.getMember_email(); //memberDAO.getUserEmail(id);
+         String subject = "BLUEOCEANÀ» À§ÇÑ ÀÌ¸ŞÀÏ ÀÎÁõ ¸ŞÀÏÀÔ´Ï´Ù.";
+         String content = "´ÙÀ½ ¸µÅ©¿¡ Á¢¼ÓÇÏ¿© ÀÌ¸ŞÀÏ ÀÎÁõÀ» ÁøÇàÇÏ¼¼¿ä." + 
+            "'<a href=" + host + "transfer/emailCheckAction?code=" + new SHA256().getSHA256(to) + "'>ÀÌ¸ŞÀÏ ÀÎÁõÇÏ±â</a>";
+      
+          String user = "yhj940928@gmail.com"; // ³×ÀÌ¹öÀÏ °æ¿ì ³×ÀÌ¹ö °èÁ¤, gmail°æ¿ì gmail °èÁ¤
+              String password = "didgusah135@";   // ÆĞ½º¿öµå
+
+              // SMTP ¼­¹ö Á¤º¸¸¦ ¼³Á¤ÇÑ´Ù.
+              Properties prop = new Properties();
+              prop.put("mail.smtp.host", "smtp.gmail.com"); 
+              prop.put("mail.smtp.port", 465); 
+              prop.put("mail.smtp.auth", "true"); 
+              prop.put("mail.smtp.ssl.enable", "true"); 
+              prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+              
+              Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
+                  protected PasswordAuthentication getPasswordAuthentication() {
+                      return new PasswordAuthentication(user, password);
+                  }
+              });
+
+              try {
+                  MimeMessage message = new MimeMessage(session);
+                  message.setFrom(new InternetAddress(user));
+
+                  //¼ö½ÅÀÚ¸ŞÀÏÁÖ¼Ò
+                  message.addRecipient(Message.RecipientType.TO, new InternetAddress(to)); 
+
+                  // Subject
+                  message.setSubject(subject); //¸ŞÀÏ Á¦¸ñÀ» ÀÔ·Â
+
+                  // Text
+                  message.setText(content);    //¸ŞÀÏ ³»¿ëÀ» ÀÔ·Â
+
+                  // send the message
+                  Transport.send(message); ////Àü¼Û
+                  System.out.println("message sent successfully...");
+              } catch (AddressException e) {
+                  // TODO Auto-generated catch block
+                  e.printStackTrace();
+              } catch (MessagingException e) {
+                  // TODO Auto-generated catch block
+                  e.printStackTrace();
+              }*/
+      }
+      return  "transfer/finish";
+   } 
+   
+   @RequestMapping("TransferAuto")
+   public String TransferAuto() { 
+      return  "transfer/TransferAuto"; 
+   } 
+   @RequestMapping("TransferRes")
+   public String TransferRes()  throws Throwable { 
+      return  "transfer/TransferReserve"; 
+   }
+   @RequestMapping("TransferSelect")
+   public String TransferSelect()  throws Throwable { 
+      return  "transfer/TransferSelect"; 
+   } 
+   @RequestMapping("TransferSelectList")
+   public String TransferSelectList(TransferDTO transfer, int select_period,
+         String first_year,String first_month, String first_day,String second_year,
+         String second_month, String second_day, Model m   )  {    //±â°£ ¼³Á¤ ¸Ş¼Òµå(´Ù¼ØÀÌ ´Ş·Â¸Ş¼Òµå Âü°í ÈÄ ¼öÁ¤ÇÒ°Ô¿ä)
+      
+      int error=0;      //¿¡·¯Ã¼Å©¸¦ À§ÇÑ º¯¼ö
+      try {
+         boolean check_Account= transferMybatisdao.check_account_no(transfer.getAccount_no());   //ÅëÀåÀÌ Á¸ÀçÇÏ´ÂÁö È®ÀÎÇÏ´Â ¸Ş¼Òµå
+         if(check_Account) {
+            transferdata.setAccount_no(transfer.getAccount_no());      //ÅëÀåÀÌ Á¸ÀçÇÒ °æ¿ì setAccount_no
+         }
+      }catch(Exception e) {
+         e.printStackTrace();
+      }
+      Calendar cal=Calendar.getInstance();
+      cal.setTime(new Date());
+      DateFormat df=new SimpleDateFormat("yyyy/MM/dd");
+      String now_date=df.format(cal.getTime());
+      if(select_period==0) {
+         
+          if(first_month.length()<2) {
+             first_month="0"+first_month;
+         }
+         if(first_day.length()<2) {
+            first_day="0"+first_day;
+         }
+          if(second_month.length()<2) {
+             second_month="0"+second_month;
+         }
+         if(second_day.length()<2) {
+            second_day="0"+second_day;
+         }      
+         String first_date=first_year+first_month+first_day;
+         String second_date=second_year+second_month+second_day;
+         List<TransferDTO> transList=transferMybatisdao.dateTransList(second_date,first_date,transferdata.getAccount_no());
+         
+         m.addAttribute("transList", transList);
+
+         return  "transfer/TransferSelectList"; 
+      }else if(select_period<10 && select_period>0) {
+         cal.add(Calendar.DATE, -select_period);
+      }else {
+         cal.add(Calendar.MONTH, -(select_period/10));
+      }
+
+      String select_date=df.format(cal.getTime());
+
+      List<TransferDTO> transList=transferMybatisdao.dateTransList(now_date,select_date,transferdata.getAccount_no());
+      
+      m.addAttribute("transList", transList);   
+      return  "transfer/TransferSelectList"; 
+   } 
+   @RequestMapping("TransferAuth")
+   public String TransferAuth(TransferDTO transfer,int num, String year, String month,String day,Model m)  throws Throwable {
+      int error=0;
+      try {
+         //ÅëÀåÀÌ Á¸ÀçÇÏ´ÂÁö 1¹ø 
+         boolean check_Account= transferMybatisdao.check_account_no(transfer.getAccount_no()); //ÅëÀåÀÌ Á¸ÀçÇÏ´ÂÁö È®ÀÎÇÏ´Â ¸Ş¼Òµå
+         if(check_Account) {
+            transferdata.setAccount_no(transfer.getAccount_no());   //ÅëÀåÀÌ Á¸ÀçÇÒ °æ¿ì 
+         }
+         transferdata.setMember_id("hyeonmo");
+         transferdata.setTransfer_alias(transfer.getTransfer_alias());
+         transferdata.setTransfer_to_member_id("hyeonmo2");   
+         //ÅëÀå¿¡ µ·ÀÌ ºÎÁ·ÇÑÁö 2¹ø
+         boolean check_Account_money=transferMybatisdao.check_account_money(transfer.getAccount_no(),transfer.getTransfer_price());
+         if(check_Account_money) {   //ÅëÀå¿¡ µ·ÀÌ ÃæºĞÇÑ °æ¿ì
+            transferdata.setTransfer_price(transfer.getTransfer_price());
+         }else {      //ÅëÀå¿¡ µ·ÀÌ ºÎÁ·ÇÑ °æ¿ì
+            error=2;
+            m.addAttribute("error", error);
+            return "transfer/TransferWrite";
+         }
+         //º¸³¾ ÅëÀåÀÌ Á¸ÀçÇÏ´ÂÁö 3¹ø
+         boolean check_TransferAccount=transferMybatisdao.check_account_no(transfer.getTransfer_to_account_no());
+         if(check_TransferAccount) {   //º¸³¾ ÅëÀåÀÌ Á¸ÀçÇÏ´Â °æ¿ì
+            transferdata.setTransfer_to_account_no(transfer.getTransfer_to_account_no());
+         }else {
+            error=3;
+            m.addAttribute("error", error);
+            return "transfer/TransferWrite";
+         }
+         //ÀÚ½Å¿¡°Ô º¸³»Áö ¸øÇÏµµ·Ï 4¹ø
+         if(transfer.getAccount_no().equals(transfer.getTransfer_to_account_no())) {
+            error=4;
+            m.addAttribute("error", error);
+            return "transfer/TransferWrite";
+         }
+         if(num==1) {   //Áï½Ã ÀÌÃ¼ÀÎ °æ¿ì
+            //result=transferMybatisdao.transferInsert(transferdata,num);      //ÀÌÃ¼ ³»¿ª »ğÀÔ
+            //int transcount=transferMybatisdao.getTransListCount(num);   // ¸¶Áö¸· Çà = »ç¿ëÀÚ Á¤º¸
+            //transferdata=transferMybatisdao.transferDetail(transcount, num);   //»ç¿ëÀÚ Á¤º¸
+            //transferMybatisdao.updateMoney(transferdata.getAccount_no(),transferdata.getTransfer_price(),1);      //1: Minus Money 2.Plus Money
+            //transferMybatisdao.updateMoney(transferdata.getTransfer_to_account_no(),transferdata.getTransfer_price(),2);
+            m.addAttribute("transferdata", transferdata);
+            return "transfer/TransferAuth";
+         }else if(num==2 || num==3) {   //ÀÚµ¿ÀÌÃ¼ , ¿¹¾àÀÌÃ¼ (´Ş·Â ¼öÁ¤ ÀÌÈÄ ÁÖ¼® ´Ş°Ô¿ä)
+            if(month.length()<2) {
+               month="0"+month;
+            }
+            if(day.length()<2) {
+               day="0"+day;
+            }
+            if(num==2) {
+               transferdata.setTransfer_auto_period(transfer.getTransfer_auto_period());            
+               transferdata.setTransfer_auto_period_start(year+""+month+""+day);
+            }
+            else if(num==3){
+               transferdata.setTransfer_res_day(year+""+month+""+day);
+            }
+            try {
+               String period_start="";
+               if(num==2) {
+                  transferdata.setTransfer_auto_period(transfer.getTransfer_auto_period());
+                   period_start=transferdata.getTransfer_auto_period_start();
+               }else if(num==3) {
+                  period_start=transferdata.getTransfer_res_day();
+               }
+                  Date today=new Date();
+                  System.out.println("³¯Â¥:"+ period_start);
+                  Date actday=new SimpleDateFormat("yyyyMMdd").parse(period_start);
+                  transferdata.setTransfer_auto_period_start(period_start);
+                  
+                  //³¯Â¥ ºñ±³ À¯È¿¼º
+                  if( (actday!=null) && actday.getTime() > today.getTime()) {
+                     boolean insert=transferMybatisdao.transferInsert(transferdata,num);
+                     if(insert) {
+                        int transcount=transferMybatisdao.getTransListCount(num);
+                        transferdata=transferMybatisdao.transferDetail(transcount, num);
+                        System.out.println("ÅëÀå¹øÈ£"+ transferdata.getAccount_no());
+                        System.out.println("ÀÌÃ¼°¡°İ"+ transferdata.getTransfer_price());
+                        transferMybatisdao.updateMoney(transferdata.getAccount_no(),transferdata.getTransfer_price(),1);      //1: Minus Money 2.Plus Money
+                        transferMybatisdao.updateMoney(transferdata.getTransfer_to_account_no(),transferdata.getTransfer_price(),2);      
+                        return "transfer/TransferAuth";
+                     }
+                  }               
+                  else {
+                     error=5;
+                     System.out.println("¿¡·¯ÀÔ´Ï´Ù");
+                     m.addAttribute("error", error);
+                     if(num==2) {
+                        return "transfer/TransferAuto";
+                     }else if(num==3) {
+                        return "transfer/TransferReserve";
+                     }
+                  }
+            }catch(java.text.ParseException e) {
+               error=6;
+               m.addAttribute("error", error);
+               if(num==2) {
+                  return "transfer/TransferAuto";
+               }else if(num==3) {
+                  return "transfer/TransferReserve";
+               }
+            }catch(Exception e) {
+               e.printStackTrace();
+            }
+         }
+         }catch(Exception e) {
+            e.printStackTrace();
+         }
+      m.addAttribute("transfer", transfer);
+      return "transfer/TransferAuth";         
+   } 
 }
