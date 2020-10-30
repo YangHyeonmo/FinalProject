@@ -26,6 +26,15 @@ public class AccountController {
 	@Autowired
 	AccountDAO dbpro;
 
+	public HttpSession session = null;
+
+	@ModelAttribute
+	public void headProcess(HttpServletRequest request, HttpServletResponse res) {
+
+		session = request.getSession();
+
+	}
+
 	@RequestMapping("accountShow")
 	public String accountShow(String account_num, Model m) throws Exception {
 
@@ -40,7 +49,7 @@ public class AccountController {
 	@RequestMapping("accountList")
 	public String accountList(Model m) throws Exception {
 
-		String member_id = "dasom7107"; // session.getAtt~~~ 바꾸기
+		String member_id = (String) session.getAttribute("member_id");
 		int count1 = 0;
 		int count2 = 0;
 		int count3 = 0;
@@ -128,7 +137,7 @@ public class AccountController {
 
 	@RequestMapping("accountDelete") // 계좌해지 목록출력
 	public String accountDelete(String account_num, Model m) throws Exception {
-		String member_id = "dasom7107";
+		String member_id = (String) session.getAttribute("member_id");
 		List<String> article = dbpro.getAccount(account_num);
 		List<String> account = dbpro.moveBalanceAccount(member_id);
 		m.addAttribute("account_num", account_num);
@@ -139,22 +148,23 @@ public class AccountController {
 	}
 
 	@RequestMapping("accountDeletePro") // 비번확인,다른계좌로 잔액옮김
-	public String accountDeletePro(String account_num, int account_pw, String OPEN_ACCOUNT_NO, int balance, Model m) throws Exception {
+	public String accountDeletePro(String account_num, int account_pw, String OPEN_ACCOUNT_NO, int balance, Model m)
+			throws Exception {
 
-		System.out.println("Account_num= "+balance); 
-		
+		System.out.println("Account_num= " + balance);
+
 		boolean check;
-        int movebalance;
-        
+		int movebalance;
+
 		check = dbpro.deleteCheckPw(account_num, account_pw);
 		m.addAttribute("check", check);
-		
+
 		if (check == true) {
 			movebalance = dbpro.moveBalance(OPEN_ACCOUNT_NO, balance);
-			if(movebalance == 1) {
-			m.addAttribute("openAccountNo", OPEN_ACCOUNT_NO);
-			m.addAttribute("balance", balance);
-		}
+			if (movebalance == 1) {
+				m.addAttribute("openAccountNo", OPEN_ACCOUNT_NO);
+				m.addAttribute("balance", balance);
+			}
 		}
 		return "account/accountDeletePro";
 	}

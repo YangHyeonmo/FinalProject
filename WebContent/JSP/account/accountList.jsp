@@ -21,7 +21,7 @@ td.moreMenu {
 <h3 style="font-size: 20px; display: inline-block;">나루뱅크 계좌조회</h3>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <h3 style="font-size: 10px; display: inline-block;">
-	<a href="<%=request.getContextPath()%>ㅇㅇ"> 다른은행 계좌조회</a>
+	<a href="<%=request.getContextPath()%>/openbanking/SelectOpenBanking"> 다른은행 계좌조회</a>
 </h3>
 <h5>
 	조회기준일시:
@@ -54,7 +54,7 @@ td.moreMenu {
 				<td align="center" width="1000"><strong>입출금통장</strong> 만들 때 <br />은행
 					방문 NO, 이젠 모바일로 손안에서 OK</br></td>
 				<td width="100"><a
-					href="<%=request.getContextPath()%>/account/계좌개설하기"> 개설하기</a></td>
+					href="<%=request.getContextPath()%>/finance/financeDepositList"> 개설하기</a></td>
 			</tr>
 		</table>
 	</c:if>
@@ -70,7 +70,7 @@ td.moreMenu {
 						href="<%=request.getContextPath() %>/account/accountShow?account_num=${article.account_num}">
 							조회</a></td>
 					<td width="100"><a
-						href="<%=request.getContextPath()%>/account/이체하기"> 이체</a></td>
+						href="<%=request.getContextPath()%>/transfer/TransferSelectList"> 이체</a></td>
 					<td class="button" width="100">계좌관리</td>
 					<td class="moreMenu"><a href="URL"
 						onclick="window.open('<%=request.getContextPath()%>/account/aliasChange?account_num=${article.account_num}', '_blank', 'top=350px,left=350px,width=550px,height=390px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;">계좌
@@ -100,7 +100,7 @@ td.moreMenu {
 					예금이자, 단 한달이라도 여유자금을 예금에 맡겨두세요.
 				</td>
 				<td width="100"><a
-					href="<%=request.getContextPath()%>/account/예금가입하기"> 가입하기</a></td>
+					href="<%=request.getContextPath()%>/finance/financeDepositList"> 가입하기</a></td>
 			</tr>
 		</table>
 	</c:if>
@@ -140,7 +140,7 @@ td.moreMenu {
 					예금이자, 단 한달이라도 여유자금을 예금에 맡겨두세요.
 				</td>
 				<td width="100"><a
-					href="<%=request.getContextPath()%>/account/적금가입하기"> 가입하기</a></td>
+					href="<%=request.getContextPath()%>/finance/financeSavingsList"> 가입하기</a></td>
 			</tr>
 		</table>
 	</c:if>
