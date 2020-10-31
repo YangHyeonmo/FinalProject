@@ -1,6 +1,8 @@
 package model;
 
 public class ProductsDTO {
+	private int rnum;
+	private int num;
 	private int fin_no;
 	private String fin_pro;
 	private String fin_name;
@@ -14,7 +16,18 @@ public class ProductsDTO {
 	private int ref_no;
 	private String member_id;
 	private String account_num;
-	
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public int getFin_no() {
 		return fin_no;
 	}
