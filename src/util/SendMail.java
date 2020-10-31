@@ -15,18 +15,14 @@ public class SendMail {
 
 	public void send(String email,int random) {
 		String host = "http://localhost:8088/SpringProject/";
-		String to = email; //회원 이메일
-		String subject = "Naru을 위한 이메일 인증 메일입니다.";
-		/*
-		 * String content = "다음 링크에 접속하여 이메일 인증을 진행하세요." + "'<a href=" + host +
-		 * "transfer/emailCheckAction?code=" + new SHA256().getSHA256(to) +
-		 * "'>이메일 인증하기</a>";
-		 */
-		String content="인증번호:"+random;
-		 String user = "yhj940928@gmail.com"; // 네이버일 경우 네이버 계정, gmail경우 gmail 계정
-	        String password = "didgusah135@";   // 패스워드
+		String to = email; //�쉶�썝 �씠硫붿씪
+		String subject = "NaruBank을 위한 이메일 인증 메일입니다.";
+		
+		String content="Valid number:"+random;
+		 String user = "yhj940928@gmail.com"; // �꽕�씠踰꾩씪 寃쎌슦 �꽕�씠踰� 怨꾩젙, gmail寃쎌슦 gmail 怨꾩젙
+	        String password = "didgusah135@";   // �뙣�뒪�썙�뱶
 
-	        // SMTP 서버 정보를 설정한다.
+	        // SMTP �꽌踰� �젙蹂대�� �꽕�젙�븳�떎.
 	        Properties prop = new Properties();
 	        prop.put("mail.smtp.host", "smtp.gmail.com"); 
 	        prop.put("mail.smtp.port", 465); 
@@ -44,17 +40,17 @@ public class SendMail {
 	            MimeMessage message = new MimeMessage(session);
 	            message.setFrom(new InternetAddress(user));
 
-	            //수신자메일주소
+	            //�닔�떊�옄硫붿씪二쇱냼
 	            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to)); 
 
 	            // Subject
-	            message.setSubject(subject); //메일 제목을 입력
+	            message.setSubject(subject); //硫붿씪 �젣紐⑹쓣 �엯�젰
 
 	            // Text
-	            message.setText(content);    //메일 내용을 입력
+	            message.setText(content);    //硫붿씪 �궡�슜�쓣 �엯�젰
 
 	            // send the message
-	            Transport.send(message); ////전송
+	            Transport.send(message); ////�쟾�넚
 	            System.out.println("message sent successfully...");
 	        } catch (AddressException e) {
 	            // TODO Auto-generated catch block

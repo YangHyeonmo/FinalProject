@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="<%=request.getContextPath()%>/transfer/stockgraph" method="post" name="transferform">
+<form action="<%=request.getContextPath()%>/stock/stockgraph" method="post" name="transferform">
 
 <input type="text" name="stockname">
 <input type="submit" value="입력">

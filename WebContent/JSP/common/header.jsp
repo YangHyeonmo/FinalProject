@@ -46,7 +46,7 @@
 						<li><a href="<%=request.getContextPath()%>/transfer/TransferWrite">이체</a></li>
 						<li><a href="<%=request.getContextPath()%>/transfer/TransferSelect">이체
 								내역 조회</a></li>
-						<li><a href="#">Page 1-3</a></li>
+						<li><a href="<%=request.getContextPath()%>/stock/stockinput">">Page 1-3</a></li>
 					</ul></li>
 				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"
 					href="#"

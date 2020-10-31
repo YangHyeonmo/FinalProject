@@ -55,7 +55,7 @@
 					</tr>
 					<tr>
 						<td colspan = "5">	
-							<select name="ACCOUNT_NO">
+							<select name="account_no">
 								<c:forEach var= "ACCOUNT_NO" items="${account_num }" varStatus="status">
 									<option value=${ACCOUNT_NO }>${ACCOUNT_NO}</option>
 								</c:forEach>
@@ -69,7 +69,7 @@
 						<td>${deposit }
 					</tr> --%>
 					<tr align=center>
-						<td colspan="5">이체금액</td>					
+						<td colspan="5">조회</td>					
 					</tr>
 					<tr>
 						<td><input type="button" value="일주일" onclick="money(7)"></td>
@@ -78,45 +78,11 @@
 						<td><input type="button" value="6개월" onclick="money(180)"></td>
 						<td><input type="button" value="1년"  onclick="money(365)"></td>
 					</tr>
-					<tr>
-						<td colspan="5"><input type="hidden" value=0 name= "select_period" id="select_period"></td>
-					</tr>
+					<input type="date"  name="select_period"
+                  min="2020-08-01" max="2020-12-31" name="date"
+                  contenteditable="false">
 					
-					<tr align=center>
-						<td colspan="5">직접 입력(시작 날짜)</td>					
-					</tr>
-					<tr>
-						<td colspan = "2">
-							<select id="select_year" name="transfer_year" onchange="javascript:lastday();">
-							</select>
-						</td>
-						<td colspan = "2">
-							<select id="select_month" name="transfer_month" onchange="javascript:lastday();">
-							</select>
-						</td>
-						<td colspan = "1">
-							<select id="select_day" name="transfer_day">
-							</select>
-						</td>
-					</tr>
 				
-					<tr align=center>
-						<td colspan="5">직접 입력(종료 날짜)</td>					
-					</tr>
-					<tr>
-						<td colspan = "2">
-							<select id="select_year2" name="transfer_year2" onchange="javascript:lastday_select();">
-							</select>
-						</td>
-						<td colspan = "2">
-							<select id="select_month2" name="transfer_month2" onchange="javascript:lastday_select();">
-							</select>
-						</td>
-						<td colspan = "1">
-							<select id="select_day2" name="transfer_day2">
-							</select>
-						</td>
-					</tr>
 					<tr>
 						<td colspan="5"><input type="submit" value="확인"></td>
 					</tr>
