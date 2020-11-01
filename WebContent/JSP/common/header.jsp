@@ -68,6 +68,24 @@
 							href="<%=request.getContextPath()%>/openbanking/SelectWithdrawLog"
 						>오픈뱅킹 내역</a></li>
 					</ul></li>
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"
+					href="#"
+				>금융상품 <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a
+							href="<%=request.getContextPath()%>/finance/financeMain?dbno=1"
+						>예금 상품 </a></li>
+						<li><a
+							href="<%=request.getContextPath()%>/finance/financeMain?dbno=2"
+						>적금 상품</a></li>
+						<li><a
+							href="<%=request.getContextPath()%>/finance/financeMain?dbno=3"
+						>펀드 상품</a></li>
+						<li><a
+							href="<%=request.getContextPath()%>/finance/financeMain?dbno=4"
+						>대출 상품</a></li>
+					</ul>
+				</li>
 			</ul>
 		</c:if>
 		<ul class="nav navbar-nav navbar-right">
