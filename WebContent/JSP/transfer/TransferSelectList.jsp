@@ -99,7 +99,7 @@
 		<td>${transList.transfer_to_member_id}</td>
 		<td>${transList.transfer_price}</td>
 	</tr>
-	</c:forEach>
+</c:forEach>
 </table>
 </body>
 <script>

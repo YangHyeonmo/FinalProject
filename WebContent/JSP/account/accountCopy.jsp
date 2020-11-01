@@ -36,7 +36,7 @@ body hr{border-top: 1px dotted grey ;}
 	<c:forEach var="article" items="${article}">
 	<div class="bankInfo">
 		<table class="w3-table-all" >
-			<h3>${member.name}님</h3>
+			<h3>${member_name}님</h3>
 			<tr>
 				<td>예금종류</td>
 				<td>${article.account_type}</td>

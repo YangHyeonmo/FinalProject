@@ -97,7 +97,8 @@
 	<update id="moveBalance" parameterType="hashmap">
 		update openbanking set
 		open_balance =open_balance + #{balance} where open_account_no
-		= #{open_account_no}
+		=
+		#{open_account_no}
 	</update>
 
 	<delete id="deleteAccount" parameterType="hashmap">
@@ -105,5 +106,12 @@
 		where
 		account_num = #{account_num}
 	</delete>
+
+	<select id="dateAccountList" resultType="Account"
+		parameterType="hashMap">
+		select * from account where account_date BETWEEN
+		#{start_date} AND
+		#{end_date} and (account_num=#{account_num})
+	</select>
 
 </mapper>

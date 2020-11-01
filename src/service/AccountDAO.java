@@ -53,7 +53,7 @@ public class AccountDAO extends AbstractMybatis {
 		}
 	}
 
-	public List getA(String member_id) throws Exception { // ï¿½ï¿½ï¿½ï¿½Ý°ï¿½ï¿½ï¿½
+	public List getA(String member_id) throws Exception { // ÀÔÃâ±Ý°èÁÂ
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("member_id", member_id);
@@ -64,7 +64,7 @@ public class AccountDAO extends AbstractMybatis {
 		}
 	}
 
-	public List getB(String member_id) throws Exception { // ï¿½ï¿½ï¿½Ý°ï¿½ï¿½ï¿½
+	public List getB(String member_id) throws Exception { // ¿¹±Ý°èÁÂ
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("member_id", member_id);
@@ -75,7 +75,7 @@ public class AccountDAO extends AbstractMybatis {
 		}
 	}
 
-	public List getC(String member_id) throws Exception { // ï¿½ï¿½ï¿½Ý°ï¿½ï¿½ï¿½
+	public List getC(String member_id) throws Exception { // Àû±Ý°èÁÂ
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("member_id", member_id);
@@ -99,7 +99,7 @@ public class AccountDAO extends AbstractMybatis {
 		}
 	}
 
-	public List getAlias(String account_num) throws Exception { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public List getAlias(String account_num) throws Exception { // º°¸íÃâ·Â
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("account_num", account_num);
@@ -112,7 +112,7 @@ public class AccountDAO extends AbstractMybatis {
 		}
 	}
 
-	public int updateAlias(String account_alias, String account_num) throws Exception { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public int updateAlias(String account_alias, String account_num) throws Exception { // º°¸íº¯°æ
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("account_alias", account_alias);
@@ -131,7 +131,7 @@ public class AccountDAO extends AbstractMybatis {
 	}
 
 
-	public boolean checkPw(String account_num, int account_pw, int pw_new, int pw_new_check) { //ï¿½ï¿½ï¿½Âºï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	public boolean checkPw(String account_num, int account_pw, int pw_new, int pw_new_check) { //°èÁÂºñ¹ø º¯°æ
 		boolean result = false;
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -166,7 +166,7 @@ public class AccountDAO extends AbstractMybatis {
 		return result;
 	}
 
-	public List<String> getAccount(String account_num) { // ï¿½Ï³ï¿½ï¿½ï¿½ï¿½
+	public List<String> getAccount(String account_num) { // ÇÏ³ªÃâ·Â
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("account_num", account_num);
@@ -178,10 +178,10 @@ public class AccountDAO extends AbstractMybatis {
 		}
 	}
 
-	public List<String> moveBalanceAccount(String member_id) { // ï¿½Ü¾×¿Å±ï¿½ï¿½ï¿½Â¸ï¿½ï¿½
+	public List<String> moveBalanceAccount(String member_id) { // ÀÜ¾×¿Å±æ°èÁÂ¸ñ·Ï
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("MEMBER_ID", member_id);
+		map.put("member_id", member_id);
 		System.out.println(map);
 		try {
 			return sqlSession.selectList(namespace2 + ".SelectOpenBanking", map);
@@ -191,7 +191,7 @@ public class AccountDAO extends AbstractMybatis {
 		}
 	}
 
-	public boolean deleteCheckPw(String account_num, int account_pw) { //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½È®ï¿½ï¿½
+	public boolean deleteCheckPw(String account_num, int account_pw) { //°èÁÂÇØÁö ºñ¹øÈ®ÀÎ
 		boolean result = false;
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -222,10 +222,10 @@ public class AccountDAO extends AbstractMybatis {
 		return result;
 	}
 	
-	public int moveBalance(String open_account_no, int balance) throws Exception { // ï¿½Ü¾×¿Å±ï¿½ï¿½
+	public int moveBalance(String OPEN_ACCOUNT_NO, int balance) throws Exception { // ÀÜ¾×¿Å±â±â
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("open_account_no", open_account_no);
+		map.put("OPEN_ACCOUNT_NO", OPEN_ACCOUNT_NO);
 		map.put("balance", balance);
 		try {
 			return sqlSession.update(namespace + ".moveBalance", map);
@@ -237,6 +237,24 @@ public class AccountDAO extends AbstractMybatis {
 			sqlSession.close();
 		}
 		return 0;
+	}
+	
+	public List<AccountDTO> dateAccountList(String start_date,String end_date,String account_num){
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		List<AccountDTO> accountList=null;
+		try {
+			String statement=namespace+".dateAccountList";
+			map.put("end_date", end_date);
+			map.put("start_date", start_date);
+			map.put("account_num", account_num);
+			accountList=sqlSession.selectList(statement,map);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return accountList;
 	}
 
 }

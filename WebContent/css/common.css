@@ -65,7 +65,7 @@ background-color: white; -webkit-rtl-ordering: logical; cursor: text; margin: 0e
 .loginRegister{background-color: white}
 .loginRegister .container {position: relative; overflow: hidden; width: 700px; height: 500px; margin: 80px auto 0; background-color: #ffffff; -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px; -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px; box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;}
 .loginRegister .container .half {float: left; width: 50%; height: 100%; padding: 20px 40px 0;}
-.loginRegister .container .half.bg { background-image: url("http://www.blueb.co.kr/SRC2/_image/v01.jpg"); background-size: 400px; background-repeat: no-repeat;}
+.loginRegister .container .half.bg { background-image: url("../images/Naru.jpg"); background-size: 400px; background-repeat: no-repeat;}
 .loginRegister .container h1 { font-size: 18px; font-weight: 700; margin-bottom: 23px; text-align: center; text-indent: 6px; letter-spacing: 7px; text-transform: uppercase; color: #263238;}
 .loginRegister .container .tabs { width: 100%; margin-bottom: 10px; border-bottom: 1px solid #d9d9d9;}
 .loginRegister .container .tabs .tab { display: inline-block; margin-bottom: -1px; padding: 20px 15px 10px; cursor: pointer; letter-spacing: 0; border-bottom: 1px solid #d9d9d9; -moz-user-select: -moz-none; -ms-user-select: none; -webkit-user-select: none; user-select: none; transition: all 0.1s ease-in-out;}
@@ -186,4 +186,3 @@ background-color: white; -webkit-rtl-ordering: logical; cursor: text; margin: 0e
 .showExchange  p {font-weight:bolder;font-size:20px;margin-top:-1rem; text-align: center; }
 
 
-}

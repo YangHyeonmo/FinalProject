@@ -24,7 +24,25 @@ public class AccountDTO implements Serializable{
     private String send_get;
     private int count;
     private int rate;
+    private String start_date;
+    private String end_date;
     
+
+	public String getStart_date() {
+		return start_date;
+	}
+	public void setStart_date(String start_date) {
+		this.start_date = start_date;
+	}
+	public String getEnd_date() {
+		return end_date;
+	}
+	public void setEnd_date(String end_date) {
+		this.end_date = end_date;
+	}
+	public void setAccount_date(Timestamp account_date) {
+		this.account_date = account_date;
+	}
 	@Override
 	public String toString() {
 		return "AccountDTO [member_id=" + member_id + ", account_type=" + account_type + ", account_num=" + account_num
@@ -32,6 +50,9 @@ public class AccountDTO implements Serializable{
 				+ ", made_date=" + made_date + ", account_date=" + account_date + ", sum=" + sum + ", withdraw="
 				+ withdraw + ", deposit=" + deposit + ", balance=" + balance + ", content=" + content + ", bank_place="
 				+ bank_place + ", send_get=" + send_get + ", count=" + count + ", rate=" + rate + "]";
+	}
+	public Timestamp getAccount_date() {
+		return account_date;
 	}
 	public String getMember_id() {
 		return member_id;
@@ -74,12 +95,6 @@ public class AccountDTO implements Serializable{
 	}
 	public void setMade_date(Timestamp made_date) {
 		this.made_date = made_date;
-	}
-	public Timestamp getAccount_date() {
-		return account_date;
-	}
-	public void setAccount_date(Timestamp account_date) {
-		this.account_date = account_date;
 	}
 	public String getSum() {
 		return sum;
@@ -135,7 +150,7 @@ public class AccountDTO implements Serializable{
 	public void setRate(int rate) {
 		this.rate = rate;
 	}
-     
+
    
     
 }

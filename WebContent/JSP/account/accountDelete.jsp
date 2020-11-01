@@ -60,7 +60,6 @@
 	<script>
 		$(document).ready(function() {
 			$("#btnDelete").click(function() {
-
 				if (confirm("해지하시겠습니까?")) {
 					document.delForm.action = "accountDeletePro";
 					document.delForm.submit();
