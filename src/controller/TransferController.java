@@ -146,8 +146,6 @@ public class TransferController{
             System.out.println(e.getMessage());
             System.out.println(e.getCode());
           }         
-      
-         System.out.println(1);
          m.addAttribute("random", random);
          m.addAttribute("phone",member.getMember_phonenumber());
       }else if(authType==2) {
