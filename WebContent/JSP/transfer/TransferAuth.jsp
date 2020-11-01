@@ -1,6 +1,6 @@
 
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -11,33 +11,33 @@
 	<div>
 		<table>
 			<tr>
-				<td>${transferdata.transfer_to_member_id }´Ô¿¡°Ô
-					${transferdata.transfer_price } ÀÌÃ¼</td>
+				<td>${transferdata.transfer_to_member_id }ë‹˜ì—ê²Œ
+					${transferdata.transfer_price } ì´ì²´</td>
 			</tr>
 			<tr>
-				<td>${transferdata.transfer_price }¼Û±İ</td>
+				<td>${transferdata.transfer_price }ì†¡ê¸ˆ</td>
 			</tr>
 			<tr>
-				<td>¹Ş´ÂºĞ °èÁÂ ${transferdata.transfer_to_account_no }</td>
+				<td>ë°›ëŠ”ë¶„ ê³„ì¢Œ ${transferdata.transfer_to_account_no }</td>
 			</tr>
 			<tr>
-				<td>¹Ş´ÂºĞ ÅëÀå Ç¥½Ã : ${transferdata.transfer_alias }</td>
+				<td>ë°›ëŠ”ë¶„ í†µì¥ í‘œì‹œ : ${transferdata.transfer_alias }</td>
 			</tr>
 			<tr>
 				<td>
-					<a href="./TransferWrite">¼öÁ¤</a>
+					<a href="./TransferWrite">ìˆ˜ì •</a>
 				</td>
 			</tr>
 		</table>
 		<form method="post" name="authform">
 			<tr>
 				<td>
-					<input type="button" name="message" onclick="goMessage()" value="¹®ÀÚÀÎÁõ">
+					<input type="button" name="message" onclick="goMessage()" value="ë¬¸ìì¸ì¦">
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<input type="button" name="email" onclick="goEmail()" value="ÀÌ¸ŞÀÏ ÀÎÁõ">
+					<input type="button" name="email" onclick="goEmail()" value="ì´ë©”ì¼ ì¸ì¦">
 				</td>
 			</tr>
 		</form>

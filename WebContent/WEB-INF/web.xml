@@ -12,7 +12,10 @@
 
 	<jsp-config>
 		<jsp-property-group>
-			<url-pattern>/JSP/*</url-pattern>
+			<url-pattern>/JSP/view/*</url-pattern>
+			<url-pattern>/JSP/transfer/*</url-pattern>
+			<url-pattern>/JSP/openbanking/*</url-pattern>
+			<url-pattern>/JSP/exchange/*</url-pattern>
 			<include-prelude>/JSP/common/header.jsp</include-prelude>			
 		</jsp-property-group>
 	</jsp-config>

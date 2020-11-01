@@ -80,7 +80,7 @@ function change(){
 					</tr>
 					<tr>
 						<td colspan = "5">	
-							<select name="ACCOUNT_NO" id="account_no" onchange="change()">
+							<select name="account_no" id="account_no" onchange="change()">
 								<c:forEach var= "ACCOUNT_NO" items="${account_num }" varStatus="status">
 									<option value=${ACCOUNT_NO }>${ACCOUNT_NO}</option>
 								</c:forEach>
@@ -111,14 +111,14 @@ function change(){
 						<td colspan = "5">받는 분 계좌 번호</td>
 					</tr>
 					<tr>
-						<td colspan = "5"><input type="text" name="TRANSFER_TO_ACCOUNT_NO" 
+						<td colspan = "5"><input type="text" name="transfer_to_account_no" 
 						style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
 					</tr>
 					<tr>
 						<td colspan = "5">받는 분 표시</td>
 					</tr>
 					<tr>
-						<td colspan="5"><input type="text" name="TRANSFER_ALIAS" 
+						<td colspan="5"><input type="text" name="transfer_to_aias" 
 						style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
 					</tr>
 				
@@ -142,7 +142,7 @@ function change(){
 					</tr>
 					<tr>
 						<td colspan="5">	
-							<select name="ACCOUNT_NO">
+							<select name="account_no">
 								<c:forEach var= "ACCOUNT_NO" items="${account_num }" varStatus="status">
 									<option value=${ACCOUNT_NO }>${ACCOUNT_NO}</option>
 								</c:forEach>
