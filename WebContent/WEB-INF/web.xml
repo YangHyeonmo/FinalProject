@@ -12,11 +12,13 @@
 
 	<jsp-config>
 		<jsp-property-group>
-			<url-pattern>/JSP/view/*</url-pattern>
-			<include-prelude>/JSP/common/header.jsp</include-prelude>
+			<url-pattern>/JSP/*</url-pattern>
+			<include-prelude>/JSP/common/header.jsp</include-prelude>			
 		</jsp-property-group>
 	</jsp-config>
 	
+	
+
 	 <servlet>
       <servlet-name>springDynamic</servlet-name>
       <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

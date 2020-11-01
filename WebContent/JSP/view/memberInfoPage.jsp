@@ -11,6 +11,7 @@
 <div class="content">
 	<!-- 상단 페이지이름/버튼 영역 -->
  <form method="post" name="regFrm">
+
 	<div class="header">
 		<div class="thumb-wrapper">
 			<img class="thumb" src="<%=request.getContextPath()%>/images/person.png">
@@ -27,7 +28,6 @@
 			<tr>
 				<th>아이디</th>
 				<td>
-					<input type="hidden" name="id" value="${member.member_id}" />
 					${member.member_id}
 				</td>
 			</tr>
@@ -127,7 +127,8 @@ function memberDelete(){
 	var oldpwd = regForm.oldpwd.value;
 	if(oldpwd==""){
         alert("비밀번호를 입력해주세요.");
-	}else{
+	}
+	else{
     	regForm.action = "<%=request.getContextPath()%>/member/memberDelete";
     	regForm.submit();
     }

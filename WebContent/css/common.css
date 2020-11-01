@@ -117,10 +117,6 @@ background-color: white; -webkit-rtl-ordering: logical; cursor: text; margin: 0e
 .credits { display: block; position: absolute; right: 0; bottom: 0; color: #999999; font-size: 14px; margin: 0 10px 10px 0;}
 .credits a { filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80); opacity: 0.8; color: inherit; font-weight: 700; text-decoration: none;}
 
-
-
-
-
 /* 마이페이지 css */
 .mainPageB{margin:0; background-color: #485861; color: #FFE6CF; }
 .mainPageB .header{text-align:center; margin-top:-21px;}
@@ -151,4 +147,43 @@ background-color: white; -webkit-rtl-ordering: logical; cursor: text; margin: 0e
 .content input[type="text"],input[type="password"], input[type="email"],input[type="date"], input[type="file"], select {background-color:rgba(0,0,0,0.2); width: 35rem; backwidth:100%; height:32px; font-size:1.4rem; line-height:2rem; padding:5px 10px;  transition: 0.5s;}
 .content button{background-color: rgba(0,0,0,0.25)}
 .content .button {width:200px; margin:0 auto;}
+
+/* 환전/환율 페이지 css */
+.exchangeform{  text-align:center; height: 100%; display: inline-block; padding:4rem; margin-left:22rem;}
+.exchangeform img{height:7rem;}
+.exchangeform:before{content:''; height:100%; display:inline-block; vertical-align:middle;}
+.exchangeform button{background:white; box-shadow:inset 0px -2px 2px 1px rgb(30, 30, 30),
+    0px 3px 4px rgba(50, 50, 50, 0.6); color:#fff; border:none; position:relative; height:8rem; font-size:1.6em;padding:0 2em; margin:4rem 6rem; width:14rem; float:center; cursor:pointer; transition:800ms ease all; outline:none;}
+.exchangeform button:hover{background:white; color:rgba(0,0,0,1);}
+.exchangeform button:hover span{display:none;}
+.exchangeform .exchangeButton1:before{ content:'USD'; position:absolute; top:0; right:0; height:2px; width:0; background: white; padding-top:3rem; transition:400ms ease all;}
+.exchangeform .exchangeButton2:before{ content:'EUR'; position:absolute; top:0; right:0; height:2px; width:0; background: white; padding-top:3rem; transition:400ms ease all;}
+.exchangeform .exchangeButton3:before{ content:'JPY'; position:absolute; top:0; right:0; height:2px; width:0; background: white; padding-top:3rem; transition:400ms ease all;}
+.exchangeform .exchangeButton4:before{ content:'CNH'; position:absolute; top:0; right:0; height:2px; width:0; background: white; padding-top:3rem; transition:400ms ease all;}
+.exchangeform .exchangeButton5:before{ content:'HKD'; position:absolute; top:0; right:0; height:2px; width:0; background: white; padding-top:3rem; transition:400ms ease all;}
+.exchangeform .exchangeButton6:before{ content:'THB'; position:absolute; top:0; right:0; height:2px; width:0; background: white; padding-top:3rem; transition:400ms ease all;}
+.exchangeform .exchangeButton7:before{ content:'SGD'; position:absolute; top:0; right:0; height:2px; width:0; background: white; padding-top:3rem; transition:400ms ease all;}
+.exchangeform .exchangeButton8:before{ content:'GBP'; position:absolute; top:0; right:0; height:2px; width:0; background: white; padding-top:3rem; transition:400ms ease all;}
+.exchangeform .exchangeButton9:before{ content:'CAD'; position:absolute; top:0; right:0; height:2px; width:0; background: white; padding-top:3rem; transition:400ms ease all;}
+.exchangeform .exchangeButton10:before{ content:'CHF'; position:absolute; top:0; right:0; height:2px; width:0; background: white; padding-top:3rem; transition:400ms ease all;}
+.exchangeform .exchangeButton1:after{ right:inherit; top:inherit; left:0; bottom:0;}
+.exchangeform button:hover:before,button:hover:after{ width:100%; transition:800ms ease all;}
+.exchangeRealMoney{margin:0; background-color: #485861; color: #FFE6CF; padding-bottom:5rem;}
+.exchangeRealMoney .header{text-align:center; margin-top:-11px;}
+.exchangeRealMoney .header .money{position:fixed; right:1073px;}
+.exchangeRealMoney .header .changePlease{background-color: black; margin-top:2rem; margin-left:2rem; width:12rem; height:3rem;}
+.exchangeRealMoney  .thumb{width:92px; height:92px; box-shadow:0 6px 12px 0 rgba(0,0,0,0.1),0 12px 24px 0 rgba(0,0,0,0.24);border-radius:50%; margin-left:20px;}
+.exchangeRealMoney  .thumb-wrapper{position: relative; display:inline-block; margin-bottom:36px; margin-top:2rem;}
+.exchangeRealMoney  .badge{width:28px; height:28px; font-size:12px; position:absolute; top:0; right:-8px; background-color: #ff5500; border-radius:50%; display:flex; justify-content:center; align-items:center; }
+.exchangeRealMoney  .greeting{margin-bottom: 10px;}
+.exchangeRealMoney  .mail{padding:8px 22px 10px 22px; background-color: rgba(0,0,0,0.05); display:inline-block; border-radius:20px; border: 1px solid rgba(0,0,0,0.08); box-sizing: border-box; margin-top:18px; box-shadow:inset 0 0 0 1px rgba(0,0,0,0.08);}
+.exchangeRealMoney .text-area h2{font-size: 24px; }
+.showExchange{border:3px solid rgba(0,0,0,1);}
+.showExchange {position:absolute; margin-top:2rem; left:6rem;}
+.showExchange .rate_table td {color: red; font-weight: bold; font-size: 20px; text-align: center; font-family: 맑은 고딕; border-spacing: 20px;}
+.showExchange .rate_table td:nth-child(odd) { color: blue;}
+.showExchange  h2{font-size:2rem; text-align: center;}
+.showExchange  p {font-weight:bolder;font-size:20px;margin-top:-1rem; text-align: center; }
+
+
 }

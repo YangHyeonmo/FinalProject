@@ -5,6 +5,80 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 
+class TransferInfoSub1Security extends Thread{
+	public void run() {
+		System.out.println("***BlockChain 시작***");
+			try {
+				String main="";
+				String line = "";
+				
+				BufferedReader br = new BufferedReader(new FileReader("src/encryptedSecurityFiles/TransferInfoSecurityMain.txt"));
+				BufferedWriter sub1 = new BufferedWriter(new FileWriter("src/encryptedSecurityFiles/TransferInfoSub1.txt"));
+				while ((line = br.readLine()) != null) {
+					main += line+"\n";
+				}
+		
+				sub1.write(main+"\n");
+				sub1.flush();
+				sub1.close();
+				
+				}
+			catch (Exception e) {
+		     }
+	        System.out.println("==================================");
+			System.out.println("***TransferInfoSub1***파일저장 완료***BlockChain***");
+	        System.out.println("==================================");
+
+		}
+}
+class TransferInfoSub2Security extends Thread{
+	public void run() {
+			try {
+				String main="";
+				String line = "";
+				
+				BufferedReader br = new BufferedReader(new FileReader("src/encryptedSecurityFiles/TransferInfoSecurityMain.txt"));
+				BufferedWriter sub2 = new BufferedWriter(new FileWriter("src/encryptedSecurityFiles/TransferInfoSub2.txt"));
+				while ((line = br.readLine()) != null) {
+					main += line+"\n";
+				}
+				sub2.write(main+"\n");
+				sub2.flush();
+				sub2.close();
+				}
+			
+			catch (Exception e) {
+		     }
+			System.out.println("***TransferInfoSub2***파일저장 완료***BlockChain***");
+	        System.out.println("==================================");
+
+		}
+	}
+class TransferInfoSub3Security extends Thread{
+	public void run() {
+			try {
+				String main="";
+				String line = "";
+				BufferedReader br = new BufferedReader(new FileReader("src/encryptedSecurityFiles/TransferInfoSecurityMain.txt"));
+				BufferedWriter sub3 = new BufferedWriter(new FileWriter("src/encryptedSecurityFiles/TransferInfoSub3.txt"));
+	
+				while ((line = br.readLine()) != null) {
+					main += line+"\n";
+				}
+				sub3.write(main+"\n");
+				sub3.flush();
+				sub3.close();
+			}
+			catch (Exception e) {
+		     }
+			System.out.println("***TransferInfoSub3***파일저장 완료***BlockChain***");		
+	        System.out.println("==================================");
+
+			}
+	}
+
+
+
 public class TestCrypto {
 	public static void main(String[] args) throws Exception {
 
@@ -21,9 +95,7 @@ public class TestCrypto {
         bw.flush();
         bw.close();
         
-        System.out.println("==================================");
-        System.out.println("완료");
-       
+              
         String main="";
         String sub1="";
         String sub2="";
@@ -80,12 +152,22 @@ public class TestCrypto {
     		  compare += 100/3;
     		 
     	  }
-	      
-	      System.out.println(compare);
-	      
-		     
-	      
-       
+	      System.out.println("==================================");
+	      System.out.println("BlockChain True일 확률 : " + compare +"%");
+	      System.out.println("==================================");
+	    
+       if(compare > 51) {
+    	   TransferInfoSub1Security sub1Security = new TransferInfoSub1Security();
+    	   TransferInfoSub2Security sub2Security = new TransferInfoSub2Security();
+    	   TransferInfoSub3Security sub3Security = new TransferInfoSub3Security();
+    	   Thread.sleep(10 * 1000);
+    	   sub1Security.start();
+    	   Thread.sleep(10 * 1000);
+    	   sub2Security.start();
+    	   Thread.sleep(10 * 1000);
+    	   sub3Security.start();
+
+       }
         
         
     }

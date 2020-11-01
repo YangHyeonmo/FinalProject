@@ -88,15 +88,21 @@ public class MemberController {
 	}
 	
 	@RequestMapping("memberInfoUpdate")
-	public String memberInfoUpdate(MemberDTO member, String oldpwd) throws Exception {
-	
-		member.setMember_id((String)session.getAttribute("member_id"));
-		member.setMember_password(SHA256.getSHA256(member.getMember_password()));
+	public String memberInfoUpdate(String oldpwd, String pwd, String name, String email, String tel, String birthdate, String gender, String zipcode, String address) throws Exception {
+		MemberDTO member = (MemberDTO) session.getAttribute("member");
 
-		String password = (String)session.getAttribute("member_password");
+		String password = member.getMember_password();
 		String oldPwdChk = SHA256.getSHA256(oldpwd);
 		
 		if(password.equals(oldPwdChk)) {
+			member.setMember_password(SHA256.getSHA256(pwd));
+			member.setMember_name(name);
+			member.setMember_email(email);
+			member.setMember_phonenumber(tel);
+			member.setMember_birthdate(birthdate);
+			member.setMember_gender(gender);
+			member.setMember_zipcode(zipcode);
+			member.setMember_address(address);
 			memberDAO.updateMember(member);
 			return "view/mainPage";
 		}
@@ -106,10 +112,11 @@ public class MemberController {
 	
 	@RequestMapping("memberDelete")
 	public String memberDelete(String oldpwd) throws Exception {
-		
+		MemberDTO member = (MemberDTO) session.getAttribute("member");
 		String member_id = (String) session.getAttribute("member_id");
-		String password = (String)session.getAttribute("member_password");
+		String password = member.getMember_password();
 		String oldPwdChk = SHA256.getSHA256(oldpwd);
+
 		if(password.equals(oldPwdChk)) {
 			memberDAO.deleteMember(member_id);
 			session.invalidate();

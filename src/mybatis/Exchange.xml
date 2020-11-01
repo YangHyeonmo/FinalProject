@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Exchange">
+	
+	<insert id="insertExchange" parameterType="hashmap">
+	insert into exchange (member_id, cur_unit, kor_money, exc_money, exc_name, zipcode, exc_date)
+  values (#{member_id}, #{cur_unit}, #{kor_money}, #{exc_money}, #{exc_name}, #{zipcode}, sysdate)
+	</insert>
+	
+	<select id = "selectExchange" parameterType = "String" resultType = "exchange">
+	select *
+	from exchange 
+	where member_id = #{member_id}
+	</select>
+	
+</mapper>

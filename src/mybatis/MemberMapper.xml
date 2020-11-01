@@ -30,7 +30,7 @@
 	where member_id = #{member_id}
 	</select>
 	
-	<update id="update" parameterType="member" >
+	<update id="update" parameterType="Member" >
 	update member set member_password=#{member_password}, member_email=#{member_email}, member_name=#{member_name}, member_birthdate=#{member_birthdate}, member_gender=#{member_gender},
 	member_zipcode=#{member_zipcode}, member_address=#{member_address}
 	where member_id=#{member_id}

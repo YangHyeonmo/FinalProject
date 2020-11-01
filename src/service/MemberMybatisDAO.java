@@ -80,29 +80,25 @@ public class MemberMybatisDAO extends AbstractMybatis{
 
 		public int updateMember(MemberDTO member) throws Exception{
 			SqlSession sqlSession = getSqlSessionFactory().openSession();
-			int result = 0;
 			try {
-				sqlSession.update(namespace +".update", member); 
-				result = 1;
+				return sqlSession.update(namespace +".update", member); 		
 			}  finally {
 				sqlSession.commit();
 				sqlSession.close();
 				
 			}
-			return result;
 		}
 		public int deleteMember(String member_id) throws Exception{
 			SqlSession sqlSession = getSqlSessionFactory().openSession();
-			int result = 0;
+			
 			try {
-				sqlSession.delete(namespace +".deleteMember", member_id); 
-				result = 1;
+				return sqlSession.delete(namespace +".deleteMember", member_id); 
+				
 			}  finally {
 				sqlSession.commit();
-				sqlSession.close();
-				
+				sqlSession.close();	
 			}
-			return result;
+			
 		}
 		public String fineMemberId(String member_name, String member_email) throws Exception{
 			SqlSession sqlSession = getSqlSessionFactory().openSession();
