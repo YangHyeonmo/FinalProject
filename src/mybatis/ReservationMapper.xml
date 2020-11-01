@@ -6,53 +6,40 @@
 
 	<!-- 예약 모으기 등록 -->
 	<insert id="ReservationReg" parameterType="HashMap">
-		INSERT INTO RESERVATION (
+		INSERT INTO Reservation (
 		 	member_id,
-			MY_ACCOUNT_NUM,
-			COLLECTING_MONEY,
-			OPEN_ACCOUNT_PW,
-			COLLECTING_DAY,
-			START_DATE )
-		VALUES ( #{member_id}, #{MY_ACCOUNT_NUM}, #{COLLECTING_MONEY}, #{OPEN_ACCOUNT_PW}, #{COLLECTING_DAY}, sysdate )
+			my_account_num,
+			collecting_money,
+			open_account_pw,
+			collecting_day,
+			start_date )
+		VALUES ( #{member_id}, #{my_account_num}, #{collecting_money}, #{open_account_pw}, #{collecting_day}, sysdate )
 	</insert>
 
 	<!-- 예약 모으기 삭제 -->
-	<delete id="ReservationDelete" parameterType="RESERVATION">
+	<delete id="ReservationDelete" parameterType="Reservation">
 		DELETE FROM 
-			RESERVATION
+			Reservation
 		WHERE 
-			member_id = #{member_id} AND OPEN_ACCOUNT_PW = #{OPEN_ACCOUNT_PW}
+			member_id = #{member_id} AND open_account_pw = #{open_account_pw}
 	</delete>
 
-	<!-- 예약 모으기 변경 -->
-	<!--	<update id="ReservationModify" parameterType="RESERVATION">
-		UPDATE 
-			RESERVATION
-		SET
-			MY_ACCOUNT_NUM = #{MY_ACCOUNT_NUM},
-			COLLECTING_MONEY = #{COLLECTING_MONEY},
-			COLLECTING_DAY = #{COLLECTING_DAY},
-			START_DATE = sysdate )
-		WHERE 
-			member_id = #{member_id} AND OPEN_ACCOUNT_PW = #{OPEN_ACCOUNT_PW}
-	</update>-->
-
 	<!-- 예약 모으기 조회 -->
-	<select id="SelectReservation" parameterType="String" resultType="RESERVATION">
+	<select id="SelectReservation" parameterType="String" resultType="Reservation">
 		SELECT
 			member_id,
-			MY_ACCOUNT_NUM,
-			COLLECTING_MONEY,
-			START_DATE,
-			COLLECTING_DAY,
-			LAST_RUN_DATE,
-			CLOSE_DATE
+			my_account_num,
+			collecting_money,
+			start_date,
+			collecting_day,
+			last_run_date,
+			close_date
 		FROM 
-			RESERVATION
+			Reservation
 		WHERE 
 			member_id = #{member_id}
 		ORDER BY
-			START_DATE	
+			start_date DESC
 	</select>
 
 
@@ -61,60 +48,60 @@
 	<!-- =============================================================================== -->
 
 	<!--1. 예약 정보 조회 -->
-	<select id="selectByDate" resultType="RESERVATION">
+	<select id="selectByDate" resultType="Reservation">
 		SELECT 
 			member_id,
-			MY_ACCOUNT_NUM
+			my_account_num
 		FROM 
-			RESERVATION
+			Reservation
 		WHERE 
-			COLLECTING_DAY = '11'
+			collecting_day = '11'
 		<!-- setDate 자동이체 설정일 -->
 	</select>
 
 	<!--3-1. 예약 모으기(출금계좌) -->
-	<update id="ReservationWithdraw" parameterType="RESERVATION">
+	<update id="ReservationWithdraw" parameterType="Reservation">
 		UPDATE 
 			OPENBANKING 
 		SET 
-			OPEN_BALANCE = OPEN_BALANCE - OPEN_BALANCE
+			open_balance = open_balance - open_balance
 		WHERE 
 			member_id = #{member_id}
 		<!--임시 조건-->
 	</update>
 
 	<!--3-2. 예약 모으기(입금계좌) -->
-	<update id="ReservationDeposit" parameterType="RESERVATION">
+	<update id="ReservationDeposit" parameterType="Reservation">
 		UPDATE 
 			ACCOUNT 
 		SET
-			BALANCE = BALANCE + (SELECT SUM(OPEN_BALANCE) FROM OPENBANKING WHERE member_id = #{member_id})
+			BALANCE = BALANCE + (SELECT SUM(open_balance) FROM OPENBANKING WHERE member_id = #{member_id})
 		WHERE 
 			member_id = #{member_id}
 		<!--임시 조건-->
 	</update>
 
 	<!-- 4. 예약 모으기 마지막 날짜 -->
-	<update id="LastRunDate" parameterType="RESERVATION">
+	<update id="LastRunDate" parameterType="Reservation">
 		UPDATE 
-			RESERVATION
+			Reservation
 		SET
-			LAST_RUN_DATE = sysdate
+			last_run_date = sysdate
 		WHERE 
 			member_id = #{member_id}
 	</update>
 
 	<!-- 거래내역 로그(잔액모으기 내역) -->
-	<insert id="ReservationWithdrawLog" parameterType="RESERVATION">
-		INSERT INTO RESERVATION (
+	<insert id="ReservationWithdrawLog" parameterType="Reservation">
+		INSERT INTO Reservation (
 		 	member_id,
-			MY_ACCOUNT_NUM,
-			COLLECTING_MONEY,
-			COLLECTING_DAY,
-			SUMMARY,
-			MEMO )
-		VALUES ( #{member_id}, #{MY_ACCOUNT_NUM}, (SELECT SUM(OPEN_BALANCE) FROM OPENBANKING WHERE member_id = #{member_id}),
-				 #{COLLECTING_DAY}, '예약모으기', #{MEMO} )		
+			my_account_num,
+			collecting_money,
+			collecting_day,
+			summary,
+			memo )
+		VALUES ( #{member_id}, #{my_account_num}, (SELECT SUM(open_balance) FROM OPENBANKING WHERE member_id = #{member_id}),
+				 #{collecting_day}, '예약모으기', #{memo} )		
 	</insert>
 
 </mapper>

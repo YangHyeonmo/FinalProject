@@ -5,136 +5,104 @@ import java.util.Date;
 
 public class ReservationDTO implements Serializable {
 	private String member_id; // 아이디
-	private String OPEN_ACCOUNT_NO; // 오픈뱅킹 계좌번호
-	private String MY_ACCOUNT_NUM; // 내 계좌번호
-	private String OPEN_ACCOUNT_PW; // 예약 암호
-	private String OPEN_CARD_NAME; // 오픈뱅킹 카드명
-	private int COLLECTING_MONEY; // 예약모으기 금액
-	private String COLLECTING_DAY; // 예약모으기가 실행 될 날짜
-	private String RESERVATION; // 예약 상태(정상,해지) -> 안 쓸듯
-	private String START_DATE; // 등록일
-	private String CLOSE_DATE; // 해지일
-	private String LAST_RUN_DATE; // 마지막 예약 실행날짜
-	private String SUMMARY; // 거래종류
-	private String MEMO; // 메모
+	private String open_account_no; // 오픈뱅킹 계좌번호
+	private String my_account_num; // 내 계좌번호
+	private String open_account_pw; // 예약 암호
+	private int collecting_money; // 예약모으기 금액
+	private String collecting_day; // 예약모으기가 실행 될 날짜
+	private String reservation; // 예약 상태(정상,해지) -> 안 쓸듯
+	private String start_date; // 등록일
+	private String close_date; // 해지일
+	private String last_run_date; // 마지막 예약 실행날짜
+	private String summary; // 거래종류
+	private String memo; // 메모
 
 	public ReservationDTO() {
-	}
+		super();
 
+	}
 	public String getMember_id() {
 		return member_id;
 	}
-
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
-
-	public String getOPEN_ACCOUNT_NO() {
-		return OPEN_ACCOUNT_NO;
+	public String getOpen_account_no() {
+		return open_account_no;
 	}
-
-	public void setOPEN_ACCOUNT_NO(String oPEN_ACCOUNT_NO) {
-		OPEN_ACCOUNT_NO = oPEN_ACCOUNT_NO;
+	public void setOpen_account_no(String open_account_no) {
+		this.open_account_no = open_account_no;
 	}
-
-	public String getMY_ACCOUNT_NUM() {
-		return MY_ACCOUNT_NUM;
+	public String getMy_account_num() {
+		return my_account_num;
 	}
-
-	public void setMY_ACCOUNT_NUM(String mY_ACCOUNT_NUM) {
-		MY_ACCOUNT_NUM = mY_ACCOUNT_NUM;
+	public void setMy_account_num(String my_account_num) {
+		this.my_account_num = my_account_num;
 	}
-
-	public String getOPEN_ACCOUNT_PW() {
-		return OPEN_ACCOUNT_PW;
+	public String getOpen_account_pw() {
+		return open_account_pw;
 	}
-
-	public void setOPEN_ACCOUNT_PW(String oPEN_ACCOUNT_PW) {
-		OPEN_ACCOUNT_PW = oPEN_ACCOUNT_PW;
+	public void setOpen_account_pw(String open_account_pw) {
+		this.open_account_pw = open_account_pw;
 	}
-
-	public String getOPEN_CARD_NAME() {
-		return OPEN_CARD_NAME;
+	public int getCollecting_money() {
+		return collecting_money;
 	}
-
-	public void setOPEN_CARD_NAME(String oPEN_CARD_NAME) {
-		OPEN_CARD_NAME = oPEN_CARD_NAME;
+	public void setCollecting_money(int collecting_money) {
+		this.collecting_money = collecting_money;
 	}
-
-	public int getCOLLECTING_MONEY() {
-		return COLLECTING_MONEY;
+	public String getCollecting_day() {
+		return collecting_day;
 	}
-
-	public void setCOLLECTING_MONEY(int cOLLECTING_MONEY) {
-		COLLECTING_MONEY = cOLLECTING_MONEY;
+	public void setCollecting_day(String collecting_day) {
+		this.collecting_day = collecting_day;
 	}
-
-	public String getCOLLECTING_DAY() {
-		return COLLECTING_DAY;
+	public String getReservation() {
+		return reservation;
 	}
-
-	public void setCOLLECTING_DAY(String cOLLECTING_DAY) {
-		COLLECTING_DAY = cOLLECTING_DAY;
+	public void setReservation(String reservation) {
+		this.reservation = reservation;
 	}
-
-	public String getRESERVATION() {
-		return RESERVATION;
+	public String getStart_date() {
+		return start_date;
 	}
-
-	public void setRESERVATION(String rESERVATION) {
-		RESERVATION = rESERVATION;
+	public void setStart_date(String start_date) {
+		this.start_date = start_date;
 	}
-
-	public String getSTART_DATE() {
-		return START_DATE;
+	public String getClose_date() {
+		return close_date;
 	}
-
-	public void setSTART_DATE(String sTART_DATE) {
-		START_DATE = sTART_DATE;
+	public void setClose_date(String close_date) {
+		this.close_date = close_date;
 	}
-
-	public String getCLOSE_DATE() {
-		return CLOSE_DATE;
+	public String getLast_run_date() {
+		return last_run_date;
 	}
-
-	public void setCLOSE_DATE(String cLOSE_DATE) {
-		CLOSE_DATE = cLOSE_DATE;
+	public void setLast_run_date(String last_run_date) {
+		this.last_run_date = last_run_date;
 	}
-
-	public String getLAST_RUN_DATE() {
-		return LAST_RUN_DATE;
+	public String getSummary() {
+		return summary;
 	}
-
-	public void setLAST_RUN_DATE(String lAST_RUN_DATE) {
-		LAST_RUN_DATE = lAST_RUN_DATE;
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
-
-	public String getSUMMARY() {
-		return SUMMARY;
+	public String getMemo() {
+		return memo;
 	}
-
-	public void setSUMMARY(String sUMMARY) {
-		SUMMARY = sUMMARY;
+	public void setMemo(String memo) {
+		this.memo = memo;
 	}
-
-	public String getMEMO() {
-		return MEMO;
-	}
-
-	public void setMEMO(String mEMO) {
-		MEMO = mEMO;
-	}
-
 	@Override
 	public String toString() {
-		return "ReservationDTO [member_id=" + member_id + ", OPEN_ACCOUNT_NO="
-				+ OPEN_ACCOUNT_NO + ", MY_ACCOUNT_NUM=" + MY_ACCOUNT_NUM
-				+ ", OPEN_ACCOUNT_PW=" + OPEN_ACCOUNT_PW + ", OPEN_CARD_NAME="
-				+ OPEN_CARD_NAME + ", COLLECTING_MONEY=" + COLLECTING_MONEY
-				+ ", COLLECTING_DAY=" + COLLECTING_DAY + ", RESERVATION="
-				+ RESERVATION + ", START_DATE=" + START_DATE + ", CLOSE_DATE="
-				+ CLOSE_DATE + ", LAST_RUN_DATE=" + LAST_RUN_DATE + ", SUMMARY="
-				+ SUMMARY + ", MEMO=" + MEMO + "]";
+		return "ReservationDTO [member_id=" + member_id + ", open_account_no="
+				+ open_account_no + ", my_account_num=" + my_account_num
+				+ ", open_account_pw=" + open_account_pw + ", collecting_money="
+				+ collecting_money + ", collecting_day=" + collecting_day
+				+ ", reservation=" + reservation + ", start_date=" + start_date
+				+ ", close_date=" + close_date + ", last_run_date="
+				+ last_run_date + ", summary=" + summary + ", memo=" + memo
+				+ "]";
 	}
 
 }

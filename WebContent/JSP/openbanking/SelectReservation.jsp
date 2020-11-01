@@ -3,6 +3,7 @@
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+<meta charset="UTF-8">
 <div class="w3-bar w3-white">
 	<button class="w3-bar-item w3-button" onclick="openTransfer('select')">조회</button>
 	<button class="w3-bar-item w3-button" onclick="openTransfer('insert')">등록</button>
@@ -28,12 +29,12 @@
 			<c:forEach var="list" items="${list}">
 				<tr>
 					<td>${list.member_id}&emsp;&emsp;</td>
-					<td>${list.MY_ACCOUNT_NUM}&emsp;&emsp;</td>
-					<td>${list.COLLECTING_MONEY}&emsp;&emsp;</td>
-					<td>${list.START_DATE}&emsp;&emsp;</td>
-					<td>${list.COLLECTING_DAY}&emsp;&emsp;</td>
-					<td>${list.LAST_RUN_DATE}&emsp;&emsp;</td>
-					<td>${list.CLOSE_DATE}&emsp;&emsp;</td>
+					<td>${list.my_account_num}&emsp;&emsp;</td>
+					<td>${list.collecting_money}&emsp;&emsp;</td>
+					<td>${list.start_date}&emsp;&emsp;</td>
+					<td>${list.collecting_day}&emsp;&emsp;</td>
+					<td>${list.last_run_date}&emsp;&emsp;</td>
+					<td>${list.close_date}&emsp;&emsp;</td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -49,7 +50,7 @@
 	<div class="w3-container">
 		<br />
 		<h1>
-			<b>예약등록</b>
+			<b>예약 등록</b>
 		</h1>
 		<br />
 		<form method="post" name="R"
@@ -60,39 +61,40 @@
 					<td width="100" align="left">아이디 확인</td>
 					<td width="500">
 						<input type="text" size="50" maxlength="50" id="member_id"
-							name="member_id" required="required"
-						>
-					</td>
-				</tr>
-				<tr>
-					<td width="130" align="left">입금 될 계좌번호</td>
-					<td width="500">
-						<input type="text" size="50" maxlength="50" id="MY_ACCOUNT_NUM"
-							name="MY_ACCOUNT_NUM" required="required"
-						>
-					</td>
-				</tr>
-				<tr>
-					<td width="100" align="left">금액</td>
-					<td width="500">
-						<input type="text" size="50" maxlength="50" id="COLLECTING_MONEY"
-							name="COLLECTING_MONEY" required="required"
+							name="member_id" required="required" placeholder="ID 입력"
 						>
 					</td>
 				</tr>
 				<tr>
 					<td width="100" align="left">예약 암호</td>
 					<td width="500">
-						<input type="text" size="50" maxlength="50" id="OPEN_ACCOUNT_PW"
-							name="OPEN_ACCOUNT_PW" required="required"
+						<input type="text" size="50" maxlength="50" id="open_account_pw"
+							name="open_account_pw" required="required" placeholder="PW 입력"
+						>
+					</td>
+				</tr>
+				<tr>
+					<td width="130" align="left">입금 될 계좌번호</td>
+					<td width="500">
+						<input type="text" size="50" maxlength="50" id="my_account_num"
+							name="my_account_num" required="required" pattern="\d{4}-\d{2}-\d{4}"
+							placeholder="ex) 1234-12-1234"
+						>
+					</td>
+				</tr>
+				<tr>
+					<td width="100" align="left">금액</td>
+					<td width="500">
+						<input type="text" size="50" maxlength="50" id="collecting_money"
+							name="collecting_money" required="required" placeholder="money 입력"
 						>
 					</td>
 				</tr>
 				<tr>
 					<td width="100" align="left">설정일</td>
 					<td width="500">
-						<input type="date" size="50" maxlength="50" id="COLLECTING_DAY"
-							name="COLLECTING_DAY" required="required"
+						<input type="date" size="50" maxlength="50" id="collecting_day"
+							name="collecting_day" required="required" placeholder="date 입력"
 						>
 					</td>
 				</tr>
@@ -111,10 +113,10 @@
 	<div class="w3-container">
 		<br />
 		<h1>
-			<b>예약삭제</b>
+			<b>예약 삭제</b>
 		</h1>
 		<br />
-		<form method="post" name="writeform"
+		<form method="post"
 			action="<%=request.getContextPath()%>/openbanking/ReservationDeleteProc"
 		>
 			<table class="w3-table-all">
@@ -122,15 +124,15 @@
 					<td width="100" align="left">아이디 확인</td>
 					<td width="500">
 						<input type="text" size="50" maxlength="50" id="member_id"
-							name="member_id" required="required"
+							name="member_id" required="required" placeholder="ID 입력"
 						>
 					</td>
 				</tr>
 				<tr>
 					<td width="100" align="left">예약 암호</td>
 					<td width="500">
-						<input type="password" size="50" maxlength="50" id="OPEN_ACCOUNT_PW"
-							name="OPEN_ACCOUNT_PW" required="required"
+						<input type="password" size="50" maxlength="50" id="open_account_pw"
+							name="open_account_pw" required="required" placeholder="PW 입력"
 						>
 					</td>
 				</tr>

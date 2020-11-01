@@ -5,12 +5,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>예약삭제</title>
 </head>
 <body>
-	<script>
-		alert("예약 삭제완료!");
-	</script>
-	<meta http-equiv="Refresh" content="0; url=SelectWithdrawLog" />
+	<c:if test="${error==1}">
+		<script>
+			alert("예약 삭제완료!!");
+		</script>
+		<meta http-equiv="Refresh" content="0; url=SelectOpenBanking" />
+	</c:if>
+	<c:if test="${error==2}">
+		<script>
+			alert("예약 삭제에 실패하였습니다!!");
+		</script>
+		<meta http-equiv="Refresh" content="0; url=SelectOpenBanking" />
+	</c:if>
 </body>
 </html>

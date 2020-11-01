@@ -149,7 +149,7 @@ public class AccountController {
 	}
 
 	@RequestMapping("accountDeletePro") // ���Ȯ��,�ٸ����·� �ܾ׿ű�
-	public String accountDeletePro(String account_num, int account_pw, String OPEN_ACCOUNT_NO, int balance, Model m)
+	public String accountDeletePro(String account_num, int account_pw, String open_account_no, int balance, Model m)
 			throws Exception {
 
 		System.out.println("Account_num= " + balance);
@@ -161,9 +161,9 @@ public class AccountController {
 		m.addAttribute("check", check);
 
 		if (check == true) {
-			movebalance = dbpro.moveBalance(OPEN_ACCOUNT_NO, balance);
+			movebalance = dbpro.moveBalance(open_account_no, balance);
 			if (movebalance == 1) {
-				m.addAttribute("openAccountNo", OPEN_ACCOUNT_NO);
+				m.addAttribute("openAccountNo", open_account_no);
 				m.addAttribute("balance", balance);
 			}
 		}

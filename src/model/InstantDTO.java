@@ -5,81 +5,73 @@ import java.util.Date;
 
 public class InstantDTO implements Serializable {
 	private String member_id; // 아이디
-	private String OPEN_ACCOUNT_NO; // 오픈뱅킹 계좌번호 -> 아직 안 쓰임
-	private String MY_ACCOUNT_NUM; // 내 계좌번호
-	private String OPEN_ACCOUNT_PW; // 계좌 비밀번호 -> 아직 안 쓰임
-	private String OPEN_CARD_NAME; // 오픈뱅킹 카드명 -> 아직 안 쓰임
-	private int COLLECTING_MONEY; // 모으기 금액
-	private Date COLLECTING_DAY; // 모으기 날짜
-	private String SUMMARY; // 거래종류
-	private String MEMO; // 메모
+	private String open_account_no; // 오픈뱅킹 계좌번호 -> 아직 안 쓰임
+	private String my_account_num; // 내 계좌번호
+	private String open_account_pw; // 계좌 비밀번호 -> 아직 안 쓰임
+	private int collecting_money; // 모으기 금액
+	private Date collecting_day; // 모으기 날짜
+	private String summary; // 거래종류
+	private String memo; // 메모
 
 	public InstantDTO() {
-	}
+		super();
 
+	}
 	public String getMember_id() {
 		return member_id;
 	}
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
-	public String getOPEN_ACCOUNT_NO() {
-		return OPEN_ACCOUNT_NO;
+	public String getOpen_account_no() {
+		return open_account_no;
 	}
-	public void setOPEN_ACCOUNT_NO(String oPEN_ACCOUNT_NO) {
-		OPEN_ACCOUNT_NO = oPEN_ACCOUNT_NO;
+	public void setOpen_account_no(String open_account_no) {
+		this.open_account_no = open_account_no;
 	}
-	public String getMY_ACCOUNT_NUM() {
-		return MY_ACCOUNT_NUM;
+	public String getMy_account_num() {
+		return my_account_num;
 	}
-	public void setMY_ACCOUNT_NUM(String mY_ACCOUNT_NUM) {
-		MY_ACCOUNT_NUM = mY_ACCOUNT_NUM;
+	public void setMy_account_num(String my_account_num) {
+		this.my_account_num = my_account_num;
 	}
-	public String getOPEN_ACCOUNT_PW() {
-		return OPEN_ACCOUNT_PW;
+	public String getOpen_account_pw() {
+		return open_account_pw;
 	}
-	public void setOPEN_ACCOUNT_PW(String oPEN_ACCOUNT_PW) {
-		OPEN_ACCOUNT_PW = oPEN_ACCOUNT_PW;
+	public void setOpen_account_pw(String open_account_pw) {
+		this.open_account_pw = open_account_pw;
 	}
-	public String getOPEN_CARD_NAME() {
-		return OPEN_CARD_NAME;
+	public int getCollecting_money() {
+		return collecting_money;
 	}
-	public void setOPEN_CARD_NAME(String oPEN_CARD_NAME) {
-		OPEN_CARD_NAME = oPEN_CARD_NAME;
+	public void setCollecting_money(int collecting_money) {
+		this.collecting_money = collecting_money;
 	}
-	public int getCOLLECTING_MONEY() {
-		return COLLECTING_MONEY;
+	public Date getCollecting_day() {
+		return collecting_day;
 	}
-	public void setCOLLECTING_MONEY(int cOLLECTING_MONEY) {
-		COLLECTING_MONEY = cOLLECTING_MONEY;
+	public void setCollecting_day(Date collecting_day) {
+		this.collecting_day = collecting_day;
 	}
-	public Date getCOLLECTING_DAY() {
-		return COLLECTING_DAY;
+	public String getSummary() {
+		return summary;
 	}
-	public void setCOLLECTING_DAY(Date cOLLECTING_DAY) {
-		COLLECTING_DAY = cOLLECTING_DAY;
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
-	public String getSUMMARY() {
-		return SUMMARY;
+	public String getMemo() {
+		return memo;
 	}
-	public void setSUMMARY(String sUMMARY) {
-		SUMMARY = sUMMARY;
+	public void setMemo(String memo) {
+		this.memo = memo;
 	}
-	public String getMEMO() {
-		return MEMO;
-	}
-	public void setMEMO(String mEMO) {
-		MEMO = mEMO;
-	}
-
 	@Override
 	public String toString() {
-		return "InstantDTO [member_id=" + member_id + ", OPEN_ACCOUNT_NO="
-				+ OPEN_ACCOUNT_NO + ", MY_ACCOUNT_NUM=" + MY_ACCOUNT_NUM
-				+ ", OPEN_ACCOUNT_PW=" + OPEN_ACCOUNT_PW + ", OPEN_CARD_NAME="
-				+ OPEN_CARD_NAME + ", COLLECTING_MONEY=" + COLLECTING_MONEY
-				+ ", COLLECTING_DAY=" + COLLECTING_DAY + ", SUMMARY=" + SUMMARY
-				+ ", MEMO=" + MEMO + "]";
+		return "InstantDTO [member_id=" + member_id + ", open_account_no="
+				+ open_account_no + ", my_account_num=" + my_account_num
+				+ ", open_account_pw=" + open_account_pw + ", collecting_money="
+				+ collecting_money + ", collecting_day=" + collecting_day
+				+ ", summary=" + summary + ", memo=" + memo + "]";
 	}
 
 }

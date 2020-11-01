@@ -26,8 +26,10 @@ public class ReservationDAO extends AbstractMybatis {
 			int result = sqlSession.insert(statement, reservation);
 			if (result > 0) {
 				sqlSession.commit();
+				return 1;
 			} else {
 				sqlSession.rollback();
+				return 0;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -45,8 +47,10 @@ public class ReservationDAO extends AbstractMybatis {
 			int result = sqlSession.delete(statement, reservation);
 			if (result > 0) {
 				sqlSession.commit();
+				return 1;
 			} else {
 				sqlSession.rollback();
+				return 0;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -88,7 +92,7 @@ public class ReservationDAO extends AbstractMybatis {
 	}
 
 	//////////////////////////////////////////////////////////////////////////////
-	//////// 자동이체 실행 로직
+	//////// 자동이체 실행 로직 10월 31일 기준 사용되지 않는 부분 입니다.
 	//////////////////////////////////////////////////////////////////////////////
 
 	/* 예약 정보 조회 */
@@ -152,15 +156,15 @@ public class ReservationDAO extends AbstractMybatis {
 			int result = sqlSession.insert(statement, reservation);;
 			if (result > 0) {
 				sqlSession.commit();
+				return 1;
 			} else {
-				sqlSession.rollback();
+				return 0;
 			}
-			System.out.println("기록 :" + result);
-			return result;
-
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			sqlSession.close();
 		}
+		return 1;
 	}
-
 }

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import model.AccountDTO;
 import model.MemberDTO;
 import model.OpenBankingDTO;
+import service.AccountDAO;
 import service.MemberMybatisDAO;
 import service.OpenBankingDAO;
 import service.TransferMybatisDAO;
@@ -65,6 +66,8 @@ public class ViewPageController {
 			m.addAttribute("account_num", num);
 			m.addAttribute("balance", balance);
 
+			//2.회원이 통장이 가입이 되어있는지
+			System.out.println(member_id);
 			int total = opDAO.TotalOpenBalance(member_id);
 			m.addAttribute("total", total);
 			List<OpenBankingDTO> list = opDAO.SelectOpenBanking(member_id);

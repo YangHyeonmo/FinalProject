@@ -5,67 +5,83 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class OpenBankingDTO implements Serializable {
-	private String OPEN_ACCOUNT_NO; // 오픈뱅킹 계좌번호
+	private String open_account_no; // 오픈뱅킹 계좌번호
 	private String member_id; // 아이디
-	private String OPEN_BANK; // 오픈뱅킹 은행명
-	private String OPEN_ACCOUNT_PW; // 오픈뱅킹 계좌 비밀번호
-	private int OPEN_BALANCE; // 오픈뱅킹 잔액
-	private String OPEN_CARD_NAME; // 오픈뱅킹 카드명
-	private Date REGDATE; // 오픈뱅킹 등록날짜
+	private String open_bank; // 오픈뱅킹 은행명
+	private String open_account_pw; // 오픈뱅킹 계좌 비밀번호
+	private int open_balance; // 오픈뱅킹 잔액
+	private Date regdate; // 오픈뱅킹 등록날짜
+
+	private String num1;
+	private String num2;
+	private String num3;
 
 	public OpenBankingDTO() {
-	}
+		super();
 
-	public String getOPEN_ACCOUNT_NO() {
-		return OPEN_ACCOUNT_NO;
 	}
-	public void setOPEN_ACCOUNT_NO(String oPEN_ACCOUNT_NO) {
-		OPEN_ACCOUNT_NO = oPEN_ACCOUNT_NO;
+	public String getOpen_account_no() {
+		return open_account_no;
 	}
-	public String getmember_id() {
+	public void setOpen_account_no(String open_account_no) {
+		this.open_account_no = open_account_no;
+	}
+	public String getMember_id() {
 		return member_id;
 	}
-	public void setmember_id(String member_id) {
+	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
-	public String getOPEN_BANK() {
-		return OPEN_BANK;
+	public String getOpen_bank() {
+		return open_bank;
 	}
-	public void setOPEN_BANK(String oPEN_BANK) {
-		OPEN_BANK = oPEN_BANK;
+	public void setOpen_bank(String open_bank) {
+		this.open_bank = open_bank;
 	}
-	public String getOPEN_ACCOUNT_PW() {
-		return OPEN_ACCOUNT_PW;
+	public String getOpen_account_pw() {
+		return open_account_pw;
 	}
-	public void setOPEN_ACCOUNT_PW(String oPEN_ACCOUNT_PW) {
-		OPEN_ACCOUNT_PW = oPEN_ACCOUNT_PW;
+	public void setOpen_account_pw(String open_account_pw) {
+		this.open_account_pw = open_account_pw;
 	}
-	public int getOPEN_BALANCE() {
-		return OPEN_BALANCE;
+	public int getOpen_balance() {
+		return open_balance;
 	}
-	public void setOPEN_BALANCE(int oPEN_BALANCE) {
-		OPEN_BALANCE = oPEN_BALANCE;
+	public void setOpen_balance(int open_balance) {
+		this.open_balance = open_balance;
 	}
-	public String getOPEN_CARD_NAME() {
-		return OPEN_CARD_NAME;
+	public Date getRegdate() {
+		return regdate;
 	}
-	public void setOPEN_CARD_NAME(String oPEN_CARD_NAME) {
-		OPEN_CARD_NAME = oPEN_CARD_NAME;
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
 	}
-	public Date getREGDATE() {
-		return REGDATE;
+	public String getNum1() {
+		return num1;
 	}
-	public void setREGDATE(Date rEGDATE) {
-		REGDATE = rEGDATE;
+	public void setNum1(String num1) {
+		this.num1 = num1;
+	}
+	public String getNum2() {
+		return num2;
+	}
+	public void setNum2(String num2) {
+		this.num2 = num2;
+	}
+	public String getNum3() {
+		return num3;
+	}
+	public void setNum3(String num3) {
+		this.num3 = num3;
 	}
 
 	@Override
 	public String toString() {
-		return "OpenBankingDTO [OPEN_ACCOUNT_NO=" + OPEN_ACCOUNT_NO
-				+ ", member_id=" + member_id + ", OPEN_BANK=" + OPEN_BANK
-				+ ", OPEN_ACCOUNT_PW=" + OPEN_ACCOUNT_PW + ", OPEN_BALANCE="
-				+ OPEN_BALANCE + ", OPEN_CARD_NAME=" + OPEN_CARD_NAME
-				+ ", REGDATE=" + REGDATE + "]";
+		return "OpenBankingDTO [open_account_no=" + open_account_no
+				+ ", member_id=" + member_id + ", open_bank=" + open_bank
+				+ ", open_account_pw=" + open_account_pw + ", open_balance="
+				+ open_balance + ", regdate=" + regdate + ", num1=" + num1
+				+ ", num2=" + num2 + ", num3=" + num3 + "]";
 	}
 
 }

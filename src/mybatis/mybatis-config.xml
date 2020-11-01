@@ -6,12 +6,11 @@
 		<typeAlias type="model.MemberDTO" alias="Member" />
 		<typeAlias type="model.TransferDTO" alias="Transfer" />
 		<typeAlias type="model.AccountDTO" alias="Account" />
-		<typeAlias type="model.OpenBankingDTO" alias="OPENBANKING" />
-		<typeAlias type="model.InstantDTO" alias="INSTANT" />
-		<typeAlias type="model.ReservationDTO" alias="RESERVATION" />
+		<typeAlias type="model.OpenBankingDTO" alias="OpenBanking" />
+		<typeAlias type="model.InstantDTO" alias="Instant" />
+		<typeAlias type="model.ReservationDTO" alias="Reservation" />
 		<typeAlias type="model.FinanceDTO" alias="Finance" />
 		<typeAlias type="model.ProductsDTO" alias="Products" />
-		<typeAlias type="model.AccountDTO" alias="Account" />
 		<typeAlias type="model.StockDTO" alias="Stock" />
 
 	</typeAliases>

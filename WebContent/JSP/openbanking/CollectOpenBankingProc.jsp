@@ -5,12 +5,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>모으기</title>
 </head>
 <body>
-	<script>
-		alert("모으기 완료!");
-	</script>
-	<meta http-equiv="Refresh" content="0; url=SelectOpenBanking" />
+	<c:if test="${error==1}">
+		<script>
+		alert("모으기 완료!!");
+		</script>
+		<meta http-equiv="Refresh" content="0; url=SelectOpenBanking" />
+	</c:if>
+	<c:if test="${error==2}">
+		<script>
+			alert("모으기 실패!!");
+		</script>
+		<meta http-equiv="Refresh" content="0; url=SelectOpenBanking" />
+	</c:if>
 </body>
 </html>

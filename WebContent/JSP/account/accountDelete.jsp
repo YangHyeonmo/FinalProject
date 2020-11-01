@@ -35,12 +35,12 @@
 					<td align="center" width="200">잔액옮길계좌</td>
 					<td><select name="movebalance">
 							<c:forEach var="account" items="${account}">
-								<option value="다른은행계좌">${account.OPEN_ACCOUNT_NO}
-									${account.OPEN_BANK }</option>
-							<c:set var="openAccountNo" value="${account.OPEN_ACCOUNT_NO}"></c:set>
+								<option value="다른은행계좌">${account.open_account_no}
+									${account.open_bank }</option>
+							<c:set var="openAccountNo" value="${account.open_account_no}"></c:set>
 							</c:forEach>
 					</select>
-					<input type="hidden" name="OPEN_ACCOUNT_NO" value="${openAccountNo}"></td>
+					<input type="hidden" name="open_account_no" value="${openAccountNo}"></td>
 				</tr>
 
 				<tr height="30">

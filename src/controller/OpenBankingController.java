@@ -17,10 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import model.AccountDTO;
 import model.InstantDTO;
+import model.MemberDTO;
 import model.OpenBankingDTO;
 import model.ReservationDTO;
+import service.AccountDAO;
+import service.MemberMybatisDAO;
 import service.OpenBankingDAO;
 import service.ReservationDAO;
+import util.SendMail;
 
 @Controller
 @RequestMapping("/openbanking")
@@ -54,15 +58,55 @@ public class OpenBankingController {
 	}
 
 	@RequestMapping("InsertOpenBankingProc")
-	public String InsertOpenBankingProc(OpenBankingDTO opDTO, Model m)
+	public String InsertOpenBankingProc(OpenBankingDTO op, Model m)
 			throws Throwable {
 
-		int result = opDAO.InsertOpenBanking(opDTO);
+		MemberMybatisDAO mdao = new MemberMybatisDAO();
 
-		if (result == 1) { //유효성 검사 필요
-			return "openbanking/InsertOpenBankingProc";
+		//1.회원인지 아닌지 확인
+		MemberDTO mdto = mdao.getMember(op.getMember_id());
+		System.out.println("member:" + mdto.getMember_address());
+		if (!mdto.getMember_id().equals(null)) {
+			//2. 회원인데 account가 없는 경우
+
+			String open_account_no = (op.getNum1() + "-" + op.getNum2() + "-"
+					+ op.getNum3());
+			op.setOpen_account_no(open_account_no);
+			opDTO = op;
+
+			//이메일 인증 
+			int random = (int) (Math.random() * 1000000) + 1;
+			mdto = mdao.getMember(opDTO.getMember_id());
+
+			SendMail send = new SendMail();
+			send.send(mdto.getMember_email(), random);
+			m.addAttribute("random", random);
+
+			return "openbanking/view";
+		}
+		return "openbanking/view";
+
+	}
+
+	@RequestMapping("view")
+	public String view(String member_id, Model m) {
+
+		return "openbanking/view";
+	}
+
+	@RequestMapping("checknumber")
+	public String checknumber(int random, int auth_num, Model m) {
+
+		// 이후 세션으로 수정
+		List<OpenBankingDTO> list = opDAO.SelectOpenBanking("vldrn7636");
+		m.addAttribute("list", list);
+
+		if (random == auth_num) {
+			int result = opDAO.InsertOpenBanking(opDTO);
+			return "openbanking/SelectOpenBanking";
 		} else {
-			return "openbanking/error";
+			m.addAttribute("error", 1);
+			return "openbanking/SelectOpenBanking";
 		}
 	}
 
@@ -79,9 +123,11 @@ public class OpenBankingController {
 		int result = opDAO.DeleteOpenBanking(opDTO);
 
 		if (result == 1) {
+			m.addAttribute("error", 1);
 			return "openbanking/DeleteOpenBankingProc";
 		} else {
-			return "openbanking/error";
+			m.addAttribute("error", 2);
+			return "openbanking/DeleteOpenBankingProc";
 		}
 	}
 
@@ -105,23 +151,23 @@ public class OpenBankingController {
 	}
 	@RequestMapping("CollectOpenBankingProc")
 	public String CollectOpenBankingProc(int money, String member_id,
-			String OPEN_ACCOUNT_PW, Model m) throws Throwable {
+			String open_account_pw, Model m) throws Throwable {
 
 		String fromaccount = opDAO.checkaccount(member_id);
 
 		List<OpenBankingDTO> list = opDAO.selectList(fromaccount, member_id);
 		int total = list.size() * money;
 
-		opDAO.WithdrawLog(member_id, fromaccount, total);
-
-		opDAO.WithdrawOpenBanking(money, member_id, OPEN_ACCOUNT_PW);
-
-		int result = opDAO.DepositOpenBanking(fromaccount, total);
-
+		int result = opDAO.WithdrawOpenBanking(money, member_id,
+				open_account_pw);
 		if (result == 1) {
+			opDAO.DepositOpenBanking(fromaccount, total);
+			opDAO.WithdrawLog(member_id, fromaccount, total);
+			m.addAttribute("error", 1);
 			return "openbanking/CollectOpenBankingProc";
 		} else {
-			return "openbanking/error";
+			m.addAttribute("error", 2);
+			return "openbanking/CollectOpenBankingProc";
 		}
 	}
 
@@ -150,11 +196,12 @@ public class OpenBankingController {
 
 		int result = rDAO.ReservationReg(rDTO);
 
-		System.out.println(result);
-		if (result == 1) { //유효성 검사 필요
+		if (result == 1) {
+			m.addAttribute("error", 1);
 			return "openbanking/ReservationRegProc";
 		} else {
-			return "openbanking/error";
+			m.addAttribute("error", 2);
+			return "openbanking/ReservationRegProc";
 		}
 	}
 
@@ -182,10 +229,13 @@ public class OpenBankingController {
 
 		int result = rDAO.ReservationDelete(rDTO);
 
-		if (result == 1) { //유효성 검사 필요
+		if (result == 1) {
+			m.addAttribute("error", 1);
 			return "openbanking/ReservationDeleteProc";
 		} else {
-			return "openbanking/error";
+			m.addAttribute("error", 2);
+			return "openbanking/ReservationDeleteProc";
 		}
+
 	}
 }

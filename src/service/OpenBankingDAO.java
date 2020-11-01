@@ -28,8 +28,9 @@ public class OpenBankingDAO extends AbstractMybatis {
 			int result = sqlSession.insert(statement, OpenBanking);
 			if (result > 0) {
 				sqlSession.commit();
+				return 1;
 			} else {
-				sqlSession.rollback();
+				return 0;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -47,8 +48,9 @@ public class OpenBankingDAO extends AbstractMybatis {
 			int result = sqlSession.insert(statement, OpenBanking);
 			if (result > 0) {
 				sqlSession.commit();
+				return 1;
 			} else {
-				sqlSession.rollback();
+				return 0;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -97,19 +99,20 @@ public class OpenBankingDAO extends AbstractMybatis {
 
 	/* 잔액모으기(출금계좌) */
 	public Integer WithdrawOpenBanking(int money, String member_id,
-			String OPEN_ACCOUNT_PW) {
+			String open_account_pw) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
 			String statement = namespace + ".WithdrawOpenBanking";
 			map.clear();
 			map.put("money", money);
 			map.put("member_id", member_id);
-			map.put("OPEN_ACCOUNT_PW", OPEN_ACCOUNT_PW);
+			map.put("open_account_pw", open_account_pw);
 			int result = sqlSession.update(statement, map);
 			if (result > 0) {
 				sqlSession.commit();
+				return 1;
 			} else {
-				sqlSession.rollback();
+				return 0;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -130,8 +133,9 @@ public class OpenBankingDAO extends AbstractMybatis {
 			int result = sqlSession.update(statement, map);
 			if (result > 0) {
 				sqlSession.commit();
+				return 1;
 			} else {
-				sqlSession.rollback();
+				return 0;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -172,8 +176,9 @@ public class OpenBankingDAO extends AbstractMybatis {
 			result = sqlSession.insert(statement, map);
 			if (result > 0) {
 				sqlSession.commit();
+				return 1;
 			} else {
-				sqlSession.rollback();
+				return 0;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

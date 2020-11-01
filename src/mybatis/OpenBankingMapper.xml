@@ -5,43 +5,41 @@
 	<cache />
 
 	<!-- 오픈뱅킹 계좌 등록 -->
-	<insert id="InsertOpenBanking" parameterType="OPENBANKING">
+	<insert id="InsertOpenBanking" parameterType="OpenBanking">
 		INSERT INTO OPENBANKING (
-			OPEN_ACCOUNT_NO,
-			OPEN_BANK,
+			open_account_no,
+			open_bank,
 			member_id,  
-			OPEN_ACCOUNT_PW, 
-			OPEN_BALANCE,
-			OPEN_CARD_NAME,
-			REGDATE )
-		VALUES ( #{OPEN_ACCOUNT_NO}, #{OPEN_BANK}, #{member_id}, #{OPEN_ACCOUNT_PW}, #{OPEN_BALANCE}, #{OPEN_CARD_NAME}, sysdate )
+			open_account_pw, 
+			open_balance,
+			regdate )
+		VALUES ( #{open_account_no}, #{open_bank}, #{member_id}, #{open_account_pw}, #{open_balance}, sysdate )
 		<!--WHERE-->
 	</insert>
 
 	<!-- 오픈뱅킹 계좌 삭제 -->
-	<delete id="DeleteOpenBanking" parameterType="OPENBANKING">
+	<delete id="DeleteOpenBanking" parameterType="OpenBanking">
   		DELETE FROM OPENBANKING
   		WHERE 
-			 member_id = #{member_id} AND OPEN_ACCOUNT_NO = #{OPEN_ACCOUNT_NO} AND OPEN_ACCOUNT_PW = #{OPEN_ACCOUNT_PW}
+			 member_id = #{member_id} AND open_account_no = #{open_account_no} AND open_account_pw = #{open_account_pw}
   	</delete>
 
 	<!-- 오픈뱅킹 계좌 조회 -->
-	<select id="SelectOpenBanking" parameterType="String" resultType="OPENBANKING">
+	<select id="SelectOpenBanking" parameterType="String" resultType="OpenBanking">
 		SELECT
-			OPEN_ACCOUNT_NO,
-			OPEN_BANK,
+			open_account_no,
+			open_bank,
 			member_id,
-			OPEN_BALANCE,
-			OPEN_CARD_NAME,
-			TO_CHAR(REGDATE,'YYYY-MM-DD')
+			open_balance,
+			regdate
 		FROM 
 			OPENBANKING
 		WHERE 
 			member_id = #{member_id}
 		ORDER BY
-			REGDATE
+			regdate DESC
 	</select>
-	<select id="SelectList" parameterType="String" resultType="OPENBANKING">
+	<select id="SelectList" parameterType="String" resultType="OpenBanking">
 		SELECT
 			*
 		FROM 
@@ -49,35 +47,14 @@
 		where member_id=#{member_id}
 	</select>
 
-	<!--	
-	<select id="SelectId" parameterType="OPENBANKING" resultType="OPENBANKING">
-		SELECT
-			member_id
-		FROM 
-			OPENBANKING
-	</select>
-	<select id="SelectPw" parameterType="OPENBANKING" resultType="OPENBANKING">
-		SELECT
-			OPEN_ACCOUNT_PW
-		FROM 
-			OPENBANKING
-	</select>
-	<select id="SelectBalance" parameterType="OPENBANKING" resultType="OPENBANKING">
-		SELECT
-			OPEN_BALANCE
-		FROM 
-			OPENBANKING
-	</select>
-	-->
-
 	<!-- 잔액모으기(출금계좌) -->
 	<update id="WithdrawOpenBanking" parameterType="HashMap">
 		UPDATE 
 			OPENBANKING 
 		SET 
-			OPEN_BALANCE = OPEN_BALANCE - #{money}
+			open_balance = open_balance - #{money}
 		WHERE 
-			 member_id = #{member_id} AND OPEN_ACCOUNT_PW = #{OPEN_ACCOUNT_PW}
+			 member_id = #{member_id} AND open_account_pw = #{open_account_pw}
 	</update>
 
 	<!-- 잔액모으기(입금계좌) -->
@@ -87,44 +64,44 @@
 		SET
 			BALANCE = BALANCE + #{money}
 		WHERE 
-			account_num = #{account_num}
+			 member_id = #{member_id} AND open_account_pw = #{open_account_pw}
 	</update>
 
 	<!-- 거래내역 로그(잔액모으기 내역) -->
 	<insert id="WithdrawLog" parameterType="HashMap">
 		INSERT INTO INSTANT (
 		 	member_id,
-			MY_ACCOUNT_NUM,
-			COLLECTING_MONEY,
-			COLLECTING_DAY,
-			SUMMARY,
-			MEMO )
+			my_account_num,
+			collecting_money,
+			collecting_day,
+			summary,
+			memo )
 		VALUES ( #{member_id}, #{account_num}, #{money},
-				 sysdate, '즉시모으기', '메모' )		
+				 sysdate, '즉시모으기', '메모' )	
 	</insert>
 
 	<!--거래내역 조회 -->
-	<select id="SelectWithdrawLog" parameterType="String" resultType="INSTANT">
+	<select id="SelectWithdrawLog" parameterType="String" resultType="Instant">
 		SELECT
 			member_id,
-			MY_ACCOUNT_NUM,
-			COLLECTING_MONEY,
-			COLLECTING_DAY,
-			SUMMARY,
-			MEMO 
+			my_account_num,
+			collecting_money,
+			collecting_day,
+			summary,
+			memo 
 		FROM 
 			INSTANT
 		WHERE 
 			member_id = #{member_id}
 		ORDER BY
-			COLLECTING_DAY
+			collecting_day DESC
 	</select>
 
 	<select id="checkaccount" parameterType="String" resultType="String">
 		SELECT 
 			account_num 
 		FROM 
-			ACCOUNT 
+			MainAccount 
 		WHERE
 			 member_id = #{member_id}
 	</select>
@@ -132,7 +109,7 @@
 	<!--메인페이지 총 잔액 조회-->
 	<select id="TotalOpenBalance" parameterType="String" resultType="int">
 		SELECT
-			SUM ( OPEN_BALANCE ) AS TOTAL
+			nvl(SUM ( open_balance ),0) AS TOTAL
 		FROM 
 			OPENBANKING
 		WHERE 
