@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/default.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/common.css">
 </head>
-<body class="loginRegister">
+<div class="loginRegister">
 	<section class="container">
 		<article class="half">
 			<h1>NARUBANK</h1>
@@ -99,6 +99,8 @@
 		</article>
 		<div class="half bg"></div>
 	</section>
+	</div>
+	
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/common.js"></script>
 	<script
 		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"
@@ -125,6 +127,6 @@ $('.container .bg').mousemove(function(e){
     $(this).css('background-position', amountMovedX + 'px ' + amountMovedY + 'px');
 });
 </script>
-</body>
-</body>
+
+
 </html>

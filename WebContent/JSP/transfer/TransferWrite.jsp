@@ -10,6 +10,8 @@
 <meta http-equiv="X-UA-Compatible">
 <title>MyPage</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
 </head>
 <body>
 <c:if test="${error==1}">
@@ -37,11 +39,8 @@ var balance=new Array();
 <c:forEach items="${balance}" var="item">
 	balance.push("${item}");
 </c:forEach>
-
-
 document.getElementById('balance').value=balance[0];
-</script>
-<script>
+
 function change(){
 	var account=new Array();
 	<c:forEach items="${account_num}" var="item">
@@ -61,282 +60,184 @@ function change(){
 	}
 }
 </script>
-<div class="w3-bar w3-white">
-  <button class="w3-bar-item w3-button" onclick="openTransfer('transfer')">이체</button>
-  <button class="w3-bar-item w3-button" onclick="openTransfer('transferAuto')">자동 이체</button>
-  <button class="w3-bar-item w3-button" onclick="openTransfer('transferRes')">예약 이체</button>
+<div class="transferButt">
+  <button  onclick="openTransfer('transfer')">이체</button>
+  <button  onclick="openTransfer('transferAuto')">자동 이체</button>
+  <button  onclick="openTransfer('transferRes')">예약 이체</button>
 </div>
 <div id="transfer" class="bank">
-<form action="<%=request.getContextPath()%>/transfer/TransferAuth" method="post" name="transferform">
-	<table class = "table table-bordered table-hover" style = "text-align: center; border: 1px solid #dddddd">
-	<input type="hidden" name="num" value="1"/>
-				<thead>
-					<tr>
-						<th colspan = "5"><h4 align="center">이체</h4></th>
-					</tr>
-				</thead>
-					<tr>
-						<td colspan = "5">출금 계좌 번호</td>
-					</tr>
-					<tr>
-						<td colspan = "5">	
-							<select name="account_no" id="account_no" onchange="change()">
+<div class="container">
+  <div class="col1">
+    <div class="card">
+      <div class="front">
+        <div class="type">
+          <img class="bankid"/>
+        </div>
+        <span class="chip"></span>
+        <span class="narubank">N A R U B A N K</span>
+        <span class="card_number">&#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF; </span>
+        <div class="date"><span class="date_value">MM / YYYY</span></div>
+        <span class="fullname">FULL NAME</span>
+      </div>
+      <div class="back">
+        <div class="magnetic"></div>
+        <div class="bar"></div>
+        <span class="seccode">&#x25CF;&#x25CF;&#x25CF;</span>
+      </div>
+    </div>
+  </div>
+  <div class="col2">
+  <form action="<%=request.getContextPath()%>/transfer/TransferAuth" method="post" name="transferform">
+  	<input type="hidden" name="num" value="1"/>
+    <label>출금 계좌 번호</label>
+    <select class="chooseAccount" name="account_no" id="account_no" onchange="change()">
 								<c:forEach var= "ACCOUNT_NO" items="${account_num }" varStatus="status">
 									<option value=${ACCOUNT_NO }>${ACCOUNT_NO}</option>
 								</c:forEach>
 							</select>
-						</td>						
-					</tr>
-					<tr>
-						<td colspan = "5">잔액</td>
-					</tr>
-					<tr>
-						<td colspan="5"><input type="text" name= "balance" value="${balance[0]}" id="balance" style="border:0; outline:0;">원</td>
-					</tr>
-					<tr align=center>
-						<td colspan = "5">이체금액</td>					
-					</tr>
-					<tr>
-						<td><input type="button" value="+100만" onclick="money(1000000)" style="border:0; outline:0;"></td>
-						<td><input type="button" value="+50만" onclick="money(500000)" style="border:0; outline:0;"></td>
-						<td><input type="button" value="+10만" onclick="money(100000)" style="border:0; outline:0;"></td>
-						<td><input type="button" value="+1만" onclick="money(10000)" style="border:0; outline:0;"></td>
-						<td><input type="button" value="+전액"  onclick="money()" style="border:0; outline:0;"></td>
-					</tr>
-					<tr>
-						<td colspan="5"><input type="text" value=0 name= "TRANSFER_PRICE" id="TRANSFER_PRICE" style="border:0; outline:0;">원</td>
-					</tr>
-					
-					<tr>
-						<td colspan = "5">받는 분 계좌 번호</td>
-					</tr>
-					<tr>
-						<td colspan = "5"><input type="text" name="transfer_to_account_no" 
-						style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
-					</tr>
-					<tr>
-						<td colspan = "5">받는 분 표시</td>
-					</tr>
-					<tr>
-						<td colspan="5"><input type="text" name="transfer_to_aias" 
-						style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
-					</tr>
-				
-					<tr>
-						<td colspan="5"><input type="submit" value="확인" style="border:0; outline:0;"></td>
-					</tr>
-			</table>
-	</form>
+    <input class="number" type="text" placeholder="이체할 계좌번호를 입력해주세요" ng-model="ncard" maxlength="12" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/> 
+    <label>잔액</label>
+    <input type="text" name= "balance" value="${balance[0]}" id="balance">
+    <label>이체금액</label>
+   	<input type="button" class="chooseMoney" value="+100만" onclick="money(1000000)" >
+	<input type="button" class="chooseMoney" value="+50만" onclick="money(500000)" >
+	<input type="button" class="chooseMoney" value="+10만" onclick="money(100000)">
+	<input type="button" class="chooseMoney" value="+1만" onclick="money(10000)" >
+	<input type="button" class="chooseMoney" value="+전액"  onclick="money()">
+	<input type="text" value=0 name="TRANSFER_PRICE" id="TRANSFER_PRICE" placeholder="이체하실 금액을 입력하세요">
+    <label>보내실 분 성함</label>
+    <input class="inputname" type="text" placeholder="이름을 입력해주세요"/>
+    <label>받는 분 계좌 번호</label>
+  	<input type="text" name="transfer_to_account_no" >
+    <label>받는 분 표시</label>
+    <input type="text" name="transfer_to_aias" >
+    <label>Today's Date</label>
+    <input class="expire" type="text" placeholder="오늘 날짜를 입력해주세요"/>
+    <label>보안 번호</label>
+    <input class="ccv" type="text" placeholder="메크로 방지 번호 111 입력" maxlength="3" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+   
+   <div class="page">
+  <button type="submit" class="fun-btn">이체하기</button>
 </div>
+    
+    </form>
+  </div>
+</div>
+</div>
+
+
 <div id="transferAuto" class="bank" style="display:none">
 <form action="<%=request.getContextPath()%>/transfer/TransferAuth" method="post" name="transferform">
-	<table class = "table table-bordered table-hover" style = "text-align: center; border: 1px solid #dddddd">
 	<input type="hidden" name="num" value="2"/>
-				<thead>
-					<tr>
-						<th colspan = "5"><h4 align="center">자동이체</h4></th>
-					</tr>
-				</thead>
-					<tr>
-						<td colspan = "5">출금 계좌 번호</td>
-					</tr>
-					<tr>
-						<td colspan="5">	
-							<select name="account_no">
+
+<div class="container">
+  <div class="col">
+    <label>출금 계좌 번호</label>
+    <select class="chooseAccount2" name="account_no" id="account_no" onchange="change()">
 								<c:forEach var= "ACCOUNT_NO" items="${account_num }" varStatus="status">
 									<option value=${ACCOUNT_NO }>${ACCOUNT_NO}</option>
 								</c:forEach>
 							</select>
-						</td>						
-					</tr>
-					<tr align=center>
-						<td colspan="5">이체금액</td>					
-					</tr>
-					<tr>
-						<td><input type="button" value="+100만" onclick="money(1000000)"></td>
-						<td><input type="button" value="+50만" onclick="money(500000)"></td>
-						<td><input type="button" value="+10만" onclick="money(100000)"></td>
-						<td><input type="button" value="+1만" onclick="money(10000)"></td>
-						<td><input type="button" value="+전액"  onclick="money()"></td>
-					</tr>
-					<tr>
-						<td colspan="5"><input type="text" value=0 name= "TRANSFER_PRICE" id="TRANSFER_PRICE" placeholder="숫자만 입력">원</td>
-					</tr>
-					
-					<tr>
-						<td colspan = "5">받는 분 계좌 번호</td>
-					</tr>
-					<tr>
-						<td colspan="5"><input type="text" name="TRANSFER_TO_ACCOUNT_NO"></td>
-					</tr>
-					<tr>
-						<td colspan = "5">받는 분 표시</td>
-					</tr>
-					<tr>
-						<td colspan="5"><input type="text" name="TRANSFER_ALIAS"></td>
-					</tr>
-					<tr>
-						<td colspan="5">자동 이체 주기</td>
-					</tr>
-					<tr>
-						<td colspan="5">
-							<select name="TRANSFER_AUTO_PERIOD">
+    <input class="number" type="text" placeholder="이체할 계좌번호를 입력해주세요" ng-model="ncard" maxlength="12" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/> 
+    
+    <label>이체금액</label>
+   	<input type="button" class="chooseMoney" value="+100만" onclick="money2(1000000)" >
+	<input type="button" class="chooseMoney" value="+50만" onclick="money2(500000)" >
+	<input type="button" class="chooseMoney" value="+10만" onclick="money2(100000)">
+	<input type="button" class="chooseMoney" value="+1만" onclick="money2(10000)" >
+	<input type="button" class="chooseMoney" value="+전액"  onclick="money2()">
+	<input type="text" value=0 name="TRANSFER_PRICE" id="TRANSFER_PRICE2" placeholder="이체하실 금액을 입력하세요">
+
+    <label>받는 분 계좌 번호</label>
+  	<input type="text" name="transfer_to_account_no" >
+    <label>받는 분 표시</label>
+    <input type="text" name="transfer_to_aias" >
+    <label>자동 이체 주기</label>
+    <br/>
+    <select name="TRANSFER_AUTO_PERIOD" class="period">
 								<option value=7>1주일</option>
 								<option value=14>2주일</option>
 								<option value=21>3주일</option>
-								<option value=30>1달</option>
-								<option value=90>3달</option>
-								<option value=180>6달</option>
+								<option value=30>1개월</option>
+								<option value=90>3개월</option>
+								<option value=180>6개월</option>
 							</select>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="5">자동 이체 시작 기간</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<select id="select_year" name="transfer_year" onchange="javascript:lastday();">
-							</select>
-						</td>
-						<td colspan="2">
-							<select id="select_month" name="transfer_month" onchange="javascript:lastday();">
-							</select>
-						</td>
-						<td colspan="1">
-							<select id="select_day" name="transfer_day">
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="5"><input type="submit" value="확인"></td>
-					</tr>
-			</table>
-</form>
+							<br/>
+	<label>자동 이체 시작 기간</label>
+	<br/>
+	
+	<select class="choosePeriod" id="select_year" name="transfer_year" onchange="javascript:lastday();"></select>
+	<select class="choosePeriod" id="select_month" name="transfer_month" onchange="javascript:lastday();"></select>
+	<select class="choosePeriod" id="select_day" name="transfer_day"></select>
+	
+	
+   
+   <div class="page">
+  <button type="submit">예약하기</button>
 </div>
+</div>
+</div>
+
+    
+    </form>
+  </div>
+
+
+	
 <div id="transferRes" class="bank" style="display:none">
 <form action="<%=request.getContextPath()%>/transfer/TransferAuth" method="post" name="transferform">
-	<table class = "table table-bordered table-hover" style = "text-align: center; border: 1px solid #dddddd">
+	
 	<input type="hidden" name="num" value="3"/>
-				<thead>
-					<tr>
-						<th colspan = "5"><h4 align="center">예약 이체</h4></th>
-					</tr>
-				</thead>
-					<tr>
-						<td colspan = "5">출금 계좌 번호</td>
-					</tr>
-					<tr>
-						<td colspan = "5">	
-							<select name="ACCOUNT_NO">
+<div class="container">
+  <div class="col">
+    <label>출금 계좌 번호</label>
+    <select class="chooseAccount2" name="account_no" id="account_no" onchange="change()">
 								<c:forEach var= "ACCOUNT_NO" items="${account_num }" varStatus="status">
 									<option value=${ACCOUNT_NO }>${ACCOUNT_NO}</option>
 								</c:forEach>
 							</select>
-						</td>						
-					</tr>
-					<tr align=center>
-						<td colspan="5">이체금액</td>					
-					</tr>
-					<tr>
-						<td><input type="button" value="+100만" onclick="money(1000000)"></td>
-						<td><input type="button" value="+50만" onclick="money(500000)"></td>
-						<td><input type="button" value="+10만" onclick="money(100000)"></td>
-						<td><input type="button" value="+1만" onclick="money(10000)"></td>
-						<td><input type="button" value="+전액"  onclick="money()"></td>
-					</tr>
-					<tr>
-						<td colspan="5"><input type="text" value=0 name= "TRANSFER_PRICE" id="TRANSFER_PRICE" placeholder="숫자만 입력">원</td>
-					</tr>
-					
-					<tr>
-						<td colspan = "5">받는 분 계좌 번호</td>
-					</tr>
-					<tr>
-						<td colspan = "5"><input type="text" name="TRANSFER_TO_ACCOUNT_NO"></td>
-					</tr>
-					<tr>
-						<td colspan = "5">받는 분 표시</td>
-					</tr>
-					<tr>
-						<td colspan="5"><input type="text" name="TRANSFER_ALIAS"></td>
-					</tr>
-					<tr>
-						<td colspan="5">예약 이체 날짜</td>
-					</tr>
-					<tr>
-						<td colspan = "2">
-							<select id="select_year" name="transfer_year" onchange="javascript:lastday();">
-							</select> 
-						</td>
-						<td colspan = "2">
-							<select id="select_month" name="transfer_month" onchange="javascript:lastday();">
-							</select>
-						</td>
-						<td colspan = "1">
-							<select id="select_day" name="transfer_day">
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="5"><input type="submit" value="확인"></td>
-					</tr>
-			</table>
+    <input class="number" type="text" placeholder="이체할 계좌번호를 입력해주세요" ng-model="ncard" maxlength="12" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/> 
+    
+    <label>이체금액</label>
+   	<input type="button" class="chooseMoney" value="+100만" onclick="money3(1000000)" >
+	<input type="button" class="chooseMoney" value="+50만" onclick="money3(500000)" >
+	<input type="button" class="chooseMoney" value="+10만" onclick="money3(100000)">
+	<input type="button" class="chooseMoney" value="+1만" onclick="money3(10000)" >
+	<input type="button" class="chooseMoney" value="+전액"  onclick="money3()">
+	<input type="text" value=0 name="TRANSFER_PRICE" id="TRANSFER_PRICE2" placeholder="이체하실 금액을 입력하세요">
+
+    <label>받는 분 계좌 번호</label>
+  	<input type="text" name="transfer_to_account_no" >
+    <label>받는 분 표시</label>
+    <input type="text" name="transfer_to_aias" >
+    <br/>
+   
+	<label>예약 이체 날짜</label>
+	<br/>
+	
+	<select class="choosePeriod" id="select_year2" name="transfer_year" onchange="javascript:lastday2();"></select>
+	<select class="choosePeriod" id="select_month2" name="transfer_month" onchange="javascript:lastday2();"></select>
+	<select class="choosePeriod" id="select_day2" name="transfer_day"></select>
+	
+	
+   
+   <div class="page">
+  <button type="submit">예약하기</button>
+</div>
+</div>
+</div>
+				
+		
+			
 </form>
 </div>
 
 
 
 
-
+<script src="<%=request.getContextPath()%>/js/common.js"></script>
 </body>
 
 
-<script>
-      function money(price) {                           /* type 메뉴 선택시 type에 해당하는 테이블 출력하는 함수   /  cityName => kind(type) */
-          var element= parseInt(document.getElementById("TRANSFER_PRICE").value);
-    	  document.getElementById("TRANSFER_PRICE").value=element+price;
-      }
-</script>
-<script>
-function openTransfer(bank) {
-  var i;
-  var x = document.getElementsByClassName("bank");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  document.getElementById(bank).style.display = "block";
-}
-</script>
-<script> 
-var start_year="2020";// 시작할 년도 
-var today = new Date(); 
-var today_year= today.getFullYear(); 
-var index=0; 
-for(var y=start_year; y<=today_year; y++){ //start_year ~ 현재 년도 
-	document.getElementById('select_year').options[index] = new Option(y, y); 
-	index++; 
-	} 
-index=0; 
-for(var m=1; m<=12; m++){ 
-	document.getElementById('select_month').options[index] = new Option(m, m); 
-	index++; 
-	} 
-	
-lastday(); 
-function lastday(){ //년과 월에 따라 마지막 일 구하기 
-	var Year=document.getElementById('select_year').value; 
-	var Month=document.getElementById('select_month').value; 
-	var day=new Date(new Date(Year,Month,1)-86400000).getDate(); 
-	var dayindex_len=document.getElementById('select_day').length; 
-	if(day>dayindex_len){ 
-		for(var i=(dayindex_len+1); i<=day; i++){ 
-			document.getElementById('select_day').options[i-1] = new Option(i, i); 
-			} 
-	} else if(day<dayindex_len){ 
-		for(var i=dayindex_len; i>=day; i--){ 
-			document.getElementById('select_day').options[i]=null;
-			} 
-		} 
-	} 
-</script>
+
 </html>

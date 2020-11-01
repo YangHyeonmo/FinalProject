@@ -185,4 +185,70 @@ background-color: white; -webkit-rtl-ordering: logical; cursor: text; margin: 0e
 .showExchange  h2{font-size:2rem; text-align: center;}
 .showExchange  p {font-weight:bolder;font-size:20px;margin-top:-1rem; text-align: center; }
 
+/* 이체 css */
+.transferButt{position:absolute; left:5rem; display:inline-block;}
+.transferButt button{background-color: rgba(0,0,0,1); color:white; font-weight:bolder; box-shadow: inset 6px 4px 7px 6px grey;}
+.bank .container{ position: absolute; display: flex; flex-direction: row; align-items: center; margin: auto; height:25rem;top: 0; bottom: 0; left: -24rem; right: 0; width: 680px;}
+.bank .container .col1{perspective: 1000; transform-style: preserve-3d;}
+.bank .container .card{ position: relative; width: 420px; height: 250px; margin-bottom: 85px; margin-right: 10px; border-radius: 17px; box-shadow: 0 5px 20px -5px rgba(0,0,0,0.1); transition: all 1s; transform-style: preserve-3d;}
+.bank .container .front{ position: absolute; background: gold; border-radius: 17px; padding: 50px; width: 100%; height: 100%; transform: translateZ(1px); -webkit-transform: translateZ(1px); transition: background 0.3s; z-index: 50; background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), -webkit-linear-gradient(-245deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0) 90%); -webkit-backface-visibility: hidden; -moz-backface-visibility: hidden; -ms-backface-visibility: hidden; backface-visibility: hidden; }
+.bank .container .type{ position: absolute; width: 75px; height: 45px; top: 20px; right: 20px;}
+.bank .container .type img{  width: 100%; float: right; }
+.bank .container .narubank{position:absolute; font-size:21px; font-weight:bold; left:15rem; top:2rem;	}
+.bank .card_number{position: absolute;font-size: 26px; font-weight: 500;letter-spacing: -1px; top: 110px;  color: rgba(0,0,0,0.3); word-spacing: 3px; transition: color 0.5s; }
+.bank .date{ position: absolute; bottom: 40px; right: 55px; width: 90px; height: 35px; color: var(--text-color); transition: color 0.5s; }
+.bank .date_value{ font-size: 12px; position: absolute; margin-left: 22px; margin-top: 12px; color: rgba(0,0,0,0.3);font-weight: 500; transition: color 0.5s;}
+.bank .fullname{ position: absolute; font-size: 20px; bottom: 40px; color: rgba(0,0,0,0.3); transition: color 0.5s; }
+.bank .back{ position: absolute; width: 100%;border-radius: 17px; height: 100%; background: gold; transform: rotateY(180deg); }
+.bank .magnetic{ position: absolute; width: 100%; height: 50px; background: rgba(0,0,0,0.7); margin-top: 25px; }  
+.bank .bar{ position: absolute; width: 80%; height: 37px; background: rgba(255,255,255,0.7); left: 10px; margin-top: 100px; }        
+.bank .seccode{ font-size: 13px; color: rgba(0,0,0,0.3); font-weight: 500; position: absolute; top: 100px; right: 40px; }        
+.bank .chip{ bottom: 12rem; left: 10px; }       
+.bank .disclaimer{ position: absolute; width: 65%; left: 80px; color: #f1f1f1; font-size: 8px; bottom: 55px; }
+.bank .container .col2{position:absolute; left:38rem; width:44rem; height:26rem;}
+.bank .container .col2 .chooseMoney{ display:inline-block; width:5rem; position:relative; background-color: gold; opacity: 0.7; }
+.bank .container .col2 input{ display: block; width: 260px; height: 30px; padding-left: 10px; padding-top: 3px; padding-bottom: 3px; margin: 7px; font-size: 17px; border-radius: 20px; background: rgba(0,0,0,0.05); border: none; transition: background 0.5s;}
+.bank .container .col2 input:focus{ outline-width: 0; background: rgba(31,134,252, 0.15); transition: background 0.5s;}
+.bank .container .col2 label{padding-left: 8px; font-size: 15px; color: #444;}
+.bank .container .col2 .ccv{ width: 40%; }
+.bank .container .col2 .buy{ width: 260px; height: 50px; position: relative; display: block; margin: 20px auto; border-radius: 10px; border: none; background: #42C2DF; color: white; font-size: 20px; transition: background 0.4s; cursor: pointer;}
+.bank .container .col2 .chooseAccount{background-color: white;width:10rem; border-radius: 7%; opacity: 0.5;}
+.bank .chip{ position: absolute; width: 55px; height: 40px; background: #bbb; border-radius: 7px;}
+.bank .chip:after{ content: ''; display: block; width: 35px; height: 25px; border-radius: 4px; position: absolute; top: 0; bottom: 0; margin: auto; background: #ddd; }
+.bank .container .col2 .page{position:absolute;width:13rem;right:60rem;bottom:-3rem;}
+.bank .container .col2 .color-bg-start { background-color: salmon;}
+.bank .container .col2 .bg-animate-color { animation: random-bg .5s linear infinite; }
+@keyframes random-bg { from { filter: hue-rotate(0); } to { filter: hue-rotate(360deg); } }
+.bank .container .col2 .fun-btn { background-color: salmon; color: white; padding: 2em 3em; border: none; transition: all .3s ease; border-radius: 5px; letter-spacing: 2px; text-transform: uppercase; outline: none; align-self: center; cursor: pointer; font-weight: bold; }
+.bank .container .col2 .fun-btn:hover { animation: random-bg .5s linear infinite, grow 1300ms ease infinite;}
+.bank .container .col2 .start-fun { background-color: #fff !important; color: salmon !important; }
+@keyframes grow {
+  0% {transform: scale(1);}
+  14% { transform: scale(1.3); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.3); }
+  70% { transform: scale(1); } 
+ }
 
+.bank .container .type{ position: absolute; width: 75px; height: 45px; top: 20px; right: 20px;}
+.bank .container .type img{  width: 100%; float: right; }
+.bank .container .narubank{position:absolute; font-size:21px; font-weight:bold; left:15rem; top:2rem;	}         
+.bank .disclaimer{ position: absolute; width: 65%; left: 80px; color: #f1f1f1; font-size: 8px; bottom: 55px; }
+.bank .container .col{position:absolute; left:24rem; width:44rem; height:26rem;}
+.bank .container .col .page{position:absolute;width:13rem;right:60rem;bottom:-3rem;}
+.bank .container .col .chooseMoney{ display:inline-block; width:5rem; position:relative; background-color: gold; opacity: 0.7; }
+.bank .container .col input{ display: block; width: 260px; height: 30px; padding-left: 10px; padding-top: 3px; padding-bottom: 3px; margin: 7px; font-size: 17px; border-radius: 20px; background: rgba(0,0,0,0.05); border: none; transition: background 0.5s;}
+.bank .container .col input:focus{ outline-width: 0; background: rgba(31,134,252, 0.15); transition: background 0.5s;}
+.bank .container .col label{padding-left: 8px; font-size: 15px; color: #444; margin-top:2rem;}
+.bank .container .col .ccv{ width: 40%; }
+.bank .container .col .period{ width: 6rem;height:2rem; box-shadow:inset -2px 2px 7px 6px grey; background-color: white;}
+.bank .container .col .buy{ width: 260px; height: 50px; position: relative; display: block; margin: 20px auto; border-radius: 10px; border: none; background: #42C2DF; color: white; font-size: 20px; transition: background 0.4s; cursor: pointer;}
+.bank .container .col .chooseAccount2{background-color: white;width:10rem; border-radius: 7%; opacity: 0.5;}
+.bank .container .col .choosePeriod{width: 6rem;height:2rem; box-shadow:inset -2px 2px 7px 6px grey; background-color: white;}
+.bank .container .col button{ background:#1AAB8A; color:#fff; border:none; position:absolute; height:35px; font-size:1.6em; left:33rem; margin-top:11rem; padding:0 2em; cursor:pointer; transition:800ms ease all; outline:none; }
+.bank .container .col button:hover{ background:#fff; color:#1AAB8A; }
+.bank .container .col button:before,.bank .container .col button:after{ content:''; position:absolute; top:0; right:0; height:2px; width:0; background: #1AAB8A; transition:400ms ease all; }
+.bank .container .col button:after{ right:inherit; top:inherit; left:0; bottom:0; }
+.bank .container .col button:hover:before,.bank .container .col button:hover:after{ width:100%; transition:800ms ease all;}
+
+}

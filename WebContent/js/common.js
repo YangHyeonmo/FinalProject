@@ -166,5 +166,194 @@
 		document.getElementById("popup").style.display = "none";
 	}
 
+	//==============================================================
+	
 
+	$(function(){
+	 	
+	  var month = 0;
+	  var html = document.getElementsByTagName('html')[0];
+	  var number = "";
+	  
+	  var selected_card = -1;
+	  
+	  $(document).click(function(e){
+	    if(!$(e.target).is(".ccv") || !$(e.target).closest(".ccv").length){
+	      $(".card").css("transform", "rotatey(0deg)");
+	      $(".seccode").css("color", "rgba(0,0,0,0.3)");
+	    }
+	    if(!$(e.target).is(".expire") || !$(e.target).closest(".expire").length){
+	      $(".date_value").css("color", "rgba(0,0,0,0.3)");
+	    }
+	    if(!$(e.target).is(".number") || !$(e.target).closest(".number").length){
+	      $(".card_number").css("color", "rgba(0,0,0,0.3)");
+	    }
+	    if(!$(e.target).is(".inputname") || !$(e.target).closest(".inputname").length){
+	      $(".fullname").css("color", "rgba(0,0,0,0.3)");
+	    }
+	  });
+	  
+	  
+	  //Card number input
+	  $(".number").keyup(function(event){
+	    $(".card_number").text($(this).val());
+	    number = $(this).val();
+	    
+	    if($(".card_number").text().length === 0){
+	      $(".card_number").html("&#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF; ");
+	    }
+
+	  }).focus(function(){
+	    $(".card_number").css("color", "white");
+	  }).on("keydown input", function(){
+	    
+	    $(".card_number").text($(this).val());
+	    
+	    if(event.key >= 0 && event.key <= 9){
+	      if($(this).val().length === 4 || $(this).val().length === 7 || $(this).val().length === 12){
+	        $(this).val($(this).val() +  " ");
+	      }
+	    }
+	  })
+	  
+	  //Name Input
+	  $(".inputname").keyup(function(){  
+	    $(".fullname").text($(this).val());  
+	    if($(".inputname").val().length === 0){
+	        $(".fullname").text("FULL NAME");
+	    }
+	    return event.charCode;
+	  }).focus(function(){
+	    $(".fullname").css("color", "white");
+	  });
+	  
+	  //Security code Input
+	  $(".ccv").focus(function(){
+	    $(".card").css("transform", "rotatey(180deg)");
+	    $(".seccode").css("color", "white");
+	  }).keyup(function(){
+	    $(".seccode").text($(this).val());
+	    if($(this).val().length === 0){
+	      $(".seccode").html("&#x25CF;&#x25CF;&#x25CF;");
+	    }
+	  }).focusout(function() {
+	      $(".card").css("transform", "rotatey(0deg)");
+	      $(".seccode").css("color", "var(--text-color)");
+	  });
+	    
+	  
+	  //Date expire input
+	  $(".expire").keypress(function(event){
+	    if(event.charCode >= 48 && event.charCode <= 57){
+	      if($(this).val().length === 1){
+	          $(this).val($(this).val() + event.key + " / ");
+	      }else if($(this).val().length === 0){
+	        if(event.key == 1 || event.key == 0){
+	          month = event.key;
+	          return event.charCode;
+	        }else{
+	          $(this).val(0 + event.key + " / ");
+	        }
+	      }else if($(this).val().length > 2 && $(this).val().length < 9){
+	        return event.charCode;
+	      }
+	    }
+	    return false;
+	  }).keyup(function(event){
+	    $(".date_value").html($(this).val());
+	    if(event.keyCode == 8 && $(".expire").val().length == 4){
+	      $(this).val(month);
+	    }
+	    
+	    if($(this).val().length === 0){
+	      $(".date_value").text("MM / YYYY");
+	    }
+	  }).keydown(function(){
+	    $(".date_value").html($(this).val());
+	  }).focus(function(){
+	    $(".date_value").css("color", "white");
+	  });
+	});
+
+	      function money(price) {                           /* type 메뉴 선택시 type에 해당하는 테이블 출력하는 함수   /  cityName => kind(type) */
+	          var element= parseInt(document.getElementById("TRANSFER_PRICE").value);
+	    	  document.getElementById("TRANSFER_PRICE").value=element+price;
+	      }
+
+	      function money2(price) {                           /* type 메뉴 선택시 type에 해당하는 테이블 출력하는 함수   /  cityName => kind(type) */
+	          var element= parseInt(document.getElementById("TRANSFER_PRICE2").value);
+	    	  document.getElementById("TRANSFER_PRICE2").value=element+price;
+	      }
+
+	      function money3(price) {                           /* type 메뉴 선택시 type에 해당하는 테이블 출력하는 함수   /  cityName => kind(type) */
+	          var element= parseInt(document.getElementById("TRANSFER_PRICE3").value);
+	    	  document.getElementById("TRANSFER_PRICE3").value=element+price;
+	      }
+
+	function openTransfer(bank) {
+	  var i;
+	  var x = document.getElementsByClassName("bank");
+	  for (i = 0; i < x.length; i++) {
+	    x[i].style.display = "none";
+	  }
+	  document.getElementById(bank).style.display = "block";
+	}
+	
+	var start_year="2020";// 시작할 년도 
+	var today = new Date(); 
+	var today_year= today.getFullYear(); 
+	var index=0; 
+	for(var y=start_year; y<=today_year; y++){ //start_year ~ 현재 년도 
+		document.getElementById('select_year').options[index] = new Option(y, y); 
+		index++; 
+		} 
+	index=0; 
+	for(var m=1; m<=12; m++){ 
+		document.getElementById('select_month').options[index] = new Option(m, m); 
+		index++; 
+		} 
+	for(var y=start_year; y<=today_year; y++){ //start_year ~ 현재 년도 
+		document.getElementById('select_year2').options[index] = new Option(y, y); 
+		index++; 
+		} 
+	index=0; 
+	for(var m=1; m<=12; m++){ 
+		document.getElementById('select_month2').options[index] = new Option(m, m); 
+		index++; 
+		} 
+		
+	lastday(); 
+	function lastday(){ //년과 월에 따라 마지막 일 구하기 
+		var Year=document.getElementById('select_year').value; 
+		var Month=document.getElementById('select_month').value; 
+		var day=new Date(new Date(Year,Month,1)-86400000).getDate(); 
+		var dayindex_len=document.getElementById('select_day').length; 
+		if(day>dayindex_len){ 
+			for(var i=(dayindex_len+1); i<=day; i++){ 
+				document.getElementById('select_day').options[i-1] = new Option(i, i); 
+				} 
+		} else if(day<dayindex_len){ 
+			for(var i=dayindex_len; i>=day; i--){ 
+				document.getElementById('select_day').options[i]=null;
+				} 
+			} 
+		} 
+
+	
+	lastday2(); 
+	function lastday2(){ //년과 월에 따라 마지막 일 구하기 
+		var Year=document.getElementById('select_year2').value; 
+		var Month=document.getElementById('select_month2').value; 
+		var day=new Date(new Date(Year,Month,1)-86400000).getDate(); 
+		var dayindex_len=document.getElementById('select_day2').length; 
+		if(day>dayindex_len){ 
+			for(var i=(dayindex_len+1); i<=day; i++){ 
+				document.getElementById('select_day2').options[i-1] = new Option(i, i); 
+				} 
+		} else if(day<dayindex_len){ 
+			for(var i=dayindex_len; i>=day; i--){ 
+				document.getElementById('select_day2').options[i]=null;
+				} 
+			} 
+		} 
 
