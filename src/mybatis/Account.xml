@@ -13,7 +13,7 @@
 	</select>
 
 	<select id="getBCount" parameterType="hashmap" resultType="int">
-		select nvl(count(distinct account_name),0) from account
+		select nvl(count(distinct account_num),0) from account
 		where member_id
 		= #{member_id} and account_type='예금'
 	</select>

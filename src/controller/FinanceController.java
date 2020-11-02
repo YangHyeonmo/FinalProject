@@ -2,6 +2,7 @@ package controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import model.MemberDTO;
 import model.ProductsDTO;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
+import oracle.sql.DATE;
 import service.AccountDAO;
 import service.FinanceMybatisDAO;
 import service.MemberMybatisDAO;
@@ -178,7 +180,12 @@ public class FinanceController {
 				account_num="0000-04-"+(int)(Math.random()*1000)+1000;
 			}
 		
-		int acpro = dbPro.insertAcc(member_id, fdto.getFin_pro(), account_num, fdto.getFin_name(), fin_pw, fdto.getFin_rate());
+		Date today=new Date();
+		today.setMonth(today.getMonth()+fdto.getFin_date());
+		
+	
+
+		int acpro = dbPro.insertAcc(member_id, fdto.getFin_pro(), account_num, fdto.getFin_name(), fin_pw, today,fdto.getFin_rate());
 		
 		if(acpro == 1) {
 			m.addAttribute("member_id",member_id);
