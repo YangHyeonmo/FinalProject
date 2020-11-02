@@ -14,7 +14,8 @@
 			open_balance,
 			regdate )
 		VALUES ( #{open_account_no}, #{open_bank}, #{member_id}, #{open_account_pw}, #{open_balance}, sysdate )
-		<!--WHERE-->
+		WHERE
+			member_id = #{member_id}
 	</insert>
 
 	<!-- 오픈뱅킹 계좌 삭제 -->

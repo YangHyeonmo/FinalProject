@@ -63,6 +63,13 @@ public class OpenBankingController {
 
 		MemberMybatisDAO mdao = new MemberMybatisDAO();
 
+		String member_id = (String) session.getAttribute("member_id");
+
+		if (member_id != op.getMember_id()) {
+			m.addAttribute("error", 4);
+			return "openbanking/SelectOpenBanking";
+		}
+
 		//1.회원인지 아닌지 확인
 		MemberDTO mdto = mdao.getMember(op.getMember_id());
 		System.out.println("member:" + mdto.getMember_address());
@@ -97,13 +104,21 @@ public class OpenBankingController {
 	@RequestMapping("checknumber")
 	public String checknumber(int random, int auth_num, Model m) {
 
+		String member_id = (String) session.getAttribute("member_id");
 		// 이후 세션으로 수정
-		List<OpenBankingDTO> list = opDAO.SelectOpenBanking("vldrn7636");
+		List<OpenBankingDTO> list = opDAO.SelectOpenBanking(member_id);
 		m.addAttribute("list", list);
 
 		if (random == auth_num) {
 			int result = opDAO.InsertOpenBanking(opDTO);
-			return "openbanking/SelectOpenBanking";
+
+			if (result == 1) {
+				m.addAttribute("error", 2);
+				return "openbanking/SelectOpenBanking";
+			} else {
+				m.addAttribute("error", 3);
+				return "openbanking/SelectOpenBanking";
+			}
 		} else {
 			m.addAttribute("error", 1);
 			return "openbanking/SelectOpenBanking";
