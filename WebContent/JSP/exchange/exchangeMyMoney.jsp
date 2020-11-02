@@ -7,7 +7,7 @@
 <head>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>Exchange</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, charset=UTF-8">
 <style>
 .customerChange{position:absolute; top:37%; left:45%;}
 
