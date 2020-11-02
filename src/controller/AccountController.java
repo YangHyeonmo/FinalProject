@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import model.AccountDTO;
+import model.MemberDTO;
 import service.AccountDAO;
+import service.MemberMybatisDAO;
 
 @Controller
 @RequestMapping("/account/")
@@ -26,14 +28,13 @@ public class AccountController {
 	@Autowired
 	AccountDAO dbpro;
 
+	public HttpSession session = null;
 
-	 public HttpSession session = null;
-	  
-	 @ModelAttribute public void headProcess(HttpServletRequest request,
-	 HttpServletResponse res) {
-	  
-	 session = request.getSession(); }
-	
+	@ModelAttribute
+	public void headProcess(HttpServletRequest request, HttpServletResponse res) {
+
+		session = request.getSession();
+	}
 
 	@RequestMapping("accountShow")
 	public String accountShow(String account_num, Model m) throws Exception {
@@ -50,12 +51,14 @@ public class AccountController {
 	public String accountList(Model m) throws Exception {
 
 		String member_id = (String) session.getAttribute("member_id");
+		MemberMybatisDAO mdao = new MemberMybatisDAO();
+		MemberDTO member = mdao.getMember(member_id);
 		int count1 = 0;
 		int count2 = 0;
 		int count3 = 0;
-		List aaList = null; // 입출금
-		List bbList = null; // 예금
-		List ccList = null; // 적금
+		List aaList = null; // �엯異쒓툑
+		List bbList = null; // �삁湲�
+		List ccList = null; // �쟻湲�
 		AccountDAO dbPro = new AccountDAO();
 		count1 = dbPro.getACount(member_id);
 		count2 = dbPro.getBCount(member_id);
@@ -71,11 +74,12 @@ public class AccountController {
 		m.addAttribute("aaList", aaList);
 		m.addAttribute("bbList", bbList);
 		m.addAttribute("ccList", ccList);
+		m.addAttribute("member",member);
 
 		return "account/accountList";
 	}
 
-	@RequestMapping("aliasChange") // 계좌별명 관리 페이지
+	@RequestMapping("aliasChange") // 怨꾩쥖蹂꾨챸 愿�由� �럹�씠吏�
 	public String aliasChange(String account_num, Model m) throws Exception {
 
 		List article = dbpro.getAlias(account_num);
@@ -85,7 +89,7 @@ public class AccountController {
 		return "account/aliasChange";
 	}
 
-	@RequestMapping("aliasUpdatePro") // 계좌별명 변경
+	@RequestMapping("aliasUpdatePro") // 怨꾩쥖蹂꾨챸 蹂�寃�
 	public String aliasUpdatePro(String account_alias, String account_num, Model m) throws Exception {
 		// TODO Auto-generated method stub
 		int result = dbpro.updateAlias(account_alias, account_num);
@@ -97,7 +101,7 @@ public class AccountController {
 		return "account/accountList";
 	}
 
-	@RequestMapping("accountCopy") // 통장사본
+	@RequestMapping("accountCopy") // �넻�옣�궗蹂�
 	public String accountCopy(String account_num, Model m) throws Exception {
 
 		List article = dbpro.getAlias(account_num);
@@ -107,7 +111,7 @@ public class AccountController {
 		return "account/accountCopy";
 	}
 
-	@RequestMapping("accountPwChange") // 비밀번호 변경 페이지
+	@RequestMapping("accountPwChange") // 鍮꾨�踰덊샇 蹂�寃� �럹�씠吏�
 	public String accountPwChange(String account_num, Model m) throws Exception {
 
 		List article = dbpro.getArticle(account_num);
@@ -117,7 +121,7 @@ public class AccountController {
 		return "account/accountPwChange";
 	}
 
-	@RequestMapping("pwUpdate") // 계좌비번 변경
+	@RequestMapping("pwUpdate") // 怨꾩쥖鍮꾨쾲 蹂�寃�
 	public String pwUpdate(String account_num, int account_pw, int pw_new, int pw_new_check, Model m) throws Exception {
 		// TODO Auto-generated method stub
 		boolean check;
@@ -129,15 +133,15 @@ public class AccountController {
 		if (check == true) {
 			return "account/accountPwChangePro";
 		} else {
-			m.addAttribute("message", "비밀번호 불일치");
+			m.addAttribute("message", "鍮꾨�踰덊샇 遺덉씪移�");
 			return "account/accountPwChange";
 
 		}
 	}
 
-	@RequestMapping("accountDelete") // 계좌해지 목록출력
+	@RequestMapping("accountDelete") // 怨꾩쥖�빐吏� 紐⑸줉異쒕젰
 	public String accountDelete(String account_num, Model m) throws Exception {
-		
+
 		String member_id = (String) session.getAttribute("member_id");
 		List<String> article = dbpro.getAccount(account_num);
 		List<String> account = dbpro.moveBalanceAccount(member_id);
@@ -148,7 +152,7 @@ public class AccountController {
 		return "account/accountDelete";
 	}
 
-	@RequestMapping("accountDeletePro") // 비번확인,다른계좌로 잔액옮김
+	@RequestMapping("accountDeletePro") // 鍮꾨쾲�솗�씤,�떎瑜멸퀎醫뚮줈 �옍�븸�삷源�
 	public String accountDeletePro(String account_num, int account_pw, String open_account_no, int balance, Model m)
 			throws Exception {
 
@@ -171,18 +175,18 @@ public class AccountController {
 	}
 
 	@RequestMapping("DateAccountList")
-	public String DateAccountList(AccountDTO account, Model m) { // 기간 설정 메소드(다솜이
-																										// 달력메소드 참고 후
-																										// 수정할게요)
-		
-		System.out.println(account.getEnd_date()+"sdsd+"+account.getStart_date()+account.getAccount_num());
-			List<AccountDTO> article = dbpro.dateAccountList(account.getStart_date(), account.getEnd_date(),
-					account.getAccount_num());
-			m.addAttribute("account_num", account.getAccount_num());
-			m.addAttribute("article", article);
+	public String DateAccountList(AccountDTO account, Model m) { // 湲곌컙 �꽕�젙 硫붿냼�뱶(�떎�넑�씠
+																	// �떖�젰硫붿냼�뱶 李멸퀬 �썑
+																	// �닔�젙�븷寃뚯슂)
 
-			return "account/accountShow";
-		
+		System.out.println(account.getEnd_date() + "sdsd+" + account.getStart_date() + account.getAccount_num());
+		List<AccountDTO> article = dbpro.dateAccountList(account.getStart_date(), account.getEnd_date(),
+				account.getAccount_num());
+		m.addAttribute("account_num", account.getAccount_num());
+		m.addAttribute("article", article);
+
+		return "account/accountShow";
+
 	}
 
 }

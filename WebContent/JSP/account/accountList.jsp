@@ -165,7 +165,7 @@
 														+ seconds)
 							</script>
 						</h5>
-						<h1 class="cta-title">${member_name }고객님</h1>
+						<h1 class="cta-title">${member.member_name }고객님</h1>
 						<div class="cta-desc">
 							<p>Describe the action here.</p>
 							<p>Describe the action here.</p>
