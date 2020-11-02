@@ -1,7 +1,7 @@
 package service;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,11 +45,19 @@ public class FinanceMybatisDAO extends AbstractMybatis {
 			sqlSession.close();
 		}
 	}
-
+	
 	public List<FinanceDTO> FinanceLoanList() {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
 			return sqlSession.selectList(fin + ".FinanceLoanList");
+		} finally {
+			sqlSession.close();
+		}
+	}
+	public List<FinanceDTO> FinanceDandWList() {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			return sqlSession.selectList(fin + ".FinanceDandWList");
 		} finally {
 			sqlSession.close();
 		}
@@ -100,6 +108,10 @@ public class FinanceMybatisDAO extends AbstractMybatis {
 				dbno = "4";
 				map.put("dbno", dbno);
 				financedata=sqlSession.selectList(statement,map);
+			}else if (num == 5) {
+				dbno = "5";
+				map.put("dbno", dbno);
+				financedata=sqlSession.selectList(statement,map);
 			}
 			return financedata;
 
@@ -125,7 +137,7 @@ public class FinanceMybatisDAO extends AbstractMybatis {
 		}
 	}
 	
-	public int insertAcc( String member_id, String fin_pro,String account_num, String fin_name, int fin_pw, Date day,double fin_rate) {
+	public int insertAcc( String member_id, String fin_pro,String account_num, Date acc_date ,String fin_name, int fin_pw, double fin_rate) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
 			map.clear();
@@ -134,8 +146,8 @@ public class FinanceMybatisDAO extends AbstractMybatis {
 			map.put("account_num", account_num);
 			map.put("fin_name",fin_name);
 			map.put("fin_pw",fin_pw);
+			map.put("account_date", acc_date);
 			map.put("fin_rate",fin_rate);
-			map.put("account_date",day);
 			int num= sqlSession.selectOne(pro+".getCountAccount");
 			System.out.println(num);
 			map.put("account_no",num+1);

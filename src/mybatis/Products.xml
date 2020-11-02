@@ -28,8 +28,8 @@
 	</select>
 	
 	<insert id="insertAcc" parameterType="Products">
-	insert into account(account_no,member_id, account_type, account_num, account_name, account_pw, made_date,account_date, withdraw, deposit, balance, rate)
-	values(#{account_no},#{member_id}, #{fin_pro},#{account_num}, #{fin_name}, #{fin_pw}, sysdate,#{account_date}, 0, 0, 0, #{fin_rate})
+	insert into account(account_no,member_id, account_type, account_num, account_name, account_pw, made_date, account_date, withdraw, deposit, balance, rate)
+	values(#{account_no},#{member_id}, #{fin_pro},#{account_num}, #{fin_name}, #{fin_pw}, sysdate, #{account_date} ,0, 0, 0, #{fin_rate})
 	</insert>
 	
 	<select id="selPro" parameterType="int" resultType="Products">

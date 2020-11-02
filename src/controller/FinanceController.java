@@ -24,7 +24,6 @@ import model.MemberDTO;
 import model.ProductsDTO;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
-import oracle.sql.DATE;
 import service.AccountDAO;
 import service.FinanceMybatisDAO;
 import service.MemberMybatisDAO;
@@ -85,7 +84,12 @@ public class FinanceController {
 			m.addAttribute("loan", loan);
 			m.addAttribute("dbno", dbno);
 
-		} 
+		} else if(dbno == 5) {
+			List<FinanceDTO> DandW  = dbPro.FinanceDandWList();
+			financedata = dbPro.financeMain(dbno);
+			m.addAttribute("DandW", DandW);
+			m.addAttribute("dbno", dbno);
+		}
 			return "finance/financeMain";
 	}
 	
@@ -178,14 +182,12 @@ public class FinanceController {
 				account_num="0000-03-"+(int)(Math.random()*1000)+1000;
 			}else if((fin_no/100)==4) {
 				account_num="0000-04-"+(int)(Math.random()*1000)+1000;
+			}else if((fin_no/100)==5) {
+				account_num="0000-05-"+(int)(Math.random()*1000)+1000;
 			}
-		
-		Date today=new Date();
-		today.setMonth(today.getMonth()+fdto.getFin_date());
-		
-	
-
-		int acpro = dbPro.insertAcc(member_id, fdto.getFin_pro(), account_num, fdto.getFin_name(), fin_pw, today,fdto.getFin_rate());
+			Date acc_date=new Date();
+			acc_date.setMonth(acc_date.getDate()+fdto.getFin_date());
+		int acpro = dbPro.insertAcc(member_id, fdto.getFin_pro(), account_num, acc_date ,fdto.getFin_name(),  fin_pw, fdto.getFin_rate());
 		
 		if(acpro == 1) {
 			m.addAttribute("member_id",member_id);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Finance">
 
@@ -23,6 +23,11 @@
    <select id="FinanceLoanList" resultType="Finance"> <!-- 대출 상품 검색 -->
    select fin_no, fin_pro, fin_name, fin_date, fin_rate, fin_repay , fin_amount, fin_content  from finance 
    where fin_no like '4%'
+   </select>
+   
+   <select id="FinanceDandWList" resultType="Finance"> <!-- 입출금 상품 검색 -->
+   select fin_no, fin_pro, fin_name, fin_content  from finance 
+   where fin_no like '5%'
    </select>
    
    <select id="FinanceAccede" resultType="hashmap" parameterType="int">

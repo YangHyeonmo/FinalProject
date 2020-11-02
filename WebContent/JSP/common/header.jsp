@@ -84,6 +84,9 @@
 						<li><a
 							href="<%=request.getContextPath()%>/finance/financeMain?dbno=4"
 						>대출 상품</a></li>
+						<li><a
+							href="<%=request.getContextPath()%>/finance/financeMain?dbno=5"
+						>입출금 상품</a></li>
 					</ul>
 				</li>
 			</ul>
