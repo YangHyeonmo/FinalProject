@@ -40,7 +40,7 @@ blockquote {
 					${depositP.fin_name }[${depositP.fin_content }]<br> 금리 :
 					${depositP.fin_rate} <br> ${depositP.fin_date}개월 상품입니다.<br>
 					<input type="submit" class="btn btn-light btn-lg active"
-						onclick="javascript:location.href='/BANK/finance/finCertification?fin_no=${depositP.fin_no}'"
+						onclick="javascript:location.href='<%=request.getContextPath()%>/finance/finCertification?fin_no=${depositP.fin_no}'"
 						style="float: right;">가입하기
 					</button>
 				</div>
@@ -68,7 +68,7 @@ blockquote {
 					${savingP.fin_rate} <br> ${savingP.fin_amount }원 이상<br>
 					${savingP.fin_date}개월 상품입니다.<br>
 					<button type="button" class="btn btn-light btn-lg active"
-						onclick="javascript:location.href='/BANK/finance/finCertification?fin_no=${savingP.fin_no}'"
+						onclick="javascript:location.href='<%=request.getContextPath()%>/finance/finCertification?fin_no=${savingP.fin_no}'"
 						style="float: right;">가입하기</button>
 				</div>
 			</c:forEach>
@@ -90,7 +90,7 @@ blockquote {
 					${fundP.fin_name }[${fundP.fin_content }]<br> 수익률 :
 					${fundP.fin_return}% (3개월 누적)<br> 펀드 유형 : ${fundP.fin_type}<br>
 					<button type="button" class="btn btn-light btn-lg active"
-						onclick="javascript:location.href='/BANK/finance/finCertification?fin_no=${fundP.fin_no}'"
+						onclick="javascript:location.href='<%=request.getContextPath()%>/finance/finCertification?fin_no=${fundP.fin_no}'"
 						style="float: right;">가입하기</button>
 				</div>
 			</c:forEach>
@@ -112,7 +112,7 @@ blockquote {
 					${loanP.fin_date } 개월 <br> 상환방법 : ${loanP.fin_repay } <br>
 					이자 : ${loanP.fin_rate} %<br> 최대 ${loanP.fin_amount }원 까지<br>
 					<button type="button" class="btn btn-light btn-lg active"
-						onclick="javascript:location.href='/BANK/finance/finCertification?fin_no=${loanP.fin_no}'"
+						onclick="javascript:location.href='<%=request.getContextPath()%>/finance/finCertification?fin_no=${loanP.fin_no}'"
 						style="float: right;">가입하기</button>
 				</div>
 			</c:forEach>
