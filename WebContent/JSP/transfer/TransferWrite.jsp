@@ -134,25 +134,7 @@ function change(){
 	<input type="hidden" name="num" value="2"/>
 
 <div class="container">
-  <div class="col1">
-    <div class="card">
-      <div class="front">
-        <div class="type">
-          <img class="bankid"/>
-        </div>
-        <span class="chip"></span>
-        <span class="narubank">N A R U B A N K</span>
-        <span class="card_number">&#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF; </span>
-        <div class="date"><span class="date_value">MM / YYYY</span></div>
-        <span class="fullname">FULL NAME</span>
-      </div>
-      <div class="back">
-        <div class="magnetic"></div>
-        <div class="bar"></div>
-        <span class="seccode">&#x25CF;&#x25CF;&#x25CF;</span>
-      </div>
-    </div>
-  </div>
+
   <div class="col">
     <label>출금 계좌 번호</label>
     <select class="chooseAccount2" name="account_no" id="account_no" onchange="change()">
