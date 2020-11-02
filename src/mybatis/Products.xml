@@ -27,6 +27,16 @@
 	select member_id, f.fin_name as fin_name from finance f, products p where p.fin_no = f.fin_no and member_id = #{member_id}
 	</select>
 	
+	<insert id="insertAcc" parameterType="Products">
+	insert into account(account_no,member_id, account_type, account_num, account_name, account_pw, made_date, withdraw, deposit, balance, rate)
+	values(#{account_no},#{member_id}, #{fin_pro},#{account_num}, #{fin_name}, #{fin_pw}, sysdate, 0, 0, 0, #{fin_rate})
+	</insert>
 	
+	<select id="selPro" parameterType="int" resultType="Products">
+	select * from products where fin_no = #{fin_no}
+	</select>
 
+	<select id="getCountAccount" resultType="int">
+	select count(*) from account
+	</select>
 </mapper>

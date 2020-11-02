@@ -23,6 +23,7 @@ import model.MemberDTO;
 import model.ProductsDTO;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
+import service.AccountDAO;
 import service.FinanceMybatisDAO;
 import service.MemberMybatisDAO;
 import util.SendMail;
@@ -34,6 +35,7 @@ public class FinanceController {
 	public HttpSession session = null;
 	@Autowired
 	FinanceMybatisDAO dbPro;
+	AccountDAO acPro;
 
 	@ModelAttribute
 	public void headProcess(HttpServletRequest request, HttpServletResponse response) {
@@ -43,11 +45,12 @@ public class FinanceController {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		HttpSession session = request.getSession();
+		 session = request.getSession();
 	}
 
 	@RequestMapping("financeMain") // 탑 3상품 보이기
 	public String financeMain(Model m, int dbno) throws Exception {
+		String member_id = (String) session.getAttribute("member_id");
 		List<ProductsDTO> financedata = new ArrayList<ProductsDTO>();
 		if (dbno == 1) {
 			List<FinanceDTO> deposit = dbPro.FinanceDepositList();
@@ -81,7 +84,6 @@ public class FinanceController {
 			m.addAttribute("dbno", dbno);
 
 		} 
-		
 			return "finance/financeMain";
 	}
 	
@@ -131,7 +133,7 @@ public class FinanceController {
 		MemberDTO member = new MemberDTO();
 		MemberMybatisDAO mbPro = new MemberMybatisDAO();
 
-		member = mbPro.getMember("syj");
+		member = mbPro.getMember("member_id");
 
 		m.addAttribute("member", member);
 		m.addAttribute("fin_no",fin_no);
@@ -144,30 +146,76 @@ public class FinanceController {
 		MemberDTO member = new MemberDTO();
 		MemberMybatisDAO mbPro = new MemberMybatisDAO();
 
-		member = mbPro.getMember("hyeonmo");
+		member = mbPro.getMember("member_id");
 
 		m.addAttribute("member", member);
 		m.addAttribute("fin_no", fin_no);
 		return "finance/finEmailAuth";
 	}
-
+	
 	@RequestMapping("accedeProducts")
-	public String accedeProducts(Model m, String member_id, String fin_pro,String account_num, String fin_name, int fin_pw, double fin_rate, int fin_no) throws Throwable {
-//		member_id = (String) session.getAttribute("member_id");
-		member_id = "syj";
-		int result = dbPro.insertProducts(fin_no, member_id);
-		/* String findfin = dbPro.Findfin(fin_no); */
+	public String accedeProducts(Model m,  int fin_no, int fin_pw) throws Throwable {
+		String member_id = (String) session.getAttribute("member_id");
+		
 		System.out.println(fin_no);
+		FinanceDTO fdto=dbPro.Findfin(fin_no);
+	
+		int result = dbPro.insertProducts(fin_no, member_id);
+		
+		
 		if (result == 1) {
 			m.addAttribute("fin_no", fin_no);
 			m.addAttribute("member_id", member_id);
-			/* m.addAttribute("findfin",findfin); */
+
+			String account_num="";
+			if((fin_no/100)==1) {
+				account_num="0000-01-"+(int)(Math.random()*1000)+1000;
+			}else if((fin_no/100)==2) {
+				account_num="0000-02-"+(int)(Math.random()*1000)+1000;
+			}else if((fin_no/100)==3) {
+				account_num="0000-03-"+(int)(Math.random()*1000)+1000;
+			}else if((fin_no/100)==4) {
+				account_num="0000-04-"+(int)(Math.random()*1000)+1000;
+			}
 		
+		int acpro = dbPro.insertAcc(member_id, fdto.getFin_pro(), account_num, fdto.getFin_name(), fin_pw, fdto.getFin_rate());
+		
+		if(acpro == 1) {
+			m.addAttribute("member_id",member_id);
+			m.addAttribute("fin_pro",fdto.getFin_pro());
+			m.addAttribute("account_num",account_num);
+			m.addAttribute("fin_name",fdto.getFin_name());
+			m.addAttribute("fin_pw",fin_pw);
+			m.addAttribute("fin_rate",fdto.getFin_rate());
+		}
+		
+		int count1 = 0;
+		int count2 = 0;
+		int count3 = 0;
+		List aaList = null; // �����
+		List bbList = null; // ����
+		List ccList = null; // ����
+		AccountDAO dbPro = new AccountDAO();
+		count1 = dbPro.getACount(member_id);
+		count2 = dbPro.getBCount(member_id);
+		count3 = dbPro.getCCount(member_id);
+
+		aaList = dbPro.getA(member_id);
+		bbList = dbPro.getB(member_id);
+		ccList = dbPro.getC(member_id);
+
+		m.addAttribute("count1", count1);
+		m.addAttribute("count2", count2);
+		m.addAttribute("count3", count3);
+		m.addAttribute("aaList", aaList);
+		m.addAttribute("bbList", bbList);
+		m.addAttribute("ccList", ccList);
 			
-			
-			return "finance/financeMain";
+			return "account/accountList";
 		} else {
 			return "redirect:financeMain";
 		}
 	}
+
+
 }

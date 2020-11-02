@@ -135,7 +135,8 @@ public class FinanceMybatisDAO extends AbstractMybatis {
 			map.put("fin_pw",fin_pw);
 			map.put("fin_rate",fin_rate);
 			int num= sqlSession.selectOne(pro+".getCountAccount");
-			map.put("account_no",num);
+			System.out.println(num);
+			map.put("account_no",num+1);
 			return sqlSession.insert(pro + ".insertAcc", map);
 		} finally {
 			sqlSession.commit();
