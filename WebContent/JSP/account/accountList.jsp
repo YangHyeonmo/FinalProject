@@ -188,7 +188,7 @@
 								<td align="center" width="1000"><strong>입출금통장</strong> 만들 때
 									<br />은행 방문 NO, 이젠 모바일로 손안에서 OK</br></td>
 								<td width="100"><a
-									href="<%=request.getContextPath()%>/finance/financeMain">
+									href="<%=request.getContextPath()%>/finance/financeMain?dbno=1">
 										개설하기</a></td>
 							</tr>
 						</table>
@@ -250,7 +250,7 @@
 						</div>
 						<div class="col-md-3 cta-button">
 							<a
-								href="<%=request.getContextPath()%>/finance/financeMain"
+								href="<%=request.getContextPath()%>/finance/financeMain?dbno=2"
 								class="btn btn-lg btn-block btn-default">가입하기</a>
 						</div>
 					</c:if>
@@ -309,7 +309,7 @@
 							<h4>모을수록 쌓이는 이자! 나루뱅크에서 저축하세요.</h4>
 						</div>
 						<div class="col-md-3 cta-button">
-							<a href="<%=request.getContextPath()%>/finance/financeMain"
+							<a href="<%=request.getContextPath()%>/finance/financeMain?dbno=3"
 								class="btn btn-lg btn-block btn-default">가입하기</a>
 						</div>
 					</c:if>

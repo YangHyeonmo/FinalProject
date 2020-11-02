@@ -114,8 +114,12 @@ public class TransferController{
    public String realfinish(Model m,int auth,int random) throws Exception   { 
       
       if(random == auth) {
-
-         return  "transfer/realfinish";
+    	//   result=transferMybatisdao.transferInsert(transferdata,num);     
+           transferMybatisdao.updateMoney(transferdata.getAccount_no(),transferdata.getTransfer_price(),1);      //1: Minus Money 2.Plus Money
+           transferMybatisdao.updateMoney(transferdata.getTransfer_to_account_no(),transferdata.getTransfer_price(),2);
+          
+    	 m.addAttribute("finish",1);
+         return  "view/mainPage";
       }else {
          m.addAttribute("error", 1);
          return "transfer/finish";
@@ -134,7 +138,7 @@ public class TransferController{
           // 4 params(to, from, type, text) are mandatory. must be filled
           HashMap<String, String> params = new HashMap<String, String>();
           params.put("to", member.getMember_phonenumber());   // ������ȭ��ȣ
-          params.put("from", "01068992734");   // �߽���ȭ��ȣ. �׽�Ʈ�ÿ��� �߽�,���� �Ѵ� ���� ��ȣ�� �ϸ� ��
+          params.put("from", "01068992734");  
           params.put("type", "SMS");
           params.put("text", "[���� ��ȣ:"+random+"]");
           params.put("app_version", "test app 1.2"); // application name and version
@@ -191,25 +195,20 @@ public class TransferController{
    public String TransferAuth(TransferDTO transfer,int num, String year, String month,String day,Model m)  throws Throwable {
 	  String id=(String)session.getAttribute("member_id");
      try {
-         //������ �����ϴ��� 1�� 
-         boolean check_Account= transferMybatisdao.check_account_no(transfer.getAccount_no()); //������ �����ϴ��� Ȯ���ϴ� �޼ҵ�
+         boolean check_Account= transferMybatisdao.check_account_no(transfer.getAccount_no()); 
          if(check_Account) {
-            transferdata.setAccount_no(transfer.getAccount_no());   //������ ������ ��� 
+            transferdata.setAccount_no(transfer.getAccount_no());   
          }
-         transferdata.setMember_id("hyeonmo");
-         transferdata.setTransfer_alias(transfer.getTransfer_alias());
-         transferdata.setTransfer_to_member_id("hyeonmo2");   
-         //���忡 ���� �������� 2��
+         transferdata.setMember_id(id); 
          boolean check_Account_money=transferMybatisdao.check_account_money(transfer.getAccount_no(),transfer.getTransfer_price());
-         if(check_Account_money) {   //���忡 ���� ����� ���
+         if(check_Account_money) {  
             transferdata.setTransfer_price(transfer.getTransfer_price());
          }else {     
             m.addAttribute("error", 2);
             return "transfer/TransferWrite";
          }
-         //���� ������ �����ϴ��� 3��
          boolean check_TransferAccount=transferMybatisdao.check_account_no(transfer.getTransfer_to_account_no());
-         if(check_TransferAccount) {   //���� ������ �����ϴ� ���
+         if(check_TransferAccount) {   
             transferdata.setTransfer_to_account_no(transfer.getTransfer_to_account_no());
          }else {
             m.addAttribute("error", 3);
@@ -220,15 +219,10 @@ public class TransferController{
             m.addAttribute("error", 4);
             return "transfer/TransferWrite";
          }
-         if(num==1) {   //��� ��ü�� ���
-            //result=transferMybatisdao.transferInsert(transferdata,num);      //��ü ���� ����
-            //int transcount=transferMybatisdao.getTransListCount(num);   // ������ �� = ����� ����
-            //transferdata=transferMybatisdao.transferDetail(transcount, num);   //����� ����
-            //transferMybatisdao.updateMoney(transferdata.getAccount_no(),transferdata.getTransfer_price(),1);      //1: Minus Money 2.Plus Money
-            //transferMybatisdao.updateMoney(transferdata.getTransfer_to_account_no(),transferdata.getTransfer_price(),2);
+         if(num==1) {   
             m.addAttribute("transferdata", transferdata);
             return "transfer/TransferAuth";
-         }else if(num==2 || num==3) {   //�ڵ���ü , ������ü (�޷� ���� ���� �ּ� �ްԿ�)
+         }else if(num==2 || num==3) {   
             if(month.length()<2) {
                month="0"+month;
             }
