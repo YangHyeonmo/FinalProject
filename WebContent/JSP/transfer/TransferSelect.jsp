@@ -43,51 +43,36 @@
 </c:if>
 </head>
 <body>
+<div id="transferRes" class="bank" >
 <form action="./TransferSelectList" method="post" name="transferform">
-	<table class = "table table-bordered table-hover" style = "text-align: center; border: 1px solid #dddddd">
-				<thead>
-					<tr>
-						<th colspan = "5"><h4 align="center">기간 설정</h4></th>
-					</tr>
-				</thead>
-					<tr>
-						<td colspan = "5">출금 계좌 번호</td>
-					</tr>
-					<tr>
-						<td colspan = "5">	
-							<select name="account_no">
+<h4 align="center" style="font-weight:bold;">기간 설정</h4>
+<div class="container">
+  <div class="col">
+    <label>조회 계좌 번호</label>
+    <select class="chooseAccount2" name="account_no" id="account_no" onchange="change()">
 								<c:forEach var= "ACCOUNT_NO" items="${account_num }" varStatus="status">
 									<option value=${ACCOUNT_NO }>${ACCOUNT_NO}</option>
 								</c:forEach>
 							</select>
-						</td>						
-					</tr>
-					<%-- <tr>
-						<td colspan = "5">잔액</td>
-					</tr>
-					<tr>
-						<td>${deposit }
-					</tr> --%>
-					<tr align=center>
-						<td colspan="5">조회</td>					
-					</tr>
-					<tr>
-						<td><input type="button" value="일주일" onclick="money(7)"></td>
-						<td><input type="button" value="1개월" onclick="money(30)"></td>
-						<td><input type="button" value="3개월" onclick="money(90)"></td>
-						<td><input type="button" value="6개월" onclick="money(180)"></td>
-						<td><input type="button" value="1년"  onclick="money(365)"></td>
-					</tr>
-					<input type="date"  name="select_period"
-                  min="2020-08-01" max="2020-12-31" name="date"
-                  contenteditable="false">
-					
-				
-					<tr>
-						<td colspan="5"><input type="submit" value="확인"></td>
-					</tr>
-			</table>
+ 
+    <br/>
+    <label>조회</label>
+   	<input class="chooseMoney" type="button" value="일주일" onclick="money(7)">
+	<input class="chooseMoney" type="button" value="1개월" onclick="money(30)">
+	<input class="chooseMoney" type="button" value="3개월" onclick="money(90)">
+	<input class="chooseMoney" type="button" value="6개월" onclick="money(180)">
+	<input class="chooseMoney" type="button" value="1년"  onclick="money(365)">
+
+  <input type="date" id="select_period" name="select_period" min="2020-08-01" max="2020-12-31"  contenteditable="false">
+   
+   <div class="page_find">
+  <button type="submit">조회하기</button>
+</div>
+</div>
+</div>
+
 </form>
+</div>
 </body>
 <script>
       function money(price) {                           /* type 메뉴 선택시 type에 해당하는 테이블 출력하는 함수   /  cityName => kind(type) */

@@ -236,6 +236,7 @@ background-color: white; -webkit-rtl-ordering: logical; cursor: text; margin: 0e
 .bank .disclaimer{ position: absolute; width: 65%; left: 80px; color: #f1f1f1; font-size: 8px; bottom: 55px; }
 .bank .container .col{position:absolute; left:24rem; width:44rem; height:26rem;}
 .bank .container .col .page{position:absolute;width:13rem;right:60rem;bottom:-3rem;}
+.bank .container .col .page_find{position:absolute;width:13rem;right:60rem;bottom:-3rem;}
 .bank .container .col .chooseMoney{ display:inline-block; width:5rem; position:relative; background-color: gold; opacity: 0.7; }
 .bank .container .col input{ display: block; width: 260px; height: 30px; padding-left: 10px; padding-top: 3px; padding-bottom: 3px; margin: 7px; font-size: 17px; border-radius: 20px; background: rgba(0,0,0,0.05); border: none; transition: background 0.5s;}
 .bank .container .col input:focus{ outline-width: 0; background: rgba(31,134,252, 0.15); transition: background 0.5s;}
@@ -246,6 +247,7 @@ background-color: white; -webkit-rtl-ordering: logical; cursor: text; margin: 0e
 .bank .container .col .chooseAccount2{background-color: white;width:10rem; border-radius: 7%; opacity: 0.5;}
 .bank .container .col .choosePeriod{width: 6rem;height:2rem; box-shadow:inset -2px 2px 7px 6px grey; background-color: white;}
 .bank .container .col button{ background:#1AAB8A; color:#fff; border:none; position:absolute; height:35px; font-size:1.6em; left:33rem; margin-top:11rem; padding:0 2em; cursor:pointer; transition:800ms ease all; outline:none; }
+.bank .container .col .page_find button{ background:#1AAB8A; color:#fff; border:none; position:absolute; height:35px; font-size:1.6em; left:33rem; margin-top:-11rem; padding:0 2em; cursor:pointer; transition:800ms ease all; outline:none; }
 .bank .container .col button:hover{ background:#fff; color:#1AAB8A; }
 .bank .container .col button:before,.bank .container .col button:after{ content:''; position:absolute; top:0; right:0; height:2px; width:0; background: #1AAB8A; transition:400ms ease all; }
 .bank .container .col button:after{ right:inherit; top:inherit; left:0; bottom:0; }
