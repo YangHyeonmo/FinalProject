@@ -160,11 +160,11 @@ public class TestCrypto {
     	   TransferInfoSub1Security sub1Security = new TransferInfoSub1Security();
     	   TransferInfoSub2Security sub2Security = new TransferInfoSub2Security();
     	   TransferInfoSub3Security sub3Security = new TransferInfoSub3Security();
-    	   Thread.sleep(10 * 1000);
+    	   Thread.sleep(5000);
     	   sub1Security.start();
-    	   Thread.sleep(10 * 1000);
+    	   Thread.sleep(5000);
     	   sub2Security.start();
-    	   Thread.sleep(10 * 1000);
+    	   Thread.sleep(5000);
     	   sub3Security.start();
 
        }
