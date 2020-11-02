@@ -35,7 +35,7 @@
 		</li>
 		<li class="item">
 			<div class="left">
-				<div class="name"><a href="<%=request.getContextPath()%>/view/myInfo">Account Info</a></div>
+				<div class="name"><a href="<%=request.getContextPath()%>/view/myInfo">내 정보</a></div>
 			</div>
 			<div class="right">
 				<img src="<%=request.getContextPath()%>/images/arrow.png">
@@ -43,27 +43,22 @@
 		</li>
 		<li class="item">
 			<div class="left">
-				<div class="name"><a onclick="myFunction('Business')" >계좌</a></div>
+				<div class="name"><a href="<%=request.getContextPath()%>/account/accountList">계좌</a></div>
 			</div>
 			<div class="right">
 				<img src="<%=request.getContextPath()%>/images/arrow.png">
 			</div>
 		</li>
-		<div id="Business" class="w3-hide w3-container w3-center w3-pale-white">
-  				<p>계좌 소메뉴</p>
-		</div>
+		
 		<li class="item">
 			<div class="left">
-				<div class="name"><a onclick="myFunction('Transfer')" >Transfer</a></div>
+				<div class="name"><a href="<%=request.getContextPath()%>/transfer/TransferSelect">Transfer</a></div>
 			</div>
 			
 			<div class="right">
 				<img src="<%=request.getContextPath()%>/images/arrow.png">
 			</div>
 		</li>
-		<div id="Transfer" class="w3-hide w3-container w3-center w3-pale-white">
-  				<p>Transfer 소메뉴 추가 예정</p>
-		</div>
 	</ul>
 </div>
 <script>

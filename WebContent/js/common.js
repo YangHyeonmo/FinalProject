@@ -276,18 +276,36 @@
 	});
 
 	      function money(price) {                           /* type 메뉴 선택시 type에 해당하는 테이블 출력하는 함수   /  cityName => kind(type) */
-	          var element= parseInt(document.getElementById("TRANSFER_PRICE").value);
-	    	  document.getElementById("TRANSFER_PRICE").value=element+price;
+	          var element= parseInt(document.getElementById("transfer_price").value)
+	          var all=parseInt(document.getElementById("balance").value);
+	          if(element+price>all){
+	        	  alert("이체할 금액이 부족합니다");
+	        	  document.getElementById("transfer_price").value=element;
+	          }else{
+	        	  document.getElementById("transfer_price").value=element+price;
+	          }
 	      }
 
 	      function money2(price) {                           /* type 메뉴 선택시 type에 해당하는 테이블 출력하는 함수   /  cityName => kind(type) */
-	          var element= parseInt(document.getElementById("TRANSFER_PRICE2").value);
-	    	  document.getElementById("TRANSFER_PRICE2").value=element+price;
+	          var element= parseInt(document.getElementById("transfer_price2").value);
+	          var all=parseInt(document.getElementById("balance").value);
+	          if(element+price>all){
+	        	  alert("이체할 금액이 부족합니다");
+	        	  document.getElementById("transfer_price2").value=element;
+	          }else{
+	        	  document.getElementById("transfer_price2").value=element+price;
+	          }
 	      }
 
 	      function money3(price) {                           /* type 메뉴 선택시 type에 해당하는 테이블 출력하는 함수   /  cityName => kind(type) */
-	          var element= parseInt(document.getElementById("TRANSFER_PRICE3").value);
-	    	  document.getElementById("TRANSFER_PRICE3").value=element+price;
+	          var element= parseInt(document.getElementById("transfer_price3").value);
+	          var all=parseInt(document.getElementById("balance").value);
+	          if(element+price>all){
+	        	  alert("이체할 금액이 부족합니다");
+	        	  document.getElementById("transfer_price3").value=element;
+	          }else{
+	        	  document.getElementById("transfer_price3").value=element+price;
+	          }
 	      }
 
 	function openTransfer(bank) {

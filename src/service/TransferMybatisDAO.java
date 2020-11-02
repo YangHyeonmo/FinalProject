@@ -74,6 +74,7 @@ public class TransferMybatisDAO extends AbstractMybatis {
 		return transList;
 	}
 	public boolean check_account_no(String account_no) {
+		System.out.println(account_no);
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
 			String statement=namespace + ".check_account_no";
@@ -145,7 +146,7 @@ public class TransferMybatisDAO extends AbstractMybatis {
 		}
 		return x;
 	}
-	//여쭤보기
+	//�뿬彛ㅻ낫湲�
 	public boolean check_account_money(String account_no,int account_money) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {

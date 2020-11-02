@@ -30,13 +30,16 @@
 			<c:if test="${login ne 1 }">
 				<input class="money" maxlength="11" placeholder="로그인하세요" readonly>
 			</c:if>
-			<c:if test="${login eq 1 }">
-				<input class="money" maxlength="11" value="${balance[0]}"
-					placeholder="로그인하세요" id="balance" readonly
-				>
-				<h1>원</h1>
-				<a class="transfer" href="">이체</a>
-				<a class="card" href="">카드내역</a>
+			<c:if test="${login eq 1 && num ne 1 }">
+					<input class="money" maxlength="11"  value="${message}">
+			</c:if>
+			<c:if test="${login eq 1 && num eq 1 }">
+					<input class="money" maxlength="11" value="${balance[0]}"
+						placeholder="로그인하세요" readonly
+					>
+					<h1>원</h1>
+					<a class="transfer" href="">이체</a>
+					<a class="card" href="">카드내역</a>
 			</c:if>
 		</div>
 		<div class="coinMoney">

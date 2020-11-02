@@ -1,11 +1,16 @@
 package controller;
 
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.rosuda.REngine.REXP;
+import org.rosuda.REngine.REXPMismatchException;
 import org.rosuda.REngine.Rserve.RConnection;
 import org.rosuda.REngine.Rserve.RserveException;
 import org.springframework.stereotype.Controller;
@@ -43,30 +48,43 @@ public class StockController {
 	   } 
 
 	 @RequestMapping("stockgraph")
-	   public String stockgraph(String stockname,HttpServletRequest request,Model m) throws RserveException   { 
-	      System.out.println(stockname);
+	   public String stockgraph(String stockname,String startdate,String enddate,HttpServletRequest request,Model m) throws RserveException, REXPMismatchException, ParseException   { 
 	      RConnection c = new RConnection();
-	      
+	      REXP x=new REXP();
 	      StockDAO stockDAO=new StockDAO();
 	      String excode=stockDAO.searchstock(stockname);
-	      
-	      System.out.println(excode);
+	      System.out.println(startdate + " : " +enddate);
+	      Date today=new Date();
+	      Date start=new SimpleDateFormat("yyyy-MM-dd").parse(startdate);
+	      Date end=new SimpleDateFormat("yyyy-MM-dd").parse(enddate);	   
+	      System.out.println(start + " " + end + " " + today);
+	      System.out.println(start.after(today) + " " + start.after(end) + " " + today.after(end));
+	      if( start.after(today)) {
+	    	  m.addAttribute("msg", 1);
+	    	  return  "stock/stockinput"; 
+	      }else if(start.after(end)) {
+    		  m.addAttribute("msg",2);
+	    	  return  "stock/stockinput"; 
+	      }else if(!today.after(end)) {
+			  m.addAttribute("msg",3);
+	    	  return  "stock/stockinput"; 
+	      }
 	      
 	      String daily_chart = request.getServletContext().getRealPath("/")+"images\\daily_chart.jpg";
 	      daily_chart=daily_chart.replace("\\", "/");
-	      System.out.println("Â÷Æ®: "+daily_chart);
+	      System.out.println("ï¿½ï¿½Æ®: "+daily_chart);
 	      
 	      String range_chart = request.getServletContext().getRealPath("/")+"images\\range_chart.jpg";
 	      range_chart=range_chart.replace("\\", "/");
-	      System.out.println("Â÷Æ®: "+range_chart);
+	      System.out.println("ï¿½ï¿½Æ®: "+range_chart);
 	      
-	      String sum_chart = request.getServletContext().getRealPath("/")+"images\\sum_chart.jpg";
+	      String sum_chart = request.getServletContext().getRealPath("/")+"images\\chart_rank.jpg";
 	      sum_chart=sum_chart.replace("\\", "/");
-	      System.out.println("Â÷Æ®: "+sum_chart);
+	      System.out.println("ï¿½ï¿½Æ®: "+sum_chart);
 	      
 	      String risk_chart = request.getServletContext().getRealPath("/")+"images\\risk_chart.jpg";
 	      risk_chart=risk_chart.replace("\\", "/");
-	      System.out.println("Â÷Æ®: "+risk_chart);
+	      System.out.println("ï¿½ï¿½Æ®: "+risk_chart);
 	       c.eval("library(xts)");
 	       c.eval("library(quantmod)");
 	       c.eval("library(gridExtra)");
@@ -75,7 +93,7 @@ public class StockController {
 	       c.eval("library(lubridate)");
 	       c.eval("library(PerformanceAnalytics)");
 	       
-	       c.eval("stock<-getSymbols('"+excode+".KS',from='2020-01-01',to='2020-10-23',auto.assign=FALSE)");
+	       c.eval("stock<-getSymbols('"+excode+".KS',from='"+startdate+"',to='"+enddate+"',auto.assign=FALSE)");
 	       c.eval("stock<-adjustOHLC(stock,use.Adjusted=T)");
 	       c.eval("stock<-stock[Vo(stock)>0]");
 	       c.eval("colnames(stock)<-c('open','high','low','close','volume','adjusted')");
@@ -83,35 +101,85 @@ public class StockController {
 	       c.eval("stock$rtn<-ROC(Cl(stock))");
 	       c.eval("stock<-na.omit(stock)");
 	       
-	       //c.eval("path<-\"C:/Users/data/final/test.jpg\"");
-	       //ÀÏÀÏ ±×·¡ÇÁ 
+	       
+	       //ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½ 
 	       System.out.println("path<-\""+daily_chart+"\""+ "");
 	       
 	       c.eval("path<-\""+daily_chart+"\""+ "");       
 	       c.eval("png(path,width=1000,height=500,unit=\"px\")");
 	       c.eval("par(mfrow=c(1,1))");
-	       c.eval("a<-SMA(samsung$close,10)");
-	       c.eval("b<-SMA(samsung$close,30)");
-	       c.eval("chartSeries(stock,up.col='red',dn.col='blue',theme='white',name=\"stock\",TA=list(\"addBBands()\",\"addTA(a,col=5)\",\"addTA(b,col=4,on=2)\"))");
-	       c.eval("addSMA(10,col='red');");
-	       c.eval("addSMA(30,col='blue');");
+	       c.eval("chartSeries(stock,up.col='red',dn.col='blue',theme='white',TA=list(\"addBBands()\",\"addMACD()\",\"addRSI()\"))");
 	       c.eval("dev.off()");
 	       
+	       c.eval("portCumRet<-exp(cumsum(stock$rtn))");
+	       c.eval("a<-portCumRet[length(portCumRet)]$rtn");
+	       x= c.eval("as.numeric(a$rtn)");
+	       double cumRet=x.asDouble();
+	       cumRet=Math.round(cumRet*1000)/1000.0;
+	       m.addAttribute("cumRet", cumRet);	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í·ï¿½
+	      
+	       c.eval("first_day<-stock$open[1]");
+	       x=c.eval("as.numeric(first_day)");
+	       int first_day=x.asInteger();
+	       m.addAttribute("first_day",first_day);	//Ã¹ï¿½ï¿½
+	       
+	       c.eval("last_day<-stock$close[length(stock$close)]");
+	       x=c.eval("as.numeric(last_day)");
+	       int last_day=x.asInteger();
+	       m.addAttribute("last_day",last_day);	//ï¿½Î¹ï¿½Â°ï¿½ï¿½
+	       
+	       c.eval("macd<-MACD(stock$close)");
+	       c.eval("macd_m<-macd$macd[length(macd$macd)]");
+	       x=c.eval("as.numeric(macd_m)");
+	       double macd_m=x.asDouble();
+	       macd_m=Math.round(macd_m*1000)/1000.0;
+	       m.addAttribute("macd",macd_m);	//macd
 	       System.out.println("path<-\""+range_chart+"\""+ "");
 	       
+	       c.eval("macd<-MACD(stock$close)");
+	       c.eval("macd_s<-macd$signal[length(macd$signal)]");
+	       x=c.eval("as.numeric(macd_s)");
+	       double signal=x.asDouble();
+	       signal=Math.round(signal*1000)/1000.0;
+	       m.addAttribute("signal",signal);	//ï¿½Åµï¿½ ï¿½Ã±×³ï¿½
+	       System.out.println("path<-\""+range_chart+"\""+ "");
+	       	     
 	       c.eval("path<-\""+range_chart+"\""+ "");       
 	       c.eval("png(path,width=1000,height=500,unit=\"px\")");
 	       c.eval("par(mfrow=c(1,1))");
-	       c.eval("chartSeries(stock,up.col='red',dn.col='blue',theme='white',name=\"stock\",TA=\"addMACD()\")");
+	       c.eval("chartSeries(stock,up.col='red',dn.col='blue',theme='white',TA=list(\"addBBands()\",\"addVo()\",\"addDPO()\"))");
 	       c.eval("dev.off()");
+	       
+	       c.eval("rsi<-RSI(stock$close)");
+	       c.eval("rsi<-rsi$rsi[length(rsi$rsi)]");
+	       x=c.eval("as.numeric(rsi)");
+	       double rsi=x.asDouble();
+	       rsi=Math.round(rsi*1000)/1000.0;
+	       m.addAttribute("rsi",rsi);	//ï¿½Å¼ï¿½ ï¿½Åµï¿½ ï¿½ï¿½ï¿½ï¿½
+	       
+	       c.eval("dpo<-DPO(stock$close)");
+	       c.eval("dpo<-na.omit(dpo)");
+	       x=c.eval("sum(dpo[1:length(dpo)])*2");
+	       int dpo=x.asInteger();	      
+	       m.addAttribute("dpo",dpo);	//ï¿½Ìµï¿½ ï¿½ï¿½ï¿½
 	       
 	       System.out.println("path<-\""+sum_chart+"\""+ "");
 	       
 	       c.eval("path<-\""+sum_chart+"\""+ "");       
 	       c.eval("png(path,width=1000,height=500,unit=\"px\")");
 	       c.eval("par(mfrow=c(1,1))");
-	       c.eval("portCumRet<-exp(cumsum(stock$rtn))");
-	       c.eval("chartSeries(portCumRet,up.col='red',dn.col='blue',theme='white',name=\""+excode+"\""+")");
+	       c.eval("df<-stock[,c(\"adjusted\",\"volume\",\"rtn\")]");
+	       c.eval("df$cuts2<-cut(df$rtn, breaks=c(-0.15,-0.05,-0.03,0,0.03,0.05,0.15),include.lowest = TRUE)");
+	       c.eval("df$means2<-NA");
+	       c.eval("for(i in 1:6){\n" + 
+	       		"  group<-which(df$cuts2==i)\n" + 
+	       		"  if(length(group)>0){\n" + 
+	       		"    df$means2[group]<-mean(df$volume[group])\n" + 
+	       		"  }\n" + 
+	       		"}");
+	       c.eval("df<-na.omit(df)");
+	       c.eval("p<-ggplot(df)+geom_histogram(aes(x=volume))+facet_grid(cuts2~.)+ geom_vline(aes(xintercept=means2), linetype=\"dashed\",size=1)");
+	       c.eval("print(p)");
 	       c.eval("dev.off()");
 	       
 	       System.out.println("path<-\""+risk_chart+"\""+ "");
@@ -119,13 +187,17 @@ public class StockController {
 	       c.eval("path<-\""+risk_chart+"\""+ "");       
 	       c.eval("png(path,width=1000,height=500,unit=\"px\")");
 	       c.eval("par(mfrow=c(1,1))");
-	       c.eval("table.Drawdowns(stock$rtn,top=10)");
-	       c.eval("table.DownsideRisk(stock$rtn)");
-	       c.eval("charts.PerformanceSummary(stock$rtn)");
+	       c.eval("charts.PerformanceSummary(cbind(dailyReturn(stock),stock$rtn))");
 	       c.eval("dev.off()");
 	       
+	       x=c.eval("maxDrawdown(stock$rtn)");
+	       double mdd=x.asDouble();
+	       mdd=Math.round(mdd*1000)/1000.0;
 	       m.addAttribute("stock", stockname);
+	       m.addAttribute("mdd",mdd);
 	       
+	       m.addAttribute("startdate",startdate);
+	       m.addAttribute("enddate",enddate);
 	      return  "stock/stockgraph"; 
 	   } 
 

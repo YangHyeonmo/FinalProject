@@ -58,6 +58,8 @@ function change(){
 			document.getElementById('balance').value=balance[i];
 		}
 	}
+	
+	document.getElementById('account_number').value=document.getElementById('account_no').value;
 }
 </script>
 <div class="transferButt">
@@ -95,7 +97,7 @@ function change(){
 									<option value=${ACCOUNT_NO }>${ACCOUNT_NO}</option>
 								</c:forEach>
 							</select>
-    <input class="number" type="text" placeholder="이체할 계좌번호를 입력해주세요" ng-model="ncard" maxlength="12" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/> 
+    <input class="number" id="account_number" type="text" placeholder="이체할 계좌번호를 입력해주세요" ng-model="ncard" maxlength="12" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/> 
     <label>잔액</label>
     <input type="text" name= "balance" value="${balance[0]}" id="balance">
     <label>이체금액</label>
@@ -103,8 +105,8 @@ function change(){
 	<input type="button" class="chooseMoney" value="+50만" onclick="money(500000)" >
 	<input type="button" class="chooseMoney" value="+10만" onclick="money(100000)">
 	<input type="button" class="chooseMoney" value="+1만" onclick="money(10000)" >
-	<input type="button" class="chooseMoney" value="+전액"  onclick="money()">
-	<input type="text" value=0 name="TRANSFER_PRICE" id="TRANSFER_PRICE" placeholder="이체하실 금액을 입력하세요">
+	<input type="button" class="chooseMoney" value="+전액"  onclick="money(${balance[0]})">
+	<input type="text" value=0 name="transfer_price" id="transfer_price" placeholder="이체하실 금액을 입력하세요">
     <label>보내실 분 성함</label>
     <input class="inputname" type="text" placeholder="이름을 입력해주세요"/>
     <label>받는 분 계좌 번호</label>
@@ -127,10 +129,30 @@ function change(){
 
 
 <div id="transferAuto" class="bank" style="display:none">
+
 <form action="<%=request.getContextPath()%>/transfer/TransferAuth" method="post" name="transferform">
 	<input type="hidden" name="num" value="2"/>
 
 <div class="container">
+  <div class="col1">
+    <div class="card">
+      <div class="front">
+        <div class="type">
+          <img class="bankid"/>
+        </div>
+        <span class="chip"></span>
+        <span class="narubank">N A R U B A N K</span>
+        <span class="card_number">&#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF; </span>
+        <div class="date"><span class="date_value">MM / YYYY</span></div>
+        <span class="fullname">FULL NAME</span>
+      </div>
+      <div class="back">
+        <div class="magnetic"></div>
+        <div class="bar"></div>
+        <span class="seccode">&#x25CF;&#x25CF;&#x25CF;</span>
+      </div>
+    </div>
+  </div>
   <div class="col">
     <label>출금 계좌 번호</label>
     <select class="chooseAccount2" name="account_no" id="account_no" onchange="change()">
@@ -146,7 +168,7 @@ function change(){
 	<input type="button" class="chooseMoney" value="+10만" onclick="money2(100000)">
 	<input type="button" class="chooseMoney" value="+1만" onclick="money2(10000)" >
 	<input type="button" class="chooseMoney" value="+전액"  onclick="money2()">
-	<input type="text" value=0 name="TRANSFER_PRICE" id="TRANSFER_PRICE2" placeholder="이체하실 금액을 입력하세요">
+	<input type="text" value=0 name="transfer_price" id="transfer_price2" placeholder="이체하실 금액을 입력하세요">
 
     <label>받는 분 계좌 번호</label>
   	<input type="text" name="transfer_to_account_no" >
@@ -154,7 +176,7 @@ function change(){
     <input type="text" name="transfer_to_aias" >
     <label>자동 이체 주기</label>
     <br/>
-    <select name="TRANSFER_AUTO_PERIOD" class="period">
+    <select name="transfer_auto_period" class="period">
 								<option value=7>1주일</option>
 								<option value=14>2주일</option>
 								<option value=21>3주일</option>
@@ -189,6 +211,7 @@ function change(){
 	
 	<input type="hidden" name="num" value="3"/>
 <div class="container">
+
   <div class="col">
     <label>출금 계좌 번호</label>
     <select class="chooseAccount2" name="account_no" id="account_no" onchange="change()">
@@ -204,7 +227,7 @@ function change(){
 	<input type="button" class="chooseMoney" value="+10만" onclick="money3(100000)">
 	<input type="button" class="chooseMoney" value="+1만" onclick="money3(10000)" >
 	<input type="button" class="chooseMoney" value="+전액"  onclick="money3()">
-	<input type="text" value=0 name="TRANSFER_PRICE" id="TRANSFER_PRICE2" placeholder="이체하실 금액을 입력하세요">
+	<input type="text" value=0 name="transfer_price3" id="transfer_price3" placeholder="이체하실 금액을 입력하세요">
 
     <label>받는 분 계좌 번호</label>
   	<input type="text" name="transfer_to_account_no" >

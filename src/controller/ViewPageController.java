@@ -63,8 +63,15 @@ public class ViewPageController {
 				num.add(account_num.get(i).getAccount_num());
 				balance.add(account_num.get(i).getBalance());
 			}
-			m.addAttribute("account_num", num);
-			m.addAttribute("balance", balance);
+			if(num.size()!=0) {
+				m.addAttribute("num",1);
+				m.addAttribute("account_num", num);
+				m.addAttribute("balance", balance);
+			}else {
+				m.addAttribute("num",0);
+				m.addAttribute("message","통장 개설하러 가기");
+			}
+			
 
 			//2.회원이 통장이 가입이 되어있는지
 			System.out.println(member_id);
@@ -78,7 +85,10 @@ public class ViewPageController {
 	}
 
 	@RequestMapping("/memberMyPage")
-	public String memberMyPage() throws Throwable {
+	public String memberMyPage(Model m) throws Throwable {
+		String member_id = (String) session.getAttribute("member_id");
+		member = dao.getMember(member_id);
+		m.addAttribute("member", member);
 		return "view/memberMyPage";
 	}
 	@RequestMapping("myInfo")
