@@ -10,15 +10,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>인증번호 완료</title>
 </head>
 <body>
+<div class="auth_service">    
   <form method="post" name="authform"  action="<%=request.getContextPath()%>/transfer/realfinish">
    <input type="hidden" name="random" value="${random }">
-  <input type="hidden" name="authType" value=1>
-	
-		인증번호:<input type="text" name="auth">
-       	 <input type="submit" name="입력">
+  	<input type="hidden" name="authType" value=1>
+    <input type="text" name="auth" placeholder="인증번호  입력">
+   <div class="page">
+  <button type="submit">인증완료</button>
+  </div>
   </form>
+</div>
 </body>
 </html>

@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>환전 / 환율</title>
 </head>
+<div class="exchange_backImg">
 <div class="showExchange">
 
 		<h2>Today's Info </h2>&emsp;&emsp;&emsp;&emsp;
@@ -60,6 +61,8 @@
 		<button class="exchangeButton9" id="cur_unit" onclick="sendCountry(this.value);" value="CAD"><span><img src="<%=request.getContextPath()%>/images/Canada.png"></span></button>
 		<button class="exchangeButton10" id="cur_unit" onclick="sendCountry(this.value);" value="CHF"><span><img src="<%=request.getContextPath()%>/images/Swiss.png"></span></button>
 		
+</div>
+
 </div>
 <script>
 

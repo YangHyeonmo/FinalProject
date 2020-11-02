@@ -26,15 +26,15 @@
 			
 		</div>
 
-<nav class="navbar navbar-inverse" style="margin-top:9rem; background-color: rgba(0,0,0,0); box-shadow: 5px 5px 5px 5px grey;">
+<nav class="navbar navbar-inverse" style="margin-top:9rem; background-color: rgba(0,0,0,0); left:2rem; box-shadow: 5px 5px 5px 5px grey;">
 	<div class="container-fluid">
 		
 		<c:if test="${sessionScope.login eq 1}">
 			<ul class="nav navbar-nav">
-				<li class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown" style="margin-left:28rem;"
+				<li class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown" style="margin-left:20rem;"
 					href="#"
 				>조회 <span class="caret"></span></a>
-					<ul class="dropdown-menu" style="margin-left:28rem;">
+					<ul class="dropdown-menu" style="margin-left:20rem;">
 						<li><a href="<%=request.getContextPath()%>/account/accountList">내 계좌 조회</a></li>
 						<li><a href="#">Page 1-2</a></li>
 						<li><a href="#">Page 1-3</a></li>
