@@ -114,4 +114,8 @@
 		#{end_date} and (account_num=#{account_num})
 	</select>
 
+	<select id="account_id" parameterType="String"
+		resultType="String">
+		select member_id from account where account_num = #{account_num}
+	</select>
 </mapper>

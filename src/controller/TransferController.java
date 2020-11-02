@@ -51,6 +51,7 @@ import model.MemberDTO;
 import model.TransferDTO;
 
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
+import service.AccountDAO;
 import service.MemberMybatisDAO;
 //import service.StockDAO;
 import service.TransferMybatisDAO;
@@ -81,7 +82,7 @@ public class TransferController{
          // TODO Auto-generated catch block
          e.printStackTrace();
       }
-      HttpSession session = request.getSession();							
+        session = request.getSession();							
 		id= (String)session.getAttribute("member_id");	
 		List<AccountDTO> account_num= transferMybatisdao.getAccountNum(id);	
 		
@@ -193,7 +194,7 @@ public class TransferController{
 	} 
    @RequestMapping("TransferAuth")
    public String TransferAuth(TransferDTO transfer,int num, String year, String month,String day,Model m)  throws Throwable {
-	  String id=(String)session.getAttribute("member_id");
+	    id=(String)session.getAttribute("member_id");
      try {
          boolean check_Account= transferMybatisdao.check_account_no(transfer.getAccount_no()); 
          if(check_Account) {
@@ -201,20 +202,18 @@ public class TransferController{
          }
          transferdata.setMember_id(id); 
          boolean check_Account_money=transferMybatisdao.check_account_money(transfer.getAccount_no(),transfer.getTransfer_price());
-         if(check_Account_money) {  
-            transferdata.setTransfer_price(transfer.getTransfer_price());
-         }else {     
-            m.addAttribute("error", 2);
-            return "transfer/TransferWrite";
+         if(!check_Account_money) {  
+        	 m.addAttribute("error", 2);
+             return "transfer/TransferWrite";
          }
          boolean check_TransferAccount=transferMybatisdao.check_account_no(transfer.getTransfer_to_account_no());
-         if(check_TransferAccount) {   
-            transferdata.setTransfer_to_account_no(transfer.getTransfer_to_account_no());
-         }else {
-            m.addAttribute("error", 3);
-            return "transfer/TransferWrite";
+         AccountDAO a=new AccountDAO();
+         String tran_id=a.account_id(transfer.getTransfer_to_account_no());
+         transferdata.setTransfer_to_member_id(tran_id);
+         if(!check_TransferAccount) {   
+        	 m.addAttribute("error", 3);
+             return "transfer/TransferWrite";
          }
-         //�ڽſ��� ������ ���ϵ��� 4��
          if(transfer.getAccount_no().equals(transfer.getTransfer_to_account_no())) {
             m.addAttribute("error", 4);
             return "transfer/TransferWrite";
@@ -286,5 +285,13 @@ public class TransferController{
          }
       m.addAttribute("transfer", transfer);
       return "transfer/TransferAuth";         
+   } 
+   @RequestMapping("emailAuth")
+   public String emailAuth() { 
+      return  "transfer/emailAuth"; 
+   } 
+   @RequestMapping("messageAuth")
+   public String messageAuth() { 
+      return  "transfer/messageAuth"; 
    } 
 }

@@ -112,7 +112,7 @@ function change(){
     <label>받는 분 계좌 번호</label>
   	<input type="text" name="transfer_to_account_no" >
     <label>받는 분 표시</label>
-    <input type="text" name="transfer_to_aias" >
+    <input type="text" name="transfer_to_alias" >
     <label>Today's Date</label>
     <input class="expire" type="text" placeholder="오늘 날짜를 입력해주세요"/>
     <label>보안 번호</label>
