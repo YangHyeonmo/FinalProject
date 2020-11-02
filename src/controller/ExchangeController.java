@@ -31,51 +31,51 @@ public class ExchangeController {
 
 	@Autowired
 	ExchangeDAO ex;
-	
-	
+
 	@RequestMapping("exchangeForm")
 	public String exchangeForm(Model m) throws Exception {
-	      SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
-	      Calendar cal = Calendar.getInstance();
-	      cal.add(cal.DATE, -1);
-	      String yesterday = date.format(cal.getTime());
-	      
-	      String str;
-	      Map<String, Double> sell = new HashMap<>();
-	      Map<String, Double> buy = new HashMap<>();
-	      String[] cuList = { "USD", "JPY", "EUR" };
-	      double currency = 0.0;
-	      String address = "https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=f5IPSrHZYhzRp9hykkOyZijcMwDv0oNw&searchdate=20201028&data=AP01";
-	      BufferedReader br;
-	      URL url;
-	      HttpURLConnection conn;
+		SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
+		Calendar cal = Calendar.getInstance();
+		cal.add(cal.DATE, -1);
+		String yesterday = date.format(cal.getTime());
 
-	      url = new URL(address);
-	      conn = (HttpURLConnection) url.openConnection();
-	      conn.setRequestMethod("GET");
-	      br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-	      str = br.readLine();
-	      /* 데이터 mapping start */
-	      for (int i = 0; i < cuList.length; i++) {
-	         String[] tList = str.split(cuList[i]);
-	         tList = tList[1].split("\"tts\":\"");
-	         tList = tList[1].split("\"");
-	         String temp = tList[0].replace(",", "");
-	         currency = Double.parseDouble(temp);
-	         sell.put(cuList[i], currency);
-	      }
-	      for (int i = 0; i < cuList.length; i++) {
-	         String[] tList = str.split(cuList[i]);
-	         tList = tList[1].split("\"ttb\":\"");
-	         tList = tList[1].split("\"");
-	         String temp = tList[0].replace(",", "");
-	         currency = Double.parseDouble(temp);
-	         buy.put(cuList[i], currency);
-	      }
-	      /*----------------- end ---------------------*/
-	      m.addAttribute("sell", sell);
-	      m.addAttribute("buy", buy);
-	
+		String str;
+		Map<String, Double> sell = new HashMap<>();
+		Map<String, Double> buy = new HashMap<>();
+		String[] cuList = { "USD", "JPY", "EUR" };
+		double currency = 0.0;
+		String address = "https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=f5IPSrHZYhzRp9hykkOyZijcMwDv0oNw&searchdate="
+				+ yesterday + "&data=AP01";
+		BufferedReader br;
+		URL url;
+		HttpURLConnection conn;
+
+		url = new URL(address);
+		conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+		str = br.readLine();
+		/* 데이터 mapping start */
+		for (int i = 0; i < cuList.length; i++) {
+			String[] tList = str.split(cuList[i]);
+			tList = tList[1].split("\"tts\":\"");
+			tList = tList[1].split("\"");
+			String temp = tList[0].replace(",", "");
+			currency = Double.parseDouble(temp);
+			sell.put(cuList[i], currency);
+		}
+		for (int i = 0; i < cuList.length; i++) {
+			String[] tList = str.split(cuList[i]);
+			tList = tList[1].split("\"ttb\":\"");
+			tList = tList[1].split("\"");
+			String temp = tList[0].replace(",", "");
+			currency = Double.parseDouble(temp);
+			buy.put(cuList[i], currency);
+		}
+		/*----------------- end ---------------------*/
+		m.addAttribute("sell", sell);
+		m.addAttribute("buy", buy);
+
 		return "exchange/exchangeForm";
 	}
 
@@ -89,13 +89,17 @@ public class ExchangeController {
 	@RequestMapping("exchangeMoney")
 	@ResponseBody
 	public String exchangeMoney(String cur_unit, long kor_money, Model m) throws Exception {
+		SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
+		Calendar cal = Calendar.getInstance();
+		cal.add(cal.DATE, -1);
+		String yesterday = date.format(cal.getTime());
 
 		String str;
 		Map<String, Double> unit = new HashMap<>();
 		String[] cuList = { "AED", "AUD", "BHD", "BND", "CAD", "CHF", "CNH", "DKK", "EUR", "GBP", "HKD", "IDR", "JPY",
 				"KRW", "KWD", "MYR", "NOK", "NZD", "SAR", "SEK", "SGD", "THB", "USD" };
 		double currency = 0.0;
-		String address = "https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=f5IPSrHZYhzRp9hykkOyZijcMwDv0oNw&searchdate=20201028&data=AP01";
+		String address = "https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=f5IPSrHZYhzRp9hykkOyZijcMwDv0oNw&searchdate="+yesterday+"&data=AP01";
 		BufferedReader br;
 		URL url;
 		HttpURLConnection conn;
@@ -156,7 +160,6 @@ public class ExchangeController {
 
 	}
 
-	
 	@RequestMapping("exchangeShow")
 	public String selectExc(String member_id, Model m) throws Exception {
 		List<ExchangeDTO> sel = new ArrayList<ExchangeDTO>();
@@ -171,12 +174,5 @@ public class ExchangeController {
 	public String exchangePage() throws Exception {
 		return "exchange/exchangePage";
 	}
-	
 
-	
-	
-	
-	
-	
-	
 }
