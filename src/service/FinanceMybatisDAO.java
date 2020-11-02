@@ -106,11 +106,39 @@ public class FinanceMybatisDAO extends AbstractMybatis {
 			sqlSession.close();
 		}
 	}
-	public String Findfin(int fin_no) {
+	public FinanceDTO Findfin(int fin_no) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
-			return sqlSession.selectOne(fin + ".Findfin", fin_no);
+			return sqlSession.selectOne(fin + ".FindFin", fin_no);
 		} finally {
+			sqlSession.close();
+		}
+	}
+	
+	public ProductsDTO selPro(int fin_no) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			return sqlSession.selectOne(pro + ".selPro", fin_no);
+		}finally {
+			sqlSession.close();
+		}
+	}
+	
+	public int insertAcc( String member_id, String fin_pro,String account_num, String fin_name, int fin_pw, double fin_rate) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			map.clear();
+			map.put("member_id", member_id);
+			map.put("fin_pro", fin_pro);
+			map.put("account_num", account_num);
+			map.put("fin_name",fin_name);
+			map.put("fin_pw",fin_pw);
+			map.put("fin_rate",fin_rate);
+			int num= sqlSession.selectOne(pro+".getCountAccount");
+			map.put("account_no",num);
+			return sqlSession.insert(pro + ".insertAcc", map);
+		} finally {
+			sqlSession.commit();
 			sqlSession.close();
 		}
 	}

@@ -81,6 +81,7 @@ public class FinanceController {
 			m.addAttribute("dbno", dbno);
 
 		} 
+		
 			return "finance/financeMain";
 	}
 	
@@ -151,21 +152,22 @@ public class FinanceController {
 	}
 
 	@RequestMapping("accedeProducts")
-	public String accedeProducts(Model m, int fin_no, String member_id) throws Throwable {
+	public String accedeProducts(Model m, String member_id, String fin_pro,String account_num, String fin_name, int fin_pw, double fin_rate, int fin_no) throws Throwable {
 //		member_id = (String) session.getAttribute("member_id");
 		member_id = "syj";
 		int result = dbPro.insertProducts(fin_no, member_id);
 		/* String findfin = dbPro.Findfin(fin_no); */
-		
+		System.out.println(fin_no);
 		if (result == 1) {
 			m.addAttribute("fin_no", fin_no);
 			m.addAttribute("member_id", member_id);
 			/* m.addAttribute("findfin",findfin); */
+		
 			
-			return "finance/accedeProducts";
+			
+			return "finance/financeMain";
 		} else {
 			return "redirect:financeMain";
 		}
 	}
-
 }

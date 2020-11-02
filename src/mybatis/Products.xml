@@ -26,5 +26,7 @@
 	<select id="selectProducts" parameterType="String" resultType="hashmap">
 	select member_id, f.fin_name as fin_name from finance f, products p where p.fin_no = f.fin_no and member_id = #{member_id}
 	</select>
+	
+	
 
 </mapper>

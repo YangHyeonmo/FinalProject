@@ -17,12 +17,13 @@
 <body>
 	<form method="post" name="authform"
 		action="<%=request.getContextPath()%>/finance/accedeProducts">
-		<input type="hidden" name="random" value="${random }"> <input
-			type="hidden" name="authType" value=1> <input type="hidden"
-			name="fin_no" value=${fin_no }>
+		<input type="hidden" name="random" value="${random }">
+		<input type="hidden" name="fin_no" value=${fin_no }>
 		<div class="w3-display-middle">
-			인증번호:<input type="text" name="auth"> <input type="submit"
+			인증번호 : <input type="text" name="auth"> <input type="submit"
 				name="입력">
+			비밀 번호 : <input type="text" name="fin_pw">
+			
 		</div>
 	</form>
 </body>

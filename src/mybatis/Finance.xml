@@ -26,11 +26,11 @@
    </select>
    
    <select id="FinanceAccede" resultType="hashmap" parameterType="int">
-   select fin_no, fin_pro, fin_name, fin_date from finance where fin_no =${fin_no}
+   select fin_no, fin_pro, fin_name, fin_date from finance where fin_no =#{fin_no}
    </select>
    
-   <select id="FindFin" resultType="String" parameterType="int">
-   select fin_name from finance where= fin_no= ${fin_no}
+   <select id="FindFin" resultType="Finance" parameterType="int">
+   select * from finance where fin_no= #{fin_no}
    </select>
    
 </mapper>
