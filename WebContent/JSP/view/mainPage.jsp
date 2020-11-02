@@ -6,6 +6,11 @@
 <html>
 <head>
 </head>
+<c:if test="${finish==1}">
+	<script>
+		alert("이체가 완료되었습니다");
+	</script>
+</c:if>	
 <div class="main-body">
 	<img class="mainPageImg"
 		src="<%=request.getContextPath()%>/images/pointerLogo.png"
