@@ -24,7 +24,7 @@
 	<input class="search" type="text" placeholder="여기는 검색창" size="20">
 </div>
 <nav class="navbar navbar-inverse"
-	style="margin-top: 9rem; background-color: rgba(0, 0, 0, 0); left: 2rem; box-shadow: 5px 5px 5px 5px grey;"
+	style="margin-top: 9rem; background-color: rgba(0, 0, 0, 0); box-shadow: 5px 5px 5px 5px grey;"
 >
 	<div class="container-fluid">
 		<c:if test="${sessionScope.login eq 1}">
