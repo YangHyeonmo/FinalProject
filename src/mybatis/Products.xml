@@ -15,10 +15,10 @@
    </insert>
    
 	<select id="financeMain" resultType="Products" parameterType = "int"> <!-- 탑 3 정해서 화면에 띄우기 -->
-	select * from
+	 select * from
 	(select rownum as rnum, a.* from
-	(select p.fin_no , count(p.fin_no), f.fin_name from products p, finance f where p.fin_no like '${dbno}%' and p.fin_no = f.fin_no
-	group by p.fin_no, f.fin_name
+	(select p.fin_no as fin_no , count(p.fin_no), f.fin_name as fin_name, f.fin_rate as fin_rate, f.fin_return as fin_return from products p, finance f where p.fin_no like '${dbno}%' and p.fin_no = f.fin_no
+	group by p.fin_no, f.fin_name, f.fin_rate, f.fin_return
 	order by count(p.fin_no) desc) a)
 	where rnum between 1 and 3
 	</select>
