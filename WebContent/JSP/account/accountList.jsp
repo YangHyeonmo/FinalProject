@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-   pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
@@ -18,13 +18,13 @@ td.moreMenu {
    });
 </script>
 
-<h3 style="font-size: 20px; display: inline-block;">³ª·ç¹ðÅ© °èÁÂÁ¶È¸</h3>
+<h3 style="font-size: 20px; display: inline-block;">ë‚˜ë£¨ë±…í¬ ê³„ì¢Œì¡°íšŒ</h3>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <h3 style="font-size: 10px; display: inline-block;">
-   <a href="<%=request.getContextPath()%>/openbanking/SelectOpenBanking"> ´Ù¸¥ÀºÇà °èÁÂÁ¶È¸</a>
+   <a href="<%=request.getContextPath()%>/openbanking/SelectOpenBanking"> ë‹¤ë¥¸ì€í–‰ ê³„ì¢Œì¡°íšŒ</a>
 </h3>
 <h5>
-   Á¶È¸±âÁØÀÏ½Ã:
+   ì¡°íšŒê¸°ì¤€ì¼ì‹œ:
    <script type="text/javascript">
       let today = new Date();
       let year = today.getFullYear();
@@ -39,7 +39,7 @@ td.moreMenu {
                         + minutes + ':' + seconds)
    </script>
 </h5>
-               <h1 class="cta-title">${member.member_name }°í°´´Ô</h1>
+               <h1 class="cta-title">${member.member_name }ê³ ê°ë‹˜</h1>
                   <div class="cta-desc">
                      <p>Describe the action here.</p>
                      <p>Describe the action here.</p>
@@ -47,24 +47,24 @@ td.moreMenu {
                   </div>
                </div>
                <div class="col-md-3 cta-button">
-                  <p>ÃÑ ÀÜ¾×</p>
-                  <h2>~~¿ø</h2>
+                  <p>ì´ ìž”ì•¡</p>
+                  <h2>~~ì›</h2>
                </div>
-<h4>ÀÔÃâ±Ý</h4>
+<h4>ìž…ì¶œê¸ˆ</h4>
 <div
    style="border: 3px solid black; margin: 0px 10px 100px; width: 800;">
    <table class="w3-table-all" align="center">
       <tr class="w3-grey">
-         <td align="center">ÀÔÃâ±Ý (${count1 })°èÁÂ</td>
+         <td align="center">ìž…ì¶œê¸ˆ (${count1 })ê³„ì¢Œ</td>
       </tr>
    </table>
    <c:if test="${count1 == 0 }">
       <table class="w3-table-all" align="center">
          <tr class="w3-grey">
-            <td align="center" width="1000"><strong>ÀÔÃâ±ÝÅëÀå</strong> ¸¸µé ¶§ <br />ÀºÇà
-               ¹æ¹® NO, ÀÌÁ¨ ¸ð¹ÙÀÏ·Î ¼Õ¾È¿¡¼­ OK</br></td>
+            <td align="center" width="1000"><strong>ìž…ì¶œê¸ˆí†µìž¥</strong> ë§Œë“¤ ë•Œ <br />ì€í–‰
+               ë°©ë¬¸ NO, ì´ì   ëª¨ë°”ì¼ë¡œ ì†ì•ˆì—ì„œ OK</br></td>
             <td width="100"><a
-               href="<%=request.getContextPath()%>/finance/financeMain?dbno=5"> °³¼³ÇÏ±â</a></td>
+               href="<%=request.getContextPath()%>/finance/financeMain?dbno=5"> ê°œì„¤í•˜ê¸°</a></td>
          </tr>
       </table>
    </c:if>
@@ -75,50 +75,50 @@ td.moreMenu {
                <td align="center" width="200">${article.account_name}</td>
                <td align="center" width="200">${article.account_num }</td>
                <td align="center" width="150">${article.account_alias }</td>
-               <td align="center" width="150">ÀÜ¾× ${article.balance }¿ø</td>
+               <td align="center" width="150">ìž”ì•¡ ${article.balance }ì›</td>
                <td width="100"><a
                   href="<%=request.getContextPath() %>/account/accountShow?account_num=${article.account_num}">
-                     Á¶È¸</a></td></tr>
+                     ì¡°íšŒ</a></td></tr>
                <td width="100"><a
-                  href="<%=request.getContextPath()%>/transfer/TransferWrite"> ÀÌÃ¼</a></td>
-               <td class="button" width="100">°èÁÂ°ü¸®</td>
+                  href="<%=request.getContextPath()%>/transfer/TransferWrite"> ì´ì²´</a></td>
+               <td class="button" width="100">ê³„ì¢Œê´€ë¦¬</td>
                <tr height="30">
                <td class="moreMenu"><a href="URL"
-                  onclick="window.open('<%=request.getContextPath()%>/account/aliasChange?account_num=${article.account_num}', '_blank', 'top=350px,left=350px,width=550px,height=390px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;">°èÁÂ
-                     º°¸í °ü¸®</a></td>
+                  onclick="window.open('<%=request.getContextPath()%>/account/aliasChange?account_num=${article.account_num}', '_blank', 'top=350px,left=350px,width=550px,height=390px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;">ê³„ì¢Œ
+                     ë³„ëª… ê´€ë¦¬</a></td>
                <td class="moreMenu"><a href="URL"
                   onclick="window.open('<%=request.getContextPath()%>/account/accountCopy?account_num=${article.account_num}', '_blank', 'top=350px,left=400px,width=700px,height=450px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;">
-                     °èÁÂ°³¼³È®ÀÎ¼­(ÅëÀå»çº»)</a></td>
+                     ê³„ì¢Œê°œì„¤í™•ì¸ì„œ(í†µìž¥ì‚¬ë³¸)</a></td>
                <td class="moreMenu"><a href="URL"
                   onclick="window.open('<%=request.getContextPath()%>/account/accountPwChange?account_num=${article.account_num}', '_blank', 'top=350px,left=400px,width=400px,height=250px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;">
-                  °èÁÂºñ¹Ð¹øÈ£º¯°æ</a></td>
+                  ê³„ì¢Œë¹„ë°€ë²ˆí˜¸ë³€ê²½</a></td>
                <td class="moreMenu"><a href="URL"
                   onclick="window.open('<%=request.getContextPath()%>/account/accountDelete?account_num=${article.account_num}', '_blank', 'top=350px,left=400px,width=400px,height=250px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;">
-                  °èÁÂÇØÁö</a></td>
+                  ê³„ì¢Œí•´ì§€</a></td>
             </tr>
          </c:forEach>
       </table>
    </c:if>
 </div>
 
-<h4>¿¹±Ý</h4>
+<h4>ì˜ˆê¸ˆ</h4>
 <div
    style="border: 3px solid black; margin: 0px 10px 100px; width: 800;">
    <c:if test="${count2 == 0 }">
       <table class="w3-table-all" align="center">
          <tr class="w3-grey">
-            <td align="center" width="1000">Á¶È¸ ³»¿ªÀÌ ¾ø½À´Ï´Ù. </br> ÀçÅ×Å© °í¼ö´Â ³õÄ¡Áö ¾Ê´Â
-               ¿¹±ÝÀÌÀÚ, ´Ü ÇÑ´ÞÀÌ¶óµµ ¿©À¯ÀÚ±ÝÀ» ¿¹±Ý¿¡ ¸Ã°ÜµÎ¼¼¿ä.
+            <td align="center" width="1000">ì¡°íšŒ ë‚´ì—­ì´ ì—†ìŠµë‹ˆë‹¤. </br> ìž¬í…Œí¬ ê³ ìˆ˜ëŠ” ë†“ì¹˜ì§€ ì•ŠëŠ”
+               ì˜ˆê¸ˆì´ìž, ë‹¨ í•œë‹¬ì´ë¼ë„ ì—¬ìœ ìžê¸ˆì„ ì˜ˆê¸ˆì— ë§¡ê²¨ë‘ì„¸ìš”.
             </td>
             <td width="100"><a
-               href="<%=request.getContextPath()%>/finance/financeMain?dbno=1"> °¡ÀÔÇÏ±â</a></td>
+               href="<%=request.getContextPath()%>/finance/financeMain?dbno=1"> ê°€ìž…í•˜ê¸°</a></td>
          </tr>
       </table>
    </c:if>
    <c:if test="${count2 != 0 }">
       <table class="w3-table-all" align="center">
          <tr class="w3-grey">
-            <td align="center">¿¹±Ý (${count2 })°èÁÂ</td>
+            <td align="center">ì˜ˆê¸ˆ (${count2 })ê³„ì¢Œ</td>
          </tr>
       </table>
       <table class="w3-table-all" align="center">
@@ -127,48 +127,48 @@ td.moreMenu {
                <td align="center" width="200">${article.account_name}</td>
                <td align="center" width="200">${article.account_num }</td>
                <td align="center" width="150">${article.account_alias }</td>
-               <td align="center" width="150">ÀÜ¾× ${article.balance }¿ø</td>
+               <td align="center" width="150">ìž”ì•¡ ${article.balance }ì›</td>
               <td width="100"><a
                   href="<%=request.getContextPath() %>/account/accountShow?account_num=${article.account_num}">
-                     Á¶È¸</a></td></tr>
+                     ì¡°íšŒ</a></td></tr>
                <td width="100"><a
-                  href="<%=request.getContextPath()%>/transfer/TransferWrite"> ÀÌÃ¼</a></td>
-               <td class="button" width="100">°èÁÂ°ü¸®</td>
+                  href="<%=request.getContextPath()%>/transfer/TransferWrite"> ì´ì²´</a></td>
+               <td class="button" width="100">ê³„ì¢Œê´€ë¦¬</td>
                <tr height="30">
                <td class="moreMenu"><a href="URL"
-                  onclick="window.open('<%=request.getContextPath()%>/account/aliasChange?account_num=${article.account_num}', '_blank', 'top=350px,left=350px,width=550px,height=390px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;">°èÁÂ
-                     º°¸í °ü¸®</a></td>
+                  onclick="window.open('<%=request.getContextPath()%>/account/aliasChange?account_num=${article.account_num}', '_blank', 'top=350px,left=350px,width=550px,height=390px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;">ê³„ì¢Œ
+                     ë³„ëª… ê´€ë¦¬</a></td>
                <td class="moreMenu"><a href="URL"
                   onclick="window.open('<%=request.getContextPath()%>/account/accountCopy?account_num=${article.account_num}', '_blank', 'top=350px,left=400px,width=700px,height=450px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;">
-                     °èÁÂ°³¼³È®ÀÎ¼­(ÅëÀå»çº»)</a></td>
+                     ê³„ì¢Œê°œì„¤í™•ì¸ì„œ(í†µìž¥ì‚¬ë³¸)</a></td>
                <td class="moreMenu"><a href="URL"
                   onclick="window.open('<%=request.getContextPath()%>/account/accountPwChange?account_num=${article.account_num}', '_blank', 'top=350px,left=400px,width=400px,height=250px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;">
-                  °èÁÂºñ¹Ð¹øÈ£º¯°æ</a></td>
+                  ê³„ì¢Œë¹„ë°€ë²ˆí˜¸ë³€ê²½</a></td>
                <td class="moreMenu"><a href="URL"
                   onclick="window.open('<%=request.getContextPath()%>/account/accountDelete?account_num=${article.account_num}', '_blank', 'top=350px,left=400px,width=400px,height=250px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;">
-                  °èÁÂÇØÁö</a></td>
+                  ê³„ì¢Œí•´ì§€</a></td>
             </tr>
          </c:forEach>
       </table>
    </c:if>
 </div>
 
-<h4>Àû±Ý</h4>
+<h4>ì ê¸ˆ</h4>
 <div
    style="border: 3px solid black; margin: 0px 10px 100px; width: 800;">
    <c:if test="${count3 == 0 }">
       <table class="w3-table-all" align="center">
          <tr class="w3-grey">
-            <td align="center" width="1000">Á¶È¸ ³»¿ªÀÌ ¾ø½À´Ï´Ù. </br> ¾Ë¶ã»ì¶ãÇÏ°Ô ³ª·ç¹ðÅ©¿¡¼­ ¸ð¾Æº¸¾Æ¿ä
+            <td align="center" width="1000">ì¡°íšŒ ë‚´ì—­ì´ ì—†ìŠµë‹ˆë‹¤. </br> ì•Œëœ°ì‚´ëœ°í•˜ê²Œ ë‚˜ë£¨ë±…í¬ì—ì„œ ëª¨ì•„ë³´ì•„ìš”
             </td>
             <td width="100"><a
-               href="<%=request.getContextPath()%>/finance/financeMain?dbno=1"> °¡ÀÔÇÏ±â</a></td>
+               href="<%=request.getContextPath()%>/finance/financeMain?dbno=2"> ê°€ìž…í•˜ê¸°</a></td>
          </tr>
       </table>
    </c:if>
    <table class="w3-table-all" align="center">
       <tr class="w3-grey">
-         <td align="center">Àû±Ý (${count3 })°èÁÂ</td>
+         <td align="center">ì ê¸ˆ (${count3 })ê³„ì¢Œ</td>
       </tr>
    </table>
    <c:if test="${count3 != 0 }">
@@ -178,24 +178,24 @@ td.moreMenu {
                <td align="center" width="200">${article.account_name}</td>
                <td align="center" width="200">${article.account_num }</td>
                <td align="center" width="150">${article.account_alias }</td>
-               <td align="center" width="150">ÀÜ¾× ${article.balance }¿ø</td>
+               <td align="center" width="150">ìž”ì•¡ ${article.balance }ì›</td>
               <td width="100"><a
                   href="<%=request.getContextPath() %>/account/accountShow?account_num=${article.account_num}">
-                     Á¶È¸</a></td></tr>
-               <td class="button" width="100">°èÁÂ°ü¸®</td>
+                     ì¡°íšŒ</a></td></tr>
+               <td class="button" width="100">ê³„ì¢Œê´€ë¦¬</td>
                <tr height="30">
                <td class="moreMenu"><a href="URL"
-                  onclick="window.open('<%=request.getContextPath()%>/account/aliasChange?account_num=${article.account_num}', '_blank', 'top=350px,left=350px,width=550px,height=390px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;">°èÁÂ
-                     º°¸í °ü¸®</a></td>
+                  onclick="window.open('<%=request.getContextPath()%>/account/aliasChange?account_num=${article.account_num}', '_blank', 'top=350px,left=350px,width=550px,height=390px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;">ê³„ì¢Œ
+                     ë³„ëª… ê´€ë¦¬</a></td>
                <td class="moreMenu"><a href="URL"
                   onclick="window.open('<%=request.getContextPath()%>/account/accountCopy?account_num=${article.account_num}', '_blank', 'top=350px,left=400px,width=700px,height=450px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;">
-                     °èÁÂ°³¼³È®ÀÎ¼­(ÅëÀå»çº»)</a></td>
+                     ê³„ì¢Œê°œì„¤í™•ì¸ì„œ(í†µìž¥ì‚¬ë³¸)</a></td>
                <td class="moreMenu"><a href="URL"
                   onclick="window.open('<%=request.getContextPath()%>/account/accountPwChange?account_num=${article.account_num}', '_blank', 'top=350px,left=400px,width=400px,height=250px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;">
-                  °èÁÂºñ¹Ð¹øÈ£º¯°æ</a></td>
+                  ê³„ì¢Œë¹„ë°€ë²ˆí˜¸ë³€ê²½</a></td>
                <td class="moreMenu"><a href="URL"
                   onclick="window.open('<%=request.getContextPath()%>/account/accountDelete?account_num=${article.account_num}', '_blank', 'top=350px,left=400px,width=400px,height=250px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;">
-                  °èÁÂÇØÁö</a></td>
+                  ê³„ì¢Œí•´ì§€</a></td>
             </tr>
          </c:forEach>
       </table>
