@@ -159,7 +159,7 @@
 		var searchSource = [	
 		
 			<c:forEach var="stocklist" items="${stocklist}">
-			"${stocklist.exname} ${stocklist.excode}",
+			"${stocklist.exname} ,
 			</c:forEach>
 			""
 			
