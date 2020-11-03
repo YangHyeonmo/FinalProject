@@ -1,7 +1,9 @@
 package controller;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
@@ -55,9 +57,86 @@ import service.AccountDAO;
 import service.MemberMybatisDAO;
 //import service.StockDAO;
 import service.TransferMybatisDAO;
+import util.CryptoUtil;
 import util.Gmail;
 import util.SHA256;
 import util.SendMail;
+import util.TestCrypto;
+
+class TransferInfoSub1Security extends Thread{
+	public void run() {
+		System.out.println("***BlockChain 시작***");
+			try {
+				String main="";
+				String line = "";
+				
+				BufferedReader br = new BufferedReader(new FileReader("src/encryptedSecurityFiles/TransferInfoSecurityMain.txt"));
+				BufferedWriter sub1 = new BufferedWriter(new FileWriter("src/encryptedSecurityFiles/TransferInfoSub1.txt"));
+				while ((line = br.readLine()) != null) {
+					main += line+"\n";
+				}
+		
+				sub1.write(main+"\n");
+				sub1.flush();
+				sub1.close();
+				
+				}
+			catch (Exception e) {
+		     }
+	        System.out.println("==================================");
+			System.out.println("***TransferInfoSub1***파일저장 완료***BlockChain***");
+	        System.out.println("==================================");
+
+		}
+}
+class TransferInfoSub2Security extends Thread{
+	public void run() {
+			try {
+				String main="";
+				String line = "";
+				
+				BufferedReader br = new BufferedReader(new FileReader("src/encryptedSecurityFiles/TransferInfoSecurityMain.txt"));
+				BufferedWriter sub2 = new BufferedWriter(new FileWriter("src/encryptedSecurityFiles/TransferInfoSub2.txt"));
+				while ((line = br.readLine()) != null) {
+					main += line+"\n";
+				}
+				sub2.write(main+"\n");
+				sub2.flush();
+				sub2.close();
+				}
+			
+			catch (Exception e) {
+		     }
+			System.out.println("***TransferInfoSub2***파일저장 완료***BlockChain***");
+	        System.out.println("==================================");
+
+		}
+	}
+class TransferInfoSub3Security extends Thread{
+	public void run() {
+			try {
+				String main="";
+				String line = "";
+				BufferedReader br = new BufferedReader(new FileReader("src/encryptedSecurityFiles/TransferInfoSecurityMain.txt"));
+				BufferedWriter sub3 = new BufferedWriter(new FileWriter("src/encryptedSecurityFiles/TransferInfoSub3.txt"));
+	
+				while ((line = br.readLine()) != null) {
+					main += line+"\n";
+				}
+				sub3.write(main+"\n");
+				sub3.flush();
+				sub3.close();
+			}
+			catch (Exception e) {
+		     }
+			System.out.println("***TransferInfoSub3***파일저장 완료***BlockChain***");		
+	        System.out.println("==================================");
+
+			}
+	}
+
+
+
 
 @Controller
 @RequestMapping("/transfer/")
@@ -113,12 +192,14 @@ public class TransferController{
    
    @RequestMapping("realfinish")
    public String realfinish(Model m,int auth,int random) throws Exception   { 
-      
+      AccountDAO a=new AccountDAO();
+      AccountDTO foraccount=a.accountInfo(transferdata.getAccount_no());
+      AccountDTO toaccount=a.accountInfo(transferdata.getTransfer_to_account_no());
       if(random == auth) {
     	//   result=transferMybatisdao.transferInsert(transferdata,num);     
            transferMybatisdao.updateMoney(transferdata.getAccount_no(),transferdata.getTransfer_price(),1);      //1: Minus Money 2.Plus Money
            transferMybatisdao.updateMoney(transferdata.getTransfer_to_account_no(),transferdata.getTransfer_price(),2);
-          
+           System.out.println(foraccount+ " \n" + toaccount);
     	 m.addAttribute("finish",1);
          return  "view/mainPage";
       }else {
@@ -127,9 +208,9 @@ public class TransferController{
       }
       
    } 
+   
    @RequestMapping("finish")
-   public String finish(MemberDTO member,Model m,int authType)   { 
-      //�ڵ��� ��ȣ �Է�
+   public String finish(MemberDTO member,Model m,int authType,HttpServletRequest request) throws Exception   { 
       int random=(int)(Math.random()*1000000)+1;
       if(authType==1) {
           String api_key = "NCSGDPVOV9E09TBL";
@@ -138,10 +219,10 @@ public class TransferController{
          
           // 4 params(to, from, type, text) are mandatory. must be filled
           HashMap<String, String> params = new HashMap<String, String>();
-          params.put("to", member.getMember_phonenumber());   // ������ȭ��ȣ
+          params.put("to", member.getMember_phonenumber());  
           params.put("from", "01068992734");  
           params.put("type", "SMS");
-          params.put("text", "[���� ��ȣ:"+random+"]");
+          params.put("text", "[valid:"+random+"]");
           params.put("app_version", "test app 1.2"); // application name and version
 
           try {
@@ -157,6 +238,113 @@ public class TransferController{
     	  SendMail send=new SendMail();
     	  send.send(member.getMember_email(), random);
       }
+      
+      System.out.println(transferdata.getAccount_no());
+      result=transferMybatisdao.transferInsert(transferdata,transferdata.getNum());
+      transferMybatisdao.updateMoney(transferdata.getAccount_no(),transferdata.getTransfer_price(),1);
+      transferMybatisdao.updateMoney(transferdata.getTransfer_to_account_no(),transferdata.getTransfer_price(),2);
+      
+      AccountDAO a=new AccountDAO();
+      AccountDTO foraccount=a.accountInfo(transferdata.getAccount_no());
+      AccountDTO toaccount=a.accountInfo(transferdata.getTransfer_to_account_no());
+      
+      
+      String plainText = transferdata.getMember_id()+"님께서" + transferdata.getTransfer_to_member_id() + "님에게 " + transferdata.getTransfer_price()+"원을 보냈습니다";
+      String key = "secret key";
+      String encrypted = CryptoUtil.encryptAES256(plainText, key);
+      System.out.println("AES-256 : enc - " + encrypted);
+      System.out.println("AES-256 : dec - " + CryptoUtil.decryptAES256(encrypted, key));
+      
+      String path=request.getServletContext().getRealPath("/")+"text\\TransferInfoSecurityMain.txt";
+      path=path.replace("\\", "/");
+      
+      BufferedWriter bw = new BufferedWriter(new FileWriter(path,true));
+      
+      
+      bw.write(encrypted+"\n");
+      bw.flush();
+      bw.close();
+      
+            
+      String main="";
+      String sub1="";
+      String sub2="";
+      String sub3="";
+      double compare=100/3;
+
+    BufferedReader br = new BufferedReader(new FileReader(path));
+    path=request.getServletContext().getRealPath("/")+"text\\TransferInfoSub1.txt";
+    path=path.replace("\\", "/");
+  	BufferedReader br1 = new BufferedReader(new FileReader(path));
+  	path=request.getServletContext().getRealPath("/")+"text\\TransferInfoSub2.txt";
+  	path=path.replace("\\", "/");
+  	BufferedReader br2 = new BufferedReader(new FileReader(path));
+ 	path=request.getServletContext().getRealPath("/")+"text\\TransferInfoSub3.txt";
+ 	path=path.replace("\\", "/");
+  	BufferedReader br3 = new BufferedReader(new FileReader(path));
+		
+
+	      try {
+		     String  line="";
+	            while ((line = br.readLine()) != null) {
+	            	main+=line;
+	            }
+	      } catch (Exception e) {
+	      }
+	      
+	      try {
+		     String  line="";
+	            while ((line = br1.readLine()) != null) {
+	            	sub1+=line;
+	            }
+	      } catch (Exception e) {
+	      }
+	      try {
+		     String  line="";
+	            while ((line = br2.readLine()) != null) {
+	            	sub2+=line;
+	            }
+	      } catch (Exception e) {
+	      }
+	      try {
+			  String  line="";
+		         while ((line = br3.readLine()) != null) {
+		            sub3+=line;
+		           }
+		      } catch (Exception e) {
+		      }
+	      
+	      
+	      if(sub1.hashCode() == sub2.hashCode()) {
+	    	  compare += 100/3;
+	    	  if(sub2.hashCode() == sub3.hashCode()) {
+		    	  compare += 100/3;
+	    	  }
+	      }
+	      else if (sub2.hashCode() == sub3.hashCode()) {
+	    	  compare += 100/3;
+	      }
+	      else if(sub1.hashCode() == sub3.hashCode()) {
+  		  compare += 100/3;
+  		 
+  	  }
+	      System.out.println("==================================");
+	      System.out.println("BlockChain True일 확률 : " + compare +"%");
+	      System.out.println("==================================");
+	    
+	    
+     if(compare > 51) {
+  	   TransferInfoSub1Security sub1Security = new TransferInfoSub1Security();
+  	   TransferInfoSub2Security sub2Security = new TransferInfoSub2Security();
+  	   TransferInfoSub3Security sub3Security = new TransferInfoSub3Security();
+  	   Thread.sleep(5000);
+  	   sub1Security.start();
+  	   Thread.sleep(5000);
+  	   sub2Security.start();
+  	   Thread.sleep(5000);
+  	   sub3Security.start();
+
+     }
       return  "transfer/finish";
    } 
    
@@ -193,14 +381,15 @@ public class TransferController{
 		return  "transfer/TransferSelectList"; 
 	} 
    @RequestMapping("TransferAuth")
-   public String TransferAuth(TransferDTO transfer,int num, String year, String month,String day,Model m)  throws Throwable {
+   public String TransferAuth(TransferDTO transfer, String year, String month,String day,Model m)  throws Throwable {
 	    id=(String)session.getAttribute("member_id");
      try {
          boolean check_Account= transferMybatisdao.check_account_no(transfer.getAccount_no()); 
          if(check_Account) {
             transferdata.setAccount_no(transfer.getAccount_no());   
          }
-         transferdata.setMember_id(id); 
+         transfer.setMember_id(id); 
+         transferdata.setMember_id(id);
          boolean check_Account_money=transferMybatisdao.check_account_money(transfer.getAccount_no(),transfer.getTransfer_price());
          if(!check_Account_money) {  
         	 m.addAttribute("error", 2);
@@ -209,7 +398,11 @@ public class TransferController{
          boolean check_TransferAccount=transferMybatisdao.check_account_no(transfer.getTransfer_to_account_no());
          AccountDAO a=new AccountDAO();
          String tran_id=a.account_id(transfer.getTransfer_to_account_no());
+         transfer.setTransfer_to_member_id(tran_id);
+         transferdata.setTransfer_to_account_no(transfer.getTransfer_to_account_no());
          transferdata.setTransfer_to_member_id(tran_id);
+         transferdata.setTransfer_alias(transfer.getTransfer_alias());
+         transferdata.setTransfer_price(transfer.getTransfer_price());
          if(!check_TransferAccount) {   
         	 m.addAttribute("error", 3);
              return "transfer/TransferWrite";
@@ -218,29 +411,31 @@ public class TransferController{
             m.addAttribute("error", 4);
             return "transfer/TransferWrite";
          }
-         if(num==1) {   
+         if(transfer.getNum()==1) {   
+        	
             m.addAttribute("transferdata", transferdata);
+            
             return "transfer/TransferAuth";
-         }else if(num==2 || num==3) {   
+         }else if(transfer.getNum()==2 || transfer.getNum()==3) {   
             if(month.length()<2) {
                month="0"+month;
             }
             if(day.length()<2) {
                day="0"+day;
             }
-            if(num==2) {
+            if(transfer.getNum()==2) {
                transferdata.setTransfer_auto_period(transfer.getTransfer_auto_period());            
                transferdata.setTransfer_auto_period_start(year+""+month+""+day);
             }
-            else if(num==3){
+            else if(transfer.getNum()==3){
                transferdata.setTransfer_res_day(year+""+month+""+day);
             }
             try {
                String period_start="";
-               if(num==2) {
+               if(transfer.getNum()==2) {
                   transferdata.setTransfer_auto_period(transfer.getTransfer_auto_period());
                    period_start=transferdata.getTransfer_auto_period_start();
-               }else if(num==3) {
+               }else if(transfer.getNum()==3) {
                   period_start=transferdata.getTransfer_res_day();
                }
                   Date today=new Date();
@@ -250,10 +445,10 @@ public class TransferController{
                   
                   //��¥ �� ��ȿ��
                   if( (actday!=null) && actday.getTime() > today.getTime()) {
-                     boolean insert=transferMybatisdao.transferInsert(transferdata,num);
+                     boolean insert=transferMybatisdao.transferInsert(transferdata,transfer.getNum());
                      if(insert) {
-                        int transcount=transferMybatisdao.getTransListCount(num);
-                        transferdata=transferMybatisdao.transferDetail(transcount, num);
+                        int transcount=transferMybatisdao.getTransListCount(transfer.getNum());
+                        transferdata=transferMybatisdao.transferDetail(transcount, transfer.getNum());
                         System.out.println("�����ȣ"+ transferdata.getAccount_no());
                         System.out.println("��ü����"+ transferdata.getTransfer_price());
                         transferMybatisdao.updateMoney(transferdata.getAccount_no(),transferdata.getTransfer_price(),1);      //1: Minus Money 2.Plus Money
@@ -263,17 +458,17 @@ public class TransferController{
                   }               
                   else {
                      m.addAttribute("error", 5);
-                     if(num==2) {
+                     if(transfer.getNum()==2) {
                         return "transfer/TransferAuto";
-                     }else if(num==3) {
+                     }else if(transfer.getNum()==3) {
                         return "transfer/TransferReserve";
                      }
                   }
             }catch(java.text.ParseException e) {
                m.addAttribute("error", 6);
-               if(num==2) {
+               if(transfer.getNum()==2) {
                   return "transfer/TransferAuto";
-               }else if(num==3) {
+               }else if(transfer.getNum()==3) {
                   return "transfer/TransferReserve";
                }
             }catch(Exception e) {
