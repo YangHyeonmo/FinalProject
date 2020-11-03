@@ -1,33 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html>
+<html>
+<head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
-* {
-	box-sizing: border-box
-}
 
-body {
-	font-family: Verdana, sans-serif;
-	margin: 0
-}
 
-.mySlides {
+.w3-container .slideshow-container .mySlides {
 	display: none
 }
 
-img {
+.w3-container .slideshow-container img {
 	vertical-align: middle;
 	max-height: 400px;
 	overflow: hidden;
 }
 
 /* Slideshow container */
-.slideshow-container {
+.w3-container .slideshow-container {
 	max-width: 1000px;
 	position: relative;
 	margin: auto;
+	height:20rem;
+	border:5px solid rgba(0,0,0,1);
+	
 }
 
 /* Next & previous buttons */
@@ -57,7 +57,7 @@ img {
 }
 
 /* Caption text */
-.text {
+.w3-container .slideshow-container .text {
 	color: black;
 	font-size: 15px;
 	padding: 8px 12px;
@@ -68,7 +68,7 @@ img {
 }
 
 /* Number text (1/3 etc) */
-.numbertext {
+.w3-container .slideshow-container .numbertext {
 	color: black;
 	font-size: 12px;
 	padding: 8px 12px;
@@ -77,7 +77,7 @@ img {
 }
 
 /* The dots/bullets/indicators */
-.dot {
+.w3-container .dot {
 	cursor: pointer;
 	height: 15px;
 	width: 15px;
@@ -93,13 +93,15 @@ img {
 }
 
 /* Fading animation */
-.fade {
+.w3-container .slideshow-container .fade {
 	-webkit-animation-name: fade;
 	-webkit-animation-duration: 1.5s;
 	animation-name: fade;
 	animation-duration: 1.5s;
 }
-
+.w3-yellow, .w3-hover-yellow:hover{
+	border-bottom:15px solid #fff;
+}
 @
 -webkit-keyframes fade {
 	from {opacity: .4
@@ -140,12 +142,7 @@ to {
 	</script>
 </c:if>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 </head>
-
 	<div class="w3-container">
 		<c:if test="${dbno == 1}">
 			<div class="slideshow-container">
@@ -177,11 +174,12 @@ to {
 
 			<c:forEach var="depositP" items="${deposit}">
 				<button onclick="finance('deposit${depositP.fin_no}')"
-					class="w3-btn w3-block w3-yellow w3-left-align">${depositP.fin_name }
-					[${depositP.fin_date }]개월 상품</button>
+					class="w3-btn w3-block w3-yellow w3-left-align"><span style="font-weight:bold;">상품</span> : ${depositP.fin_name } /
+					<span style="font-weight:bold;">가입기간</span> : [${depositP.fin_date }]개월 </button>
+				
 				<div id="deposit${depositP.fin_no}" class="w3-container w3-hide">
-					${depositP.fin_name }[${depositP.fin_content }]<br> 금리 :
-					${depositP.fin_rate} <br> ${depositP.fin_date}개월 상품입니다.<br>
+					<span style="font-weight:bold;">상품 : </span>${depositP.fin_name}[${depositP.fin_content }] <br> <span style="font-weight:bold;">금리 :</span> 
+					${depositP.fin_rate} % <br> <span style="font-weight:bold;">가입 기간 :</span>${depositP.fin_date}개월 상품입니다.<br>
 					<button type="button" class="btn btn-light btn-lg active"
 						onclick="javascript:location.href='<%=request.getContextPath()%>/finance/finCertification?fin_no=${depositP.fin_no}'"
 						style="float: right;">가입하기</button>
@@ -212,15 +210,17 @@ to {
 					class="dot" onclick="currentSlide(2)"></span> <span class="dot"
 					onclick="currentSlide(3)"></span>
 			</div>
+			
+			
 			<c:forEach var="savingP" items="${savings}">
 				<button onclick="finance('savings${savingP.fin_no}')"
 					class="w3-btn w3-block w3-yellow w3-left-align">${savingP.fin_name }[${savingP.fin_date }]개월
 					상품</button>
 
 				<div id="savings${savingP.fin_no}" class="w3-container w3-hide">
-					${savingP.fin_name }[${savingP.fin_content }]<br> 금리
-					:${savingP.fin_rate} <br> ${savingP.fin_amount }원 이상<br>
-					${savingP.fin_date}개월 상품입니다.<br>
+					<span style="font-weight:bold;">상품 : </span>${savingP.fin_name }[${savingP.fin_content }]<br> <span style="font-weight:bold;">금리 :</span>
+					:${savingP.fin_rate} % <br> ${savingP.fin_amount }원 이상<br>
+					<br> <span style="font-weight:bold;">가입 기간 :</span> ${savingP.fin_date}개월 상품입니다.<br>
 					<button type="button" class="btn btn-light btn-lg active"
 						onclick="javascript:location.href='<%=request.getContextPath()%>/finance/finCertification?fin_no=${savingP.fin_no}'"
 						style="float: right;">가입하기</button>

@@ -2,19 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<div class="w3-display-middle">
-<form method="post" name="authform">
-	<input type="hidden" name="fin_no" value=${fin_no}>
-	<tr>
-		<td><input type="button" name="message" onclick="goMessage()"
-			value="문자인증"></td>
-	</tr>
-	<tr>
-		<td><input type="button" name="email" onclick="goEmail()"
-			value="이메일 인증"></td>
-	</tr>
-</form>
+<div class="finance_auth">
+	<form method="post" name="authform">
+		<input type="hidden" name="fin_no" value="${fin_no}"> 
+		<input type="button" class="button1" name="message" onclick="goMessage()" value="문자인증" >
+		<input type="button" class="button2" name="email" onclick="goEmail()"  value="이메일 인증" >
+	</form>
 </div>
 <script>
 	function goMessage() {
