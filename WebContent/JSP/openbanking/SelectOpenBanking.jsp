@@ -55,9 +55,9 @@
 				<div class="row">
 					<div class="cell">${list.member_id}</div>
 					<div class="cell">${list.open_account_no}</div>
-					<div class="cell">${list.open_bank}--%></div>
+					<div class="cell">${list.open_bank}</div>
 					<div class="cell">${list.open_balance}원</div>
-					<div class="cell">${list.regdate}s</div>
+					<div class="cell">${list.regdate}</div>
 				</div>
 			</c:forEach>
 		</div>
@@ -96,8 +96,8 @@
 					</div>
 
 					<div class="cell2">
-						<input class="account_number" type="text" size="12" id="open_account_no"
-							name="open_account_no" maxlength="10" required="required" placeholder="10자리 number">
+						<input class="account_number" type="text" size="12"  id="open_account_no"
+							name="open_account_no" maxlength="12" required="required" pattern="\d{4}-\d{2}-\d{4}" placeholder="ex) 1234-12-1234" >
 
 
 					</div>

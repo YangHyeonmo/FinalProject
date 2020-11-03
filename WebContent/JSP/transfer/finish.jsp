@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="auth_service">    
-  <form method="post" name="authform"  action="<%=request.getContextPath()%>/transfer/realfinish">
+  <form method="post" name="authform"  action="<%=request.getContextPath()%>/view/mainPage">
    <input type="hidden" name="random" value="${random }">
   	<input type="hidden" name="authType" value=1>
     <input type="text" name="auth" placeholder="인증번호  입력">

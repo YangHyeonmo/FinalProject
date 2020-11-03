@@ -11,21 +11,17 @@
 <title>인증</title>
 </head>
 <body>
+<div class="auth_service">
 	<form method="post"
-		action="<%=request.getContextPath()%>/openbanking/checknumber"
-	>
+		action="<%=request.getContextPath()%>/openbanking/checknumber">
 		<input type="hidden" name=random value="${random}">
-		<table class="w3-table-all">
-			<tr>
-				<td width="100" align="left">이메일 인증번호를 입력하세요</td>
-				<td width="500">
-					<input type="text" name="auth_num">
-				</td>
-			</tr>
-			<tr>
-				<input type="submit" value="전송">
-			</tr>
-		</table>
+		<input type="text" name="auth_num" placeholder="인증받을 번호를 입력해주세요">
+		
+			<div class="page">
+				<button type="submit">인증하기</button>
+			</div>
 	</form>
+	
+  </div>
 </body>
 </html>

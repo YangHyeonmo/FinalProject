@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -14,11 +14,11 @@
 	<table class = "table table-bordered table-hover" style = "text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<th colspan = "5"><h4>±â°£ ¼³Á¤</h4></th>
+						<th colspan = "5"><h4>ê¸°ê°„ ì„¤ì •</h4></th>
 					</tr>
 				</thead>
 					<tr>
-						<td colspan = "5">Ãâ±İ °èÁÂ ¹øÈ£</td>
+						<td colspan = "5">ì¶œê¸ˆ ê³„ì¢Œ ë²ˆí˜¸</td>
 					</tr>
 					<tr>
 						<td colspan = "5">	
@@ -30,21 +30,21 @@
 						</td>						
 					</tr>
 					<tr align=center>
-						<td colspan="5">ÀÌÃ¼±İ¾×</td>					
+						<td colspan="5">ì´ì²´ê¸ˆì•¡</td>					
 					</tr>
 					<tr>
-						<td><input type="button" value="ÀÏÁÖÀÏ" onclick="money(7)"></td>
-						<td><input type="button" value="1°³¿ù" onclick="money(30)"></td>
-						<td><input type="button" value="3°³¿ù" onclick="money(90)"></td>
-						<td><input type="button" value="6°³¿ù" onclick="money(180)"></td>
-						<td><input type="button" value="1³â"  onclick="money(365)"></td>
+						<td><input type="button" value="ì¼ì£¼ì¼" onclick="money(7)"></td>
+						<td><input type="button" value="1ê°œì›”" onclick="money(30)"></td>
+						<td><input type="button" value="3ê°œì›”" onclick="money(90)"></td>
+						<td><input type="button" value="6ê°œì›”" onclick="money(180)"></td>
+						<td><input type="button" value="1ë…„"  onclick="money(365)"></td>
 					</tr>
 				
 					<tr>
 						<td colspan="5"><input type="hidden" value=0 name= "select_period" id="select_period"></td>
 					</tr>
 					<tr align=center>
-						<td colspan="5">Á÷Á¢ ÀÔ·Â(½ÃÀÛ ³¯Â¥)</td>					
+						<td colspan="5">ì§ì ‘ ì…ë ¥(ì‹œì‘ ë‚ ì§œ)</td>					
 					</tr>
 					<tr>
 						<td colspan = "2">
@@ -61,7 +61,7 @@
 						</td>
 					</tr>
 					<tr align=center>
-						<td colspan="5">Á÷Á¢ ÀÔ·Â(Á¾·á ³¯Â¥)</td>					
+						<td colspan="5">ì§ì ‘ ì…ë ¥(ì¢…ë£Œ ë‚ ì§œ)</td>					
 					</tr>
 					<tr>
 						<td colspan = "2">
@@ -80,16 +80,16 @@
 			
 				
 					<tr>
-						<td colspan="5"><input type="submit" value="È®ÀÎ"></td>
+						<td colspan="5"><input type="submit" value="í™•ì¸"></td>
 					</tr>
 			</table>
 </form>
 
 <table>
 <tr>
-	<td>º¸³½ ½Ã°£</td>
-	<td>º¸³½ »ç¶÷</td>
-	<td>º¸³½ ±İ¾×</td>
+	<td>ë³´ë‚¸ ì‹œê°„</td>
+	<td>ë³´ë‚¸ ì‚¬ëŒ</td>
+	<td>ë³´ë‚¸ ê¸ˆì•¡</td>
 </tr>
 <tr>
 
@@ -104,17 +104,17 @@
 </table>
 </body>
 <script>
-      function money(price) {                           /* type ¸Ş´º ¼±ÅÃ½Ã type¿¡ ÇØ´çÇÏ´Â Å×ÀÌºí Ãâ·ÂÇÏ´Â ÇÔ¼ö   /  cityName => kind(type) */
+      function money(price) {                           /* type ë©”ë‰´ ì„ íƒì‹œ typeì— í•´ë‹¹í•˜ëŠ” í…Œì´ë¸” ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜   /  cityName => kind(type) */
           var element= parseInt(document.getElementById("select_period").value);
     	  document.getElementById("select_period").value=element+price;
       }
 </script>
 <script> 
-var start_year="2020";// ½ÃÀÛÇÒ ³âµµ 
+var start_year="2020";// ì‹œì‘í•  ë…„ë„ 
 var today = new Date(); 
 var today_year= today.getFullYear(); 
 var index=0; 
-for(var y=start_year; y<=today_year; y++){ //start_year ~ ÇöÀç ³âµµ 
+for(var y=start_year; y<=today_year; y++){ //start_year ~ í˜„ì¬ ë…„ë„ 
 	document.getElementById('select_year').options[index] = new Option(y, y); 
 	document.getElementById('select_year2').options[index] = new Option(y, y); 
 	index++; 
@@ -127,7 +127,7 @@ for(var m=1; m<=12; m++){
 	} 
 	
 lastday(); 
-function lastday(){ //³â°ú ¿ù¿¡ µû¶ó ¸¶Áö¸· ÀÏ ±¸ÇÏ±â 
+function lastday(){ //ë…„ê³¼ ì›”ì— ë”°ë¼ ë§ˆì§€ë§‰ ì¼ êµ¬í•˜ê¸° 
 	var Year=document.getElementById('select_year').value; 
 	var Month=document.getElementById('select_month').value; 
 	var day=new Date(new Date(Year,Month,1)-86400000).getDate(); 
@@ -144,7 +144,7 @@ function lastday(){ //³â°ú ¿ù¿¡ µû¶ó ¸¶Áö¸· ÀÏ ±¸ÇÏ±â
 	} 
 	
 lastday_select();
-function lastday_select(){ //³â°ú ¿ù¿¡ µû¶ó ¸¶Áö¸· ÀÏ ±¸ÇÏ±â 
+function lastday_select(){ //ë…„ê³¼ ì›”ì— ë”°ë¼ ë§ˆì§€ë§‰ ì¼ êµ¬í•˜ê¸° 
 	var Year=document.getElementById('select_year2').value; 
 	var Month=document.getElementById('select_month2').value; 
 	var day=new Date(new Date(Year,Month,1)-86400000).getDate(); 

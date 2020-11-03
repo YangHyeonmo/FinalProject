@@ -82,6 +82,9 @@ public class ViewPageController {
 			List<OpenBankingDTO> list = opDAO.SelectOpenBanking(member_id);
 			m.addAttribute("list", list);
 
+			
+			
+			
 			StockDAO stockDAO = new StockDAO();
 			List<StockDTO> stocklist = stockDAO.SelectStock1();
 			m.addAttribute("stocklist", stocklist);

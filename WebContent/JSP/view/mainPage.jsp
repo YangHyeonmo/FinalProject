@@ -57,7 +57,7 @@
 				<input class="money" maxlength="11" value="${message}">
 			</c:if>
 			<c:if test="${login eq 1 && num eq 1 }">
-				<input class="money" maxlength="11" value="${balance[0]}"
+				<input class="money" maxlength="11" name="balance" id="balance" value="${balance[0]}"
 					placeholder="로그인하세요" readonly>
 				<h1>원</h1>
 				<a class="transfer" href="">이체</a>
