@@ -29,7 +29,7 @@
 	 	FROM
 			Stock
 		WHERE
-			exname like '%' || #{exname} || '%'  
+			upper(exname) like '%' || upper(#{exname}) || '%'  
 		<!--exname=#{exname}-->
 	</select>
 

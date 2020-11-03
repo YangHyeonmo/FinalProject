@@ -208,29 +208,29 @@ public class StockController {
 		return "stock/stockgraph";
 	}
 
-	/*주식 조회 및 검색*/
-	@RequestMapping("SelectStock1")
-	public String SelectStock1(Model m) throws Throwable {
-
-		List<StockDTO> list = stockDAO.SelectStock1();
-
-		System.out.println("11111   " + list);
-
-		m.addAttribute("list", list);
-		return "stock/SelectStock1";
-	}
+	//	/*주식 조회 및 검색*/
+	//	@RequestMapping("SelectStock1")
+	//	public String SelectStock1(Model m) throws Throwable {
+	//
+	//		List<StockDTO> list = stockDAO.SelectStock1();
+	//
+	//		m.addAttribute("list", list);
+	//		return "stock/SelectStock1";
+	//	}
 
 	/*주식 조회 및 검색*/
-	@RequestMapping("SelectStock2")
+	@RequestMapping("SelectStock")
 	public String SelectStock2(String exname, Model m) throws Exception {
 
-		List<StockDTO> list2 = stockDAO.SelectStock2(exname);
+		if (exname == null) {
+			List<StockDTO> list = stockDAO.SelectStock1();
+			m.addAttribute("list", list);
+		} else {
+			List<StockDTO> list = stockDAO.SelectStock2(exname);
+			m.addAttribute("list", list);
+		}
 
-		System.out.println("222222   " + list2);
-
-		m.addAttribute("list2", list2);
-
-		return "stock/SelectStock2";
+		return "stock/SelectStock";
 	}
 
 }

@@ -93,7 +93,7 @@
 				>(임시위치)주식 <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a
-							href="<%=request.getContextPath()%>/stock/SelectStock1"
+							href="<%=request.getContextPath()%>/stock/SelectStock"
 						>(임시)주식조회</a></li>
 					</ul></li>
 			</ul>
