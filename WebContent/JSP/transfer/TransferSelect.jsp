@@ -45,7 +45,7 @@
 <body>
 <div id="transferRes" class="bank" >
 <form action="./TransferSelectList" method="post" name="transferform">
-<h4 align="center" style="font-weight:bold;">기간 설정</h4>
+<h4 align="center" style="font-weight:bold; margin-left:-5rem; margin-top:5rem;">기간 설정</h4>
 <div class="container">
   <div class="col">
     <label>조회 계좌 번호</label>

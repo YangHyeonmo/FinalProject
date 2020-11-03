@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>myInfo</title>
 </head>
-<div class="content">
+<div class="content_content">
 	<!-- 상단 페이지이름/버튼 영역 -->
  <form method="post" name="regFrm">
 

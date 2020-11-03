@@ -15,9 +15,9 @@ a {color: rgb(29, 29, 31); text-decoration: none;}
 .main-body .phoneScreen .memberId{position:absolute; padding-top:2rem; margin-left:2rem; font-weight:bold; font-size:25px;}
 .main-body .phoneScreen .insideScreen{background-color: #FFD700; width:25rem; height:12rem; float:right; margin-top: 5rem; margin-right:1rem; border-radius:8%;}
 .main-body .phoneScreen .insideScreen .my{position:absolute; padding-top:9px; padding-left:45px; font-weight:bold;}
-.main-body .mainPageImg {position:absolute;margin-left:40rem; margin-top:5rem;}
-.main-body .introduce span.introduceBank{font-family: 'Noto Sans KR', sans-serif; position:absolute; font-weight:bolder; font-size:4rem; margin-left:7rem; margin-top:19rem;}
-.main-body .introduce span.introduceBank2{font-family: 'Noto Sans KR', sans-serif; position:absolute; font-weight:bolder; font-size:25px; margin-left:7rem; margin-top:30rem; font-weight:400;}
+.main-body .mainPageImg {position:absolute;left:40rem; top:5rem;}
+.main-body .introduce span.introduceBank{font-family: 'Noto Sans KR', sans-serif; position:absolute; font-weight:bolder; font-size:4rem; left:7rem; top:19rem;}
+.main-body .introduce span.introduceBank2{font-family: 'Noto Sans KR', sans-serif; position:absolute; font-weight:bolder; font-size:25px; left:7rem; top:30rem; font-weight:400;}
 .main-body .phoneScreen .insideScreen .myAccount{position:absolute; margin-top:25px; margin-left:29px; width:9rem; height:26px; font-size:13px; text-align:center; border:white; background-color:rgba(0,0,0,0);}
 .main-body .phoneScreen .insideScreen .money{position:absolute; text-align:right; margin-top:4rem; margin-left:1rem; font-size:3rem; width:19rem; background-color:#FFD700; height:4rem; font-weight:bold; border:white;}
 .main-body .phoneScreen .insideScreen h1{font-weight:bold; margin-left:21rem; margin-top:66px;}
@@ -151,17 +151,17 @@ background-color: white; -webkit-rtl-ordering: logical; cursor: text; margin: 0e
 .mainPageB .list .item img{padding: 20px 22px;}
 
 /* 내정보수정 css */
-.content{background-color: #485861; color: #FFE6CF;}
-.content .header{text-align:center; margin-top:-21px;}
-.content .header .thumb{width:92px; height:92px; box-shadow:0 6px 12px 0 rgba(0,0,0,0.1),0 12px 24px 0 rgba(0,0,0,0.24);border-radius:50%; margin-left:20px;}
-.content .header .thumb-wrapper{position: relative; display:inline-block; margin-bottom:36px;}
-.content .header .badge{width:28px; height:28px; font-size:12px; position:absolute; top:0; right:-8px; background-color: #ff5500; border-radius:50%; display:flex; justify-content:center; align-items:center; }
-.content .header .greeting{margin-bottom: 10px;}
-.content .tbl-reg{display:flex; justify-content: center; padding-top:40px; border:solid 1px;}
-.content .tbl-reg td,th{font-size: 16px; padding:2px; padding-left:40px;}
-.content input[type="text"],input[type="password"], input[type="email"],input[type="date"], input[type="file"], select {background-color:rgba(0,0,0,0.2); width: 35rem; backwidth:100%; height:32px; font-size:1.4rem; line-height:2rem; padding:5px 10px;  transition: 0.5s;}
+.content_content{background-color: #485861; color: #FFE6CF;}
+.content_content .header{text-align:center; margin-top:-21px;}
+.content_content .header .thumb{width:92px; height:92px; box-shadow:0 6px 12px 0 rgba(0,0,0,0.1),0 12px 24px 0 rgba(0,0,0,0.24);border-radius:50%; margin-left:20px;}
+.content_content .header .thumb-wrapper{position: relative; display:inline-block; margin-bottom:36px;}
+.content_content .header .badge{width:28px; height:28px; font-size:12px; position:absolute; top:0; right:-8px; background-color: #ff5500; border-radius:50%; display:flex; justify-content:center; align-items:center; }
+.content_content .header .greeting{margin-bottom: 10px;}
+.content_content .tbl-reg{display:flex; justify-content: center; padding-top:40px; border:solid 1px;}
+.content_content .tbl-reg td,th{font-size: 16px; padding:2px; padding-left:40px;}
+.content_content input[type="text"],input[type="password"], input[type="email"],input[type="date"], input[type="file"], select {background-color:rgba(0,0,0,0.2); width: 35rem; backwidth:100%; height:32px; font-size:1.4rem; line-height:2rem; padding:5px 10px;  transition: 0.5s;}
 .content button{background-color: rgba(0,0,0,0.25)}
-.content .button {width:200px; margin:0 auto;}
+.content_content .button {width:200px; margin:0 auto;}
 
 /* 환전/환율 페이지 css */
 .exchange_backImg{left:2rem; position:absolute; width:100%; background-image: url("../images/Exchange.png");}
@@ -268,6 +268,7 @@ background-color: white; -webkit-rtl-ordering: logical; cursor: text; margin: 0e
 .bank .container .col button:after{ right:inherit; top:inherit; left:0; bottom:0; }
 .bank .container .col button:hover:before,.bank .container .col button:hover:after{ width:100%; transition:800ms ease all;}
 
+/* 인증페이지 css */
 .transfer_auth_process{position:absolute; box-shadow:13px 10px 7px 6px grey; left:32%; top:27%; width:50rem; height:32rem; border: 1px solid rgba(0,0,0,1);}
 .transfer_auth_process .to_who{position:absolute; left:10rem; top:6rem;}
 .transfer_auth_process .detail{position:absolute; font-size:3rem; font-weight: bold; left:20rem; color:cornflowerblue;}
@@ -280,7 +281,6 @@ background-color: white; -webkit-rtl-ordering: logical; cursor: text; margin: 0e
 .transfer_auth_process input:before,.transfer_auth_process input:after{ content:''; position:absolute; top:0; right:0; height:2px; width:0; background: #1AAB8A; transition:400ms ease all; }
 .transfer_auth_process input:after{ right:inherit; top:inherit; left:0; bottom:0; }
 .transfer_auth_process input:hover:before,.transfer_auth_process input:hover:after{ width:100%; transition:800ms ease all;}
-
 .auth_service{position:absolute;left:37%; top:30%; width:41rem; height:27rem; border:1px solid rgba(0,0,0,1); box-shadow:13px 10px 7px 6px grey; }
 .auth_service h2{font-size : 30px; left: 9rem; position:absolute; top:4rem; font-size:2rem;}
 .auth_service input{position:absolute; text-align:center; width:14rem; left:14rem; top:10rem; height:3rem; box-shadow:7px 16px 6px #2e9dc7; }
@@ -291,9 +291,115 @@ background-color: white; -webkit-rtl-ordering: logical; cursor: text; margin: 0e
 .auth_service button:after{ right:inherit; top:4rem; left:0; bottom:0; }
 .auth_service button:hover:before,.phone_message button:hover:after{ width:100%; transition:800ms ease all;}
 
+/* openbanking css */
+.openbankFind{position:absolute; left:5rem; display:inline-block;}
+.openbankFind button{background-color: rgba(0,0,0,1); color:white; font-weight:bolder; box-shadow: inset 6px 4px 7px 6px grey; width:6rem; height:2rem; border-radius: 10%;}
+.open_bank{position:absolute; left:30rem; top:20rem;}
+.open_bank .container h1{position:absolute; left:36rem; width:11rem; top:-5rem;}
+.table .table_header{background:#6c7ae0; display:table-row;}
+.table .table_header .cell{font-size: 18px; color:#fff; line-height: 1.2; font-weight: unset !important; padding-top: 19px; padding-bottom: 19px;}
+.table .row{box-shadow: 16px 20px 7px 6px grey;}
+.table .row .cell{ font-size:15px;color:#666666; line-height:1.2; font-weight:unset !important; padding-top:20px; padding-bottom:20px; border-bottom: 1px solid #f2f2f2;}
+.table .table_header .cell:nth-child(1) {width:333px; padding-left:40px;}
+.table .row .cell:nth-child(1) {width:367px; padding-left:73px;}
+.table .table_header .cell:nth-child(2) {width:160px; }
+.table .row .cell:nth-child(2) {width:160px; }
+.table .table_header .cell:nth-child(3) {width:250px; }
+.table .row .cell:nth-child(3) {width:250px; }
+.table .table_header .cell:nth-child(4) {width:190px; }
+.table .row .cell:nth-child(4) {width:190px; }
+.table .table_header .cell:nth-child(5) {width:190px; }
+.table .row .cell:nth-child(5) {width:190px; }
 
+.table2 .table_header2{background:#6c7ae0; display:table-row;}
+.table2 .table_header2 .cell2{font-size: 18px; color:#fff; line-height: 1.2; font-weight: unset !important; padding-top: 19px; padding-bottom: 19px;}
+.table2 .row2{box-shadow: 16px 20px 7px 6px grey;}
+.table2 .row2 .cell2{ font-size:15px;color:#666666; line-height:1.2; display:inline-block; font-weight:unset !important; padding-top:20px; padding-bottom:20px; border-bottom: 1px solid #f2f2f2;}
+.table2 .table_header2 .cell2:nth-child(1) {width:333px; padding-left:40px;}
+.table2 .row2 .cell:nth-child(1) {width:367px; padding-left:73px;}
+.table2 .table_header2 .cell2:nth-child(2) {width:160px; }
+.table2 .row2 .cell:nth-child(2) {width:160px; }
+.table2 .table_header2 .cell2:nth-child(3) {width:250px; }
+.table2 .row2 .cell:nth-child(3) {width:250px; }
+.table2 .table_header2 .cell2:nth-child(4) {width:190px; }
+.table2 .row2 .cell:nth-child(4) {width:190px; }
+.table2 .table_header2 .cell2:nth-child(5) {width:190px; }
+.table2 .row2 .cell2:nth-child(5) {width:190px; }
+.table2 .row2 .cell2 .member_id{width:13rem; text-align: center}
+.table2 .row2 .cell2 .account_number{width:10rem;  width:10rem; margin-left:8rem; text-align: center;}
+.table2 .row2 .cell2 .open_password{width:12rem; margin-left:2rem; height:25px; padding:0; font-size:13px; border:1px solid rgba(0,0,0,1); background-color: white; text-align: center;}
+.table2 .row2 .cell2 .choose_bank{width:7rem; margin-left:6rem; height:28px; font-size:13px; background-color: white; text-align: center;}
+.table2 .row2 .cell2 .open_balance{margin-left:5rem;width:10rem;}
 
+.table3{position:absolute; left:13rem;}
+.table3 .table_header3{background:#6c7ae0; display:table-row;}
+.table3 .table_header3 .cell3{font-size: 18px; color:#fff; line-height: 1.2; font-weight: unset !important; padding-top: 19px; padding-bottom: 19px;}
+.table3 .row3{box-shadow: 16px 20px 7px 6px grey;}
+.table3 .row3 .cell3{ font-size:15px;color:#666666; line-height:1.2; display:inline-block; font-weight:unset !important; padding-top:20px; padding-bottom:20px; border-bottom: 1px solid #f2f2f2;}
+.table3 .table_header3 .cell3:nth-child(1) {width:301px; padding-left:43px;}
+.table3 .row3 .cell:nth-child(1) {width:367px; padding-left:73px;}
+.table3 .table_header3 .cell3:nth-child(2) {width:301px; }
+.table3 .row3 .cell:nth-child(2) {width:160px; }
+.table3 .table_header3 .cell3:nth-child(3) {width:250px; }
+.table3 .row3 .cell:nth-child(3) {width:250px; }
 
+.table3 .row3 .cell3 .member_id{width:13rem; text-align: center}
+.table3 .row3 .cell3 .account_number{width:10rem;  width:10rem; margin-left:8rem; text-align: center;}
+.table3 .row3 .cell3 .open_password{width:12rem; margin-left:10rem; height:25px; padding:0; font-size:13px; border:1px solid rgba(0,0,0,1); background-color: white; text-align: center;}
+.openbankFind3{position:absolute; left:15rem; top:13rem; display:inline-block;}
+.openbankFind3 button{background-color: rgba(0,0,0,1); color:white; font-weight:bolder; box-shadow: inset 6px 4px 7px 6px grey; width:6rem; height:2rem; border-radius: 10%;}
+.cell{display:table-cell;}
+.cell2{display:table-cell;}
+.cell3{display:table-cell;}
+.collect_money{display:inline-block;}
+.collect_money button{background-color: rgba(0,0,0,1); color:white; font-weight:bolder; box-shadow: inset 6px 4px 7px 6px grey; width:6rem; height:2rem; border-radius: 10%;}
 
+/* openbanking 예약 css */
+.bank_reservation{position:absolute; left:30rem; top:20rem;}
+.bank_reservation  h1{position:absolute; left:36rem; width:11rem; top:-5rem;}
+.bank_reservation .container_reservation h1{position:absolute; left:36rem; width:11rem; top:-5rem;}
+.bank_reservation .delete_reservation h1{position:absolute; left:36rem; width:11rem; top:-5rem;}
+.bank_reservation_table .table_header{background:#6c7ae0; display:table-row;}
+.bank_reservation_table .table_header .cell{font-size: 18px; color:#fff; line-height: 1.2; font-weight: unset !important; padding-top: 19px; padding-bottom: 19px;}
+.bank_reservation_table .row{box-shadow: 16px 20px 7px 6px grey;}
+.bank_reservation_table .row .cell{ font-size:15px;color:#666666; line-height:1.2; font-weight:unset !important; padding-top:20px; padding-bottom:20px; border-bottom: 1px solid #f2f2f2;}
+.bank_reservation_table .table_header .cell:nth-child(1) {width:284px; padding-left:40px;}
+.bank_reservation_table .row .cell:nth-child(1) {width:284px; padding-left:40px;}
+.bank_reservation_table .table_header .cell:nth-child(2) {width:165px; }
+.bank_reservation_table .row .cell:nth-child(2) {width:165px; }
+.bank_reservation_table .table_header .cell:nth-child(3) {width:229px; padding-left:4rem; }
+.bank_reservation_table .row .cell:nth-child(3) {width:229px; padding-left:4rem;}
+.bank_reservation_table .table_header .cell:nth-child(4) {width:190px; }
+.bank_reservation_table .row .cell:nth-child(4) {width:190px; }
+.bank_reservation_table .table_header .cell:nth-child(5) {width:190px; }
+.bank_reservation_table .row .cell:nth-child(5) {width:190px; }
+.bank_reservation_table .table_header .cell:nth-child(6) {padding-right:2rem; }
+.bank_reservation_table .table_header .cell:nth-child(6) {padding-right:2rem; }
+.container_reservation .table2 .row2 .cell2 .member_id{width:13rem; text-align: center}
+.container_reservation .table2 .row2 .cell2 .account_number{ width:10rem; margin-left:3rem; text-align: center;}
+.container_reservation .table2 .row2 .cell2 .open_password{width:12rem; margin-left:7rem; height:25px; padding:0; font-size:13px; border:1px solid rgba(0,0,0,1); background-color: white; text-align: center;}
+.container_reservation .table2 .row2 .cell2 .collecting_money{width:7rem; margin-left:6rem; height:28px; font-size:13px; background-color: white; text-align: center;}
+.container_reservation .table2 .row2 .cell2 .collecting_day{margin-left:5rem;width:10rem; font-size: 1rem; background-color: #fff;}
+.delete_reservation{position:absolute; width:35rem; left:25rem;}
+.bank_reservation .delete_reservation h1{position:absolute; left:11rem; width:11rem; top:-5rem;}
 
-
+.openbankFind_info{position:absolute; left:5rem; display:inline-block;}
+.openbankFind_info button{background-color: rgba(0,0,0,1); color:white; font-weight:bolder; box-shadow: inset 6px 4px 7px 6px grey; width:6rem; height:2rem; border-radius: 10%;}
+.open_bank_info{position:absolute; left:30rem; top:20rem;}
+.open_bank_info .container_info h1{position:absolute; left:40rem; width:11rem; top:-5rem;}
+.table_info .table_header_info{background:#6c7ae0; display:table-row;}
+.table_info .table_header_info .cell{font-size: 18px; color:#fff; line-height: 1.2; font-weight: unset !important; padding-top: 19px; padding-bottom: 19px;}
+.table_info .row{box-shadow: 16px 20px 7px 6px grey;}
+.table_info .row .cell{ font-size:15px;color:#666666; line-height:1.2; font-weight:unset !important; padding-top:20px; padding-bottom:20px; border-bottom: 1px solid #f2f2f2;}
+.table_info .table_header_info .cell:nth-child(1) {width:333px; padding-left:40px;}
+.table_info .row .cell:nth-child(1) {width:367px; padding-left:73px;}
+.table_info .table_header_info .cell:nth-child(2) {width:160px; }
+.table_info .row .cell:nth-child(2) {width:160px; }
+.table_info .table_header_info .cell:nth-child(3) {width:250px; }
+.table_info .row .cell:nth-child(3) {width:250px; }
+.table_info .table_header_info .cell:nth-child(4) {width:190px; }
+.table_info .row .cell:nth-child(4) {width:190px; }
+.table_info .table_header_info .cell:nth-child(5) {width:190px; }
+.table_info .row .cell:nth-child(5) {width:190px; }
+.table_info .table_header_info .cell:nth-child(6) {width:190px; }
+.table_info .row .cell:nth-child(6) {width:190px; }

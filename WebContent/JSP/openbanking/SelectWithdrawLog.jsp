@@ -5,32 +5,39 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
 <body>
-	<button class="w3-bar-item w3-button"
-		onclick="document.location.href='<%=request.getContextPath()%>/view/mainPage'"
-	>MainPage</button>
-	<div class="w3-container">
+<div class="openbankFind_info">
+	<button onclick="document.location.href='<%=request.getContextPath()%>/view/mainPage'">MainPage</button>
+</div>
+<div id="select" class="open_bank_info">
+	<div class="container_info">
 		<br />
 		<h1>
 			<b>내역조회</b>
 		</h1>
 		<br />
-		<table class="w3-table-all">
-			<td>아이디</td>
-			<td>받은 계좌번호</td>
-			<td>모은 금액</td>
-			<td>실행일</td>
-			<td>summary</td>
-			<td>memo</td>
+		<div class="table_info">
+			<div class="table_header_info">
+				<div class="cell">아이디</div>
+				<div class="cell">받은 계좌번호</div>
+				<div class="cell">모은 금액</div>
+				<div class="cell">실행일</div>
+				<div class="cell">summary</div>
+				<div class="cell">memo</div>
+				
+
+			</div>
 			<c:forEach var="list2" items="${list2}">
-				<tr>
-					<td>${list2.member_id}&emsp;&emsp;</td>
-					<td>${list2.my_account_num}&emsp;&emsp;</td>
-					<td>${list2.collecting_money}원&emsp;&emsp;</td>
-					<td>${list2.collecting_day}&emsp;&emsp;</td>
-					<td>${list2.summary}&emsp;&emsp;</td>
-					<td>${list2.memo}&emsp;&emsp;</td>
-				</tr>
+				<div class="row">
+					<div class="cell">${list2.member_id}</div>
+					<div class="cell">${list2.my_account_num}</div>
+					<div class="cell">${list2.collecting_money}원</div>
+					<div class="cell">${list2.collecting_day}</div>
+					<div class="cell">${list2.summary}</div>
+					<div class="cell">${list2.memo}</div>
+				</div>
 			</c:forEach>
-		</table>
+		</div>
+		
 	</div>
+</div>
 </body>
