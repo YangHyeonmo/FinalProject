@@ -96,8 +96,8 @@
 					</div>
 
 					<div class="cell2">
-						<input class="account_number" type="text" size="12" id="open_account_no"
-							name="open_account_no" maxlength="10" required="required" pattern="\d{4}-\d{2}-\d{4}" placeholder="ex) 1234-12-1234" >
+						<input class="account_number" type="text" size="12"  id="open_account_no"
+							name="open_account_no" maxlength="12" required="required" pattern="\d{4}-\d{2}-\d{4}" placeholder="ex) 1234-12-1234" >
 
 
 					</div>
