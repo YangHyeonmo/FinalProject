@@ -248,6 +248,10 @@ public class TransferController{
       AccountDTO foraccount=a.accountInfo(transferdata.getAccount_no());
       AccountDTO toaccount=a.accountInfo(transferdata.getTransfer_to_account_no());
       
+      System.out.println(foraccount+ " \n" + toaccount);
+      
+      a.insertAcc(foraccount);
+      a.insertAcc(toaccount);
       
       String plainText = transferdata.getMember_id()+"님께서" + transferdata.getTransfer_to_member_id() + "님에게 " + transferdata.getTransfer_price()+"원을 보냈습니다";
       String key = "secret key";
