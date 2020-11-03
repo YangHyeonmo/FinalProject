@@ -8,14 +8,12 @@
 	<insert id="InsertOpenBanking" parameterType="OpenBanking">
 		INSERT INTO OPENBANKING (
 			open_account_no,
-			open_bank,
 			member_id,  
 			open_account_pw, 
+			open_bank,
 			open_balance,
 			regdate )
-		VALUES ( #{open_account_no}, #{open_bank}, #{member_id}, #{open_account_pw}, #{open_balance}, sysdate )
-		WHERE
-			member_id = #{member_id}
+		VALUES ( #{open_account_no}, #{member_id}, #{open_account_pw}, #{open_bank}, #{open_balance}, sysdate )
 	</insert>
 
 	<!-- 오픈뱅킹 계좌 삭제 -->

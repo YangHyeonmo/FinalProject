@@ -65,7 +65,7 @@ public class OpenBankingController {
 
 		String member_id = (String) session.getAttribute("member_id");
 
-		if (member_id != op.getMember_id()) {
+		if (!member_id.equals(op.getMember_id())) {
 			m.addAttribute("error", 4);
 			return "openbanking/SelectOpenBanking";
 		}
@@ -76,9 +76,6 @@ public class OpenBankingController {
 		if (!mdto.getMember_id().equals(null)) {
 			//2. 회원인데 account가 없는 경우
 
-			String open_account_no = (op.getNum1() + "-" + op.getNum2() + "-"
-					+ op.getNum3());
-			op.setOpen_account_no(open_account_no);
 			opDTO = op;
 
 			//이메일 인증 

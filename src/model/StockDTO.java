@@ -5,6 +5,9 @@ public class StockDTO {
 	private String excode; // 종목코드
 	private String exname; // 종목명.
 
+	public StockDTO() {
+	}
+
 	public String getExcode() {
 		return excode;
 	}

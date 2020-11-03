@@ -4,6 +4,34 @@
 <mapper namespace="StockMapper">
 
 	<select id="searchstock" resultType="String" parameterType="String">
-		select excode from exceltable where exname=#{exname}
+		SELECT 
+			excode
+	 	FROM
+			Stock
+		WHERE
+	 		exname=#{exname}
 	</select>
+
+	<!-- 주식 조회 및 검색1-->
+	<select id="SelectStock1" resultType="Stock">
+		SELECT 
+			excode,
+		 	exname
+	 	FROM
+			Stock
+	</select>
+
+	<!-- 주식 조회 및 검색2-->
+	<select id="SelectStock2" parameterType="Stock" resultType="Stock">
+		SELECT 
+			excode,
+		 	exname
+	 	FROM
+			Stock
+		WHERE
+			exname like '%' || #{exname} || '%'  
+		<!--exname=#{exname}-->
+	</select>
+
+
 </mapper>

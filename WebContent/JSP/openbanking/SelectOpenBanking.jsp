@@ -11,20 +11,20 @@
 </c:if>
 <c:if test="${error==2}">
 	<script>
-			alert("계좌 등록완료!!");
-		</script>
+		alert("계좌 등록완료!!");
+	</script>
 	<meta http-equiv="Refresh" content="0; url=SelectOpenBanking" />
 </c:if>
 <c:if test="${error==3}">
 	<script>
-			alert("계좌 등록에 실패하였습니다!!");
-		</script>
+		alert("계좌 등록에 실패하였습니다!!");
+	</script>
 	<meta http-equiv="Refresh" content="0; url=SelectOpenBanking" />
 </c:if>
 <c:if test="${error==4}">
 	<script>
-			alert("아이디가 틀렸습니다!!");
-		</script>
+		alert("아이디가 틀렸습니다!!");
+	</script>
 	<meta http-equiv="Refresh" content="0; url=SelectOpenBanking" />
 </c:if>
 <!DOCTYPE html>
@@ -82,29 +82,24 @@
 				<tr>
 					<td width="100" align="left">아이디 확인</td>
 					<td width="500">
-						<input type="text" size="50" maxlength="50" id="member_id"
+						<input type="text" size="75" maxlength="50" id="member_id"
 							name="member_id" required="required" placeholder="ID 입력"
 						>
 					</td>
 				</tr>
 				<tr>
 					<td width="100" align="left">계좌번호</td>
-					<td width="1000">
-						<input type="text" size="12" id="num1" name="num1" required="required"
-							pattern="\d{4}" placeholder="4자리 number"
-						>
-						<input type="text" size="12" id="num2" name="num2" required="required"
-							pattern="\d{2}" placeholder="2자리 number"
-						>
-						<input type="text" size="12" id="num3" name="num3" required="required"
-							pattern="\d{4}" placeholder="4자리 number"
+					<td width="500">
+						<input type="text" size="75" maxlength="12" id="open_account_no"
+							name="open_account_no" required="required" pattern="\d{4}-\d{2}-\d{4}"
+							placeholder="ex) 1234-12-1234"
 						>
 					</td>
 				</tr>
 				<tr>
-					<td width="110" align="left">계좌 비밀번호</td>
+					<td width="100" align="left">계좌 비밀번호</td>
 					<td width="500">
-						<input type="password" size="50" maxlength="50" id="open_account_pw"
+						<input type="password" size="40" maxlength="50" id="open_account_pw"
 							name="open_account_pw" required="required" placeholder="PW 입력"
 						>
 					</td>
@@ -126,7 +121,7 @@
 				<tr>
 					<td width="100" align="left">금액</td>
 					<td width="500">
-						<input type="number" size="50" maxlength="50" id="open_balance"
+						<input type="number" size="500" maxlength="50" id="open_balance"
 							name="open_balance" required="required" placeholder="money 입력"
 						>
 					</td>

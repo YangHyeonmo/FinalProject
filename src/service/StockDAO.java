@@ -17,38 +17,34 @@ public class StockDAO extends AbstractMybatis {
 	HashMap<String, Object> map = new HashMap<String, Object>();
 
 	/*주식 조회 및 검색*/
-	public List<StockDTO> SelectExcelTable(String exname) {
+	public String searchstock(String exname) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		System.out.println(exname);
 		try {
-			return sqlSession.selectList(namespace + ".SelectExcelTable",
-					exname);
+			return sqlSession.selectOne(namespace + ".searchstock", exname);
 		} finally {
 			sqlSession.close();
 		}
 	}
 
-	/*주식 조회 및 검색*/
-	public String searchstock(String exname) {
+	/*주식 조회 및 검색 1 */
+	public List<StockDTO> SelectStock1() {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
-		System.out.println(exname);
 		try {
-			return sqlSession.selectOne(namespace + ".searchstock",exname);
+			return sqlSession.selectList(namespace + ".SelectStock1");
 		} finally {
 			sqlSession.close();
 		}
 	}
-	
-	/*주식 조회 및 검색*/
-	public List<StockDTO> SelectExcelTable2() {
+
+	/*주식 조회 및 검색 2 */
+	public List<StockDTO> SelectStock2(String exname) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
-			String statement = namespace + ".SelectExcelTable2";
-			return sqlSession.selectList(statement);
+			return sqlSession.selectList(namespace + ".SelectStock2", exname);
 		} finally {
 			sqlSession.close();
 		}
 	}
-	
-	
 
 }

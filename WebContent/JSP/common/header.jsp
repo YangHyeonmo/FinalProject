@@ -17,25 +17,24 @@
 ></script>
 </head>
 <div class="search-header">
-			<img class="navbar-img" src="<%=request.getContextPath()%>/images/NaruCat.png">
-			<a class="navbar-brand" href="<%=request.getContextPath()%>/view/mainPage"
-				style="margin-left: 95px; font-size: 50px; color: white">
-			<strong>Narubank</strong></a>
-			
-			<input class="search" type="text" placeholder="여기는 검색창" size="20">
-			
-		</div>
-
-<nav class="navbar navbar-inverse" style="margin-top:9rem; background-color: rgba(0,0,0,0); left:2rem; box-shadow: 5px 5px 5px 5px grey;">
+	<img class="navbar-img" src="<%=request.getContextPath()%>/images/NaruCat.png">
+	<a class="navbar-brand" href="<%=request.getContextPath()%>/view/mainPage"
+		style="margin-left: 95px; font-size: 50px; color: white"
+	> <strong>Narubank</strong></a>
+	<input class="search" type="text" placeholder="여기는 검색창" size="20">
+</div>
+<nav class="navbar navbar-inverse"
+	style="margin-top: 9rem; background-color: rgba(0, 0, 0, 0); left: 2rem; box-shadow: 5px 5px 5px 5px grey;"
+>
 	<div class="container-fluid">
-		
 		<c:if test="${sessionScope.login eq 1}">
 			<ul class="nav navbar-nav">
-				<li class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown" style="margin-left:20rem;"
-					href="#"
+				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"
+					style="margin-left: 20rem;" href="#"
 				>조회 <span class="caret"></span></a>
-					<ul class="dropdown-menu" style="margin-left:20rem;">
-						<li><a href="<%=request.getContextPath()%>/account/accountList">내 계좌 조회</a></li>
+					<ul class="dropdown-menu" style="margin-left: 20rem;">
+						<li><a href="<%=request.getContextPath()%>/account/accountList">내
+								계좌 조회</a></li>
 						<li><a href="#">Page 1-2</a></li>
 						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
@@ -46,7 +45,8 @@
 						<li><a href="<%=request.getContextPath()%>/transfer/TransferWrite">이체</a></li>
 						<li><a href="<%=request.getContextPath()%>/transfer/TransferSelect">이체
 								내역 조회</a></li>
-						<li><a href="<%=request.getContextPath()%>/stock/stockinput">">Page 1-3</a></li>
+						<li><a href="<%=request.getContextPath()%>/stock/stockinput">">Page
+								1-3</a></li>
 					</ul></li>
 				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"
 					href="#"
@@ -68,7 +68,7 @@
 							href="<%=request.getContextPath()%>/openbanking/SelectWithdrawLog"
 						>오픈뱅킹 내역</a></li>
 					</ul></li>
-					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"
+				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"
 					href="#"
 				>금융상품 <span class="caret"></span></a>
 					<ul class="dropdown-menu">
@@ -87,23 +87,31 @@
 						<li><a
 							href="<%=request.getContextPath()%>/finance/financeMain?dbno=5"
 						>입출금 상품</a></li>
-					</ul>
-				</li>
+					</ul></li>
+				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"
+					href="#"
+				>(임시위치)주식 <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a
+							href="<%=request.getContextPath()%>/stock/SelectStock1"
+						>(임시)주식조회</a></li>
+					</ul></li>
 			</ul>
 		</c:if>
 		<ul class="nav navbar-nav navbar-right">
 			<c:if test="${sessionScope.login ne 1}">
 				<li><a href="URL"
 					onclick="window.open('<%=request.getContextPath()%>/member/loginRegister', '_blank', 'top=250px,left=550px,width=756px,height=609px,toolbars=no,scrollbars=no,toolbars=no,status=no'); return false;"
-				style="margin-right:24rem;"><span class="glyphicon glyphicon-user"></span> Login / Sign Up</a></li>
+					style="margin-right: 24rem;"
+				><span class="glyphicon glyphicon-user"></span> Login / Sign Up</a></li>
 			</c:if>
 			<c:if test="${sessionScope.login eq 1}">
 				<li><a href="<%=request.getContextPath()%>/view/memberMyPage"><span
 						class="glyphicon glyphicon-user"
 					></span> 마이페이지</a></li>
-				<li><a href="<%=request.getContextPath()%>/view/logout" style="margin-right:23rem;"><span
-						class="glyphicon glyphicon-log-in"
-					></span> 로그아웃</a></li>
+				<li><a href="<%=request.getContextPath()%>/view/logout"
+					style="margin-right: 23rem;"
+				><span class="glyphicon glyphicon-log-in"></span> 로그아웃</a></li>
 			</c:if>
 		</ul>
 	</div>
