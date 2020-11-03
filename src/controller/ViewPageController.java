@@ -17,9 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 import model.AccountDTO;
 import model.MemberDTO;
 import model.OpenBankingDTO;
+import model.StockDTO;
 import service.AccountDAO;
 import service.MemberMybatisDAO;
 import service.OpenBankingDAO;
+import service.StockDAO;
 import service.TransferMybatisDAO;
 
 @Controller
@@ -80,6 +82,10 @@ public class ViewPageController {
 			List<OpenBankingDTO> list = opDAO.SelectOpenBanking(member_id);
 			m.addAttribute("list", list);
 
+			StockDAO stockDAO = new StockDAO();
+			List<StockDTO> stocklist = stockDAO.SelectStock1();
+			m.addAttribute("stocklist", stocklist);
+			
 			return "view/mainPage";
 		}
 	}

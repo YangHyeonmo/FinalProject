@@ -267,4 +267,30 @@ public class AccountDAO extends AbstractMybatis {
 		return accountList;
 	}
 
+	public AccountDTO accountInfo(String account_no) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			String statement=namespace+".accountInfo";
+			return sqlSession.selectOne(statement,account_no);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return null;
+	}
+
+	public int insertAcc(AccountDTO account) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			String statement=namespace+".insertAcc";
+			return sqlSession.selectOne(statement,account);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			sqlSession.commit();
+			sqlSession.close();
+		}
+		return 0;
+	}
 }

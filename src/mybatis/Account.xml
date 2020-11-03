@@ -118,4 +118,13 @@
 		resultType="String">
 		select member_id from account where account_num = #{account_num}
 	</select>
+	
+	<select id="accountInfo" parameterType="String" resultType="Account">
+		select * from account where account_num=#{account_no}
+	</select>
+	
+	<insert id="insertAcc" parameterType="Account">
+	insert into account(account_no,member_id, account_type, account_num, account_name, account_pw, made_date, account_date, withdraw, deposit, balance, rate)
+	values(#{account_no},#{member_id}, #{fin_pro},#{account_num}, #{fin_name}, #{fin_pw}, sysdate, #{account_date} ,0, 0, 0, #{fin_rate})
+	</insert>
 </mapper>
