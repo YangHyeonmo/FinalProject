@@ -4,15 +4,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
-blockquote {
-	border: 1px solid #27a9e3;
-	margin-left: 0px;
-	margin-right: 0px;
-	padding-left: 20px;
-	padding-right: 20px;
-	border-left: 10px solid #27a9e3;
-}
-
 * {
 	box-sizing: border-box
 }
@@ -154,11 +145,12 @@ to {
 <head>
 <meta charset="UTF-8">
 </head>
-<body>
+
 	<div class="w3-container">
 		<c:if test="${dbno == 1}">
 			<div class="slideshow-container">
 				<c:forEach var="bestD" items="${best1}">
+					<!-- 예금 상품 best3 -->
 					<div class="mySlides fade">
 						<div class="numbertext">나루은행 추천상품 ${bestD.rnum }/3</div>
 						<img src="<%=request.getContextPath()%>/images/${bestD.rnum}.png"
@@ -196,26 +188,38 @@ to {
 				</div>
 			</c:forEach>
 		</c:if>
+
 		<c:if test="${dbno == 2}">
-			<blockquote>
-				<h1>적금 TOP3 제품</h1>
-				<p>
-					<input type="hidden" name="dbno" value="2" />
-					<c:forEach var="bestS" items="${best2}">
-				TOP ${bestS.rnum} :
-				${bestS.fin_name}<br>
-					</c:forEach>
-				</p>
-			</blockquote>
+			<!-- 적금 상품 best3 -->
+			<div class="slideshow-container">
+				<c:forEach var="bestS" items="${best2}">
+					<div class="mySlides fade">
+						<div class="numbertext">나루은행 추천상품 ${bestS.rnum }/3</div>
+						<img src="<%=request.getContextPath()%>/images/${bestS.rnum}.png"
+							style="width: 100%">
+						<div class="text">
+							<h1>${bestS.fin_name}</h1>
+							<br> ${bestS.fin_content }<br> 금리 : ${bestS.fin_rate }<br>
+						</div>
+					</div>
+				</c:forEach>
+				<a class="prev" onclick="plusSlides(-1)">&#10094;</a> <a
+					class="next" onclick="plusSlides(1)">&#10095;</a>
+			</div>
+			<br>
+			<div style="text-align: center">
+				<span class="dot" onclick="currentSlide(1)"></span> <span
+					class="dot" onclick="currentSlide(2)"></span> <span class="dot"
+					onclick="currentSlide(3)"></span>
+			</div>
 			<c:forEach var="savingP" items="${savings}">
 				<button onclick="finance('savings${savingP.fin_no}')"
 					class="w3-btn w3-block w3-yellow w3-left-align">${savingP.fin_name }[${savingP.fin_date }]개월
 					상품</button>
 
 				<div id="savings${savingP.fin_no}" class="w3-container w3-hide">
-					${savingP.fin_name }[${savingP.fin_content }]<br> 
-					금리 :${savingP.fin_rate} <br>
-					 ${savingP.fin_amount }원 이상<br>
+					${savingP.fin_name }[${savingP.fin_content }]<br> 금리
+					:${savingP.fin_rate} <br> ${savingP.fin_amount }원 이상<br>
 					${savingP.fin_date}개월 상품입니다.<br>
 					<button type="button" class="btn btn-light btn-lg active"
 						onclick="javascript:location.href='<%=request.getContextPath()%>/finance/finCertification?fin_no=${savingP.fin_no}'"
@@ -224,62 +228,94 @@ to {
 			</c:forEach>
 		</c:if>
 		<c:if test="${dbno == 3}">
-			<h2>펀드 TOP3 제품</h2>
-			<p>
+			<div class="slideshow-container">
 				<c:forEach var="bestF" items="${best3}">
-				TOP ${bestF.rnum} :
-				${bestF.fin_name}<br>
-				</c:forEach>
-			</p>
-			<c:forEach var="fundP" items="${fund}">
-				<button onclick="finance('fund${fundP.fin_no}')"
-					class="w3-btn w3-block w3-yellow w3-left-align">${fundP.fin_name }
-					상품</button>
+					<div class="numbertext">나루은행 추천상품 ${bestF.rnum }/3</div>
+					<img src="<%=request.getContextPath()%>/images/${bestF.rnum}.png"
+						style="width: 100%">
+					<div class="text">
+						<h1>${bestF.fin_name}</h1>
+						<br> ${bestF.fin_content }<br> 최대 수익 :
+						${bestF.fin_return }<br>
+					</div>
+			</div>
+			</c:forEach>
+			<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+			<a class="next" onclick="plusSlides(1)">&#10095;</a>
+	</div>
+	<br>
+	<div style="text-align: center">
+		<span class="dot" onclick="currentSlide(1)"></span> <span class="dot"
+			onclick="currentSlide(2)"></span> <span class="dot"
+			onclick="currentSlide(3)"></span>
+	</div>
 
-				<div id="fund${fundP.fin_no}" class="w3-container w3-hide">
-					${fundP.fin_name }[${fundP.fin_content }]<br> 수익률 :
-					${fundP.fin_return}% (3개월 누적)<br> 펀드 유형 : ${fundP.fin_type}<br>
-					<button type="button" class="btn btn-light btn-lg active"
-						onclick="javascript:location.href='<%=request.getContextPath()%>/finance/finCertification?fin_no=${fundP.fin_no}'"
-						style="float: right;">가입하기</button>
+	<c:forEach var="fundP" items="${fund}">
+		<button onclick="finance('fund${fundP.fin_no}')"
+			class="w3-btn w3-block w3-yellow w3-left-align">${fundP.fin_name }
+			상품</button>
+
+
+		<div id="fund${fundP.fin_no}" class="w3-container w3-hide">
+			${fundP.fin_name }[${fundP.fin_content }]<br> 수익률 :
+			${fundP.fin_return}% (3개월 누적)<br> 펀드 유형 : ${fundP.fin_type}<br>
+			<button type="button" class="btn btn-light btn-lg active"
+				onclick="javascript:location.href='<%=request.getContextPath()%>/finance/finCertification?fin_no=${fundP.fin_no}'"
+				style="float: right;">가입하기</button>
+		</div>
+	</c:forEach>
+	</c:if>
+	<c:if test="${dbno == 4}">
+		<div class="slideshow-container">
+
+			<c:forEach var="bestL" items="${best4}">
+				<div class="mySlides fade">
+					<div class="numbertext">나루은행 추천상품 ${bestL.rnum }/3</div>
+					<img src="<%=request.getContextPath()%>/images/${bestL.rnum}.png"
+						style="width: 100%">
+					<div class="text">
+						<h1>${bestL.fin_name}</h1>
+						<br> ${bestL.fin_content }<br> 금리 : ${bestL.fin_rate }<br>
+					</div>
+
 				</div>
 			</c:forEach>
-		</c:if>
-		<c:if test="${dbno == 4}">
-			<h2>대출 TOP3 제품</h2>
-			<p>
-				<c:forEach var="bestL" items="${best4}">
-					TOP ${bestL.rnum} :
-				${bestL.fin_name}<br>
-				</c:forEach>
-			</p>
-			<c:forEach var="loanP" items="${loan}">
-				<button onclick="finance('loan${loanP.fin_no}')"
-					class="w3-btn w3-block w3-yellow w3-left-align">${loanP.fin_name } 상품</button>
-				<div id="loan${loanP.fin_no}" class="w3-container w3-hide">
-					${loanP.fin_name }[${loanP.fin_content }]<br> 기간 :
-					${loanP.fin_date } 개월 <br> 상환방법 : ${loanP.fin_repay } <br>
-					이자 : ${loanP.fin_rate} %<br> 최대 ${loanP.fin_amount }원 까지<br>
-					<button type="button" class="btn btn-light btn-lg active"
-						onclick="javascript:location.href='<%=request.getContextPath()%>/finance/finCertification?fin_no=${loanP.fin_no}'"
-						style="float: right;">가입하기</button>
-				</div>
-			</c:forEach>
-		</c:if>
-		<c:if test="${dbno == 5}">
-			<c:forEach var="dw1" items="${DandW}">
-				<button onclick="finance('dw1${dw1.fin_no}')"
-					class="w3-btn w3-block w3-yellow w3-left-align">${dw1.fin_name }
-					상품</button>
-				<div id="dw1${dw1.fin_no}" class="w3-container w3-hide">
-					${dw1.fin_name }[${dw1.fin_pro}]<br> 
-					${dw1.fin_content }
-					<button type="button" class="btn btn-light btn-lg active"
-						onclick="javascript:location.href='<%=request.getContextPath()%>/finance/finCertification?fin_no=${dw1.fin_no}'"
-						style="float: right;">가입하기</button>
-				</div>
-			</c:forEach>
-		</c:if>
+			<a class="prev" onclick="plusSlides(-1)">&#10094;</a> <a class="next"
+				onclick="plusSlides(1)">&#10095;</a>
+		</div>
+		<br>
+		<div style="text-align: center">
+			<span class="dot" onclick="currentSlide(1)"></span> <span class="dot"
+				onclick="currentSlide(2)"></span> <span class="dot"
+				onclick="currentSlide(3)"></span>
+		</div>
+		<c:forEach var="loanP" items="${loan}">
+			<button onclick="finance('loan${loanP.fin_no}')"
+				class="w3-btn w3-block w3-yellow w3-left-align">${loanP.fin_name }
+				상품</button>
+			<div id="loan${loanP.fin_no}" class="w3-container w3-hide">
+				${loanP.fin_name }[${loanP.fin_content }]<br> 기간 :
+				${loanP.fin_date } 개월 <br> 상환방법 : ${loanP.fin_repay } <br>
+				이자 : ${loanP.fin_rate} %<br> 최대 ${loanP.fin_amount }원 까지<br>
+				<button type="button" class="btn btn-light btn-lg active"
+					onclick="javascript:location.href='<%=request.getContextPath()%>/finance/finCertification?fin_no=${loanP.fin_no}'"
+					style="float: right;">가입하기</button>
+			</div>
+		</c:forEach>
+	</c:if>
+	<c:if test="${dbno == 5}">
+		<c:forEach var="dw1" items="${DandW}">
+			<button onclick="finance('dw1${dw1.fin_no}')"
+				class="w3-btn w3-block w3-yellow w3-left-align">${dw1.fin_name }
+				상품</button>
+			<div id="dw1${dw1.fin_no}" class="w3-container w3-hide">
+				${dw1.fin_name }[${dw1.fin_pro}]<br> ${dw1.fin_content }
+				<button type="button" class="btn btn-light btn-lg active"
+					onclick="javascript:location.href='<%=request.getContextPath()%>/finance/finCertification?fin_no=${dw1.fin_no}'"
+					style="float: right;">가입하기</button>
+			</div>
+		</c:forEach>
+	</c:if>
 	</div>
 	<script>
 		var slideIndex = 1;
@@ -322,5 +358,4 @@ to {
 			}
 		};
 	</script>
-</body>
 </html>
