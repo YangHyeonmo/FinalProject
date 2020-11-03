@@ -27,6 +27,7 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import service.AccountDAO;
 import service.FinanceMybatisDAO;
 import service.MemberMybatisDAO;
+import service.OpenBankingDAO;
 import util.SendMail;
 
 @Controller
@@ -184,6 +185,9 @@ public class FinanceController {
 				account_num="0000-04-"+(int)(Math.random()*1000)+1000;
 			}else if((fin_no/100)==5) {
 				account_num="0000-05-"+(int)(Math.random()*1000)+1000;
+				OpenBankingDAO opdao=new OpenBankingDAO();
+				opdao.InsertMainAccount(member_id,account_num,fin_pw,0);
+				
 			}
 			Date acc_date=new Date();
 			acc_date.setMonth(acc_date.getDate()+fdto.getFin_date());

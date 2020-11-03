@@ -12,6 +12,8 @@
 		<typeAlias type="model.FinanceDTO" alias="Finance" />
 		<typeAlias type="model.ProductsDTO" alias="Products" />
 		<typeAlias type="model.StockDTO" alias="Stock" />
+		<typeAlias type="model.MainAccountDTO" alias="MainAccount" />
+
 
 	</typeAliases>
 

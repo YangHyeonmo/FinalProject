@@ -21,5 +21,6 @@
 		</script>
 		<meta http-equiv="Refresh" content="0; url=SelectOpenBanking" />
 	</c:if>
+	<meta http-equiv="Refresh" content="0; url=SelectOpenBanking" />
 </body>
 </html>
