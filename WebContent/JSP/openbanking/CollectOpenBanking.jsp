@@ -7,7 +7,7 @@
 <div class="w3-bar w3-white">
 	<button class="w3-bar-item w3-button"
 		onclick="document.location.href='<%=request.getContextPath()%>/view/mainPage'"
-	>MainPage</button>
+	>MainPagddddde</button>
 </div>
 <div class="w3-container">
 	<br />
