@@ -70,15 +70,21 @@
 						<span class="subBank">${list.open_account_no}&emsp;&emsp;${list.open_bank}&emsp;&emsp;${list.open_balance}원&emsp;</span>
 				</c:forEach>
 		</div>
-		<div class="bankProduct">
-			<span class="productName">금융상품</span> <select name="productListAll"
-				class="productList">
-				<option value="조회" selected>상품조회
-				<option value="남">남</option>
-				<option value="여">여</option>
-			</select> <span class="moneySave">589,212</span>
-		</div>
-	</div>
+	<div class="bankProduct" style="overflow: auto;">
+         <select name="member_gender"
+            id="account_financeno" class="myAccount" onchange="changefinance()">
+            <option value="조회" selected>계좌조회
+               <c:forEach var="financenum" items="${financenum }"
+                  varStatus="status">
+                  <option value=${financenum }>${financenum}</option>
+               </c:forEach>
+         </select>
+         <input class="money" maxlength="11" name="finance_balance" id="finance_balance" value="${financebalance[0]}"
+               placeholder="로그인하세요" readonly>
+            <h1>원</h1>
+      </div>
+   </div>
+
 	<div class="introduce">
 		<span class="introduceBank">차원이 다른 은행 <br>Naru뱅크
 		</span> <span class="introduceBank2">고객님께 더욱 더 쉽고, 편리한 <br> 소통이
@@ -140,6 +146,28 @@
 			}
 		}
 	}
+	
+	   function changefinance() {
+		      var account = new Array();
+		      <c:forEach items="${financenum}" var="item">
+		      account.push("${item}");
+		      </c:forEach>
+
+		      var balance = new Array();
+		      <c:forEach items="${financebalance}" var="item">
+		      balance.push("${item}");
+		      </c:forEach>
+
+		      var num = document.getElementById('account_financeno');
+		      for (var i = 0; i < account.length; i++) {
+		         if (num.value == account[i]) {
+		            document.getElementById('finance_balance').value = balance[i];
+		         }
+		      }
+		   }
+
+	
+	
 </script>
 <script>
 	$(function() { //화면 다 뜨면 시작

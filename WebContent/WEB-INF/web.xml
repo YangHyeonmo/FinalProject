@@ -17,7 +17,7 @@
 			<url-pattern>/JSP/openbanking/*</url-pattern>
 			<url-pattern>/JSP/exchange/*</url-pattern>
 			<url-pattern>/JSP/finance/*</url-pattern>
-			<url-pattern>/JSP/account/*</url-pattern>
+			<url-pattern>/JSP/account/accountList</url-pattern>
 			<include-prelude>/JSP/common/header.jsp</include-prelude>			
 		</jsp-property-group>
 	</jsp-config>

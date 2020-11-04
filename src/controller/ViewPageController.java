@@ -103,6 +103,10 @@ public class ViewPageController {
 			return "view/mainPage";
 		}
 	}
+	
+	
+	
+	
 
 	@RequestMapping("/memberMyPage")
 	public String memberMyPage(Model m) throws Throwable {
