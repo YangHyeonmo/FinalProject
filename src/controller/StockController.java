@@ -203,20 +203,12 @@ public class StockController {
       m.addAttribute("stock", stockname);
       m.addAttribute("mdd", mdd);
 
-      m.addAttribute("startdate", startdate);
-      m.addAttribute("enddate", enddate);
+      m.addAttribute("start_day", startdate);
+      m.addAttribute("end_day", enddate);
       return "stock/stockgraph";
    }
 
-   //   /*주식 조회 및 검색*/
-   //   @RequestMapping("SelectStock1")
-   //   public String SelectStock1(Model m) throws Throwable {
-   //
-   //      List<StockDTO> list = stockDAO.SelectStock1();
-   //
-   //      m.addAttribute("list", list);
-   //      return "stock/SelectStock1";
-   //   }
+ 
 
    /*주식 조회 및 검색*/
    @RequestMapping("SelectStock")

@@ -38,7 +38,7 @@
 		<td>MACD가 Signal을 상향돌파 하면 골든 크로스 (매수 시점) / MACD가 Signal을 하향돌파 하면 데드크로스 (매도 시점)</td>
 	</tr>
 	<tr>
-		<td><h2> RSI: ${rsi }  DPO: ${dpo }</h2></td>
+		<td><h2> RSI: ${rsi }  </h2></td>
 	</tr>
 	<tr>
 		<td>RSI: 가격의 상승압력과 하락압력 간의 상대적인 강도로 70% 이상이면 초과매수, 30% 이하는 초과매도</td>

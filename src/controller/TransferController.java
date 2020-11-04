@@ -64,14 +64,22 @@ import util.SendMail;
 import util.TestCrypto;
 
 class TransferInfoSub1Security extends Thread{
-	public void run() {
+	public void run(HttpServletRequest request) {
 		System.out.println("***BlockChain 시작***");
 			try {
 				String main="";
 				String line = "";
-				
-				BufferedReader br = new BufferedReader(new FileReader("src/encryptedSecurityFiles/TransferInfoSecurityMain.txt"));
-				BufferedWriter sub1 = new BufferedWriter(new FileWriter("src/encryptedSecurityFiles/TransferInfoSub1.txt"));
+				 String path=request.getServletContext().getRealPath("/")+"text\\TransferInfoSecurityMain.txt";
+				  path=path.replace("\\", "/");
+				String   path1=request.getServletContext().getRealPath("/")+"text\\TransferInfoSub1.txt";
+				    path1=path1.replace("\\", "/");
+				  String	path2=request.getServletContext().getRealPath("/")+"text\\TransferInfoSub2.txt";
+				  	path2=path2.replace("\\", "/");
+				  String	path3=request.getServletContext().getRealPath("/")+"text\\TransferInfoSub3.txt";
+				 	path3=path3.replace("\\", "/");
+				  	
+				BufferedReader br = new BufferedReader(new FileReader(path));
+				BufferedWriter sub1 = new BufferedWriter(new FileWriter(path1));
 				while ((line = br.readLine()) != null) {
 					main += line+"\n";
 				}
@@ -90,13 +98,17 @@ class TransferInfoSub1Security extends Thread{
 		}
 }
 class TransferInfoSub2Security extends Thread{
-	public void run() {
+	public void run(HttpServletRequest request) {
 			try {
 				String main="";
 				String line = "";
+				 String path=request.getServletContext().getRealPath("/")+"text\\TransferInfoSecurityMain.txt";
+				  path=path.replace("\\", "/");
+				  String	path2=request.getServletContext().getRealPath("/")+"text\\TransferInfoSub2.txt";
+				  	path2=path2.replace("\\", "/");
 				
-				BufferedReader br = new BufferedReader(new FileReader("src/encryptedSecurityFiles/TransferInfoSecurityMain.txt"));
-				BufferedWriter sub2 = new BufferedWriter(new FileWriter("src/encryptedSecurityFiles/TransferInfoSub2.txt"));
+				BufferedReader br = new BufferedReader(new FileReader(path));
+				BufferedWriter sub2 = new BufferedWriter(new FileWriter(path2));
 				while ((line = br.readLine()) != null) {
 					main += line+"\n";
 				}
@@ -113,12 +125,17 @@ class TransferInfoSub2Security extends Thread{
 		}
 	}
 class TransferInfoSub3Security extends Thread{
-	public void run() {
+	public void run(HttpServletRequest request) {
 			try {
 				String main="";
 				String line = "";
-				BufferedReader br = new BufferedReader(new FileReader("src/encryptedSecurityFiles/TransferInfoSecurityMain.txt"));
-				BufferedWriter sub3 = new BufferedWriter(new FileWriter("src/encryptedSecurityFiles/TransferInfoSub3.txt"));
+				 String path=request.getServletContext().getRealPath("/")+"text\\TransferInfoSecurityMain.txt";
+				  path=path.replace("\\", "/");
+				  String	path3=request.getServletContext().getRealPath("/")+"text\\TransferInfoSub3.txt";
+				 	path3=path3.replace("\\", "/");
+				 
+				BufferedReader br = new BufferedReader(new FileReader(path));
+				BufferedWriter sub3 = new BufferedWriter(new FileWriter(path3));
 	
 				while ((line = br.readLine()) != null) {
 					main += line+"\n";
