@@ -16,6 +16,7 @@
 <form method="post" name="authform"
 				action="<%=request.getContextPath()%>/finance/finishProducts?fin_no=${fin_no}">
 	<input type="hidden" name="fin_no" value="${fin_no}">
+	<input type="hidden" name="authType" value=1>
     <input type="text" name="member_phonenumber" placeholder="인증받을 번호를 입력해주세요">
    <div class="page">
   <button type="submit">인증하기</button>

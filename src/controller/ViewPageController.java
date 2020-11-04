@@ -82,8 +82,19 @@ public class ViewPageController {
 			List<OpenBankingDTO> list = opDAO.SelectOpenBanking(member_id);
 			m.addAttribute("list", list);
 
+			AccountDAO adao=new AccountDAO();
+			List<AccountDTO> accountlist=adao.getFinanceList(member_id);
+			List<String> financenum = new ArrayList<String>();
+			List<Integer> financebalance = new ArrayList<Integer>();
+			//Map<String,Integer> accountMap=new HashMap<String,Integer>();
+			for (int i = 0; i < accountlist.size(); i++) {
+				//accountMap.put(account_num.get(i).getAccount_num(), account_num.get(i).getBalance());
+				financenum.add(accountlist.get(i).getAccount_num());
+				financebalance.add(accountlist.get(i).getBalance());
+			}
 			
-			
+			m.addAttribute("financenum", financenum);
+			m.addAttribute("financebalance", financebalance);
 			
 			StockDAO stockDAO = new StockDAO();
 			List<StockDTO> stocklist = stockDAO.SelectStock1();

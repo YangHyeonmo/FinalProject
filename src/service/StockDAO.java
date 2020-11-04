@@ -19,7 +19,6 @@ public class StockDAO extends AbstractMybatis {
 	/*주식 조회 및 검색*/
 	public String searchstock(String exname) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
-		System.out.println(exname);
 		try {
 			return sqlSession.selectOne(namespace + ".searchstock", exname);
 		} finally {

@@ -7,7 +7,7 @@
 		SELECT 
 			excode
 	 	FROM
-			Stock
+			stock
 		WHERE
 	 		exname=#{exname}
 	</select>
@@ -15,8 +15,8 @@
 	<!-- 주식 조회 및 검색1-->
 	<select id="SelectStock1" resultType="Stock">
 		SELECT 
-			excode,
-		 	exname
+			EXCODE,
+		 	EXNAME
 	 	FROM
 			Stock
 	</select>
