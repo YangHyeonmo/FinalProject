@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -239,7 +240,6 @@ public class TransferController{
     	  send.send(member.getMember_email(), random);
       }
       
-      System.out.println(transferdata.getAccount_no());
       result=transferMybatisdao.transferInsert(transferdata,transferdata.getNum());
       transferMybatisdao.updateMoney(transferdata.getAccount_no(),transferdata.getTransfer_price(),1);
       transferMybatisdao.updateMoney(transferdata.getTransfer_to_account_no(),transferdata.getTransfer_price(),2);
@@ -248,6 +248,7 @@ public class TransferController{
       AccountDTO foraccount=a.accountInfo(transferdata.getAccount_no());
       AccountDTO toaccount=a.accountInfo(transferdata.getTransfer_to_account_no());
       
+ 
       System.out.println(foraccount+ " \n" + toaccount);
       
       a.insertAcc(foraccount);

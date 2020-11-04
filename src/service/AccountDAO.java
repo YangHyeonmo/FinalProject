@@ -293,4 +293,18 @@ public class AccountDAO extends AbstractMybatis {
 		}
 		return 0;
 	}
+	
+	public List<AccountDTO> getFinanceList(String member_id) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			String statement=namespace+".getFinanceList";
+			return sqlSession.selectList(statement,member_id);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			sqlSession.commit();
+			sqlSession.close();
+		}
+		return null;
+	}
 }

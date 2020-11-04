@@ -123,6 +123,14 @@
 		select * from account where account_num=#{account_no}
 	</select>
 	
+	<select id="getFinanceList" parameterType="String" resultType="Account">
+		select * from account
+		where (account_num, account_date) in (
+		select
+		account_num, max(account_date) max_date from account group by
+		account_num) and (account_type='적금' or account_type='예금') and member_id = #{member_id}
+	</select>
+	
 	<insert id="insertAcc" parameterType="Account">
 	insert into account(account_no,member_id, account_type, account_num, account_name, account_pw, made_date, account_date, withdraw, deposit, balance, rate)
 	values(#{account_no},#{member_id}, #{fin_pro},#{account_num}, #{fin_name}, #{fin_pw}, sysdate, sysdate ,0, 0, 0, #{fin_rate})
