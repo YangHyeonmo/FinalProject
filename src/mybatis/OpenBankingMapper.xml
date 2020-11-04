@@ -38,13 +38,6 @@
 		ORDER BY
 			regdate DESC
 	</select>
-	<select id="SelectList" parameterType="String" resultType="OpenBanking">
-		SELECT
-			*
-		FROM 
-			OPENBANKING
-		where member_id=#{member_id}
-	</select>
 
 	<!-- 잔액모으기(출금계좌) -->
 	<update id="WithdrawOpenBanking" parameterType="HashMap">
@@ -96,17 +89,7 @@
 			collecting_day DESC
 	</select>
 
-	<select id="checkaccount" parameterType="String" resultType="String">
-		SELECT 
-			account_num 
-		FROM 
-			MainAccount 
-		WHERE
-			 member_id = #{member_id}
-	</select>
-
-
-	<!--메인페이지 총 잔액 조회-->
+	<!--메인페이지 오픈뱅킹 총액-->
 	<select id="TotalOpenBalance" parameterType="String" resultType="int">
 		SELECT
 			nvl(SUM ( open_balance ),0) AS TOTAL
@@ -116,7 +99,7 @@
 			member_id = #{member_id}
 	</select>
 
-	<!-- 오픈뱅킹 계좌 등록 -->
+	<!-- 입출금 상품 메인계좌 등록 -->
 	<insert id="InsertMainAccount" parameterType="HashMap">
 		INSERT INTO MainAccount (
 			member_id,
@@ -126,6 +109,35 @@
 		VALUES ( #{member_id}, #{account_num}, #{account_pw}, #{balance} )
 	</insert>
 
+	<!--오픈뱅킹 계좌 정보-->
+	<select id="SelectList" parameterType="String" resultType="OpenBanking">
+		SELECT
+			*
+		FROM 
+			OPENBANKING
+		where member_id=#{member_id}
+	</select>
+
+	<!--오픈뱅킹 계좌 잔액확인-->
+	<select id="CheckOpenBalance" parameterType="String" resultType="OpenBanking">
+		SELECT
+			open_balance
+		FROM 
+			OPENBANKING
+		where member_id=#{member_id}
+	</select>
+
+	<!--메인계좌 확인-->
+	<select id="checkaccount" parameterType="String" resultType="String">
+		SELECT 
+			account_num 
+		FROM 
+			MainAccount 
+		WHERE
+			 member_id = #{member_id}
+	</select>
+
+	<!--오픈뱅킹 계좌 확인-->
 	<select id="CheckOpenAccount" parameterType="String" resultType="String">
 		SELECT 
 			open_account_no 

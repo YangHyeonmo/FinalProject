@@ -72,31 +72,6 @@ public class OpenBankingDAO extends AbstractMybatis {
 
 	}
 
-	/*	public OpenBankingDTO SelectId(String string) {
-			SqlSession sqlSession = getSqlSessionFactory().openSession();
-			try {
-				return sqlSession.selectOne(namespace + ".SelectId", string);
-			} finally {
-				sqlSession.close();
-			}
-		}
-		public OpenBankingDTO SelectPw(String string) {
-			SqlSession sqlSession = getSqlSessionFactory().openSession();
-			try {
-				return sqlSession.selectOne(namespace + ".SelectPw", string);
-			} finally {
-				sqlSession.close();
-			}
-		}
-		public OpenBankingDTO SelectBalance(int i) {
-			SqlSession sqlSession = getSqlSessionFactory().openSession();
-			try {
-				return sqlSession.selectOne(namespace + ".SelectBalance", i);
-			} finally {
-				sqlSession.close();
-			}
-		}*/
-
 	/* 잔액모으기(출금계좌) */
 	public Integer WithdrawOpenBanking(int money, String member_id,
 			String open_account_pw) {
@@ -148,45 +123,6 @@ public class OpenBankingDAO extends AbstractMybatis {
 		return 1;
 	}
 
-	//	public String checkaccount(String id) {
-	//		SqlSession sqlSession = getSqlSessionFactory().openSession();
-	//		try {
-	//			return sqlSession.selectOne(namespace + ".checkaccount", id);
-	//		} finally {
-	//			sqlSession.close();
-	//		}
-	//	}
-
-	public List<String> checkamainccount(String id) {
-		SqlSession sqlSession = getSqlSessionFactory().openSession();
-		try {
-			return sqlSession.selectList(namespace + ".checkaccount", id);
-		} finally {
-			sqlSession.close();
-		}
-	}
-	public List<OpenBankingDTO> selectList(String account, String id) {
-		SqlSession sqlSession = getSqlSessionFactory().openSession();
-		try {
-			List<OpenBankingDTO> list = sqlSession
-					.selectList(namespace + ".SelectList", id);
-			return list;
-		} finally {
-			sqlSession.close();
-		}
-	}
-
-	public List<OpenBankingDTO> mainAccList(String id) {
-		SqlSession sqlSession = getSqlSessionFactory().openSession();
-		try {
-			List<OpenBankingDTO> list = sqlSession
-					.selectList(namespace + ".mainAccList", id);
-			return list;
-		} finally {
-			sqlSession.close();
-		}
-	}
-
 	/* 거래내역 등록 */
 	public Integer WithdrawLog(String member_id, String account, int total) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
@@ -211,7 +147,7 @@ public class OpenBankingDAO extends AbstractMybatis {
 		return 1;
 	}
 
-	/* 거래내역 */
+	/* 거래내역 조회 */
 	public List<InstantDTO> SelectWithdrawLog(String member_id) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
@@ -222,7 +158,7 @@ public class OpenBankingDAO extends AbstractMybatis {
 		}
 	}
 
-	/*메인화면 총액*/
+	/*메인화면 오픈뱅킹 총액*/
 	public int TotalOpenBalance(String member_id) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
@@ -233,6 +169,7 @@ public class OpenBankingDAO extends AbstractMybatis {
 		}
 	}
 
+	/*입출금 상품 메인계좌 등록*/
 	public Integer InsertMainAccount(String member_id, String account_num,
 			int fin_pw, int i) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
@@ -261,6 +198,53 @@ public class OpenBankingDAO extends AbstractMybatis {
 		return 1;
 	}
 
+	/*오픈뱅킹 계좌정보*/
+	public List<OpenBankingDTO> selectList(String account, String id) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			List<OpenBankingDTO> list = sqlSession
+					.selectList(namespace + ".SelectList", id);
+			return list;
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	/*오픈뱅킹 계좌 잔액확인*/
+	public List<OpenBankingDTO> CheckOpenBalance(String account, int money,
+			String id) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			List<OpenBankingDTO> list = sqlSession
+					.selectList(namespace + ".CheckOpenBalance", id);
+			return list;
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	/*메인계좌 확인*/
+	public List<String> checkamainccount(String id) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			return sqlSession.selectList(namespace + ".checkaccount", id);
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	/*	public List<OpenBankingDTO> mainAccList(String id) {
+			SqlSession sqlSession = getSqlSessionFactory().openSession();
+			try {
+				List<OpenBankingDTO> list = sqlSession
+						.selectList(namespace + ".mainAccList", id);
+				return list;
+			} finally {
+				sqlSession.close();
+			}
+		}*/
+
+	/*오픈뱅킹 계좌 확인*/
 	public List<String> CheckOpenAccount(String member_id) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {

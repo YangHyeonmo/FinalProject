@@ -1,7 +1,10 @@
 package controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -169,7 +172,6 @@ public class OpenBankingController {
 		String member_id = (String) session.getAttribute("member_id");
 		List<String> mainaccount = opDAO.checkamainccount(member_id);
 		m.addAttribute("mainaccount", mainaccount);
-		System.out.println(mainaccount);
 
 		return "openbanking/CollectOpenBanking";
 	}
@@ -178,8 +180,21 @@ public class OpenBankingController {
 			String open_account_pw, String account_num, int money, Model m)
 			throws Throwable {
 
-		List<OpenBankingDTO> list = opDAO.selectList(account_num, member_id);
-		int total = list.size() * money;
+		List<OpenBankingDTO> check = opDAO.CheckOpenBalance(account_num, money,
+				member_id);
+
+		Iterator<OpenBankingDTO> x = check.iterator();
+
+		while (x.hasNext()) {
+			OpenBankingDTO y = x.next();
+			if (y.getOpen_balance() < money) {
+				m.addAttribute("error", 3);
+				return "openbanking/CollectOpenBankingProc";
+			}
+		}
+
+		List<OpenBankingDTO> list2 = opDAO.selectList(account_num, member_id);
+		int total = list2.size() * money;
 
 		int result1 = opDAO.WithdrawOpenBanking(money, member_id,
 				open_account_pw);
