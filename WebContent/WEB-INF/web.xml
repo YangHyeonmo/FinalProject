@@ -18,7 +18,7 @@
 			<url-pattern>/JSP/exchange/*</url-pattern>
 			<url-pattern>/JSP/finance/*</url-pattern>
 			<url-pattern>/JSP/stock/*</url-pattern>
-			<url-pattern>/JSP/account/accountList</url-pattern>
+			<url-pattern>/JSP/account/*</url-pattern>
 			<include-prelude>/JSP/common/header.jsp</include-prelude>			
 		</jsp-property-group>
 	</jsp-config>

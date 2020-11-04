@@ -27,11 +27,14 @@ a {color: rgb(29, 29, 31); text-decoration: none;}
 .main-body .phoneScreen .coinMoney .coin{position:absolute; margin-top:22px; margin-left:3rem; font-size:27px; font-weight:bold}
 .main-body .phoneScreen .coinMoney .coinCollect{font-size:2rem; float:right; margin-top:18px; margin-right:21px; font-weight:bold;}
 .main-body .phoneScreen .bankProduct{background-color:#669999; height:9rem; width:25rem; float:right; margin-right:1rem; margin-top:1rem; border-radius:8%;}
+.main-body .phoneScreen .bankProduct .myAccount{position:absolute; margin-top:25px; margin-left:29px; width:9rem; height:26px; font-size:13px; text-align:center; border:white; background-color:rgba(0,0,0,0);}
+.main-body .phoneScreen .bankProduct h1{font-weight:bold; margin-left:21rem; margin-top:66px;}
+.main-body .phoneScreen .bankProduct .money{position:absolute; text-align:right; margin-top:4rem; margin-left:1rem; font-size:3rem; width:19rem; background-color:#669999; height:4rem; font-weight:bold; border:white;}
 .main-body .phoneScreen .bankProduct .productName{position:absolute; font-size:17px; padding-top:10px; padding-left:37px; color:white; font-weight:bold;}
 .main-body .phoneScreen .bankProduct .productList{position:absolute; margin-top:25px; margin-left:29px; width:8rem; height:26px; font-size:13px; text-align:center; border:white; background-color:rgba(0,0,0,0);}
 .main-body .phoneScreen .bankProduct .moneySave{font-size:2rem; float:right; margin-top:4rem; margin-right:3rem; font-weight:bold; color:white;}
 .main-body .phoneScreen .phoneImage{position:absolute;margin-left:62rem; margin-top:5rem;}
-.main-body .phoneScreen .bankProduct .subBank{position: absolute; font-size:18px; font-weight: bold; margin-left:7px; margin-top:1rem;}
+.main-body .phoneScreen .bankProduct .subBank{position: relative; font-size:17px; font-weight: bold; margin-left:14px; top:1rem;}
 
 
 .stock_page{height:30rem; width:100%; margin-left:2rem; }
@@ -300,7 +303,6 @@ background-color: white; -webkit-rtl-ordering: logical; cursor: text; margin: 0e
 .open_bank .container h1{position:absolute; left:36rem; width:11rem; top:-5rem;}
 .table .table_header{background:#6c7ae0; display:table-row;}
 .table .table_header .cell{font-size: 18px; color:#fff; line-height: 1.2; font-weight: unset !important; padding-top: 19px; padding-bottom: 19px;}
-.table .row{box-shadow: 16px 20px 7px 6px grey;}
 .table .row .cell{ font-size:15px;color:#666666; line-height:1.2; font-weight:unset !important; padding-top:20px; padding-bottom:20px; border-bottom: 1px solid #f2f2f2;}
 .table .table_header .cell:nth-child(1) {width:333px; padding-left:40px;}
 .table .row .cell:nth-child(1) {width:333px; padding-left:52px;}
@@ -438,6 +440,26 @@ background-color: white; -webkit-rtl-ordering: logical; cursor: text; margin: 0e
 .finance_auth .button2:before,.finance_auth .button2:after{ content:''; position:absolute; top:0; right:0; height:2px; width:0; background: #1AAB8A; transition:400ms ease all; }
 .finance_auth .button2:after{ right:inherit; top:4rem; left:0; bottom:0; }
 .finance_auth .button2:hover:before,.finance_auth .button2:hover:after{ width:100%; transition:800ms ease all;}
+
+.acc_auth_service{position:absolute;left:37%; top:30%; width:41rem; height:27rem; border:1px solid rgba(0,0,0,1); box-shadow:13px 10px 7px 6px grey; }
+.acc_auth_service h2{font-size : 30px; left: 2rem; position:absolute; top:9rem; font-size:2rem;}
+.acc_auth_service .font2{font-size : 30px; left: 2rem; position:absolute; top:4rem; font-size:2rem;}
+.acc_auth_service input{position:absolute; text-align:center; width:14rem; left:14rem; top:5rem; height:3rem; box-shadow:7px 16px 6px #2e9dc7; }
+.acc_auth_service .h2_2{position:absolute; text-align:center; width:14rem; left:14rem; top:10rem; height:3rem; box-shadow:7px 16px 6px #2e9dc7; }
+.acc_auth_service .email{position:absolute;text-align:center; background-color:white; font-size:1rem; width:14rem; left:14rem; top:10rem; height:3rem; box-shadow:7px 16px 6px #2e9dc7; }
+.acc_auth_service button{ background:#2e9dc7; color:#fff; border:none; position:relative; height:4rem; font-size:1.6em; left:9em; top:16rem; width:14rem; padding:0 2em; cursor:pointer; transition:800ms ease all; outline:none; }
+.acc_auth_service button:hover{ background:#fff; color:#1AAB8A; }
+.acc_auth_service button:before,.phone_message button:after{ content:''; position:absolute; top:0; right:0; height:2px; width:0; background: #1AAB8A; transition:400ms ease all; }
+.acc_auth_service button:after{ right:inherit; top:4rem; left:0; bottom:0; }
+.acc_auth_service button:hover:before,.phone_message button:hover:after{ width:100%; transition:800ms ease all;}
+
+.deleteAcc{position:absolute;left:25%; width:39rem; height:13rem; border:1px solid rgba(0,0,0,1); box-shadow:13px 10px 7px 6px grey; }
+.deleteAcc h2{left: 2rem; position:absolute;font-size:2rem;}
+.deleteAcc button{ background:#2e9dc7; color:#fff; border:none; position:relative; height:4rem; font-size:1.6em; left:9em; top:6rem; width:14rem; padding:0 2em; cursor:pointer; transition:800ms ease all; outline:none; }
+.deleteAcc button:hover{ background:#fff; color:#1AAB8A; }
+.deleteAcc button:before,.phone_message button:after{ content:''; position:absolute; top:0; right:0; height:2px; width:0; background: #1AAB8A; transition:400ms ease all; }
+.deleteAcc button:after{ right:inherit; top:4rem; left:0; bottom:0; }
+.deleteAcc button:hover:before,.phone_message button:hover:after{ width:100%; transition:800ms ease all;}
 
 
 /* account css */

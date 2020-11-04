@@ -76,7 +76,7 @@ public class MemberController {
 			member = (MemberDTO) memberDAO.getMember(member_id);
 			session.setAttribute("member_id", member_id);
 			session.setAttribute("member_password", member_password);
-			session.setAttribute("member", member);
+			session.setAttribute("member", member);	
 			session.setAttribute("login", 1);
 			return "member/memberLoginPro";
 		} else

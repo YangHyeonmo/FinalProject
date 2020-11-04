@@ -102,8 +102,10 @@ public class ExchangeController {
 
 	@RequestMapping("exchangeMyMoney")
 	public String exchangeMyMoney(@RequestParam String cur_unit, Model m) throws Exception {
-
+		
 		m.addAttribute("cur_unit", cur_unit);
+
+
 		return "exchange/exchangeMyMoney";
 	}
 

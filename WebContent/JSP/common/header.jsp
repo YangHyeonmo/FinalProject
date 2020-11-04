@@ -82,14 +82,7 @@
 							href="<%=request.getContextPath()%>/finance/financeMain?dbno=5"
 						>입출금 상품</a></li>
 					</ul></li>
-				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"
-					href="#"
-				>(임시위치)주식 <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a
-							href="<%=request.getContextPath()%>/stock/SelectStock"
-						>(임시)주식조회</a></li>
-					</ul></li>
+			
 			</ul>
 		</c:if>
 		<ul class="nav navbar-nav navbar-right">

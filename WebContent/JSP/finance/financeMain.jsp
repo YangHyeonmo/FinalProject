@@ -2,10 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
 
@@ -142,7 +138,7 @@ to {
 	</script>
 </c:if>
 
-</head>
+
 	<div class="w3-container">
 		<c:if test="${dbno == 1}">
 			<div class="slideshow-container">
@@ -358,4 +354,3 @@ to {
 			}
 		};
 	</script>
-</html>

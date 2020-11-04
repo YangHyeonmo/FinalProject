@@ -98,7 +98,7 @@ public class AccountController {
 		m.addAttribute("account_num", account_num);
 		m.addAttribute("article", article);
 
-		return "account/accountList";
+		return "account/aliasUpdatePro";
 	}
 
 	@RequestMapping("accountCopy") // �넻�옣�궗蹂�

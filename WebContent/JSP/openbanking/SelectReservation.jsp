@@ -86,7 +86,7 @@
 					</div>
 
 					<div class="cell2">
-						<input class="collecting_money" type="text" size="50"
+						<input class="collecting_money" type="number" size="50"
 							maxlength="50" id="collecting_money" name="collecting_money"
 							required="required" placeholder="money 입력" min="0">
 					</div>

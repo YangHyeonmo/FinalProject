@@ -64,20 +64,14 @@ import util.SendMail;
 import util.TestCrypto;
 
 class TransferInfoSub1Security extends Thread{
-	public void run(HttpServletRequest request) {
+	public void run() {
 		System.out.println("***BlockChain 시작***");
 			try {
 				String main="";
 				String line = "";
-				 String path=request.getServletContext().getRealPath("/")+"text\\TransferInfoSecurityMain.txt";
-				  path=path.replace("\\", "/");
-				String   path1=request.getServletContext().getRealPath("/")+"text\\TransferInfoSub1.txt";
-				    path1=path1.replace("\\", "/");
-				  String	path2=request.getServletContext().getRealPath("/")+"text\\TransferInfoSub2.txt";
-				  	path2=path2.replace("\\", "/");
-				  String	path3=request.getServletContext().getRealPath("/")+"text\\TransferInfoSub3.txt";
-				 	path3=path3.replace("\\", "/");
-				  	
+				String path="/SpringProject/WebContent/text/TransferInfoSecurityMain.txt";
+				String path1="/SpringProject/WebContent/text/TransferInfoSub1.txt";
+				
 				BufferedReader br = new BufferedReader(new FileReader(path));
 				BufferedWriter sub1 = new BufferedWriter(new FileWriter(path1));
 				while ((line = br.readLine()) != null) {
@@ -87,6 +81,7 @@ class TransferInfoSub1Security extends Thread{
 				sub1.write(main+"\n");
 				sub1.flush();
 				sub1.close();
+				br.close();
 				
 				}
 			catch (Exception e) {
@@ -98,14 +93,13 @@ class TransferInfoSub1Security extends Thread{
 		}
 }
 class TransferInfoSub2Security extends Thread{
-	public void run(HttpServletRequest request) {
+	public void run() {
 			try {
 				String main="";
 				String line = "";
-				 String path=request.getServletContext().getRealPath("/")+"text\\TransferInfoSecurityMain.txt";
-				  path=path.replace("\\", "/");
-				  String	path2=request.getServletContext().getRealPath("/")+"text\\TransferInfoSub2.txt";
-				  	path2=path2.replace("\\", "/");
+				String path="/SpringProject/WebContent/text/TransferInfoSecurityMain.txt";
+				String path2="/SpringProject/WebContent/text/TransferInfoSub2.txt";
+				
 				
 				BufferedReader br = new BufferedReader(new FileReader(path));
 				BufferedWriter sub2 = new BufferedWriter(new FileWriter(path2));
@@ -115,6 +109,7 @@ class TransferInfoSub2Security extends Thread{
 				sub2.write(main+"\n");
 				sub2.flush();
 				sub2.close();
+				br.close();
 				}
 			
 			catch (Exception e) {
@@ -129,10 +124,8 @@ class TransferInfoSub3Security extends Thread{
 			try {
 				String main="";
 				String line = "";
-				 String path=request.getServletContext().getRealPath("/")+"text\\TransferInfoSecurityMain.txt";
-				  path=path.replace("\\", "/");
-				  String	path3=request.getServletContext().getRealPath("/")+"text\\TransferInfoSub3.txt";
-				 	path3=path3.replace("\\", "/");
+				String path="/SpringProject/WebContent/text/TransferInfoSecurityMain.txt";
+				String path3="/SpringProject/WebContent/text/TransferInfoSub3.txt";
 				 
 				BufferedReader br = new BufferedReader(new FileReader(path));
 				BufferedWriter sub3 = new BufferedWriter(new FileWriter(path3));
@@ -143,6 +136,7 @@ class TransferInfoSub3Security extends Thread{
 				sub3.write(main+"\n");
 				sub3.flush();
 				sub3.close();
+				br.close();
 			}
 			catch (Exception e) {
 		     }
@@ -292,17 +286,16 @@ public class TransferController{
       String sub2="";
       String sub3="";
       double compare=100/3;
-
+  
+	
+	
     BufferedReader br = new BufferedReader(new FileReader(path));
-    path=request.getServletContext().getRealPath("/")+"text\\TransferInfoSub1.txt";
-    path=path.replace("\\", "/");
-  	BufferedReader br1 = new BufferedReader(new FileReader(path));
-  	path=request.getServletContext().getRealPath("/")+"text\\TransferInfoSub2.txt";
-  	path=path.replace("\\", "/");
-  	BufferedReader br2 = new BufferedReader(new FileReader(path));
- 	path=request.getServletContext().getRealPath("/")+"text\\TransferInfoSub3.txt";
- 	path=path.replace("\\", "/");
-  	BufferedReader br3 = new BufferedReader(new FileReader(path));
+  	String path1="/SpringProject/WebContent/text/TransferInfoSub1.txt";
+  	BufferedReader br1 = new BufferedReader(new FileReader(path1));
+  	String path2="/SpringProject/WebContent/text/TransferInfoSub2.txt";
+  	BufferedReader br2 = new BufferedReader(new FileReader(path2));
+  	String path3="/SpringProject/WebContent/text/TransferInfoSub3.txt";
+  	BufferedReader br3 = new BufferedReader(new FileReader(path3));
 		
 
 	      try {
