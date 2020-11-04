@@ -3,25 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
 
-<style>
-body .infoMessage{border: 1px solid rgba(0,0,0,0.3); color:rgba(0,0,0,0.3); margin: 0px 10px 50px; width: 800;}
-body .bankInfo{border: 3px solid brown; margin: 0px 10px 50px; width: 800;}
-body .bankInfo .w3-table-all tr td{float:left;}
-body .bankInfo .w3-table-all tr td:nth-child(2){ position:absolute; margin-left:10rem;color:red;}
-body .button{width:250px; margin-left:15rem; position:absolute; }
-body h5{color:orange; font-size:10px; top:21rem;position:absolute;}
-body h4{color:rgba(0,0,0,0.3); font-size:10px;}
-body hr{border-top: 1px dotted grey ;}
-
-</style>
-
-
-</head>
-
-<body>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/common.css">
+<div class="accountCopyPage">
 	<div class="infoMessage">
 		<table class="w3-table-all" align="center">
 			<tr class="w3-grey">
@@ -36,7 +20,7 @@ body hr{border-top: 1px dotted grey ;}
 	<c:forEach var="article" items="${article}">
 	<div class="bankInfo">
 		<table class="w3-table-all" >
-			<h3>${member_name}님</h3>
+			<h3>${member.member_name}님</h3>
 			<tr>
 				<td>예금종류</td>
 				<td>${article.account_type}</td>
@@ -53,17 +37,18 @@ body hr{border-top: 1px dotted grey ;}
 		</table>
 		<hr class="line">
 		
-		<h4>위와 같이 계좌가 개설되어 있음을 확인합니다. {$</h4>
+		<h4>위와 같이 계좌가 개설되어 있음을 확인합니다.</h4>
 		<h4>⁕스마트고객상담부(상담/폰뱅킹) 1599-9999, 1588-9999(국내) |
 			82-1-1234-5678(해외)</h4>
 	</div>
 	</c:forEach>
 	<h5>  ⁕통장사본은 본인계좌개설 확인용 이외의 어떠한 용도의 증명서로도 사용하실 수 없습니다.</h5>
-<div class="button">
 	
-		<input type="button" value="인쇄" id="print" onclick="window.print()" />
-		<input type="button" value="취소" id="cancle" onclick="window.close()" />
+	<div class="accountRec">
+			<br />
+			<button type="submit" id="print" onclick="window.print()">인쇄</button> 
+			<button type="button" id="cancle" onclick="window.close();">취소</button> 
+		</div>
 	
 </div>
-</body>
 </html>

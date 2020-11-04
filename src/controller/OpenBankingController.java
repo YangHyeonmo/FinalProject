@@ -1,10 +1,7 @@
 package controller;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -73,15 +70,9 @@ public class OpenBankingController {
 			return "openbanking/SelectOpenBanking";
 		}
 
-		List<String> list = opDAO.CheckOpenAccount(member_id);
-
-		if (list.contains(op.getOpen_account_no())) {
-			m.addAttribute("error", 5);
-			return "openbanking/SelectOpenBanking";
-		}
-
 		//1.회원인지 아닌지 확인
 		MemberDTO mdto = mdao.getMember(op.getMember_id());
+		System.out.println("member:" + mdto.getMember_address());
 		if (!mdto.getMember_id().equals(null)) {
 			//2. 회원인데 account가 없는 경우
 
@@ -167,54 +158,27 @@ public class OpenBankingController {
 
 	//입금,출금,기록
 	@RequestMapping("CollectOpenBanking")
-	public String CollectOpenBanking(Model m) throws Throwable {
-
-		String member_id = (String) session.getAttribute("member_id");
-		List<String> mainaccount = opDAO.checkamainccount(member_id);
-		m.addAttribute("mainaccount", mainaccount);
-
+	public String CollectOpenBanking() throws Throwable {
 		return "openbanking/CollectOpenBanking";
 	}
 	@RequestMapping("CollectOpenBankingProc")
-	public String CollectOpenBankingProc(String member_id,
-			String open_account_pw, String account_num, int money, Model m)
-			throws Throwable {
+	public String CollectOpenBankingProc(int money, String member_id,
+			String open_account_pw, Model m) throws Throwable {
 
-		List<OpenBankingDTO> check = opDAO.CheckOpenBalance(account_num, money,
-				member_id);
+		String fromaccount = opDAO.checkaccount(member_id);
 
-		Iterator<OpenBankingDTO> x = check.iterator();
+		List<OpenBankingDTO> list = opDAO.selectList(fromaccount, member_id);
+		int total = list.size() * money;
 
-		while (x.hasNext()) {
-			OpenBankingDTO y = x.next();
-			if (y.getOpen_balance() < money) {
-				m.addAttribute("error", 3);
-				return "openbanking/CollectOpenBankingProc";
-			}
-		}
-
-		List<OpenBankingDTO> list2 = opDAO.selectList(account_num, member_id);
-		int total = list2.size() * money;
-
-		int result1 = opDAO.WithdrawOpenBanking(money, member_id,
+		int result = opDAO.WithdrawOpenBanking(money, member_id,
 				open_account_pw);
-		int result2 = opDAO.DepositOpenBanking(total, member_id,
-				open_account_pw, account_num);
-		int result3 = opDAO.WithdrawLog(member_id, account_num, total);
-
-		m.addAttribute("error", 1);
-
-		if (result1 != 1) {
-			m.addAttribute("error", 2);
-			return "openbanking/CollectOpenBankingProc";
-		} else if (result2 != 1) {
-			m.addAttribute("error", 2);
-			return "openbanking/CollectOpenBankingProc";
-		} else if (result3 != 1) {
-			m.addAttribute("error", 2);
+		if (result == 1) {
+			opDAO.DepositOpenBanking(fromaccount, total);
+			opDAO.WithdrawLog(member_id, fromaccount, total);
+			m.addAttribute("error", 1);
 			return "openbanking/CollectOpenBankingProc";
 		} else {
-			m.addAttribute("error", 1);
+			m.addAttribute("error", 2);
 			return "openbanking/CollectOpenBankingProc";
 		}
 	}
@@ -226,6 +190,7 @@ public class OpenBankingController {
 		String member_id = (String) session.getAttribute("member_id");
 
 		List<InstantDTO> list2 = opDAO.SelectWithdrawLog(member_id);
+		System.out.println(list2);
 
 		m.addAttribute("list2", list2);
 

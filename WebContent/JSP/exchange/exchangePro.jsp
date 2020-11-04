@@ -46,7 +46,7 @@
 			} else {
 				alert("환전에 실패하였습니다.")
 			}
-		location.href = "exchangeForm";
+		history.go(-2);
 		});
 	</script>
 </body>

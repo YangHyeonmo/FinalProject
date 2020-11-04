@@ -75,6 +75,7 @@
 		 ↓<br/> 
 		 <span class="money">${cur_unit}</span> <span class="changedMoney" id="changedMoneyCurrency"><font color="red">환전할 돈을 입력하세요</font></span><br/>
 		<span>이름</span>&nbsp; <input type="text" class="mail" name="exc_name" placeholder="환전하는 고객의 이름" value="${member.member_name}"><br/>
+		<span>주소</span>&nbsp;  <input type = "text" class="mail" name ="zipcode"><br/>
 		<input class="changePlease"type="submit" value="환전하기">  
 </form>
 		

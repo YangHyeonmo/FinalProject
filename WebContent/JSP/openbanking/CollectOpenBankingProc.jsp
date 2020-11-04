@@ -21,11 +21,5 @@
 		</script>
 		<meta http-equiv="Refresh" content="0; url=SelectOpenBanking" />
 	</c:if>
-	<c:if test="${error==3}">
-		<script>
-			alert("잔액이 부족합니다!!");
-		</script>
-		<meta http-equiv="Refresh" content="0; url=SelectOpenBanking" />
-	</c:if>
 </body>
 </html>

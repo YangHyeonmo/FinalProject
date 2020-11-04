@@ -1,15 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<!DOCTYPE html>
-<html>
-<head>
-</head>
+
 <c:if test="${finish==1}">
 	<script>
 		alert("이체가 완료되었습니다");
@@ -30,7 +22,7 @@
 		alert("현재 날짜보다 일찍 입력");
 	</script>
 </c:if>
-
+<body>
 <div class="main-body">
 	<img class="mainPageImg"
 		src="<%=request.getContextPath()%>/images/pointerLogo.png">
@@ -74,15 +66,9 @@
 			</c:if>
 		</div>
 		<div class="bankProduct" style="overflow: auto;">
-			<table class="w3-table-all">
-				<c:forEach var="list" items="${list}">
-					<tr>
-						<td align="right">&emsp;&emsp;&emsp;${list.open_account_no}&emsp;</td>
-						<td align="right">&emsp;${list.open_bank}&emsp;</td>
-						<td align="right">&emsp;${list.open_balance}원&emsp;</td>
-					</tr>
+				<c:forEach var="list" items="${list}">					
+						<span class="subBank">${list.open_account_no}&emsp;&emsp;${list.open_bank}&emsp;&emsp;${list.open_balance}원&emsp;</span>
 				</c:forEach>
-			</table>
 		</div>
 		<div class="bankProduct">
 			<span class="productName">금융상품</span> <select name="productListAll"
@@ -125,7 +111,8 @@
 
 
 
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	
 <script type="text/javascript">
 	var balance = new Array();
 	<c:forEach items="${balance}" var="item">
@@ -159,7 +146,7 @@
 		var searchSource = [	
 		
 			<c:forEach var="stocklist" items="${stocklist}">
-			"${stocklist.exname} ,
+			"${stocklist.exname} ${stocklist.excode}",
 			</c:forEach>
 			""
 			
@@ -190,4 +177,4 @@
 
 	});
 </script>
-</html>
+</body>

@@ -31,6 +31,8 @@ a {color: rgb(29, 29, 31); text-decoration: none;}
 .main-body .phoneScreen .bankProduct .productList{position:absolute; margin-top:25px; margin-left:29px; width:8rem; height:26px; font-size:13px; text-align:center; border:white; background-color:rgba(0,0,0,0);}
 .main-body .phoneScreen .bankProduct .moneySave{font-size:2rem; float:right; margin-top:4rem; margin-right:3rem; font-weight:bold; color:white;}
 .main-body .phoneScreen .phoneImage{position:absolute;margin-left:62rem; margin-top:5rem;}
+.main-body .phoneScreen .bankProduct .subBank{position: absolute; font-size:18px; font-weight: bold; margin-left:7px; margin-top:1rem;}
+
 
 .stock_page{height:30rem; width:100%; margin-left:2rem; }
 .stock_page .stock_input{position:absolute; top:117%; left:62rem;}
@@ -438,6 +440,98 @@ background-color: white; -webkit-rtl-ordering: logical; cursor: text; margin: 0e
 .finance_auth .button2:hover:before,.finance_auth .button2:hover:after{ width:100%; transition:800ms ease all;}
 
 
+/* account css */
+.account_font{margin:0 auto; font-size:2rem; font-weight: bold; width:17rem; box-shadow: 1px 2px 20px 3px #ffbb22;}
+.account_font2{position: absolute; right:8%; font-weight:700; font-size: 20px;}
+.account_date{position: absolute; left:9rem; top:17rem; font-size: 20px; font-weight: bolder; color:red;}
+.cta-title{display: flex; justify-content: center; font-size:2rem; border-bottom: 1px dotted black; margin-bottom: 3rem;}
+.account_title{font-weight:bold; color:#ffbb22; margin-left:3rem;}
+.account_list_table{border: 3px solid black; margin: 0px 10px 100px; width: 800;}
+.account_list_table .account_list_table_form .account_list_table_tr .account_list_table_td{display:flex; justify-content: center; font-size: 2rem; font-weight: bold; opacity: 0.8;}
+
+.accountList_a .table .row{box-shadow:  0 0 black; display:flex; justify-content: center;}
+.accountList_a .table .row .cell{ font-size:15px;color:#666666; line-height:1.2; font-weight:unset !important; padding-top:20px; padding-bottom:20px; border-bottom: 3px solid #e2d0ca;}
+.accountList_a .table .row .cell2{ font-size:15px;color:#666666; line-height:1.2; font-weight:unset !important; padding-top:20px; padding-bottom:20px; border-bottom: 3px solid #e2d0ca; display: inline-block; margin-left:2rem;}
+.accountList_a .table .row .cell:nth-child(1) {width:333px; padding-left:52px;}
+.accountList_a .table .row .cell:nth-child(2) {width:174px; }
+.accountList_a .table .row .cell:nth-child(3) {width:237px; }
+.accountList_a .table .row .cell:nth-child(4) {width:190px; }
+.accountList_a .table .row .cell:nth-child(5) {width:190px; }
+
+.noAccountMessage span{display: flex; justify-content: center; text-align: center; font-weight:bold;}
+.noAccountMessage .accountLink{color:orange; font-size:16px; margin-left:1rem; margin-top:1rem; font-weight:bold;}
+.accountList_a .button{ background:#2e9dc7; color:#fff; border:none; position:relative; height:3rem; font-size:1rem; left:1em; top:1rem; width:8rem; padding:0 2em; cursor:pointer; transition:800ms ease all; outline:none; }
+.accountList_a .button:hover{ background:#fff; color:#1AAB8A; }
+.accountList_a .button:before,.accountList_a .button:after{ content:''; position:absolute; top:0; right:0; height:2px; width:0; background: #1AAB8A; transition:400ms ease all; }
+.accountList_a .button:after{ right:inherit; top:3rem; left:0; bottom:0; }
+.accountList_a .button:hover:before,.accountList_a .button:hover:after{ width:100%; transition:800ms ease all;}
+
+
+.changeAlias .table_header{background:#6c7ae0; display:table-row;}
+.changeAlias .table_header .cell{font-size: 18px; color:#fff; line-height: 1.2; font-weight: unset !important; padding-top: 19px; padding-bottom: 19px;}
+.changeAlias .row{box-shadow: 16px 20px 7px 6px grey;}
+.changeAlias .row .cell{ font-size:15px;color:#666666; line-height:1.2; font-weight:unset !important; padding-top:20px; padding-bottom:20px; border-bottom: 1px solid #f2f2f2;}
+.changeAlias .table_header .cell:nth-child(1) {width:333px; padding-left:40px;}
+.changeAlias .row .cell:nth-child(1) {width:333px; padding-left:52px;}
+.changeAlias .table_header .cell:nth-child(2) {width:160px; }
+.changeAlias .row .cell:nth-child(2) {width:174px; }
+.changeAlias .table_header .cell:nth-child(3) {width:250px; }
+.changeAlias .row .cell:nth-child(3) {width:237px; }
+.changeAlias .button{ background:#2e9dc7; color:#fff; border:none; position:relative; height:3rem; font-size:1rem; left:1em; top:1rem; width:8rem; padding:0 2em; cursor:pointer; transition:800ms ease all; outline:none; }
+.changeAlias .button:hover{ background:#fff; color:#1AAB8A; }
+.changeAlias .button:before,.changeAlias .button:after{ content:''; position:absolute; top:0; right:0; height:2px; width:0; background: #1AAB8A; transition:400ms ease all; }
+.changeAlias .button:after{ right:inherit; top:3rem; left:0; bottom:0; }
+.changeAlias .button:hover:before,.changeAlias .button:hover:after{ width:100%; transition:800ms ease all;}
+
+.accountCopyPage .accountRec button{ background:#2e9dc7; color:#fff; border:none; position:relative; height:3rem; font-size:1rem; left:22em; top:-3rem; width:8rem; padding:0 2em; cursor:pointer; transition:800ms ease all; outline:none; }
+.accountCopyPage .accountRec button:hover{ background:#fff; color:#1AAB8A; }
+.accountCopyPage .accountRec button:before,.accountRec button:after{ content:''; position:absolute; top:0; right:0; height:2px; width:0; background: #1AAB8A; transition:400ms ease all; }
+.accountCopyPage .accountRec button:after{ right:inherit; top:3rem; left:0; bottom:0; }
+.accountCopyPage .accountRec button:hover:before,.accountRec button:hover:after{ width:100%; transition:800ms ease all;}
+
+
+.accountCopyPage .infoMessage{border: 1px solid rgba(0,0,0,0.3); color:rgba(0,0,0,0.3); margin: 0px 10px 50px; width: 800;}
+.accountCopyPage .bankInfo{border: 3px solid brown; margin: 0px 10px 50px; width: 800;}
+.accountCopyPage .bankInfo .w3-table-all tr td{float:left;}
+.accountCopyPage .bankInfo .w3-table-all tr td:nth-child(2){ position:absolute; margin-left:10rem;color:red;}
+.accountCopyPage .button{width:250px; margin-left:15rem; position:absolute; }
+.accountCopyPage h5{color:orange; font-size:10px; top:21rem;position:absolute; margin-left:1rem;}
+.accountCopyPage h4{color:rgba(0,0,0,0.3); font-size:10px;}
+.accountCopyPage hr{border-top: 1px dotted grey ;}
+.changePwd .row{box-shadow: 16px 20px 7px 6px grey; position: absolute; margin-left:13rem;}
+.changePwd .table .row .pass{ background-color:white; width:20rem;}
+.changePwd h3{color: orange; font-size: 20px; text-align: center;}
+.changepassword input{ background:#1AAB8A; columns: ;r:#fff; border:none; position:relative; height:4rem; font-size:1.6em; left:14rem; top:8rem; padding:0 2em; cursor:pointer; transition:800ms ease all; outline:none; }
+.changepassword input:hover{ background:#fff; color:#1AAB8A; }
+.changepassword input:before,.changepassword input:after{ content:''; position:absolute; top:0; right:0; height:2px; width:0; background: #1AAB8A; transition:400ms ease all; }
+.changepassword input:after{ right:inherit; top:inherit; left:0; bottom:0; }
+.changepassword input:hover:before,.changepassword input:hover:after{ width:100%; transition:800ms ease all;}
+
+
+
+.accountdelete .table_header{background:#6c7ae0; display:table-row;}
+.accountdelete .table_header .cell{font-size: 18px; color:#fff; line-height: 1.2; font-weight: unset !important; padding-top: 19px; padding-bottom: 19px;}
+.accountdelete .row{box-shadow: 16px 20px 7px 6px grey;}
+.accountdelete .row .cell{ font-size:15px;color:#666666; line-height:1.2; font-weight:unset !important; padding-top:20px; padding-bottom:20px; border-bottom: 1px solid #f2f2f2;}
+.accountdelete .table_header .cell:nth-child(1) {width:11rem; padding-left:40px;}
+.accountdelete .row .cell:nth-child(1) {width:16rem; padding-left:28px;}
+.accountdelete .table_header .cell:nth-child(2) {width:160px; }
+.accountdelete .row .cell:nth-child(2) {width:243px; }
+.accountdelete .table_header .cell:nth-child(3) {width:250px; }
+.accountdelete .row .cell:nth-child(3) {width:237px; }
+.accountdelete .table_header_info .cell:nth-child(4) {width:190px; }
+.accountdelete .row .cell:nth-child(4) {width:190px; }
+.accountdelete .table_header_info .cell:nth-child(5) {width:190px; }
+.accountdelete .row .cell:nth-child(5) {width:190px; }
+.accountdelete .row .accountbalance{width:17rem; height:35px; background-color: white; margin-right:1rem;}
+.accountdelete .row .accountdeletePass{width:9rem; margin-right:6rem; background-color: white; border:1px solid rgba(0,0,0,1);}
+
+
+.accountdelete .accountRec button{ background:#2e9dc7; color:#fff; border:none; position:relative; height:3rem; font-size:1rem; left:22em; top:1rem;; width:8rem; padding:0 2em; cursor:pointer; transition:800ms ease all; outline:none; }
+.accountdelete .accountRec button:hover{ background:#fff; color:#1AAB8A; }
+.accountdelete .accountRec button:before,.accountRec button:after{ content:''; position:absolute; top:0; right:0; height:2px; width:0; background: #1AAB8A; transition:400ms ease all; }
+.accountdelete .accountRec button:after{ right:inherit; top:3rem; left:0; bottom:0; }
+.accountdelete .accountRec button:hover:before,.accountRec button:hover:after{ width:100%; transition:800ms ease all;}
 
 
 
